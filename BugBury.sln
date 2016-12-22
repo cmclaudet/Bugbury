@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugBury.CSharp", "BugBury.CSharp.csproj", "{17664AB5-E289-ABDD-A296-97253167E480}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugBury.CSharp.Editor", "BugBury.CSharp.Editor.csproj", "{219FDE60-E195-CCB1-EB71-7F1CDF94FBC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17664AB5-E289-ABDD-A296-97253167E480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17664AB5-E289-ABDD-A296-97253167E480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17664AB5-E289-ABDD-A296-97253167E480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17664AB5-E289-ABDD-A296-97253167E480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{219FDE60-E195-CCB1-EB71-7F1CDF94FBC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{219FDE60-E195-CCB1-EB71-7F1CDF94FBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{219FDE60-E195-CCB1-EB71-7F1CDF94FBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{219FDE60-E195-CCB1-EB71-7F1CDF94FBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
