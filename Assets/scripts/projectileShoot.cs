@@ -6,8 +6,8 @@ public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;
 	public Vector3 spawnPosition;
 
-	private LineRenderer leftCatapultLine;
-	private LineRenderer rightCatapultLine;
+	private GameObject leftSlingshot;
+	private GameObject rightSlingshot;
 	private GameObject springAnchor;
 	private GameObject manager;
 
@@ -26,10 +26,8 @@ public class projectileShoot : MonoBehaviour {
 		radius = GetComponent<CircleCollider2D> ().radius;
 		middleLine = GetComponent<LineRenderer> ();
 
-		GameObject leftSlingshot = GameObject.Find ("slingshot left");
-		GameObject rightSlingshot = GameObject.Find ("slingshot right");
-		leftCatapultLine = leftSlingshot.GetComponent<LineRenderer> ();
-		rightCatapultLine = rightSlingshot.GetComponent<LineRenderer> ();
+		leftSlingshot = GameObject.Find ("slingshot left");
+		rightSlingshot = GameObject.Find ("slingshot right");
 		manager = GameObject.Find ("game manager");
 
 		springAnchor = GameObject.Find ("spring anchor");
@@ -79,13 +77,10 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 	void launch() {
-		if (mouseDown == false && transform.position.y > leftCatapultLine.transform.position.y) {
+		if (mouseDown == false && transform.position.y > leftSlingshot.transform.position.y) {
 			GetComponent<SpringJoint2D> ().enabled = false;
 			GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
-			leftCatapultLine.SetPosition (1, rightCatapultLine.transform.position);
 			middleLine.enabled = false;
-			rightCatapultLine.enabled = false;
-			leftCatapultLine.enabled = false;
 
 			if (rockGen) {
 				manager.GetComponent<rockManager> ().makeRockNow = true;
@@ -95,15 +90,10 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 	void setupLineRenderer() {
-		leftCatapultLine.SetPosition (0, leftCatapultLine.transform.position);
-		rightCatapultLine.SetPosition (0, rightCatapultLine.transform.position);
-
-		leftCatapultLine.sortingLayerName = "Foreground";
-		rightCatapultLine.sortingLayerName = "Foreground";
 		middleLine.sortingLayerName = "Foreground";
-
-		leftCatapultLine.sortingOrder = 1;
-		rightCatapultLine.sortingOrder = 1;
+		middleLine.SetPosition (0, leftSlingshot.transform.position);
+		updateLineRenderer ();
+		middleLine.SetPosition (3, rightSlingshot.transform.position);
 		middleLine.sortingOrder = 3;
 	}
 
@@ -111,8 +101,8 @@ public class projectileShoot : MonoBehaviour {
 		screenDim = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0));
 		float screenWidth = screenDim.x;
 		float screenHeight = screenDim.y;
-		float boundHeight = (screenHeight + leftCatapultLine.GetPosition (0).y) / 2;
-		float yCenter = leftCatapultLine.GetPosition (0).y - boundHeight;
+		float boundHeight = (screenHeight + leftSlingshot.transform.position.y) / 2;
+		float yCenter = leftSlingshot.transform.position.y - boundHeight;
 		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*screenWidth, 2*boundHeight, 0));
 	}
 
@@ -120,11 +110,8 @@ public class projectileShoot : MonoBehaviour {
 		Vector3 leftPos = new Vector3 (transform.position.x - radius, transform.position.y, transform.position.z);
 		Vector3 rightPos = new Vector3 (transform.position.x + radius, transform.position.y, transform.position.z);
 
-		leftCatapultLine.SetPosition (1, leftPos);
-		rightCatapultLine.SetPosition (1, rightPos);
-
-		middleLine.SetPosition (0, leftPos);
-		middleLine.SetPosition (1, rightPos);
+		middleLine.SetPosition (1, leftPos);
+		middleLine.SetPosition (2, rightPos);
 	}
 
 
