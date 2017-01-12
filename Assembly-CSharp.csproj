@@ -49,6 +49,8 @@
      <Compile Include="Assets\Spriter2UnityDX\Runtime\EntityRenderer.cs" />
      <Compile Include="Assets\Spriter2UnityDX\Runtime\SortingOrderUpdater.cs" />
      <Compile Include="Assets\Spriter2UnityDX\Runtime\TextureController.cs" />
+     <Compile Include="Assets\caterpillarManager.cs" />
+     <Compile Include="Assets\move.cs" />
      <Compile Include="Assets\scripts\projectileShoot.cs" />
      <Compile Include="Assets\scripts\rockManager.cs" />
  <Reference Include="UnityEngine.Analytics">
