@@ -49,6 +49,7 @@ public class projectileShoot : MonoBehaviour {
 		drag ();
 		shoot ();
 		launch ();
+		goInactive ();
 	}
 
 	void drag()
@@ -114,5 +115,10 @@ public class projectileShoot : MonoBehaviour {
 		middleLine.SetPosition (2, rightPos);
 	}
 
+	void goInactive() {
+		if (transform.position.y > screenDim.y) {
+			
+		}
+	}
 
 }

@@ -1,29 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/rockManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/rockManager.cs">
     <Files>
-      <File FileName="../Documents/Game tutorials/AngryBirdsTut/Assets/Scripts/projectileDragging.cs" Line="87" Column="6" />
-      <File FileName="Assets/scripts/projectileShoot.cs" Line="49" Column="13" />
-      <File FileName="Assets/rockManager.cs" Line="19" Column="1" />
+      <File FileName="Assets/scripts/rockManager.cs" Line="25" Column="17" />
+      <File FileName="Assets/scripts/projectileShoot.cs" Line="33" Column="52" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="BugBury" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="scripts" expanded="True" />
-              <Node name="rockManager.cs" selected="True" />
-            </Node>
-            <Node name="Assembly-CSharp-Editor" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State name="__root__">
-          <Node name="BugBury" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
