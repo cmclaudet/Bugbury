@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class move : MonoBehaviour {
+	public int laneNumber;	//must be EVEN
 	public float downwardVelocity;
 	public float finishLine;
 
@@ -39,7 +40,9 @@ public class move : MonoBehaviour {
 		yMin = transform.TransformPoint (new Vector3 (0, ySize - yOffset, 0)).y;
 		yMin = -screenHeight - yMin;
 
-		float xPos = Random.Range (-screenWidth, screenWidth);
+		int lane = Random.Range (-laneNumber/2, laneNumber/2);
+		float laneWidth = 2*screenWidth / laneNumber;
+		float xPos = (lane + 0.5f) * laneWidth; 
 		float yPos = screenHeight + yWorldDim;
 
 		transform.position = new Vector3 (xPos, yPos, 0);
