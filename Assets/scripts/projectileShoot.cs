@@ -118,6 +118,15 @@ public class projectileShoot : MonoBehaviour {
 		if (col.gameObject.CompareTag("caterpillar") && (transform.position.y > spawnPosition.y)) {
 			col.gameObject.SetActive(false);
 			this.gameObject.SetActive(false);
+
+			manager.GetComponent<scoreCount> ().playerCombo += 1;
+			int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
+
+			if (currentCombo < 3) {
+				manager.GetComponent<scoreCount> ().playerScore += 1;
+			} else {
+				manager.GetComponent<scoreCount> ().playerScore += currentCombo;
+			}
 		}
 	}
 

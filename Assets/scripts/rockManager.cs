@@ -24,8 +24,9 @@ public class rockManager : MonoBehaviour {
 
 		for (int i = 0; i < allRocks.Length; i++) {
 			float rockRadius = allRocks [i].GetComponent<CircleCollider2D> ().radius;
-			if (allRocks [i].transform.position.y > (screenLength + rockRadius)) {
+			if ((allRocks [i].transform.position.y > (screenLength + rockRadius)) || (allRocks[i].transform.position.y < (-screenLength - rockRadius))) {
 				allRocks [i].SetActive (false);
+				GetComponent<scoreCount> ().playerCombo = 0;
 			}
 		}
 		

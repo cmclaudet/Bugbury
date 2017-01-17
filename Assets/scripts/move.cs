@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class move : MonoBehaviour {
 	public int laneNumber;	//must be EVEN
-	public float downwardVelocity;
+	public float minVelocity;
+	public float maxVelocity;
 	public float finishLine;
 
-	private float screenHeight;
+	public float screenHeight { get; set; }
 	private float screenWidth;
 
 	private float yOffset;
@@ -16,11 +17,18 @@ public class move : MonoBehaviour {
 
 	public float yMin { get; set; }
 
+	private GameObject manager;
+	private int totalCaterpillars;
+
 	// Use this for initialization
 	void Start () {
+		manager = GameObject.Find ("game manager");
+		totalCaterpillars = manager.GetComponent<caterpillarManager> ().totalCaterpillars;
+
 		setupPosition ();
-		setSpeed ();
+		setIncreasedSpeed ();
 		yheadPos = transform.TransformPoint (new Vector3 (0, yOffset - ySize, 0)).y - screenHeight;
+		Debug.Log (GetComponent<Rigidbody2D> ().velocity);
 	}
 
 	// Update is called once per frame
@@ -36,10 +44,10 @@ public class move : MonoBehaviour {
 		yOffset = GetComponent<BoxCollider2D> ().offset.y;
 		ySize = GetComponent<BoxCollider2D> ().size.y/2;
 
-		float yWorldDim = transform.TransformPoint (new Vector3 (0, yOffset + ySize, 0)).y;
 		yMin = transform.TransformPoint (new Vector3 (0, ySize - yOffset, 0)).y;
-		yMin = -screenHeight - yMin;
+		yMin = - screenHeight - yMin;
 
+		float yWorldDim = transform.TransformPoint (new Vector3 (0, yOffset + ySize, 0)).y;
 		int lane = Random.Range (-laneNumber/2, laneNumber/2);
 		float laneWidth = 2*screenWidth / laneNumber;
 		float xPos = (lane + 0.5f) * laneWidth; 
@@ -49,6 +57,13 @@ public class move : MonoBehaviour {
 	}
 
 	void setSpeed() {
-		GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -downwardVelocity, 0); 
+		GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -minVelocity, 0);
+	}
+
+	void setIncreasedSpeed() {
+		float deltaVelocity = (maxVelocity - minVelocity) / totalCaterpillars;
+		int currentCaterpillar = manager.GetComponent<caterpillarManager> ().currentSpawn;
+		float speed = minVelocity + currentCaterpillar * deltaVelocity;
+		GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -speed, 0);
 	}
 }
