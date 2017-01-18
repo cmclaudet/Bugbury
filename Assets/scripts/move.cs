@@ -21,14 +21,13 @@ public class move : MonoBehaviour {
 	private int totalCaterpillars;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		manager = GameObject.Find ("game manager");
 		totalCaterpillars = manager.GetComponent<caterpillarManager> ().totalCaterpillars;
 
 		setupPosition ();
 		setIncreasedSpeed ();
 		yheadPos = transform.TransformPoint (new Vector3 (0, yOffset - ySize, 0)).y - screenHeight;
-		Debug.Log (GetComponent<Rigidbody2D> ().velocity);
 	}
 
 	// Update is called once per frame

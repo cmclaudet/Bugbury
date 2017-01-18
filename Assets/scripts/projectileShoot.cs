@@ -122,11 +122,28 @@ public class projectileShoot : MonoBehaviour {
 			manager.GetComponent<scoreCount> ().playerCombo += 1;
 			int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
 
+			int scoreMultiplier;
+
 			if (currentCombo < 3) {
-				manager.GetComponent<scoreCount> ().playerScore += 1;
+//				manager.GetComponent<scoreCount> ().playerScore += 1;
+				scoreMultiplier = 1;
 			} else {
-				manager.GetComponent<scoreCount> ().playerScore += currentCombo;
+//				manager.GetComponent<scoreCount> ().playerScore += currentCombo;
+				scoreMultiplier = currentCombo;
 			}
+
+			float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
+			float finishLine = col.gameObject.GetComponent<move> ().finishLine;
+			float arenaMidpoint = (screenHeight + finishLine) / 2;
+
+			if (col.transform.position.y > arenaMidpoint) {
+				manager.GetComponent<scoreCount> ().far = true;
+				scoreMultiplier *= 2;
+			} else {
+				manager.GetComponent<scoreCount> ().far = false;
+			}
+
+			manager.GetComponent<scoreCount> ().playerScore += scoreMultiplier;
 		}
 	}
 
