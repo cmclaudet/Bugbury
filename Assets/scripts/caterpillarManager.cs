@@ -10,6 +10,7 @@ public class caterpillarManager : MonoBehaviour {
 	public int currentSpawn{ get; set; }
 	public bool control{ get; set; }
 	public bool levelEnd{ get; set; }
+	public int caterpillarsInactivated{ get; set; }
 	public int caterpillarsKilled{ get; set; }
 
 	public Transform completeMessage;
@@ -24,6 +25,7 @@ public class caterpillarManager : MonoBehaviour {
 	private bool setupNotDone = true;
 
 	void Start() {
+		caterpillarsInactivated = 0;
 		caterpillarsKilled = 0;
 		levelEnd = false;
 		control = true;
@@ -57,10 +59,10 @@ public class caterpillarManager : MonoBehaviour {
 		for (int i = 0; i < allCaterpillars.Length; i++) {
 			if (allCaterpillars [i].transform.position.y < minimunY) {
 				allCaterpillars [i].gameObject.SetActive (false);
-				caterpillarsKilled += 1;
+				caterpillarsInactivated += 1;
 				GetComponent<scoreCount> ().playerCombo = 0;
 
-				if (caterpillarsKilled == totalCaterpillars) {
+				if (caterpillarsInactivated == totalCaterpillars) {
 					levelEnd = true;
 				}
 			}

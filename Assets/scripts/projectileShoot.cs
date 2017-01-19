@@ -125,11 +125,12 @@ public class projectileShoot : MonoBehaviour {
 			GameObject splatter = Instantiate (splatters);
 			splatter.transform.position = col.transform.position;
 
+			manager.GetComponent<caterpillarManager> ().caterpillarsInactivated += 1;
 			manager.GetComponent<caterpillarManager> ().caterpillarsKilled += 1;
 
 			updateScores (col);
 
-			if (manager.GetComponent<caterpillarManager> ().caterpillarsKilled == manager.GetComponent<caterpillarManager> ().totalCaterpillars) {
+			if (manager.GetComponent<caterpillarManager> ().caterpillarsInactivated == manager.GetComponent<caterpillarManager> ().totalCaterpillars) {
 				manager.GetComponent<caterpillarManager> ().levelEnd = true;
 			}
 		}

@@ -55,6 +55,7 @@
      <Compile Include="Assets\scripts\projectileShoot.cs" />
      <Compile Include="Assets\scripts\rockManager.cs" />
      <Compile Include="Assets\scripts\scoreCount.cs" />
+     <Compile Include="Assets\scripts\setScores.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
