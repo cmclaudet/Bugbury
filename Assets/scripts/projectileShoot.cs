@@ -5,6 +5,7 @@ using UnityEngine;
 public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;
 	public Vector3 spawnPosition;
+	public GameObject splatters;
 
 	private GameObject leftSlingshot;
 	private GameObject rightSlingshot;
@@ -53,16 +54,18 @@ public class projectileShoot : MonoBehaviour {
 
 	void drag()
 	{
-		if (Input.GetMouseButton (0) && rockGen) {
-			Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			Vector3 actualPos = new Vector3 (mousePos.x, mousePos.y, 0);
+		if (manager.GetComponent<caterpillarManager>().control) {
+			if (Input.GetMouseButton (0) && rockGen) {
+				Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+				Vector3 actualPos = new Vector3 (mousePos.x, mousePos.y, 0);
 
-			if (shootingSpace.Contains(actualPos)) {
-				GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
-				spring.enabled = false;
-				GetComponent<Rigidbody2D> ().isKinematic = true;
-				mouseDown = true;
-				transform.position = new Vector3(mousePos.x, mousePos.y, 0);
+				if (shootingSpace.Contains (actualPos)) {
+					GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
+					spring.enabled = false;
+					GetComponent<Rigidbody2D> ().isKinematic = true;
+					mouseDown = true;
+					transform.position = new Vector3 (mousePos.x, mousePos.y, 0);
+				}
 			}
 		}
 	}
@@ -119,32 +122,45 @@ public class projectileShoot : MonoBehaviour {
 			col.gameObject.SetActive(false);
 			this.gameObject.SetActive(false);
 
-			manager.GetComponent<scoreCount> ().playerCombo += 1;
-			int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
+			GameObject splatter = Instantiate (splatters);
+			splatter.transform.position = col.transform.position;
 
-			int scoreMultiplier;
+			manager.GetComponent<caterpillarManager> ().caterpillarsKilled += 1;
 
-			if (currentCombo < 3) {
-//				manager.GetComponent<scoreCount> ().playerScore += 1;
-				scoreMultiplier = 1;
-			} else {
-//				manager.GetComponent<scoreCount> ().playerScore += currentCombo;
-				scoreMultiplier = currentCombo;
+			updateScores (col);
+
+			if (manager.GetComponent<caterpillarManager> ().caterpillarsKilled == manager.GetComponent<caterpillarManager> ().totalCaterpillars) {
+				manager.GetComponent<caterpillarManager> ().levelEnd = true;
 			}
-
-			float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
-			float finishLine = col.gameObject.GetComponent<move> ().finishLine;
-			float arenaMidpoint = (screenHeight + finishLine) / 2;
-
-			if (col.transform.position.y > arenaMidpoint) {
-				manager.GetComponent<scoreCount> ().far = true;
-				scoreMultiplier *= 2;
-			} else {
-				manager.GetComponent<scoreCount> ().far = false;
-			}
-
-			manager.GetComponent<scoreCount> ().playerScore += scoreMultiplier;
 		}
+	}
+
+	void updateScores(Collision2D col) {
+		manager.GetComponent<scoreCount> ().playerCombo += 1;
+		int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
+
+		int scoreMultiplier;
+
+		if (currentCombo < 3) {
+			scoreMultiplier = 1;
+		} else {
+			scoreMultiplier = currentCombo;
+		}
+
+		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
+		float finishLine = col.gameObject.GetComponent<move> ().finishLine;
+		float arenaMidpoint = (screenHeight + finishLine) / 2;
+
+		if (col.transform.position.y > arenaMidpoint) {
+
+			manager.GetComponent<scoreCount> ().far = true;
+			scoreMultiplier *= 2;
+		} else {
+			manager.GetComponent<scoreCount> ().far = false;
+		}
+
+		manager.GetComponent<scoreCount> ().playerScore += scoreMultiplier;
+
 	}
 
 }

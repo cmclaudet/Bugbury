@@ -27,7 +27,7 @@ public class scoreCount : MonoBehaviour {
 			comboText.text = "COMBO x" + playerCombo;
 		} else {
 			comboText.text = " ";
-		}
+		} 
 
 		if (far) {
 			farText.text = "FAR x2";

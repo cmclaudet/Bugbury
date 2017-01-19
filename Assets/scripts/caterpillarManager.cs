@@ -8,6 +8,12 @@ public class caterpillarManager : MonoBehaviour {
 	public Rigidbody2D caterpillars;
 	public int totalCaterpillars;
 	public int currentSpawn{ get; set; }
+	public bool control{ get; set; }
+	public bool levelEnd{ get; set; }
+	public int caterpillarsKilled{ get; set; }
+
+	public Transform completeMessage;
+	public Transform canvas;
 
 	private float spawnFrequency;
 	private float timeSinceSpawn;
@@ -15,8 +21,12 @@ public class caterpillarManager : MonoBehaviour {
 	private float minimunY;
 
 	private bool levelOngoing = true;
+	private bool setupNotDone = true;
 
 	void Start() {
+		caterpillarsKilled = 0;
+		levelEnd = false;
+		control = true;
 		findAllBugs ();
 		float screenHeight = allCaterpillars [0].GetComponent<move> ().screenHeight;
 		float finishLine = allCaterpillars [0].GetComponent<move> ().finishLine;
@@ -47,8 +57,17 @@ public class caterpillarManager : MonoBehaviour {
 		for (int i = 0; i < allCaterpillars.Length; i++) {
 			if (allCaterpillars [i].transform.position.y < minimunY) {
 				allCaterpillars [i].gameObject.SetActive (false);
+				caterpillarsKilled += 1;
 				GetComponent<scoreCount> ().playerCombo = 0;
+
+				if (caterpillarsKilled == totalCaterpillars) {
+					levelEnd = true;
+				}
 			}
+		}
+
+		if (levelEnd && setupNotDone) {
+			setupEnd ();
 		}
 	}
 
@@ -61,5 +80,12 @@ public class caterpillarManager : MonoBehaviour {
 
 	void findAllBugs() {
 		allCaterpillars = GameObject.FindGameObjectsWithTag ("caterpillar");
+	}
+
+	void setupEnd() {
+		control = false;
+		Transform levelDone = Instantiate (completeMessage);
+		levelDone.transform.SetParent (canvas, false);
+		setupNotDone = false;
 	}
 }
