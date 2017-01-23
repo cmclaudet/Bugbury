@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class caterpillarManager : MonoBehaviour {
-	public float interbugDistance;
+	public float interbugDistance;	//desired distance between subsequently spawning bugs
+	public float finishLine;
 
 	public Rigidbody2D caterpillars;
-	public int totalCaterpillars;
-	public int currentSpawn{ get; set; }
-	public bool control{ get; set; }
-	public bool levelEnd{ get; set; }
-	public int caterpillarsInactivated{ get; set; }
-	public int caterpillarsKilled{ get; set; }
+	public int totalCaterpillars;	//total caterpillars for this level
+	public int currentSpawn{ get; set; }	//number of the most recent caterpillar
+	public bool control{ get; set; }		//whether play can control the slingshot or not
+	public bool levelEnd{ get; set; }		//triggers end menu when true
+	public int caterpillarsInactivated{ get; set; }		//equals caterpillars killed + caterpillars passed over finish line
+	public int caterpillarsKilled{ get; set; }			//total caterpillars player successfully killed
 
-	public Transform completeMessage;
+	public Transform completeMessage;	//UI menu displaying end of level scores
 	public Transform canvas;
 
-	private float spawnFrequency;
+	private float spawnFrequency;	//changes depending on speed of caterpillar to keep interbugDistance constant
 	private float timeSinceSpawn;
 	private GameObject[] allCaterpillars;
-	private float minimunY;
+	private float minimunY;			//minimum possible y value for caterpillars before going inactive
 
 	private bool levelOngoing = true;
-	private bool setupNotDone = true;
+	private bool setupNotDone = true;	//ensures end menu is not repeatedley instantiated
 
 	void Start() {
 		caterpillarsInactivated = 0;
@@ -30,38 +31,36 @@ public class caterpillarManager : MonoBehaviour {
 		levelEnd = false;
 		control = true;
 		findAllBugs ();
-		float screenHeight = allCaterpillars [0].GetComponent<move> ().screenHeight;
-		float finishLine = allCaterpillars [0].GetComponent<move> ().finishLine;
-		float currentVel = allCaterpillars [0].GetComponent<move> ().minVelocity;
 
-		spawnFrequency = interbugDistance / currentVel;
-		minimunY = allCaterpillars [0].GetComponent<move> ().yMin;
-		minimunY += (screenHeight + finishLine);
-		currentSpawn = 1;
+		currentSpawn = 0;
+		timeSinceSpawn = spawnFrequency;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		timeSinceSpawn += Time.deltaTime;
-		findAllBugs ();
 
+		//instantiate caterpillar when time has elapsed over spawn frequency
 		if (timeSinceSpawn > spawnFrequency && levelOngoing) {
 			if (currentSpawn < totalCaterpillars) {
 				Instantiate (caterpillars);
 				timeSinceSpawn = 0;
 				currentSpawn += 1;
-				calculateSpawnTime ();
+				calculateSpawnTime ();	//find spawn time for next caterpillar
 			} else {
 				levelOngoing = false;
 			}
 		}
+		findMinY ();
 
 		for (int i = 0; i < allCaterpillars.Length; i++) {
+			//inactivates caterpillars if they have surpassed finish line
 			if (allCaterpillars [i].transform.position.y < minimunY) {
 				allCaterpillars [i].gameObject.SetActive (false);
 				caterpillarsInactivated += 1;
 				GetComponent<scoreCount> ().playerCombo = 0;
 
+				//ends level once all caterpillars are inactivated
 				if (caterpillarsInactivated == totalCaterpillars) {
 					levelEnd = true;
 				}
@@ -76,7 +75,9 @@ public class caterpillarManager : MonoBehaviour {
 	void calculateSpawnTime() {
 		findAllBugs ();
 
+		//get velocity of most recently spawned caterpillar
 		float currVel = -allCaterpillars [allCaterpillars.Length - 1].GetComponent<Rigidbody2D> ().velocity.y;
+		//time=distance/speed
 		spawnFrequency = interbugDistance / currVel;
 	}
 
@@ -84,10 +85,17 @@ public class caterpillarManager : MonoBehaviour {
 		allCaterpillars = GameObject.FindGameObjectsWithTag ("caterpillar");
 	}
 
+	//displays player scores
 	void setupEnd() {
 		control = false;
 		Transform levelDone = Instantiate (completeMessage);
 		levelDone.transform.SetParent (canvas, false);
 		setupNotDone = false;
+	}
+
+	void findMinY() {
+		float screenHeight = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0)).y;
+		minimunY = allCaterpillars [0].GetComponent<move> ().yMin;
+		minimunY += (screenHeight + finishLine);
 	}
 }

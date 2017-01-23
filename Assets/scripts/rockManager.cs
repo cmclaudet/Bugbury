@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class rockManager : MonoBehaviour {
 	public Rigidbody2D rocks;
-	public bool makeRockNow = false;
+	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
 	private float screenLength;
 	private GameObject[] allRocks;
 
@@ -14,7 +14,6 @@ public class rockManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-//		Debug.Log (makeRockNow);
 		if (makeRockNow) {
 			Instantiate (rocks);
 			makeRockNow = false;
@@ -22,6 +21,7 @@ public class rockManager : MonoBehaviour {
 
 		allRocks = GameObject.FindGameObjectsWithTag ("rock");
 
+		//checks if rocks have gone off screen
 		for (int i = 0; i < allRocks.Length; i++) {
 			float rockRadius = allRocks [i].GetComponent<CircleCollider2D> ().radius;
 			if ((allRocks [i].transform.position.y > (screenLength + rockRadius)) || (allRocks[i].transform.position.y < (-screenLength - rockRadius))) {
