@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class showBonuses : MonoBehaviour {
-	public GameObject bonusText;
+	public GameObject bonusTextRight;
+	public GameObject bonusTextLeft;
 
 	public bool dead{ get; set; }
 
@@ -35,12 +36,16 @@ public class showBonuses : MonoBehaviour {
 	}
 
 	void instantiateBonus() {
-		Debug.Log (comboNumber);
-		GameObject thisBonusText = Instantiate (bonusText);
+		GameObject thisBonusText;
+		if (isOnRight ()) {
+			thisBonusText = Instantiate (bonusTextLeft);
+		} else {
+			thisBonusText = Instantiate (bonusTextRight);
+		}
+
 		thisBonusText.transform.position = transform.position;
 		Transform comboNumText = thisBonusText.transform.Find ("comboText");
 		if (comboNumber > 2) {
-			Debug.Log (comboNumText.gameObject.GetComponent<TextMesh> ().text);
 			comboNumText.gameObject.GetComponent<TextMesh> ().text = "COMBO X" + comboNumber;
 		} else {
 			comboNumText.gameObject.GetComponent<TextMesh> ().text = " ";
@@ -55,5 +60,13 @@ public class showBonuses : MonoBehaviour {
 
 		gameObject.SetActive (false);
 
+	}
+
+	bool isOnRight() {
+		if (transform.position.x > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

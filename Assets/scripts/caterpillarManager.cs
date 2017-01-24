@@ -5,6 +5,7 @@ using UnityEngine;
 public class caterpillarManager : MonoBehaviour {
 	public float interbugDistance;	//desired distance between subsequently spawning bugs
 	public float finishLine;
+	public float endDelay;
 
 	public Rigidbody2D caterpillars;
 	public int totalCaterpillars;	//total caterpillars for this level
@@ -25,6 +26,8 @@ public class caterpillarManager : MonoBehaviour {
 	private bool levelOngoing = true;
 	private bool setupNotDone = true;	//ensures end menu is not repeatedley instantiated
 
+	private float timeAfterEnd;
+
 	void Start() {
 		caterpillarsInactivated = 0;
 		caterpillarsKilled = 0;
@@ -34,6 +37,7 @@ public class caterpillarManager : MonoBehaviour {
 
 		currentSpawn = 0;
 		timeSinceSpawn = spawnFrequency;
+		timeAfterEnd = 0;
 	}
 
 	// Update is called once per frame
@@ -62,13 +66,18 @@ public class caterpillarManager : MonoBehaviour {
 
 				//ends level once all caterpillars are inactivated
 				if (caterpillarsInactivated == totalCaterpillars) {
+					control = false;
 					levelEnd = true;
 				}
 			}
 		}
 
 		if (levelEnd && setupNotDone) {
-			setupEnd ();
+			timeAfterEnd += Time.deltaTime;
+
+			if (timeAfterEnd >= endDelay) {
+				setupEnd ();
+			}
 		}
 	}
 
@@ -87,7 +96,6 @@ public class caterpillarManager : MonoBehaviour {
 
 	//displays player scores
 	void setupEnd() {
-		control = false;
 		Transform levelDone = Instantiate (completeMessage);
 		levelDone.transform.SetParent (canvas, false);
 		setupNotDone = false;
