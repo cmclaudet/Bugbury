@@ -32,7 +32,7 @@ public class caterpillarManager : MonoBehaviour {
 		caterpillarsInactivated = 0;
 		caterpillarsKilled = 0;
 		levelEnd = false;
-		control = true;
+		control = false;
 		findAllBugs ();
 
 		currentSpawn = 0;
@@ -42,7 +42,9 @@ public class caterpillarManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		timeSinceSpawn += Time.deltaTime;
+		if (control) {
+			timeSinceSpawn += Time.deltaTime;
+		}
 
 		//instantiate caterpillar when time has elapsed over spawn frequency
 		if (timeSinceSpawn > spawnFrequency && levelOngoing) {
@@ -55,7 +57,10 @@ public class caterpillarManager : MonoBehaviour {
 				levelOngoing = false;
 			}
 		}
-		findMinY ();
+
+		if (control) {
+			findMinY ();
+		}
 
 		for (int i = 0; i < allCaterpillars.Length; i++) {
 			//inactivates caterpillars if they have surpassed finish line

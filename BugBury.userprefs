@@ -1,18 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/blowUp.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/caterpillarManager.cs">
     <Files>
-      <File FileName="Assets/scripts/blowUp.cs" Line="81" Column="1" />
-      <File FileName="Assets/scripts/setScores.cs" Line="29" Column="3" />
+      <File FileName="Assets/scripts/blowUp.cs" Line="35" Column="1" />
+      <File FileName="Assets/scripts/setScores.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/projectileShoot.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/caterpillarManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/caterpillarManager.cs" Line="58" Column="5" />
       <File FileName="Assets/scripts/move.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/rockManager.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/scoreCount.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/fadeText.cs" Line="1" Column="1" />
-      <File FileName="Assets/setOrder.cs" Line="9" Column="54" />
-      <File FileName="Assets/scripts/blowUpGeneral.cs" Line="13" Column="5" />
-      <File FileName="Assets/starSetup.cs" Line="22" Column="1" />
+      <File FileName="Assets/scripts/fadeText.cs" Line="16" Column="57" />
+      <File FileName="Assets/scripts/blowUpGeneral.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/scaleSetup.cs" Line="9" Column="20" />
+      <File FileName="Assets/go.cs" Line="25" Column="63" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

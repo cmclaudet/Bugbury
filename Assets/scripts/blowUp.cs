@@ -12,9 +12,9 @@ public class blowUp : MonoBehaviour {
 	public Transform starfill3;
 
 	private float maxScale;
-	private float currScale;
-	private float acc;
-	private float vel;
+	public float initScale;
+	public float acc;
+	public float vel;
 
 	private bool needScaling;
 	private int playerScore;
@@ -32,9 +32,6 @@ public class blowUp : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		needScaling = true;
-		currScale = 0.1f;
-		acc = -0.2f;
-		vel = 2.0f;
 		star1NotInstantiated = true;
 		star2NotInstantiated = true;
 		star3NotInstantiated = true;
@@ -44,10 +41,10 @@ public class blowUp : MonoBehaviour {
 		timeTillDelay3 = 0;
 
 		maxScale = GetComponent<RectTransform> ().localScale.x;
-		GetComponent<RectTransform> ().localScale = new Vector3(currScale, currScale);
+		GetComponent<RectTransform> ().localScale = new Vector3(initScale, initScale);
 		playerScore = GameObject.Find ("game manager").GetComponent<scoreCount> ().playerScore;
 
-		endMessage = new blowUpGeneral (vel, acc, currScale);
+		endMessage = new blowUpGeneral (vel, acc, initScale);
 	}
 	
 	// Update is called once per frame

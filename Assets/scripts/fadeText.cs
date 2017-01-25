@@ -13,6 +13,8 @@ public class fadeText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		GetComponent<MeshRenderer> ().sortingLayerName = "UI";
+
 		timePassed = 0;
 		alphaValue = GetComponent<MeshRenderer> ().material.color.a;
 		redValue = GetComponent<MeshRenderer> ().material.color.r;
