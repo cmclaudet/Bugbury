@@ -9,7 +9,7 @@ public class loadMain : MonoBehaviour {
 		SceneManager.LoadScene ("level 1");
 	}
 
-	public void loadChooselvl2() {
-		SceneManager.LoadScene ("levelSelect 2");
+	public void loadChooselvl() {
+		SceneManager.LoadScene ("levelSelect");
 	}
 }
