@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//delays starting level as soon as scene is loaded to introduce level and tell player to shoot
+//like a countdown
 public class go : MonoBehaviour {
-	public float startTime;
+	public float startTime;	//defines how long "level" message is up. Actual start time is startTime*1.5
 	private float timetoStart;
 	private GameObject manager;
 	// Use this for initialization

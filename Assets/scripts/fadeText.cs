@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class fadeText : MonoBehaviour {
-	public float fadeTime;
+	//makes alpha value of text reduce over time
+	public float fadeTime;	//time taken to reduce to zero
 
 	private float timePassed;
-	private float alphaValue;
-	private float redValue;
-	private float greenValue;
-	private float blueValue;
+	private float alphaValue;	//max alpha value
+	private float redValue;		//text red value
+	private float greenValue;	//text green value
+	private float blueValue;	//text blue value
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +27,7 @@ public class fadeText : MonoBehaviour {
 	void Update () {
 		timePassed += Time.deltaTime;
 
-		float factor = 1 - timePassed / fadeTime;
+		float factor = 1 - timePassed / fadeTime;	//factor to multiply by max alpha to obtain new alpha value
 		float newAlpha = factor * alphaValue;
 
 		GetComponent<MeshRenderer> ().material.SetColor("_Color", new Color(redValue, greenValue, blueValue, newAlpha));

@@ -2,28 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//sets scale up on complete message
+//instaniates stars if player has reached certain score
+//sets up time delay between star instantiation
 public class blowUp : MonoBehaviour {
-	public int star1;
-	public int star2;
-	public int star3;
-	public float starDelay;
-	public Transform starfill1;
+	public int star1;	//necessary score for 1 star
+	public int star2;	//necessary score for 2 stars
+	public int star3;	//necessary score for 3 stars
+	public float starDelay;		//delay time between appearance of each star
+	public Transform starfill1;		//star filling object for each star
 	public Transform starfill2;
 	public Transform starfill3;
 
+	//values for scaling of message itself
 	private float maxScale;
 	public float initScale;
 	public float acc;
 	public float vel;
 
-	private bool needScaling;
+	private bool needScaling;	//once false scaling no longer occurs
 	private int playerScore;
 
-	private bool star1NotInstantiated;
+	private bool star1NotInstantiated;	//bool values ensure stars not repeatedly instantiated
 	private bool star2NotInstantiated;
 	private bool star3NotInstantiated;
 
-	private float timeTillDelay1;
+	private float timeTillDelay1;		//timers from instantiation of each star
 	private float timeTillDelay2;
 	private float timeTillDelay3;
 
@@ -58,6 +62,7 @@ public class blowUp : MonoBehaviour {
 		if (endMessage.scale >= maxScale) {
 			needScaling = false;
 
+			//updates timers for each star. Min value necessary to instantiate increases with star so that star 1 appears first and star 3 appears last
 			timeTillDelay1 = updatedTime (timeTillDelay1);
 			if (timeTillDelay1 >= starDelay) {
 				launchStar (star1, star1NotInstantiated, starfill1);
@@ -77,11 +82,13 @@ public class blowUp : MonoBehaviour {
 	}
 
 	void launchStar(int requiredScore, bool notInstantiated, Transform star) {
+		//only launch star if player has reached appropriate goal
 		if (playerScore >= requiredScore && notInstantiated) {
 			instantiateStar (star);
 		}
 	}
 
+	//updates timer values
 	float updatedTime(float time) {
 		float newTime = time + Time.deltaTime;
 		return newTime;

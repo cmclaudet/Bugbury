@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//defines slingshot shooting mechanics including dragging projectile on hold, launching on release and instantiation of new projectiles.
+//manages events which occur due to caterpillar projectile collision including inactivation of the gameobjects, updating player score and combo and displaying bonuses on screen
 public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;	//insert desired speed for rocks
 	public Vector3 spawnPosition;	//rock spawn position
@@ -83,7 +85,7 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 	void launch() {
-		//once rock has passed over the slingshot position, spring and line renderers are is disabled.
+		//once rock has passed over the slingshot position, spring and line renderers are disabled.
 		//Velocity is set to magnitude specified above
 		if (mouseDown == false && transform.position.y > leftSlingshot.transform.position.y) {
 			GetComponent<SpringJoint2D> ().enabled = false;
@@ -91,7 +93,7 @@ public class projectileShoot : MonoBehaviour {
 			middleLine.enabled = false;
 
 			if (rockGen) {
-				manager.GetComponent<rockManager> ().makeRockNow = true;
+				manager.GetComponent<rockManager> ().makeRockNow = true;	//changes value in rock manager to instantiate another rock
 			}
 			rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
 		}

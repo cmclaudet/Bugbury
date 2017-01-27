@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//script manages caterpillar spawn frequency changing over time, keeps count of caterpillar deaths and triggers end level message when all caterpillars are inactivated
+
 public class caterpillarManager : MonoBehaviour {
 	public float interbugDistance;	//desired distance between subsequently spawning bugs
-	public float finishLine;
-	public float endDelay;
+	public float finishLine;	//finish line y co-ordinated in world space
+	public float endDelay;		//time between final caterpillar being inactivated and level complete message appears
 
-	public Rigidbody2D caterpillars;
+	public Rigidbody2D caterpillars;	//caterpillar prefab
 	public int totalCaterpillars;	//total caterpillars for this level
 	public int currentSpawn{ get; set; }	//number of the most recent caterpillar
 	public bool control{ get; set; }		//whether play can control the slingshot or not
@@ -28,17 +30,17 @@ public class caterpillarManager : MonoBehaviour {
 	private bool levelOngoing = true;
 	private bool setupNotDone = true;	//ensures end menu is not repeatedley instantiated
 
-	private float timeAfterEnd;
+	private float timeAfterEnd;		//counts time passed since final caterpillar is inactivated
 
 	void Start() {
 		caterpillarsInactivated = 0;
 		caterpillarsKilled = 0;
 		levelEnd = false;
 		control = false;
-		findAllBugs ();
+		findAllBugs ();		//finds all caterpillars currently in heirarchy
 
 		currentSpawn = 0;
-		timeSinceSpawn = spawnFrequency;
+		timeSinceSpawn = spawnFrequency;	//set so that caterpillar spawns right away
 		timeAfterEnd = 0;
 	}
 
@@ -60,7 +62,7 @@ public class caterpillarManager : MonoBehaviour {
 			}
 		}
 
-		if (control) {
+		if (control) {	//can only be done when control is true as before this there are no caterpillars to grab minimum y value from
 			findMinY ();
 		}
 
@@ -78,6 +80,7 @@ public class caterpillarManager : MonoBehaviour {
 				}
 			}
 		}
+
 
 		if (levelEnd && setupNotDone) {
 			timeAfterEnd += Time.deltaTime;

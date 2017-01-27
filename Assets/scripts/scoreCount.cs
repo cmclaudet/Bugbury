@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class scoreCount : MonoBehaviour {
+	//score, player combo and far values stored here
 	public Text scoreText;
-//	public Text comboText;
-//	public Text farText;
 	public int playerScore { get; set; }
 	public int playerCombo { get; set; }
 	public bool far { get; set; }
@@ -16,24 +15,11 @@ public class scoreCount : MonoBehaviour {
 		playerScore = 0;
 		playerCombo = 0;
 		far = false;
-//		comboText.text = " ";
-//		farText.text = " ";
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//display player score
 		scoreText.text = "Score: " + playerScore;
-/*
-		if (playerCombo > 2) {
-			comboText.text = "COMBO x" + playerCombo;
-		} else {
-			comboText.text = " ";
-		} 
-
-		if (far) {
-			farText.text = "FAR x2";
-		} else {
-			farText.text = " ";
-		}*/
 	}
 }

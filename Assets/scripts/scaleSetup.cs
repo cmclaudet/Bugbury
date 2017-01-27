@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//add to object which requires scaling upon instantiation
 public class scaleSetup : MonoBehaviour {
 	public blowUpGeneral scaleUp;
 	public float vel;
 	public float acc;
-	public float scale;
+	public float scale;		//start scale, ie small value which object starts at
 
-	private float maxScale;
+	private float maxScale;	//max value object scales up to
 	private bool needScaling;
 
 	// Use this for initialization
 	void Start () {
 		GetComponent<RectTransform> ().SetAsFirstSibling();
-/*
-		float vel = 2.0f;
-		float acc = -0.2f;
-		float scale = 0.1f;*/
 		needScaling = true;
 
 		maxScale = GetComponent<RectTransform> ().localScale.x;

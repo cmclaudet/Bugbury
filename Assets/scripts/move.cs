@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//sets caterpillar position onto one of six lanes randomely and finds y co-ordinate for caterpillar spawn point based on screen height and caterpillar body lenght
+//sets caterpillar speed based on spawn number and min max speeds set in inspector
+
 public class move : MonoBehaviour {
 	public int laneNumber;	//must be EVEN
 	public float minVelocity;
@@ -14,7 +17,7 @@ public class move : MonoBehaviour {
 	private float ySize;	//offset of caterpillar
 	private float yheadPos;	//position of caterpillar head from body in world co-ordinates
 
-	public float yMin { get; set; }	//minimum y value for caterpillar to be active
+	public float yMin { get; set; }	//minimum y value for caterpillar to be active. must be calculated here as makes use of caterpillar body length values.
 
 	private GameObject manager;
 	private int totalCaterpillars;

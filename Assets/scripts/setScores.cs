@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//rewrites text on level complete message to display correct scores
 public class setScores : MonoBehaviour {
 
 	private GameObject manager;
@@ -12,6 +13,7 @@ public class setScores : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//finds all values needed to display score
 		manager = GameObject.Find ("game manager");
 		caterpillarsKilled = manager.GetComponent<caterpillarManager> ().caterpillarsKilled;
 		totalCaterpillars = manager.GetComponent<caterpillarManager> ().totalCaterpillars;
