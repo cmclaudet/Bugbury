@@ -12,4 +12,9 @@ public class loadMain : MonoBehaviour {
 	public void loadChooselvl() {
 		SceneManager.LoadScene ("levelSelect");
 	}
+
+	public void loadMainMenu() {
+		Time.timeScale = 1.0f;
+		SceneManager.LoadScene ("title");
+	}
 }

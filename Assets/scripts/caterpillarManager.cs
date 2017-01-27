@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class caterpillarManager : MonoBehaviour {
 	public float interbugDistance;	//desired distance between subsequently spawning bugs
@@ -17,6 +18,7 @@ public class caterpillarManager : MonoBehaviour {
 
 	public Transform completeMessage;	//UI menu displaying end of level scores
 	public Transform canvas;
+	public Button pauseButton;
 
 	private float spawnFrequency;	//changes depending on speed of caterpillar to keep interbugDistance constant
 	private float timeSinceSpawn;
@@ -101,6 +103,8 @@ public class caterpillarManager : MonoBehaviour {
 
 	//displays player scores
 	void setupEnd() {
+		control = false;
+		pauseButton.interactable = false;
 		Transform levelDone = Instantiate (completeMessage);
 		levelDone.transform.SetParent (canvas, false);
 		setupNotDone = false;
