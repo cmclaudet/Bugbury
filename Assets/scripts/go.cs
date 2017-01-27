@@ -18,7 +18,8 @@ public class go : MonoBehaviour {
 		timetoStart += Time.deltaTime;
 
 		if (timetoStart >= startTime) {
-			GetComponent<Text> ().text = "SHOOT!";
+			Transform lvl2text = transform.Find ("levelStart");
+			lvl2text.GetComponent<Text> ().text = "SHOOT!";
 		}
 		if (timetoStart >= 1.5f * startTime) {
 			GetComponent<RectTransform> ().gameObject.SetActive (false);
