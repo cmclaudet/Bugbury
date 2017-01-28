@@ -17,7 +17,7 @@ public class projectileShoot : MonoBehaviour {
 	private LineRenderer middleLine;
 	private SpringJoint2D spring;
 	private float radius;
-	private bool mouseDown = false;	//becomes true when mouse is clicked in active shooting area
+	private bool fingerDown = false;	//becomes true when screen touched in active shooting area
 
 	private Bounds shootingSpace;
 	private Vector3 screenDim;
@@ -56,38 +56,40 @@ public class projectileShoot : MonoBehaviour {
 
 	void drag()
 	{
-		//make rock follow player mouse whilst mouse is down inside the shooting space
+		//make rock follow player finger whilst finger is down inside the shooting space
 		//ensures spring is disabled in this time and the rock is kinematic
 		if (manager.GetComponent<caterpillarManager>().control) {
-			if (Input.GetMouseButton (0) && rockGen) {	//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
-				Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				Vector3 actualPos = new Vector3 (mousePos.x, mousePos.y, 0);
+			if (Input.touchCount > 0 && rockGen) {	//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
+				Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
+				Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
-				if (shootingSpace.Contains (actualPos)) {
+				if (shootingSpace.Contains (worldPos)) {
 					GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
 					spring.enabled = false;
 					GetComponent<Rigidbody2D> ().isKinematic = true;
-					mouseDown = true;
-					transform.position = new Vector3 (mousePos.x, mousePos.y, 0);
+					fingerDown = true;
+					transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
 				}
 			}
 		}
 	}
 
 	void shoot() {
-		//when player releases mouse after clicking in active shooting area, spring physics is enabled
-		if (Input.GetMouseButtonUp (0) && mouseDown) {
-			spring.enabled = true;
-			GetComponent<SpringJoint2D>().enabled = true;
-			GetComponent<Rigidbody2D> ().isKinematic = false;
-			mouseDown = false;
+		//when player releases finger after touching active shooting area, spring physics is enabled
+		if (Input.touchCount > 0) {
+			if (Input.GetTouch (0).phase == TouchPhase.Ended && fingerDown) {
+				spring.enabled = true;
+				GetComponent<SpringJoint2D> ().enabled = true;
+				GetComponent<Rigidbody2D> ().isKinematic = false;
+				fingerDown = false;
+			}
 		}
 	}
 
 	void launch() {
 		//once rock has passed over the slingshot position, spring and line renderers are disabled.
 		//Velocity is set to magnitude specified above
-		if (mouseDown == false && transform.position.y > leftSlingshot.transform.position.y) {
+		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
 			GetComponent<SpringJoint2D> ().enabled = false;
 			GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
 			middleLine.enabled = false;
