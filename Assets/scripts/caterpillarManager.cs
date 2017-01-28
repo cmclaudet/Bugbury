@@ -72,6 +72,7 @@ public class caterpillarManager : MonoBehaviour {
 				allCaterpillars [i].gameObject.SetActive (false);
 				caterpillarsInactivated += 1;
 				GetComponent<scoreCount> ().playerCombo = 0;
+				findAllBugs ();		//recount caterpillars after inactivation
 
 				//ends level once all caterpillars are inactivated
 				if (caterpillarsInactivated == totalCaterpillars) {

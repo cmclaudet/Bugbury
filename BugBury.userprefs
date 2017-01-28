@@ -1,17 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/projectileShoot.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/caterpillarManager.cs">
     <Files>
-      <File FileName="Assets/scripts/projectileShoot.cs" Line="96" Column="121" />
-      <File FileName="Assets/scripts/loadMain.cs" Line="14" Column="3" />
-      <File FileName="Assets/scripts/caterpillarManager.cs" Line="6" Column="168" />
-      <File FileName="Assets/scripts/move.cs" Line="20" Column="153" />
-      <File FileName="Assets/scripts/fadeText.cs" Line="34" Column="1" />
-      <File FileName="Assets/scripts/blowUpGeneral.cs" Line="26" Column="40" />
-      <File FileName="Assets/scripts/scaleSetup.cs" Line="20" Column="47" />
+      <File FileName="Assets/scripts/rockManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/loadMain.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/caterpillarManager.cs" Line="75" Column="63" />
+      <File FileName="Assets/scripts/move.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/fadeText.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/blowUpGeneral.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/scaleSetup.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/pauseGame.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/go.cs" Line="24" Column="51" />
-      <File FileName="Assets/scripts/blowUp.cs" Line="65" Column="143" />
+      <File FileName="Assets/scripts/go.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/blowUp.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
