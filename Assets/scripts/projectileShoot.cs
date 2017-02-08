@@ -9,6 +9,8 @@ public class projectileShoot : MonoBehaviour {
 	public Vector3 spawnPosition;	//rock spawn position
 	public GameObject splatters;	//blood splatter of caterpillars
 
+	private AudioSource throwSound;	//sound when rock launches
+	private AudioSource splatSound; //sound when caterpillar dies
 	private GameObject leftSlingshot;
 	private GameObject rightSlingshot;
 	private GameObject springAnchor;
@@ -25,6 +27,8 @@ public class projectileShoot : MonoBehaviour {
 	private bool rockGen = true;
 
 	void Awake() {
+		throwSound = GameObject.Find ("throw").GetComponent<AudioSource> ();
+		splatSound = GameObject.Find ("splat").GetComponent<AudioSource> ();
 		spring = GetComponent<SpringJoint2D> ();
 		radius = GetComponent<CircleCollider2D> ().radius;
 		middleLine = GetComponent<LineRenderer> ();
@@ -76,8 +80,10 @@ public class projectileShoot : MonoBehaviour {
 
 	void shoot() {
 		//when player releases finger after touching active shooting area, spring physics is enabled
+		//sound effect
 		if (Input.touchCount > 0) {
 			if (Input.GetTouch (0).phase == TouchPhase.Ended && fingerDown) {
+				throwSound.Play ();
 				spring.enabled = true;
 				GetComponent<SpringJoint2D> ().enabled = true;
 				GetComponent<Rigidbody2D> ().isKinematic = false;
@@ -132,6 +138,7 @@ public class projectileShoot : MonoBehaviour {
 	//on collision with caterpillar both bodies are inactivated, blood splatter is placed and player score + combo updated
 	void OnCollisionEnter2D(Collision2D col) {
 		if (col.gameObject.CompareTag("caterpillar") && (transform.position.y > spawnPosition.y)) {
+			splatSound.Play ();
 			col.gameObject.GetComponent<showBonuses> ().dead = true;
 
 			GameObject splatter = Instantiate (splatters);

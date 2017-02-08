@@ -53,6 +53,7 @@
      <Compile Include="Assets\scripts\blowUp.cs" />
      <Compile Include="Assets\scripts\blowUpGeneral.cs" />
      <Compile Include="Assets\scripts\caterpillarManager.cs" />
+     <Compile Include="Assets\scripts\dontDestroy.cs" />
      <Compile Include="Assets\scripts\fadeText.cs" />
      <Compile Include="Assets\scripts\go.cs" />
      <Compile Include="Assets\scripts\loadMain.cs" />
