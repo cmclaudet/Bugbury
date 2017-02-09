@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class fadeText : MonoBehaviour {
 	//makes alpha value of text reduce over time
-	public float fadeTime;	//time taken to reduce to zero
+	public float fadeTime = 1;	//time taken to reduce to zero
 
 	private float timePassed;
 	private float alphaValue;	//max alpha value

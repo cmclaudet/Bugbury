@@ -14,20 +14,27 @@ public class loadMain : MonoBehaviour {
 		click = GameObject.Find ("click").GetComponent<AudioSource>();
 	}
 
-	public void loadMainGame () {
+	public void loadFirstlvl () {
 		resetMusic ();
 		SceneManager.LoadScene ("level 1");
 		click.Play ();
 	}
 
-	public void loadSecondlvl () {
+	public void loadSecondlvl() {
 		resetMusic ();
 		SceneManager.LoadScene ("level 2");
 		click.Play ();
 	}
 
+	public void loadThirdlvl () {
+		resetMusic ();
+		SceneManager.LoadScene ("level 3");
+		click.Play ();
+	}
+
 	public void loadChooselvl() {
 		DontDestroyOnLoad (backgroundmusic.transform.gameObject);
+		backgroundmusic.transform.gameObject.tag = "Untagged";
 		SceneManager.LoadScene ("levelSelect");
 		click.Play ();
 	}
@@ -37,6 +44,13 @@ public class loadMain : MonoBehaviour {
 		Time.timeScale = 1.0f;
 		SceneManager.LoadScene ("title");
 		click.enabled = true;
+		click.Play ();
+	}
+
+	public void backToMenuFromSelect() {
+		SceneManager.LoadScene ("title");
+		GameObject initialMusic = GameObject.FindGameObjectWithTag ("initialMusic");
+		Destroy (initialMusic);
 		click.Play ();
 	}
 

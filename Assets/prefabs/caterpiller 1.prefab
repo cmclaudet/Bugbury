@@ -641,7 +641,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: -0.12}
   serializedVersion: 2
-  m_Size: {x: 1.84, y: 8.1}
+  m_Size: {x: 2.62, y: 8.1}
 --- !u!74 &74000013392031512
 AnimationClip:
   m_ObjectHideFlags: 0
@@ -1745,8 +1745,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneNumber: 6
-  minVelocity: 1
-  maxVelocity: 2
+  minVelocity: 0.5
+  maxVelocity: 1.2
 --- !u!114 &114697436439251882
 MonoBehaviour:
   m_ObjectHideFlags: 1
