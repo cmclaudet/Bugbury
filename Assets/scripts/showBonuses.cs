@@ -46,7 +46,7 @@ public class showBonuses : MonoBehaviour {
 		thisBonusText.transform.position = transform.position;
 		Transform comboNumText = thisBonusText.transform.Find ("comboText");
 		if (comboNumber > 2) {
-			comboNumText.gameObject.GetComponent<TextMesh> ().text = "COMBO X" + comboNumber;
+			comboNumText.gameObject.GetComponent<TextMesh> ().text = comboNumber + " STREAK";
 		} else {
 			comboNumText.gameObject.GetComponent<TextMesh> ().text = " ";
 		}
