@@ -10,13 +10,15 @@ public class scaleSetup : MonoBehaviour {
 	public float scale;		//start scale, ie small value which object starts at
 
 	private float maxScale;	//max value object scales up to
-	private bool needScaling;
+	public bool needScaling{ get; set; }
+
+	void Awake() {
+		GetComponent<RectTransform> ().SetAsFirstSibling();
+		needScaling = true;
+	}
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<RectTransform> ().SetAsFirstSibling();
-		needScaling = true;
-
 		maxScale = GetComponent<RectTransform> ().localScale.x;
 		GetComponent<RectTransform> ().localScale = new Vector3(scale, scale);
 		scaleUp = new blowUpGeneral (vel, acc, scale);

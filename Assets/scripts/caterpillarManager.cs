@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //script manages caterpillar spawn frequency changing over time, keeps count of caterpillar deaths and triggers end level message when all caterpillars are inactivated
-
+//removed life from player if player misses caterpillar
 public class caterpillarManager : MonoBehaviour {
 	public float interbugDistance;	//desired distance between subsequently spawning bugs
 	public float finishLine;	//finish line y co-ordinated in world space
@@ -71,6 +71,7 @@ public class caterpillarManager : MonoBehaviour {
 			if (allCaterpillars [i].transform.position.y < minimunY) {
 				allCaterpillars [i].gameObject.SetActive (false);
 				caterpillarsInactivated += 1;
+				GetComponent<lifeManager> ().lifeLost = true;	//triggers removal of one of player's lives
 				GetComponent<scoreCount> ().playerCombo = 0;
 				findAllBugs ();		//recount caterpillars after inactivation
 

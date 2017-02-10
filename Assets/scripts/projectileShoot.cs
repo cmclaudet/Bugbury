@@ -95,7 +95,7 @@ public class projectileShoot : MonoBehaviour {
 	void launch() {
 		//once rock has passed over the slingshot position, spring and line renderers are disabled.
 		//Velocity is set to magnitude specified above
-		if (fingerDown == false && transform.position.y >= leftSlingshot.transform.position.y) {
+		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
 			GetComponent<SpringJoint2D> ().enabled = false;
 			GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
 			middleLine.enabled = false;
