@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: panb
+  m_Name: panCenterRight
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0.00012204889
+        value: 0.83871394
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
         time: 1
-        value: 0.8365687
+        value: 1.6797137
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -65,13 +65,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -0.6818126
+        value: 0.15822673
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 1
-        value: 0.16800988
+        time: 0.98333335
+        value: 0.99983835
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -241,13 +241,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0.00012204889
+        value: 0.83871394
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
         time: 1
-        value: 0.8365687
+        value: 1.6797137
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -285,13 +285,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -0.6818126
+        value: 0.15822673
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 1
-        value: 0.16800988
+        time: 0.98333335
+        value: 0.99983835
         inSlope: 0
         outSlope: 0
         tangentMode: 136
