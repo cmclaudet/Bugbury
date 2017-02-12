@@ -7,26 +7,33 @@ using UnityEngine.UI;
 public class setScores : MonoBehaviour {
 
 	private GameObject manager;
-	private int caterpillarsKilled;
-	private int totalCaterpillars;
+	private int maxStreak;
+	private int totfarShots;
 	private int playerScore;
 
 	// Use this for initialization
 	void Start () {
 		//finds all values needed to display score
 		manager = GameObject.Find ("game manager");
-		caterpillarsKilled = manager.GetComponent<caterpillarManager> ().caterpillarsKilled;
-		totalCaterpillars = manager.GetComponent<caterpillarManager> ().totalCaterpillars;
-		playerScore = manager.GetComponent<scoreCount> ().playerScore;
-
+//		caterpillarsKilled = manager.GetComponent<caterpillarManager> ().caterpillarsKilled;
+//		totalCaterpillars = manager.GetComponent<caterpillarManager> ().totalCaterpillars;
+		findMaxStreakFarShots();
 		setupText ();
 	}
 
 	void setupText() {
-		Transform bugcountObj = this.transform.Find ("bugCount");
-		Transform scorecountObj = this.transform.Find ("scoreCount");
+		Transform maxStreakObj = this.transform.Find ("maxStreak");
+		Transform farShotsObj = this.transform.Find ("farShots");
+		Transform totalScore = this.transform.Find ("score");
 
-		bugcountObj.GetComponent<Text> ().text = "Bugs squashed: " + caterpillarsKilled + "/" + totalCaterpillars;
-		scorecountObj.GetComponent<Text> ().text = "Score: " + playerScore;
+		maxStreakObj.GetComponent<Text> ().text = "Max Streak: " + maxStreak;
+		farShotsObj.GetComponent<Text> ().text = "Far Shots: " + totfarShots;
+		totalScore.GetComponent<Text> ().text = "SCORE: " + playerScore;
+	}
+
+	void findMaxStreakFarShots() {
+		maxStreak = manager.GetComponent<scoreCount> ().maxPlayerStreak;
+		totfarShots = manager.GetComponent<scoreCount> ().farShots;
+		playerScore = manager.GetComponent<scoreCount> ().playerScore;
 	}
 }

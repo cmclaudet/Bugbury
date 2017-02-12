@@ -13,12 +13,12 @@ public class scaleSetup : MonoBehaviour {
 	public bool needScaling{ get; set; }
 
 	void Awake() {
-		GetComponent<RectTransform> ().SetAsFirstSibling();
 		needScaling = true;
 	}
 
 	// Use this for initialization
 	void Start () {
+		GetComponent<RectTransform> ().SetAsFirstSibling ();
 		maxScale = GetComponent<RectTransform> ().localScale.x;
 		GetComponent<RectTransform> ().localScale = new Vector3(scale, scale);
 		scaleUp = new blowUpGeneral (vel, acc, scale);

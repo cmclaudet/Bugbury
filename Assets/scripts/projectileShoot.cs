@@ -177,7 +177,7 @@ public class projectileShoot : MonoBehaviour {
 
 		//if player hits caterpillar above mid point, counts as a far shot - get x2
 		if (col.transform.position.y > arenaMidpoint) {
-
+			manager.GetComponent<scoreCount> ().farShots += 1;		//add 1 to total far shots
 			manager.GetComponent<scoreCount> ().far = true;
 			scoreMultiplier *= 2;
 		} else {
@@ -187,7 +187,7 @@ public class projectileShoot : MonoBehaviour {
 		manager.GetComponent<scoreCount> ().playerScore += scoreMultiplier;
 
 		setInactive (bonusCheck (scoreMultiplier), col);
-		}
+	}
 
 	void setInactive(bool bonus, Collision2D col) {
 		if (bonus == false) {
