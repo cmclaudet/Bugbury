@@ -28,12 +28,12 @@ public class setScores : MonoBehaviour {
 	}
 
 	void setupText() {
-		Transform maxStreakObj = this.transform.Find ("maxStreak");
-		Transform farShotsObj = this.transform.Find ("farShots");
-		Transform totalScore = this.transform.Find ("score");
+		Transform maxStreakNum = this.transform.Find ("maxStreakNumber");
+		Transform farShotNum = this.transform.Find ("farShotNumber");
+		Transform totalScore = this.transform.Find ("scoreNumber");
 
-		maxStreakObj.GetComponent<Text> ().text = "Max Streak: " + maxStreak;
-		farShotsObj.GetComponent<Text> ().text = "Far Shots: " + totfarShots;
-		totalScore.GetComponent<Text> ().text = "SCORE: " + playerScore;
+		maxStreakNum.GetComponent<Text> ().text = maxStreak.ToString();
+		farShotNum.GetComponent<Text> ().text = totfarShots.ToString();
+		totalScore.GetComponent<Text> ().text = playerScore.ToString();
 	}
 }

@@ -1,46 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 //add to object which requires scaling upon instantiation
-public class scaleSetup : MonoBehaviour {
+public class scaleSetupStar : MonoBehaviour {
 	public blowUpGeneral scaleUp;
-	public float timeDelay;	//delay in seconds for object to appear
 	public float vel;
 	public float acc;
 	public float scale;		//start scale, ie small value which object starts at
 
 	private float maxScale;	//max value object scales up to
-	private float timePassed;
-	private bool countTime;
 	public bool needScaling{ get; set; }
 
 	void Awake() {
-		needScaling = false;
+		needScaling = true;
 	}
 
 	// Use this for initialization
 	void Start () {
-//		GetComponent<RectTransform> ().SetAsFirstSibling ();
-		timePassed = 0;
-		countTime = true;
+		//		GetComponent<RectTransform> ().SetAsFirstSibling ();
 		maxScale = GetComponent<RectTransform> ().localScale.x;
 		GetComponent<RectTransform> ().localScale = new Vector3(scale, scale);
 		scaleUp = new blowUpGeneral (vel, acc, scale);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (countTime) {
-			timePassed += Time.deltaTime;
-		}
-
-		if (timePassed > timeDelay) {
-			timePassed = 0;
-			countTime = false;
-			needScaling = true;
-		}
-
 		if (needScaling) {
 			scaleUp.updateVelocity ();
 			scaleUp.updateScale ();
