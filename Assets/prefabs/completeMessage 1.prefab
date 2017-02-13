@@ -639,9 +639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a0cf6693b3945468da7570e2d9218a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star1: 15
-  star2: 40
-  star3: 80
+  star1score: 25
+  star2score: 50
+  star3score: 75
   starDelay: 0.75
   starfill1: {fileID: 224343539903727084, guid: 747687e1e80a143d29aa6f331a317459,
     type: 2}
@@ -650,8 +650,8 @@ MonoBehaviour:
   starfill3: {fileID: 224343539903727084, guid: 91aa22ff1f5dc47f8bc597cc53277904,
     type: 2}
   initScale: 0.1
-  acc: -0.5
-  vel: 2
+  acc: -4
+  vel: 5
   endMessage:
     velocity: 0
     acceleration: 0

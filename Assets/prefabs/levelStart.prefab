@@ -62,8 +62,8 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
-  vel: 1
-  acc: -0.2
+  vel: 3
+  acc: -4
   scale: 0.01
 --- !u!114 &114339332840575290
 MonoBehaviour:

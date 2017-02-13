@@ -162,6 +162,13 @@ public class projectileShoot : MonoBehaviour {
 		manager.GetComponent<scoreCount> ().playerCombo += 1;
 		int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
 
+		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
+		float finishLine = manager.GetComponent<caterpillarManager>().finishLine;
+		//mid-point of actual shooting space
+		float arenaMidpoint = (screenHeight + finishLine) / 2;
+
+		//code may be deleted if score is based only on max streak and far shots
+		/////
 		int scoreMultiplier;	//amount next score is multiplied by
 
 		if (currentCombo < 3) {
@@ -169,17 +176,13 @@ public class projectileShoot : MonoBehaviour {
 		} else {
 			scoreMultiplier = currentCombo;
 		}
-
-		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
-		float finishLine = manager.GetComponent<caterpillarManager>().finishLine;
-		//mid-point of actual shooting space
-		float arenaMidpoint = (screenHeight + finishLine) / 2;
+		/////
 
 		//if player hits caterpillar above mid point, counts as a far shot - get x2
 		if (col.transform.position.y > arenaMidpoint) {
 			manager.GetComponent<scoreCount> ().farShots += 1;		//add 1 to total far shots
 			manager.GetComponent<scoreCount> ().far = true;
-			scoreMultiplier *= 2;
+		//	scoreMultiplier *= 2;
 		} else {
 			manager.GetComponent<scoreCount> ().far = false;
 		}
@@ -189,6 +192,7 @@ public class projectileShoot : MonoBehaviour {
 		setInactive (bonusCheck (scoreMultiplier), col);
 	}
 
+	//set caterpillar inactive now if there is no bonus score. If not caterpillar is set inactive once bonus text fades.
 	void setInactive(bool bonus, Collision2D col) {
 		if (bonus == false) {
 			col.gameObject.SetActive (false);

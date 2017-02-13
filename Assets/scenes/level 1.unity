@@ -748,7 +748,7 @@ Prefab:
       objectReference: {fileID: 1770821641}
     - target: {fileID: 1117444186380140, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3, type: 2}
       propertyPath: m_Name
-      value: pause
+      value: pauseButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3, type: 2}
@@ -1625,6 +1625,11 @@ Prefab:
       propertyPath: m_Name
       value: lvl1Start
       objectReference: {fileID: 0}
+    - target: {fileID: 114339332840575290, guid: d841007594f014462bd34d55b9699ff7,
+        type: 2}
+      propertyPath: pauseButton
+      value: 
+      objectReference: {fileID: 315422811}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d841007594f014462bd34d55b9699ff7, type: 2}
   m_IsPrefabParent: 0

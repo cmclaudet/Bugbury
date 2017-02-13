@@ -6,9 +6,9 @@ using UnityEngine;
 //instaniates stars if player has reached certain score
 //sets up time delay between star instantiation
 public class blowUp : MonoBehaviour {
-	public int star1;	//necessary score for 1 star
-	public int star2;	//necessary score for 2 stars
-	public int star3;	//necessary score for 3 stars
+	public int star1score;	//necessary score for 1 star
+	public int star2score;	//necessary score for 2 stars
+	public int star3score;	//necessary score for 3 stars
 	public float starDelay;		//delay time between appearance of each star
 	public Transform starfill1;		//star filling object for each star
 	public Transform starfill2;
@@ -33,6 +33,10 @@ public class blowUp : MonoBehaviour {
 
 	public blowUpGeneral endMessage;
 
+	void Awake() {
+		playerScore = GameObject.Find ("game manager").GetComponent<scoreCount> ().calcScore();
+	}
+
 	// Use this for initialization
 	void Start () {
 		needScaling = true;
@@ -46,7 +50,6 @@ public class blowUp : MonoBehaviour {
 
 		maxScale = GetComponent<RectTransform> ().localScale.x;
 		GetComponent<RectTransform> ().localScale = new Vector3(initScale, initScale);
-		playerScore = GameObject.Find ("game manager").GetComponent<scoreCount> ().playerScore;
 
 		endMessage = new blowUpGeneral (vel, acc, initScale);
 	}
@@ -65,17 +68,17 @@ public class blowUp : MonoBehaviour {
 			//updates timers for each star. Min value necessary to instantiate increases with star so that star 1 appears first and star 3 appears last
 			timeTillDelay1 = updatedTime (timeTillDelay1);
 			if (timeTillDelay1 >= starDelay) {
-				launchStar (star1, star1NotInstantiated, starfill1);
+				launchStar (star1score, star1NotInstantiated, starfill1);
 				star1NotInstantiated = false;
 			}
 			timeTillDelay2 = updatedTime (timeTillDelay2);
 			if (timeTillDelay2 >= 2 * starDelay) {
-				launchStar (star2, star2NotInstantiated, starfill2);
+				launchStar (star2score, star2NotInstantiated, starfill2);
 				star2NotInstantiated = false;
 			}
 			timeTillDelay3 = updatedTime (timeTillDelay3);
 			if (timeTillDelay3 >= 3 * starDelay) {
-				launchStar (star3, star3NotInstantiated, starfill3);
+				launchStar (star3score, star3NotInstantiated, starfill3);
 				star3NotInstantiated = false;
 			}
 		}
