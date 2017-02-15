@@ -5,7 +5,7 @@ using UnityEngine;
 //add to object which requires scaling upon instantiation
 public class scaleSetup : MonoBehaviour {
 	public blowUpGeneral scalingObj;
-	public float timeDelay;	//delay in seconds for object to appear
+	public float timeDelay{ get; set; }	//delay in seconds for object to appear
 	public float vel;
 	public float acc;
 	public float startScale;		//start scale, ie value which object starts at
@@ -77,15 +77,13 @@ public class scaleSetup : MonoBehaviour {
 		timePassed = 0;
 		countTime = false;
 		needScaling = true;
-		Debug.Log ("start time!");
-		Debug.Log (Time.fixedDeltaTime);
+
 	}
 
 	void updateObjScale() {
 		scalingObj.updateVelocity ();
 		scalingObj.updateScale ();
 		GetComponent<RectTransform> ().localScale = new Vector3 (scalingObj.scale, scalingObj.scale);
-		Debug.Log (GetComponent<RectTransform> ().localScale.x);
 	}
 
 	void checkScalingDone() {

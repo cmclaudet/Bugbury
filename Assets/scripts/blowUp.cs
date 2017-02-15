@@ -10,28 +10,16 @@ public class blowUp : MonoBehaviour {
 	public int star2score;	//necessary score for 2 stars
 	public int star3score;	//necessary score for 3 stars
 
-//	public float textDelay;		//delay time between appearance of text: max streak, far shots
+	public float textDelay;		//delay time between appearance of text: max streak, far shots, score
+	public float postScoreDelay;	//delays between score and stars appearing
 	public float starDelay;		//delay time between appearance of each star
-	public Transform starfill1;		//star filling object for each star
-	public Transform starfill2;
-	public Transform starfill3;
 
-	//values for scaling of message itself
-	private float maxScale;
-	public float initScale;
-	public float acc;
-	public float vel;
+	private Transform star1;
+	private Transform star2;
+	private Transform star3;
 
-	private bool needScaling;	//once false scaling no longer occurs
 	private int playerScore;
-
-	private bool star1NotInstantiated;	//bool values ensure stars not repeatedly instantiated
-	private bool star2NotInstantiated;
-	private bool star3NotInstantiated;
-
-	private float timeTillDelay1;		//timers from instantiation of each star
-	private float timeTillDelay2;
-	private float timeTillDelay3;
+	private bool needScaling;
 
 	private GameObject scoreNumber;
 
@@ -39,74 +27,68 @@ public class blowUp : MonoBehaviour {
 
 	void Awake() {
 		playerScore = GameObject.Find ("game manager").GetComponent<scoreCount> ().calcScore();
+
 	}
 
 	// Use this for initialization
 	void Start () {
 		scoreNumber = transform.Find ("scoreNumber").gameObject;
 		scoreNumber.gameObject.SetActive (false);
-		needScaling = true;
-		star1NotInstantiated = true;
-		star2NotInstantiated = true;
-		star3NotInstantiated = true;
 
-		timeTillDelay1 = 0;
-		timeTillDelay2 = 0;
-		timeTillDelay3 = 0;
-
-		maxScale = GetComponent<RectTransform> ().localScale.x;
-		GetComponent<RectTransform> ().localScale = new Vector3(initScale, initScale);
-
-		endMessage = new blowUpGeneral (vel, acc, initScale);
+		setTextTimeDelays ();
+		setStarTimeDelays ();
+		inactivateStars ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (needScaling) {
-			endMessage.updateVelocity ();
-			endMessage.updateScale ();
-			GetComponent<RectTransform> ().localScale = new Vector3 (endMessage.scale, endMessage.scale);
-		} else {
+		needScaling = GetComponent<scaleSetup> ().needScaling;
+
+		if (needScaling == false) {
 			scoreNumber.SetActive (true);
 		}
+	}
 
-		if (endMessage.scale >= maxScale) {
-			needScaling = false;
+	//set time delay between instantiation of lvl complete message and text objects
+	void setTextTimeDelays() {
+		Transform[] textObjects = {
+			transform.Find ("maxStreak"),
+			transform.Find ("maxStreakNumber"),
+			transform.Find ("farShots"),
+			transform.Find ("farShotNumber"),
+			transform.Find ("score"),
+			transform.Find ("scoreNumber")
+		};
 
-			//updates timers for each star. Min value necessary to instantiate increases with star so that star 1 appears first and star 3 appears last
-			timeTillDelay1 = updatedTime (timeTillDelay1);
-			if (timeTillDelay1 >= starDelay) {
-				launchStar (star1score, star1NotInstantiated, starfill1);
-				star1NotInstantiated = false;
-			}
-			timeTillDelay2 = updatedTime (timeTillDelay2);
-			if (timeTillDelay2 >= 2 * starDelay) {
-				launchStar (star2score, star2NotInstantiated, starfill2);
-				star2NotInstantiated = false;
-			}
-			timeTillDelay3 = updatedTime (timeTillDelay3);
-			if (timeTillDelay3 >= 3 * starDelay) {
-				launchStar (star3score, star3NotInstantiated, starfill3);
-				star3NotInstantiated = false;
-			}
+		for (int i = 0; i < textObjects.Length; i++) {
+			textObjects [i].GetComponent<scaleSetup> ().timeDelay = textDelay * (i + 1);
+		}
+
+	}
+
+	//set the time delays between instantiation of level complete message and star objects
+	void setStarTimeDelays() {
+		star1 = transform.Find ("starFill 1");
+		star2 = transform.Find ("starFill 2");
+		star3 = transform.Find ("starFill 3");
+
+		Transform[] stars = {star1, star2, star3};
+
+		for (int i = 0; i < stars.Length; i++) {
+			stars [i].GetComponent<scaleSetup> ().timeDelay = textDelay * 6 + postScoreDelay + starDelay * (i + 1);
+			stars [i].GetComponent<RectTransform> ().SetAsLastSibling ();
 		}
 	}
 
-	void launchStar(int requiredScore, bool notInstantiated, Transform star) {
-		//only launch star if player has reached appropriate goal
-		if (playerScore >= requiredScore && notInstantiated) {
-			instantiateStar (star);
+	void inactivateStars() {
+		if (playerScore < star1score) {
+			star1.gameObject.SetActive (false);
 		}
-	}
-
-	//updates timer values
-	float updatedTime(float time) {
-		float newTime = time + Time.deltaTime;
-		return newTime;
-	}
-
-	void instantiateStar(Transform star) {
-		Transform newStar = Instantiate (star);
-		newStar.transform.SetParent (GetComponent<RectTransform>(), false);
+		if (playerScore < star2score) {
+			star2.gameObject.SetActive (false);
+		}
+		if (playerScore < star3score) {
+			star3.gameObject.SetActive (false);
+		}
 	}
 }
