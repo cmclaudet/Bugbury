@@ -45,7 +45,7 @@ public class lifeManager : MonoBehaviour {
 
 		if (checkWhenScalingIsDone) {
 			if (gameOverSign.GetComponent<scaleSetup> ().needScaling == false) {
-				Time.timeScale = 0;
+				Time.timeScale = 0;		//only pause time after scaling is done, or object won't scale
 			}
 				
 		}
