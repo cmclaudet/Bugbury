@@ -31,6 +31,8 @@ public class blowUp : MonoBehaviour {
 	private float timeTillDelay2;
 	private float timeTillDelay3;
 
+	private GameObject scoreNumber;
+
 	public blowUpGeneral endMessage;
 
 	void Awake() {
@@ -39,6 +41,8 @@ public class blowUp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		scoreNumber = transform.Find ("scoreNumber").gameObject;
+		scoreNumber.gameObject.SetActive (false);
 		needScaling = true;
 		star1NotInstantiated = true;
 		star2NotInstantiated = true;
@@ -57,9 +61,11 @@ public class blowUp : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (needScaling) {
-			endMessage.updateVelocity();
+			endMessage.updateVelocity ();
 			endMessage.updateScale ();
 			GetComponent<RectTransform> ().localScale = new Vector3 (endMessage.scale, endMessage.scale);
+		} else {
+			scoreNumber.SetActive (true);
 		}
 
 		if (endMessage.scale >= maxScale) {

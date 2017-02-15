@@ -9,15 +9,18 @@ public class scaleSetup : MonoBehaviour {
 	public float vel;
 	public float acc;
 	public float startScale;		//start scale, ie value which object starts at
+	public bool lowTimeStep;
 
 	private float finalScale;	//final value object scales to
 	private bool scalingUp;		//is true is object is growing from small to big. false otherwise.
 	private float timePassed;
 	private bool countTime;		//checks when timeDelay has passsed
-	public bool needScaling{ get; set; }
+	public bool needScaling{ get; set; }	//ensures object is only scaled when it needs to be
+	private bool doneScaling;	//ensures fixed delta time is reverted to its original number only once (right after scaling is done), not repeatedly
 
 	void Awake() {
 		needScaling = false;	//set to false so that object only scales after time delay
+		doneScaling = false;
 	}
 
 	// Use this for initialization
@@ -33,20 +36,29 @@ public class scaleSetup : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (countTime) {
 			addTime ();
 		}
 
 		if (timePassed > timeDelay) {
 			stopCount ();
+			setTimeStep ();
 		}
 
 		if (needScaling) {
 			updateObjScale ();
 		}
 
-		checkScalingDone ();
+		if (doneScaling == false) {
+			checkScalingDone ();
+		}
+	}
+
+	void setTimeStep() {
+		if (lowTimeStep) {
+			Time.fixedDeltaTime = 0.001f;
+		}
 	}
 
 	bool checkScalingDir() {
@@ -66,6 +78,7 @@ public class scaleSetup : MonoBehaviour {
 		countTime = false;
 		needScaling = true;
 		Debug.Log ("start time!");
+		Debug.Log (Time.fixedDeltaTime);
 	}
 
 	void updateObjScale() {
@@ -89,5 +102,7 @@ public class scaleSetup : MonoBehaviour {
 
 	void stopScaling() {
 		needScaling = false;
+		Time.fixedDeltaTime = 0.02f;
+		doneScaling = true;
 	}
 }
