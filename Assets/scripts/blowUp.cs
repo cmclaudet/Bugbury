@@ -9,6 +9,8 @@ public class blowUp : MonoBehaviour {
 	public int star1score;	//necessary score for 1 star
 	public int star2score;	//necessary score for 2 stars
 	public int star3score;	//necessary score for 3 stars
+
+//	public float textDelay;		//delay time between appearance of text: max streak, far shots
 	public float starDelay;		//delay time between appearance of each star
 	public Transform starfill1;		//star filling object for each star
 	public Transform starfill2;

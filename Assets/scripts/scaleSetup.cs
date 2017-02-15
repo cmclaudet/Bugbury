@@ -16,7 +16,7 @@ public class scaleSetup : MonoBehaviour {
 	private float timePassed;
 	private bool countTime;		//checks when timeDelay has passsed
 	public bool needScaling{ get; set; }	//ensures object is only scaled when it needs to be
-	private bool doneScaling;	//ensures fixed delta time is reverted to its original number only once (right after scaling is done), not repeatedly
+	public bool doneScaling{ get; set; }	//ensures fixed delta time is reverted to its original number only once (right after scaling is done), not repeatedly
 
 	void Awake() {
 		needScaling = false;	//set to false so that object only scales after time delay
