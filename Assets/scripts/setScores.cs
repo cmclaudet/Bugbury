@@ -30,10 +30,12 @@ public class setScores : MonoBehaviour {
 	void setupText() {
 		Transform maxStreakNum = this.transform.Find ("maxStreakNumber");
 		Transform farShotNum = this.transform.Find ("farShotNumber");
-		Transform totalScore = this.transform.Find ("scoreNumber");
 
 		maxStreakNum.GetComponent<Text> ().text = maxStreak.ToString();
 		farShotNum.GetComponent<Text> ().text = totfarShots.ToString();
-		totalScore.GetComponent<Text> ().text = playerScore.ToString();
+	}
+
+	public void setScoreNum(Transform scoreNumber) {
+		scoreNumber.GetComponent<Text> ().text = playerScore.ToString();
 	}
 }

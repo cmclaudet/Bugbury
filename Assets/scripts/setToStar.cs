@@ -6,6 +6,8 @@ public class setToStar : MonoBehaviour {
 	public Transform star;
 
 	void Awake() {
+		GetComponent<RectTransform> ().SetAsLastSibling();
+		star.GetComponent<RectTransform> ().SetAsFirstSibling ();
 		setFilltoOutline ();
 	}
 

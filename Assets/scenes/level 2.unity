@@ -153,7 +153,7 @@ MonoBehaviour:
   caterpillars: {fileID: 50329199488362526, guid: 041659fb077bb4dec9ab60811009d471,
     type: 2}
   totalCaterpillars: 15
-  completeMessage: {fileID: 224256179553984670, guid: 648b984669c5243c7b6e224f1ab3310f,
+  completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
   canvas: {fileID: 1770821641}
   pauseButton: {fileID: 1084964737}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livesText: {fileID: 397696314}
-  gameOverMessage: {fileID: 224667786381794034, guid: 69e4f885e5532458d9ff77fa9be7bb2e,
+  gameOverMessage: {fileID: 224667786381794034, guid: 59dfbed232a0c4d5d885e81259f17d28,
     type: 2}
   pauseButton: {fileID: 1084964737}
   canvas: {fileID: 1770821641}
@@ -246,7 +246,7 @@ Transform:
   m_LocalScale: {x: 0.85, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &290219786
 GameObject:
@@ -355,7 +355,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &314071460
 Prefab:
@@ -995,7 +995,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4470240456364158, guid: 720813d2e5c4b4f0e9087806835079c9, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1734720882157930, guid: 720813d2e5c4b4f0e9087806835079c9, type: 2}
       propertyPath: m_Name
@@ -1572,7 +1572,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1758098658}
-  - component: {fileID: 1758098659}
   m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
@@ -1599,19 +1598,8 @@ Transform:
   - {fileID: 1916529375}
   - {fileID: 1023581738}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1758098659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1758098657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f210e36ce7b014014a1a55a1e7c9be6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1770821637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,6 +1878,7 @@ GameObject:
   - component: {fileID: 1849413121}
   - component: {fileID: 1849413120}
   - component: {fileID: 1849413119}
+  - component: {fileID: 1849413124}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1965,6 +1954,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1849413124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1849413118}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ba48a85c6bd4e9f9f9b2c632fe5528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camTransform: {fileID: 0}
+  shakeDuration: 0.5
+  shakeAmount: 0.2
+  decreaseFactor: 1
 --- !u!1001 &1916529374
 Prefab:
   m_ObjectHideFlags: 0
@@ -2110,7 +2114,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4119634006826874, guid: 0b4faf803a1f74228ab06ac81c4d3058, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b4faf803a1f74228ab06ac81c4d3058, type: 2}

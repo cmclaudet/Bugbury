@@ -14,6 +14,21 @@ public class loadMain : MonoBehaviour {
 		click = GameObject.Find ("click").GetComponent<AudioSource>();
 	}
 
+	public void replay() {
+		Scene currentScene = SceneManager.GetActiveScene ();
+		SceneManager.LoadScene (currentScene.name);
+		click.Play ();
+	}
+
+	public void nextLevel() {
+		if (SceneManager.GetActiveScene ().name == "level 1") {
+			SceneManager.LoadScene ("level 2");
+		} else {
+			SceneManager.LoadScene ("level 3");
+		}
+		click.Play ();
+	}
+
 	public void loadFirstlvl () {
 		resetMusic ();
 		SceneManager.LoadScene ("level 1");

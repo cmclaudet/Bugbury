@@ -9,7 +9,9 @@ public class scaleSetup : MonoBehaviour {
 	public float vel;
 	public float acc;
 	public float startScale;		//start scale, ie value which object starts at
-	public bool lowTimeStep;
+	public bool lowTimeStep;		//set to true if scaling needs many checks per second to be precise
+//	public bool isScoreNumber;		//set to true if this object is the score number. this is because score number must only be instantiated after its time delay has passed (or the player will see it)
+	public int order;				//the order which the text comes up. max streak = 1, max streak num = 2, etc
 
 	private float finalScale;	//final value object scales to
 	private bool scalingUp;		//is true is object is growing from small to big. false otherwise.
@@ -21,11 +23,13 @@ public class scaleSetup : MonoBehaviour {
 	void Awake() {
 		needScaling = false;	//set to false so that object only scales after time delay
 		doneScaling = false;
+//		if (isScoreNumber) {
+//			timeDelay *= order;	//higher time delay if object has higher order
+//		}
 	}
 
 	// Use this for initialization
 	void Start () {
-//		GetComponent<RectTransform> ().SetAsFirstSibling ();
 		timePassed = 0;
 		countTime = true;	//set to true as it is necessary to count the time until time delay has passed
 		finalScale = GetComponent<RectTransform> ().localScale.x;
@@ -33,6 +37,14 @@ public class scaleSetup : MonoBehaviour {
 		scalingObj= new blowUpGeneral (vel, acc, startScale);
 
 		scalingUp = checkScalingDir ();
+
+		//if object is the score number skip time delay. parent object only initializes this until its time delay has passed
+//		if (isScoreNumber) {
+//			stopCount ();
+//			setTimeStep ();
+//		} else {
+		timeDelay *= order;
+//		}
 	}
 	
 	// Update is called once per frame
