@@ -1494,6 +1494,11 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 53a7e00a6db6f4ccdb352c834e84fbd9, type: 2}
+    - target: {fileID: 114367454734045142, guid: 32d8ae6109de64715b187bb6f06993d9,
+        type: 2}
+      propertyPath: m_Text
+      value: 'High Score: -'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32d8ae6109de64715b187bb6f06993d9, type: 2}
   m_IsPrefabParent: 0
@@ -2652,7 +2657,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'High Score:'
+  m_Text: 'High Score: -'
 --- !u!222 &1760088703
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3123,7 +3128,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'High Score:'
+  m_Text: 'High Score: -'
 --- !u!222 &2040309235
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3333,7 +3338,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'High Score:'
+  m_Text: 'High Score: -'
 --- !u!222 &2081303866
 CanvasRenderer:
   m_ObjectHideFlags: 0

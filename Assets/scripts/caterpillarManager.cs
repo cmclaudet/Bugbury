@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //script manages caterpillar spawn frequency changing over time, keeps count of caterpillar deaths and triggers end level message when all caterpillars are inactivated
-
+//removed life from player if player misses caterpillar
 public class caterpillarManager : MonoBehaviour {
 	public float interbugDistance;	//desired distance between subsequently spawning bugs
 	public float finishLine;	//finish line y co-ordinated in world space
@@ -71,6 +71,10 @@ public class caterpillarManager : MonoBehaviour {
 			if (allCaterpillars [i].transform.position.y < minimunY) {
 				allCaterpillars [i].gameObject.SetActive (false);
 				caterpillarsInactivated += 1;
+				GetComponent<lifeManager> ().lifeLost = true;	//triggers removal of one of player's lives
+
+				resetMaxStreak ();
+
 				GetComponent<scoreCount> ().playerCombo = 0;
 				findAllBugs ();		//recount caterpillars after inactivation
 
@@ -109,6 +113,9 @@ public class caterpillarManager : MonoBehaviour {
 	void setupEnd() {
 		control = false;
 		pauseButton.interactable = false;
+
+		resetMaxStreak ();
+
 		Transform levelDone = Instantiate (completeMessage);
 		levelDone.transform.SetParent (canvas, false);
 		setupNotDone = false;
@@ -118,5 +125,11 @@ public class caterpillarManager : MonoBehaviour {
 		float screenHeight = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0)).y;
 		minimunY = allCaterpillars [0].GetComponent<move> ().yMin;
 		minimunY += (screenHeight + finishLine);
+	}
+
+	void resetMaxStreak() {
+		if (GetComponent<scoreCount> ().playerCombo > GetComponent<scoreCount> ().maxPlayerStreak) {
+			GetComponent<scoreCount> ().maxPlayerStreak = GetComponent<scoreCount> ().playerCombo;
+		}
 	}
 }

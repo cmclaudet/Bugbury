@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //brings up pause menu when player presses pause button
 public class pauseGame : MonoBehaviour {
 	public Transform pauseMenu;
@@ -10,10 +11,12 @@ public class pauseGame : MonoBehaviour {
 	private AudioSource click;
 
 	void Awake() {
+		GetComponent<Button> ().interactable = false;
 		click = GameObject.Find ("click").GetComponent<AudioSource> ();
 	}
 
 	public void setupPause() {
+		GetComponent<Button> ().interactable = false;
 		click.Play ();
 		GameObject manager = GameObject.Find ("game manager");
 		manager.GetComponent<caterpillarManager> ().control = false;

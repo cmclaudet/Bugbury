@@ -95,7 +95,7 @@ public class projectileShoot : MonoBehaviour {
 	void launch() {
 		//once rock has passed over the slingshot position, spring and line renderers are disabled.
 		//Velocity is set to magnitude specified above
-		if (fingerDown == false && transform.position.y >= leftSlingshot.transform.position.y) {
+		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
 			GetComponent<SpringJoint2D> ().enabled = false;
 			GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
 			middleLine.enabled = false;
@@ -157,38 +157,51 @@ public class projectileShoot : MonoBehaviour {
 		}
 	}
 
-	//player combo updates
 	void updateScores(Collision2D col) {
+		//add 1 to player streak
 		manager.GetComponent<scoreCount> ().playerCombo += 1;
 		int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
 
-		int scoreMultiplier;	//amount next score is multiplied by
+		//update manager if the shot is far, ie if user hits caterpillar over the mid way point
+		updateIfFarShot(col);
+		bool farShot = manager.GetComponent<scoreCount> ().far;
 
-		if (currentCombo < 3) {
-			scoreMultiplier = 1;	//combo multipliers only triggered at combo >= 3
+		//update score
+		int newScore = getNewScore(currentCombo, farShot);
+		manager.GetComponent<scoreCount> ().changeScore (newScore);
+
+		setInactive (bonusCheck (newScore), col);
+	}
+
+	void updateIfFarShot(Collision2D col) {
+		float arenaMidpoint = getMidPoint (col);
+
+		if (col.transform.position.y > arenaMidpoint) {
+			manager.GetComponent<scoreCount> ().farShots += 1;		//add 1 to total far shots
+			manager.GetComponent<scoreCount> ().far = true;
 		} else {
-			scoreMultiplier = currentCombo;
+			manager.GetComponent<scoreCount> ().far = false;
 		}
+	}
 
+	float getMidPoint(Collision2D col) {
 		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
 		float finishLine = manager.GetComponent<caterpillarManager>().finishLine;
 		//mid-point of actual shooting space
 		float arenaMidpoint = (screenHeight + finishLine) / 2;
+		return arenaMidpoint;
+	}
 
-		//if player hits caterpillar above mid point, counts as a far shot - get x2
-		if (col.transform.position.y > arenaMidpoint) {
-
-			manager.GetComponent<scoreCount> ().far = true;
-			scoreMultiplier *= 2;
-		} else {
-			manager.GetComponent<scoreCount> ().far = false;
+	int getNewScore(int currentCombo, bool farShot) {
+		int newScore = currentCombo;
+		if (farShot) {
+			newScore += 2;
 		}
-		//update score
-		manager.GetComponent<scoreCount> ().playerScore += scoreMultiplier;
+		return newScore;
+	}
 
-		setInactive (bonusCheck (scoreMultiplier), col);
-		}
-
+	//set caterpillar inactive now if there is no bonus score. If not caterpillar is set inactive once bonus text fades.
+	//set projectile game object to false
 	void setInactive(bool bonus, Collision2D col) {
 		if (bonus == false) {
 			col.gameObject.SetActive (false);
@@ -197,7 +210,7 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 	bool bonusCheck(int scoreMultiplier) {
-		if (scoreMultiplier >= 2) {
+		if (scoreMultiplier > 1) {
 			return true;
 		} else {
 			return false;

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 //like a countdown
 public class go : MonoBehaviour {
 	public float startTime;	//defines how long "level" message is up. Actual start time is startTime*1.5
+	public Button pauseButton;
+
 	private float timetoStart;
 	private GameObject manager;
 	// Use this for initialization
@@ -26,6 +28,7 @@ public class go : MonoBehaviour {
 		if (timetoStart >= 1.5f * startTime) {
 			GetComponent<RectTransform> ().gameObject.SetActive (false);
 			manager.GetComponent<caterpillarManager> ().control = true;
+			pauseButton.interactable = true;
 		}
 	}
 }

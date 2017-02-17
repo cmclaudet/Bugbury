@@ -239,7 +239,7 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
-  vel: 4
+  vel: 6
   acc: -0.5
   minScale: 0.1
   minMaxScale: 0.7
