@@ -13,15 +13,21 @@ public class scoreCount : MonoBehaviour {
 	public int farShots{ get; set; }
 	public bool far { get; set; }
 
+	public GameObject scoreObject;
+
 	// Use this for initialization
 	void Start () {
 		playerScore = 0;
-
 		actualScore = 0;
 		playerCombo = 0;
 		maxPlayerStreak = 0;
 		farShots = 0;
 		far = false;
+	}
+
+	public void changeScore(int newScore) {
+		playerScore += newScore;
+		scoreObject.GetComponent<rewrite> ().rewriteScore (playerScore.ToString ());
 	}
 
 	//alternative score calculation based only on max streak and far shot

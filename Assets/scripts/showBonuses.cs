@@ -27,7 +27,7 @@ public class showBonuses : MonoBehaviour {
 	void Update () {
 		comboNumber = manager.GetComponent<scoreCount> ().playerCombo;
 		isFar = manager.GetComponent<scoreCount> ().far;
-		if ((comboNumber > 2 || isFar)) {
+		if ((comboNumber > 1 || isFar)) {
 			if (bonusNotInstantiated && dead) {
 				instantiateBonus ();
 				bonusNotInstantiated = false;
@@ -43,10 +43,10 @@ public class showBonuses : MonoBehaviour {
 			thisBonusText = Instantiate (bonusTextRight);
 		}
 
-		thisBonusText.transform.position = transform.position;
+		thisBonusText.transform.position = new Vector3(transform.position.x - 0.55f, transform.position.y + 0.05f, transform.position.z);
 		Transform comboNumText = thisBonusText.transform.Find ("comboText");
 		if (comboNumber > 2) {
-			comboNumText.gameObject.GetComponent<TextMesh> ().text = comboNumber + " STREAK";
+			comboNumText.gameObject.GetComponent<TextMesh> ().text = comboNumber + " STREAK!";
 		} else {
 			comboNumText.gameObject.GetComponent<TextMesh> ().text = " ";
 		}
