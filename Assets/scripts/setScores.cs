@@ -15,8 +15,6 @@ public class setScores : MonoBehaviour {
 	void Start () {
 		//finds all values needed to display score
 		manager = GameObject.Find ("game manager");
-//		caterpillarsKilled = manager.GetComponent<caterpillarManager> ().caterpillarsKilled;
-//		totalCaterpillars = manager.GetComponent<caterpillarManager> ().totalCaterpillars;
 		findMaxStreakFarShots();
 		setupText ();
 	}
@@ -24,7 +22,7 @@ public class setScores : MonoBehaviour {
 	void findMaxStreakFarShots() {
 		maxStreak = manager.GetComponent<scoreCount> ().maxPlayerStreak;
 		totfarShots = manager.GetComponent<scoreCount> ().farShots;
-		playerScore = manager.GetComponent<scoreCount> ().actualScore;
+		playerScore = manager.GetComponent<scoreCount> ().playerScore;
 	}
 
 	void setupText() {

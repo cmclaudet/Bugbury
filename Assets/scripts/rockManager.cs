@@ -14,6 +14,10 @@ public class rockManager : MonoBehaviour {
 		screenLength = Camera.main.ScreenToWorldPoint (new Vector3 (0, Screen.height, 0)).y;
 	}
 
+	void Start() {
+		Instantiate (rocks);
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (makeRockNow) {

@@ -136,7 +136,8 @@ public class projectileShoot : MonoBehaviour {
 		middleLine.SetPosition (2, rightPos);
 	}
 
-	//on collision with caterpillar both bodies are inactivated, blood splatter is placed and player score + combo updated
+	//on collision with caterpillar rock is inactivated, blood splatter is placed and player score + streak number updated
+	//rock is inactivated
 	void OnCollisionEnter2D(Collision2D col) {
 		if (col.gameObject.CompareTag("caterpillar") && (transform.position.y > spawnPosition.y)) {
 			splatSound.Play ();
@@ -150,6 +151,7 @@ public class projectileShoot : MonoBehaviour {
 
 			updateScores (col);
 
+			this.gameObject.SetActive(false);
 			//if player kills final caterpillar level ends
 			if (manager.GetComponent<caterpillarManager> ().caterpillarsInactivated == manager.GetComponent<caterpillarManager> ().totalCaterpillars) {
 				manager.GetComponent<caterpillarManager> ().levelEnd = true;
@@ -169,8 +171,6 @@ public class projectileShoot : MonoBehaviour {
 		//update score
 		int newScore = getNewScore(currentCombo, farShot);
 		manager.GetComponent<scoreCount> ().changeScore (newScore);
-
-		setInactive (bonusCheck (newScore), col);
 	}
 
 	void updateIfFarShot(Collision2D col) {
@@ -199,22 +199,4 @@ public class projectileShoot : MonoBehaviour {
 		}
 		return newScore;
 	}
-
-	//set caterpillar inactive now if there is no bonus score. If not caterpillar is set inactive once bonus text fades.
-	//set projectile game object to false
-	void setInactive(bool bonus, Collision2D col) {
-		if (bonus == false) {
-			col.gameObject.SetActive (false);
-		}
-		this.gameObject.SetActive(false);
-	}
-
-	bool bonusCheck(int scoreMultiplier) {
-		if (scoreMultiplier > 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 }

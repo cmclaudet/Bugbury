@@ -32,7 +32,7 @@ public class blowUp : MonoBehaviour {
 
 	void Awake() {
 		manager = GameObject.Find ("game manager");
-		playerScore = manager.GetComponent<scoreCount> ().calcScore();
+		playerScore = manager.GetComponent<scoreCount> ().playerScore;
 		setTextTimeDelays ();
 	}
 

@@ -1758,10 +1758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43903bb669ba543b894614cfa515089d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusTextRight: {fileID: 1094169159102852, guid: 3ed30a2411d804ef8a61092d219a3ce9,
-    type: 2}
-  bonusTextLeft: {fileID: 1098158960734536, guid: ce4e4a84808214b9dae096f10b49294a,
-    type: 2}
+  bonusText: {fileID: 1310894259917742, guid: f45935b7b544f484a996a210e4cc5738, type: 2}
 --- !u!212 &212000010147130152
 SpriteRenderer:
   m_ObjectHideFlags: 1
