@@ -174,16 +174,16 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 	void updateIfFarShot(Collision2D col) {
-		float arenaMidpoint = getMidPoint (col);
+		float arenaFarpoint = getFarPoint (col);
 
-		if (col.transform.position.y > arenaMidpoint) {
+		if (col.transform.position.y > arenaFarpoint) {
 			manager.GetComponent<scoreCount> ().farShots += 1;		//add 1 to total far shots
 			manager.GetComponent<scoreCount> ().far = true;
 		} else {
 			manager.GetComponent<scoreCount> ().far = false;
 		}
 	}
-
+/*
 	float getMidPoint(Collision2D col) {
 		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
 		float finishLine = manager.GetComponent<caterpillarManager>().finishLine;
@@ -191,11 +191,19 @@ public class projectileShoot : MonoBehaviour {
 		float arenaMidpoint = (screenHeight + finishLine) / 2;
 		return arenaMidpoint;
 	}
+*/
+	//get point 70% of the way up from the finish line. Here upwards it will be considered a far shot
+	float getFarPoint(Collision2D col) {
+		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
+		float finishLine = manager.GetComponent<caterpillarManager>().finishLine;
+		float farPoint = finishLine + (screenHeight - finishLine) * 0.7f;
+		return farPoint;
+	}
 
 	int getNewScore(int currentCombo, bool farShot) {
 		int newScore = currentCombo;
 		if (farShot) {
-			newScore += 2;
+			newScore += manager.GetComponent<scoreCount>().farShotBonus;
 		}
 		return newScore;
 	}

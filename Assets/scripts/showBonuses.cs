@@ -19,11 +19,14 @@ public class showBonuses : MonoBehaviour {
 	private Transform farText;
 	private Transform farNum;
 
+	private int farShotBonus;
+
 	// Use this for initialization
 	void Start () {
 	//	Debug.Log (transform.position);
 		dead = false;
 		manager = GameObject.Find ("game manager");
+		farShotBonus = manager.GetComponent<scoreCount> ().farShotBonus;
 		comboNumber = 0;
 		isFar = false;
 	}
@@ -80,7 +83,7 @@ public class showBonuses : MonoBehaviour {
 
 		if (isFar) {
 			farText.gameObject.GetComponent<TextMesh> ().text = "FAR SHOT!";
-			farNum.gameObject.GetComponent<TextMesh> ().text = "+2";
+			farNum.gameObject.GetComponent<TextMesh> ().text = "+" + farShotBonus;
 		} else {
 			farText.gameObject.GetComponent<TextMesh> ().text = "";
 			farNum.gameObject.GetComponent<TextMesh> ().text = "";

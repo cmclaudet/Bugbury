@@ -7,10 +7,6 @@ using UnityEngine;
 //sets up time delay between text and star instantiation
 //activates score number after its time delay has passed. score number must be inactive to start with or player will see it.
 public class blowUp : MonoBehaviour {
-	public int star1score;	//necessary score for 1 star
-	public int star2score;	//necessary score for 2 stars
-	public int star3score;	//necessary score for 3 stars
-
 	public float textDelay;		//delay time between appearance of text: max streak, far shots, score
 //	public float postScoreDelay;	//delays between score and stars appearing
 //	public float starDelay;		//delay time between appearance of each star
@@ -18,6 +14,11 @@ public class blowUp : MonoBehaviour {
 	public Transform starfill1;
 	public Transform starfill2;
 	public Transform starfill3;
+
+	//obtain from manager
+	private int star1score;	//necessary score for 1 star
+	private int star2score;	//necessary score for 2 stars
+	private int star3score;	//necessary score for 3 stars
 
 	private int playerScore;
 	private GameObject manager;
@@ -43,6 +44,7 @@ public class blowUp : MonoBehaviour {
 		scoreNumInstantiated = false;
 		calcScoreDelay ();
 //		setStarTimeDelays ();
+		setStarThresholds ();
 		inactivateStars ();
 	}
 	
@@ -91,6 +93,13 @@ public class blowUp : MonoBehaviour {
 		}
 	}
 */
+	void setStarThresholds() {
+		star1score = manager.GetComponent<starThreshold> ().threshold1;
+		star2score = manager.GetComponent<starThreshold> ().threshold2;
+		star3score = manager.GetComponent<starThreshold> ().threshold3;
+	}
+
+	//if player does not have sufficient score stars are inactivated
 	void inactivateStars() {
 		if (playerScore < star1score) {
 			starfill1.gameObject.SetActive (false);
@@ -102,4 +111,6 @@ public class blowUp : MonoBehaviour {
 			starfill3.gameObject.SetActive (false);
 		}
 	}
+
+
 }

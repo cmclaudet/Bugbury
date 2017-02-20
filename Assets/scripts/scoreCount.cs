@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class scoreCount : MonoBehaviour {
 	//score, player combo and far values stored here
+	public int farShotBonus;
 	public int playerScore { get; set; }
 
 	public int actualScore{ get; set; }

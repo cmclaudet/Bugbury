@@ -456,8 +456,8 @@ MonoBehaviour:
   vel: 6
   acc: -0.5
   minScale: 0.1
-  minMaxScale: 1
-  maxMaxScale: 1.3
+  minMaxScale: 0.9
+  maxMaxScale: 0.9
 --- !u!114 &114137494445947288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -579,5 +579,5 @@ MonoBehaviour:
   vel: 6
   acc: -0.5
   minScale: 0.1
-  minMaxScale: 1
+  minMaxScale: 0.8
   maxMaxScale: 1.3

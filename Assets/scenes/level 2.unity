@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 1144492}
   - component: {fileID: 1144493}
   - component: {fileID: 1144494}
+  - component: {fileID: 1144495}
   m_Layer: 0
   m_Name: game manager
   m_TagString: Untagged
@@ -168,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e16f248bf4f40e9852b44b21ea1d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  farShotBonus: 0
   scoreObject: {fileID: 895851421}
 --- !u!114 &1144494
 MonoBehaviour:
@@ -185,6 +187,20 @@ MonoBehaviour:
     type: 2}
   pauseButton: {fileID: 1084964737}
   canvas: {fileID: 1770821641}
+--- !u!114 &1144495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1144489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215dd795c7d6f4a0889a67b7f27681f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  star1Frac: 3
+  star2Frac: 2
+  star3Frac: 1.5
 --- !u!1001 &216683041
 Prefab:
   m_ObjectHideFlags: 0
@@ -1482,7 +1498,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 895851421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 48.800022, y: 560.2081, z: 0}
+  m_LocalPosition: {x: 48.800022, y: 600, z: 0}
   m_LocalScale: {x: 1.6293232, y: 1.6293232, z: 1.6293232}
   m_Children:
   - {fileID: 614610290}
