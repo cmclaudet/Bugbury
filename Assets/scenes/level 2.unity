@@ -151,12 +151,14 @@ MonoBehaviour:
   interbugDistance: 3
   finishLine: -3
   endDelay: 2
+  cameraScoreNumShakeDuration: 0.5
   caterpillars: {fileID: 50329199488362526, guid: 041659fb077bb4dec9ab60811009d471,
     type: 2}
   totalCaterpillars: 15
   completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
   canvas: {fileID: 1770821641}
+  camera: {fileID: 1849413118}
   pauseButton: {fileID: 1084964737}
 --- !u!114 &1144493
 MonoBehaviour:
@@ -169,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e16f248bf4f40e9852b44b21ea1d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farShotBonus: 0
+  farShotBonus: 5
   scoreObject: {fileID: 1907185823}
 --- !u!114 &1144494
 MonoBehaviour:
@@ -189,7 +191,6 @@ MonoBehaviour:
   canvas: {fileID: 1770821641}
   camera: {fileID: 1849413118}
   cameraLifeShakeDuration: 0.2
-  cameraScoreNumShakeDuration: 0.5
 --- !u!114 &1144495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1295,7 +1296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.045, y: 0.9587817}
   m_AnchorMax: {x: 0.23, y: 0.99300003}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -0.00012207031}
+  m_AnchoredPosition: {x: 0, y: -0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &884412999

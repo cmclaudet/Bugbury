@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Instantiates bonus text score when caterpillar is killed
 public class showBonuses : MonoBehaviour {
 	public GameObject bonusText;
 
@@ -21,6 +22,8 @@ public class showBonuses : MonoBehaviour {
 
 	private int farShotBonus;
 
+	private float yLimit;	//if caterpillar has greater y position than this bonus text must be moved down so player can see it
+
 	// Use this for initialization
 	void Start () {
 	//	Debug.Log (transform.position);
@@ -29,6 +32,7 @@ public class showBonuses : MonoBehaviour {
 		farShotBonus = manager.GetComponent<scoreCount> ().farShotBonus;
 		comboNumber = 0;
 		isFar = false;
+		yLimit = 4.0f;
 	}
 	
 	// Update is called once per frame
@@ -47,10 +51,16 @@ public class showBonuses : MonoBehaviour {
 
 	void instantiateBonus() {
 		thisBonusText = Instantiate (bonusText);
+
 		if (caterpillarIsOnRight ()) {
 			thisBonusText.transform.position = new Vector3(transform.position.x - 0.55f, transform.position.y + 0.05f, transform.position.z);
 		} else {
 			thisBonusText.transform.position = new Vector3(transform.position.x + 0.55f, transform.position.y + 0.05f, transform.position.z);
+		}
+
+		//reset y position if caterpillar is too high up
+		if (transform.position.y > yLimit) {
+			thisBonusText.transform.position = new Vector3 (thisBonusText.transform.position.x, yLimit);
 		}
 	}
 

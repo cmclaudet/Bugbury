@@ -10,7 +10,6 @@ public class lifeManager : MonoBehaviour {
 	public Transform canvas;
 	public GameObject camera;
 	public float cameraLifeShakeDuration;
-	public float cameraScoreNumShakeDuration;
 //	public int livesLeft{ get; set; }
 
 	private Image life1;
@@ -74,7 +73,6 @@ public class lifeManager : MonoBehaviour {
 	}
 
 	void gameOver() {
-		camera.GetComponent<CameraShake> ().shakeDuration = cameraScoreNumShakeDuration;
 		GetComponent<caterpillarManager> ().control = false;
 		pauseButton.interactable = false;
 

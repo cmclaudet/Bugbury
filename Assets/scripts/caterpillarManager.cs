@@ -9,6 +9,7 @@ public class caterpillarManager : MonoBehaviour {
 	public float interbugDistance;	//desired distance between subsequently spawning bugs
 	public float finishLine;	//finish line y co-ordinated in world space
 	public float endDelay;		//time between final caterpillar being inactivated and level complete message appears
+	public float cameraScoreNumShakeDuration;	//camera shake duration for landing of score number
 
 	public Rigidbody2D caterpillars;	//caterpillar prefab
 	public int totalCaterpillars;	//total caterpillars for this level
@@ -20,6 +21,7 @@ public class caterpillarManager : MonoBehaviour {
 
 	public Transform completeMessage;	//UI menu displaying end of level scores
 	public Transform canvas;
+	public GameObject camera;
 	public Button pauseButton;
 
 	private float spawnFrequency;	//changes depending on speed of caterpillar to keep interbugDistance constant
@@ -111,6 +113,7 @@ public class caterpillarManager : MonoBehaviour {
 
 	//displays player scores
 	void setupEnd() {
+		camera.GetComponent<CameraShake> ().shakeDuration = cameraScoreNumShakeDuration;
 		control = false;
 		pauseButton.interactable = false;
 
