@@ -150,7 +150,6 @@ public class projectileShoot : MonoBehaviour {
 			manager.GetComponent<caterpillarManager> ().caterpillarsKilled += 1;		//to inform player of total number of caterpillars killed
 
 			updateScores (col);
-
 			this.gameObject.SetActive(false);
 			//if player kills final caterpillar level ends
 			if (manager.GetComponent<caterpillarManager> ().caterpillarsInactivated == manager.GetComponent<caterpillarManager> ().totalCaterpillars) {
