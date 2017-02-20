@@ -4,11 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class lifeManager : MonoBehaviour {
-	public Text livesText;
+	public GameObject lifeImages;
 	public Transform gameOverMessage;
 	public Button pauseButton;
 	public Transform canvas;
 //	public int livesLeft{ get; set; }
+
+	private Image life1;
+	private Image life2;
+	private Image life3;
+
 	public bool lifeLost{ get; set; }
 	private int lives;
 	private bool gameOverNotDone;
@@ -24,6 +29,8 @@ public class lifeManager : MonoBehaviour {
 		checkWhenScalingIsDone = false;
 		lives = 3;
 		lifeLost = false;
+
+		getLifeImages ();
 	}
 	
 	// Update is called once per frame
@@ -31,11 +38,11 @@ public class lifeManager : MonoBehaviour {
 		if (lifeLost) {
 			lives -= 1;
 			if (lives == 2) {
-				livesText.text = "Lives: l l";
+				life1.gameObject.SetActive (false);
 			} else if (lives == 1) {
-				livesText.text = "Lives: l";
+				life2.gameObject.SetActive (false);
 			} else {
-				livesText.text = "Lives:";
+				life3.gameObject.SetActive (false);
 				if (gameOverNotDone) {
 					gameOver ();
 				}
@@ -49,6 +56,13 @@ public class lifeManager : MonoBehaviour {
 			}
 				
 		}
+	}
+
+	void getLifeImages() {
+		Image[] allLives = lifeImages.GetComponentsInChildren<Image> ();
+		life1 = allLives [0];
+		life2 = allLives [1];
+		life3 = allLives [2];
 	}
 
 	void gameOver() {
