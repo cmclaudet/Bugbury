@@ -8,6 +8,9 @@ public class lifeManager : MonoBehaviour {
 	public Transform gameOverMessage;
 	public Button pauseButton;
 	public Transform canvas;
+	public GameObject camera;
+	public float cameraLifeShakeDuration;
+	public float cameraScoreNumShakeDuration;
 //	public int livesLeft{ get; set; }
 
 	private Image life1;
@@ -39,10 +42,14 @@ public class lifeManager : MonoBehaviour {
 			lives -= 1;
 			if (lives == 2) {
 				life1.gameObject.SetActive (false);
+				camera.GetComponent<CameraShake> ().shakeDuration = cameraLifeShakeDuration;
+				camera.GetComponent<CameraShake> ().enabled = true;
 			} else if (lives == 1) {
 				life2.gameObject.SetActive (false);
+				camera.GetComponent<CameraShake> ().enabled = true;
 			} else {
 				life3.gameObject.SetActive (false);
+				camera.GetComponent<CameraShake> ().enabled = true;
 				if (gameOverNotDone) {
 					gameOver ();
 				}
@@ -52,6 +59,7 @@ public class lifeManager : MonoBehaviour {
 
 		if (checkWhenScalingIsDone) {
 			if (gameOverSign.GetComponent<scaleSetup> ().doneScaling) {
+				camera.GetComponent<CameraShake> ().stopAndReset ();	//ensures camera does not keep shaking after game over screen appears
 				Time.timeScale = 0;		//only pause time after scaling is done, or object won't scale
 			}
 				
@@ -66,6 +74,7 @@ public class lifeManager : MonoBehaviour {
 	}
 
 	void gameOver() {
+		camera.GetComponent<CameraShake> ().shakeDuration = cameraScoreNumShakeDuration;
 		GetComponent<caterpillarManager> ().control = false;
 		pauseButton.interactable = false;
 

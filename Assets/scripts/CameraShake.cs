@@ -15,6 +15,7 @@ public class CameraShake : MonoBehaviour
 	public float decreaseFactor = 1.0f;
 
 	Vector3 originalPos;
+	private float originalShakeDuration;
 
 	void Awake()
 	{
@@ -27,6 +28,7 @@ public class CameraShake : MonoBehaviour
 	void OnEnable()
 	{
 		originalPos = camTransform.localPosition;
+		originalShakeDuration = shakeDuration;
 	}
 
 	void Update()
@@ -39,8 +41,13 @@ public class CameraShake : MonoBehaviour
 		}
 		else
 		{
-			shakeDuration = 0f;
-			camTransform.localPosition = originalPos;
+			stopAndReset ();
 		}
+	}
+
+	public void stopAndReset() {
+		shakeDuration = originalShakeDuration;
+		camTransform.localPosition = originalPos;
+		this.enabled = false;
 	}
 }
