@@ -40,9 +40,10 @@ public class setWallPosition : MonoBehaviour {
 		wall.GetComponent<EdgeCollider2D>().points [1].y = - screenHeight;
 		wall.transform.position = new Vector3(xPos, 0, 0);
 
+/*
 		float minX = wall.GetComponent<SpriteRenderer> ().bounds.min.x;
 		float maxX = wall.GetComponent<SpriteRenderer> ().bounds.max.x;
-/*
+
 		Debug.Log (wall.GetComponent<SpriteRenderer> ().bounds.min.y);
 		wall.GetComponent<SpriteRenderer> ().bounds.SetMinMax (new Vector3 (minX, -screenHeight), new Vector3 (maxX, screenHeight));
 		Debug.Log (wall.GetComponent<SpriteRenderer> ().bounds.min.y);

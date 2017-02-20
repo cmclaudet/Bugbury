@@ -4,11 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class lifeManager : MonoBehaviour {
-	public Text livesText;
+	public GameObject lifeImages;
 	public Transform gameOverMessage;
 	public Button pauseButton;
 	public Transform canvas;
+	public GameObject camera;
+	public float cameraLifeShakeDuration;
+	public float cameraScoreNumShakeDuration;
 //	public int livesLeft{ get; set; }
+
+	private Image life1;
+	private Image life2;
+	private Image life3;
+
 	public bool lifeLost{ get; set; }
 	private int lives;
 	private bool gameOverNotDone;
@@ -24,6 +32,8 @@ public class lifeManager : MonoBehaviour {
 		checkWhenScalingIsDone = false;
 		lives = 3;
 		lifeLost = false;
+
+		getLifeImages ();
 	}
 	
 	// Update is called once per frame
@@ -31,11 +41,15 @@ public class lifeManager : MonoBehaviour {
 		if (lifeLost) {
 			lives -= 1;
 			if (lives == 2) {
-				livesText.text = "Lives: l l";
+				life1.gameObject.SetActive (false);
+				camera.GetComponent<CameraShake> ().shakeDuration = cameraLifeShakeDuration;
+				camera.GetComponent<CameraShake> ().enabled = true;
 			} else if (lives == 1) {
-				livesText.text = "Lives: l";
+				life2.gameObject.SetActive (false);
+				camera.GetComponent<CameraShake> ().enabled = true;
 			} else {
-				livesText.text = "Lives:";
+				life3.gameObject.SetActive (false);
+				camera.GetComponent<CameraShake> ().enabled = true;
 				if (gameOverNotDone) {
 					gameOver ();
 				}
@@ -45,13 +59,22 @@ public class lifeManager : MonoBehaviour {
 
 		if (checkWhenScalingIsDone) {
 			if (gameOverSign.GetComponent<scaleSetup> ().doneScaling) {
+				camera.GetComponent<CameraShake> ().stopAndReset ();	//ensures camera does not keep shaking after game over screen appears
 				Time.timeScale = 0;		//only pause time after scaling is done, or object won't scale
 			}
 				
 		}
 	}
 
+	void getLifeImages() {
+		Image[] allLives = lifeImages.GetComponentsInChildren<Image> ();
+		life1 = allLives [0];
+		life2 = allLives [1];
+		life3 = allLives [2];
+	}
+
 	void gameOver() {
+		camera.GetComponent<CameraShake> ().shakeDuration = cameraScoreNumShakeDuration;
 		GetComponent<caterpillarManager> ().control = false;
 		pauseButton.interactable = false;
 

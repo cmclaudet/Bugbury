@@ -19,4 +19,6 @@ public class triggerCamShake : MonoBehaviour {
 			Camera.GetComponent<CameraShake> ().enabled = true;
 		}
 	}
+
+
 }
