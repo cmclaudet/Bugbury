@@ -10,6 +10,7 @@ public class lifeManager : MonoBehaviour {
 	public Transform canvas;
 	public new GameObject camera;
 	public float cameraLifeShakeDuration;
+	public AudioSource hurtSound;
 //	public int livesLeft{ get; set; }
 
 	private Image life1;
@@ -39,6 +40,7 @@ public class lifeManager : MonoBehaviour {
 	void Update () {
 		if (lifeLost) {
 			lives -= 1;
+			hurtSound.Play ();
 			if (lives == 2) {
 				life1.gameObject.SetActive (false);
 				camera.GetComponent<CameraShake> ().shakeDuration = cameraLifeShakeDuration;

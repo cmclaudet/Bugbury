@@ -407,7 +407,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 8
-  desiredSoundEffect: 
+  desiredSoundEffect: zoomSound
 --- !u!114 &114017068921163868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -585,7 +585,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 10
-  desiredSoundEffect: 
+  desiredSoundEffect: zoomSound
 --- !u!114 &114264977563385668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -792,7 +792,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 9
-  desiredSoundEffect: 
+  desiredSoundEffect: zoomSound
 --- !u!114 &114453130450036876
 MonoBehaviour:
   m_ObjectHideFlags: 1
