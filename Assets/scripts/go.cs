@@ -11,18 +11,24 @@ public class go : MonoBehaviour {
 
 	private float timetoStart;
 	public GameObject manager;
+	public AudioSource whistle;	//whistle sound for starting
+
+	private bool whistlePlayed;
 	// Use this for initialization
 	void Start () {
 		timetoStart = 0;
+		whistlePlayed = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		timetoStart += Time.deltaTime;
 
-		if (timetoStart >= startTime) {
+		if (timetoStart >= startTime && whistlePlayed == false) {
 			Transform lvl2text = transform.Find ("levelStart");
 			lvl2text.GetComponent<Text> ().text = "SHOOT!";
+			whistle.Play ();
+			whistlePlayed = true;
 		}
 		if (timetoStart >= 1.5f * startTime) {
 			GetComponent<RectTransform> ().gameObject.SetActive (false);

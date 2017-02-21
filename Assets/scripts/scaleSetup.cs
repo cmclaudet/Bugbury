@@ -12,7 +12,9 @@ public class scaleSetup : MonoBehaviour {
 	public bool lowTimeStep;		//set to true if scaling needs many checks per second to be precise
 //	public bool isScoreNumber;		//set to true if this object is the score number. this is because score number must only be instantiated after its time delay has passed (or the player will see it)
 	public int order;				//the order which the text comes up. max streak = 1, max streak num = 2, etc
+	public string desiredSoundEffect;	//input name of desired sound effect in hierarchy. If no name is placed there will be no sound effect
 
+	private AudioSource soundEffect;
 	private float finalScale;	//final value object scales to
 	private bool scalingUp;		//is true is object is growing from small to big. false otherwise.
 	private float timePassed;
@@ -44,7 +46,8 @@ public class scaleSetup : MonoBehaviour {
 //			setTimeStep ();
 //		} else {
 		timeDelay *= order;
-//		}
+
+		setSoundEffect ();
 	}
 	
 	// Update is called once per frame
@@ -55,6 +58,7 @@ public class scaleSetup : MonoBehaviour {
 
 		if (timePassed > timeDelay) {
 			stopCount ();
+			playSound ();
 			setTimeStep ();
 		}
 
@@ -64,6 +68,13 @@ public class scaleSetup : MonoBehaviour {
 
 		if (doneScaling == false) {
 			checkScalingDone ();
+		}
+	}
+
+	void setSoundEffect() {
+		//if no name placed no sound effect is set
+		if (desiredSoundEffect != "") {
+			soundEffect = GameObject.Find (desiredSoundEffect).GetComponent<AudioSource> ();
 		}
 	}
 
@@ -90,6 +101,15 @@ public class scaleSetup : MonoBehaviour {
 		countTime = false;
 		needScaling = true;
 
+	}
+
+	void playSound() {
+		if (soundEffect != null) {
+//			soundEffect.enabled = true;
+//			soundEffect.pitch -= 1;
+//			soundEffect.pitch *= Mathf.Pow (1.05946f, (float)order);	//make pitch raise by a semi tone each time new object scales up
+			soundEffect.Play();
+		}
 	}
 
 	void updateObjScale() {

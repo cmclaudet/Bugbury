@@ -16,12 +16,12 @@ public class pauseGame : MonoBehaviour {
 		click = GameObject.Find ("click").GetComponent<AudioSource> ();
 	}
 
-	public void setupPause() {
-		GetComponent<Button> ().interactable = false;
+	public void pause() {
 		click.Play ();
 		manager.GetComponent<caterpillarManager> ().control = false;
 		Time.timeScale = 0;
 		menu = Instantiate (pauseMenu);
 		menu.SetParent (canvas, false);
+		GetComponent<Button> ().interactable = false;
 	}
 }
