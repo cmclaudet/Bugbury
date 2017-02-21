@@ -27,8 +27,12 @@ public class projectileShoot : MonoBehaviour {
 	private bool rockGen = true;
 
 	void Awake() {
+		//vary pitch of sounds to make them less repetitive
 		throwSound = GameObject.Find ("throw").GetComponent<AudioSource> ();
+		throwSound.pitch = Random.Range (0.8f, 1.2f);
 		splatSound = GameObject.Find ("splat").GetComponent<AudioSource> ();
+		splatSound.pitch = Random.Range (0.8f, 1.2f);
+
 		spring = GetComponent<SpringJoint2D> ();
 		radius = GetComponent<CircleCollider2D> ().radius;
 		middleLine = GetComponent<LineRenderer> ();
