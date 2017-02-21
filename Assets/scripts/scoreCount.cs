@@ -31,13 +31,4 @@ public class scoreCount : MonoBehaviour {
 		scoreObject.GetComponent<rewrite> ().rewriteScore (playerScore.ToString ());
 	}
 
-	//alternative score calculation based only on max streak and far shot
-	public int calcScore() {
-		int totalCaterpillars = GetComponent<caterpillarManager> ().totalCaterpillars;
-		float f_score = 100*((maxPlayerStreak + farShots) / 2.0f) / totalCaterpillars;
-		int score = Mathf.RoundToInt (f_score);
-		actualScore = score;
-		return score;
-	}
-
 }
