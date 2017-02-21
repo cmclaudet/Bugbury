@@ -114,7 +114,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114975879188857952}
-        m_MethodName: setupPause
+        m_MethodName: pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -173,6 +173,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 224549231190086358, guid: 9d806e0562bab4e33885f6fec88bb60b,
     type: 2}
   canvas: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!222 &222179000040925584
 CanvasRenderer:
   m_ObjectHideFlags: 1

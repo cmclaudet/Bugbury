@@ -407,7 +407,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 8
-  soundEffect: {fileID: 0}
+  desiredSoundEffect: 
 --- !u!114 &114017068921163868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -467,8 +467,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 5
-  soundEffect: {fileID: 82807556650619746, guid: db26c784dd64049d893736dd4e288c33,
-    type: 2}
+  desiredSoundEffect: menuAppear
 --- !u!114 &114118018563624976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -586,7 +585,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 10
-  soundEffect: {fileID: 0}
+  desiredSoundEffect: 
 --- !u!114 &114264977563385668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -772,8 +771,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 1
-  soundEffect: {fileID: 82807556650619746, guid: db26c784dd64049d893736dd4e288c33,
-    type: 2}
+  desiredSoundEffect: menuAppear
 --- !u!114 &114413757762050718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -794,7 +792,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 9
-  soundEffect: {fileID: 0}
+  desiredSoundEffect: 
 --- !u!114 &114453130450036876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -933,8 +931,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 3
-  soundEffect: {fileID: 82807556650619746, guid: db26c784dd64049d893736dd4e288c33,
-    type: 2}
+  desiredSoundEffect: menuAppear
 --- !u!114 &114601019712520694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -982,8 +979,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 4
-  soundEffect: {fileID: 82807556650619746, guid: db26c784dd64049d893736dd4e288c33,
-    type: 2}
+  desiredSoundEffect: menuAppear
 --- !u!114 &114643223275854502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1064,7 +1060,7 @@ MonoBehaviour:
   startScale: 0.1
   lowTimeStep: 0
   order: 0
-  soundEffect: {fileID: 0}
+  desiredSoundEffect: zoomSound
 --- !u!114 &114694666128482496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1328,8 +1324,7 @@ MonoBehaviour:
   startScale: 0
   lowTimeStep: 0
   order: 2
-  soundEffect: {fileID: 82807556650619746, guid: db26c784dd64049d893736dd4e288c33,
-    type: 2}
+  desiredSoundEffect: menuAppear
 --- !u!114 &114907391969300900
 MonoBehaviour:
   m_ObjectHideFlags: 1
