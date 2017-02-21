@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class pauseGame : MonoBehaviour {
 	public Transform pauseMenu;
 	public Transform canvas;
+	public GameObject manager;
 
 	private Transform menu;
 	private AudioSource click;
@@ -18,7 +19,6 @@ public class pauseGame : MonoBehaviour {
 	public void setupPause() {
 		GetComponent<Button> ().interactable = false;
 		click.Play ();
-		GameObject manager = GameObject.Find ("game manager");
 		manager.GetComponent<caterpillarManager> ().control = false;
 		Time.timeScale = 0;
 		menu = Instantiate (pauseMenu);

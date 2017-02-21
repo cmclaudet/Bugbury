@@ -1256,6 +1256,11 @@ Prefab:
       propertyPath: pauseButton
       value: 
       objectReference: {fileID: 1084964737}
+    - target: {fileID: 114339332840575290, guid: d841007594f014462bd34d55b9699ff7,
+        type: 2}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1144489}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d841007594f014462bd34d55b9699ff7, type: 2}
   m_IsPrefabParent: 0
@@ -2113,6 +2118,11 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1770821641}
+    - target: {fileID: 114975879188857952, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3,
+        type: 2}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1144489}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3, type: 2}
   m_IsPrefabParent: 0

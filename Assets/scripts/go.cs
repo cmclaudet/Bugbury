@@ -10,11 +10,10 @@ public class go : MonoBehaviour {
 	public Button pauseButton;
 
 	private float timetoStart;
-	private GameObject manager;
+	public GameObject manager;
 	// Use this for initialization
 	void Start () {
 		timetoStart = 0;
-		manager = GameObject.Find ("game manager");
 	}
 	
 	// Update is called once per frame
