@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //script manages caterpillar spawn frequency changing over time, keeps count of caterpillar deaths and triggers end level message when all caterpillars are inactivated
+//takes minimum and maximum caterpillar speeds as arguments. caterpillar speed increases linearly over spawn number up to total caterpillar number
 //removed life from player if player misses caterpillar
 public class caterpillarManager : MonoBehaviour {
 	public float interbugDistance;	//desired distance between subsequently spawning bugs
+	public float minVel;		//minimum possible velocity for caterpillar
+	public float maxVel;		//max possible velocity for caterpillar
+	public int lanes;			//number of lanes caterpillars spawn on
 	public float finishLine;	//finish line y co-ordinated in world space
 	public float endDelay;		//time between final caterpillar being inactivated and level complete message appears
 	public float cameraScoreNumShakeDuration;	//camera shake duration for landing of score number

@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interbugDistance: 3
+  minVel: 0.3
+  maxVel: 1
+  lanes: 6
   finishLine: -3
   endDelay: 2
   cameraScoreNumShakeDuration: 0.5
@@ -191,7 +194,6 @@ MonoBehaviour:
   canvas: {fileID: 1770821641}
   camera: {fileID: 1849413118}
   cameraLifeShakeDuration: 0.2
-  cameraScoreNumShakeDuration: 0.5
 --- !u!114 &1144495
 MonoBehaviour:
   m_ObjectHideFlags: 0

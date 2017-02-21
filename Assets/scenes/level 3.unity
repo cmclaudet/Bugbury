@@ -154,10 +154,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interbugDistance: 3
+  minVel: 0.7
+  maxVel: 1.4
+  lanes: 6
   finishLine: -3
   endDelay: 2
   cameraScoreNumShakeDuration: 0.5
-  caterpillars: {fileID: 50329199488362526, guid: 9ea30754423b74ed782903524d90bda7,
+  caterpillars: {fileID: 50329199488362526, guid: d680205b3e643574094ef82e2d68b7a3,
     type: 2}
   totalCaterpillars: 25
   completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,

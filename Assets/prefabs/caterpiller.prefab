@@ -1744,9 +1744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3329c9f944ee4d4098e112c0ecaa7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneNumber: 6
-  minVelocity: 0.3
-  maxVelocity: 1
 --- !u!114 &114697436439251882
 MonoBehaviour:
   m_ObjectHideFlags: 1

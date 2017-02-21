@@ -6,9 +6,9 @@ using UnityEngine;
 //sets caterpillar speed based on spawn number and min max speeds set in inspector
 
 public class move : MonoBehaviour {
-	public int laneNumber;	//must be EVEN
-	public float minVelocity;
-	public float maxVelocity;
+	private int laneNumber;	//must be EVEN
+	private float minVelocity;
+	private float maxVelocity;
 
 	public float screenHeight{ get; set; }
 	private float screenWidth;
@@ -26,6 +26,9 @@ public class move : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		manager = GameObject.Find ("game manager");
+		laneNumber = manager.GetComponent<caterpillarManager> ().lanes;
+		minVelocity = manager.GetComponent<caterpillarManager> ().minVel;
+		maxVelocity = manager.GetComponent<caterpillarManager> ().maxVel;
 		totalCaterpillars = manager.GetComponent<caterpillarManager> ().totalCaterpillars;
 		finishLine = manager.GetComponent<caterpillarManager> ().finishLine;
 
