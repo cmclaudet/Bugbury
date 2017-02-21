@@ -25,7 +25,7 @@ public class caterpillarManager : MonoBehaviour {
 
 	public Transform completeMessage;	//UI menu displaying end of level scores
 	public Transform canvas;
-	public GameObject camera;
+	public new GameObject camera;
 	public Button pauseButton;
 
 	private float spawnFrequency;	//changes depending on speed of caterpillar to keep interbugDistance constant

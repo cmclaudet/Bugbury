@@ -8,6 +8,7 @@ TagManager:
   - caterpillar
   - lvl2select
   - initialMusic
+  - menuSound
   layers:
   - Default
   - TransparentFX

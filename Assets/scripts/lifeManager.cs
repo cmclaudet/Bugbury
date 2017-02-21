@@ -8,7 +8,7 @@ public class lifeManager : MonoBehaviour {
 	public Transform gameOverMessage;
 	public Button pauseButton;
 	public Transform canvas;
-	public GameObject camera;
+	public new GameObject camera;
 	public float cameraLifeShakeDuration;
 //	public int livesLeft{ get; set; }
 
