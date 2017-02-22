@@ -40,7 +40,7 @@ public class highScoreManager : MonoBehaviour {
 	public level Three;
 
 	void Awake() {
-		DontDestroyOnLoad (this);
+//		DontDestroyOnLoad (this);
 		_instance = this;
 
 		//all stars start out false
@@ -57,20 +57,44 @@ public class highScoreManager : MonoBehaviour {
 			playerScores currentScores = (playerScores)bf.Deserialize (file);
 			file.Close ();
 
-			One = currentScores.one;
-			Two = currentScores.two;
-			Three = currentScores.three;
+			One.highScore = currentScores.highScore1;
+			Two.highScore = currentScores.highScore2;
+			Three.highScore = currentScores.highScore3;
+
+			One.star1 = currentScores.lvl1star1;
+			Two.star1 = currentScores.lvl2star1;
+			Three.star1 = currentScores.lvl3star1;
+
+			One.star2 = currentScores.lvl1star2;
+			Two.star2 = currentScores.lvl2star2;
+			Three.star2 = currentScores.lvl3star2;
+
+			One.star3 = currentScores.lvl1star3;
+			Two.star3 = currentScores.lvl2star3;
+			Three.star3 = currentScores.lvl3star3;
 		}
 	}
 
 	public void Save() {
 		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Open (Application.persistentDataPath + "/playerScores.dat", FileMode.Open);
+		FileStream file = File.Create (Application.persistentDataPath + "/playerScores.dat");
 
 		playerScores newScores = new playerScores ();
-		newScores.one = One;
-		newScores.two = Two;
-		newScores.three = Three;
+		newScores.highScore1 = One.highScore;
+		newScores.highScore2 = Two.highScore;
+		newScores.highScore3 = Three.highScore;
+
+		newScores.lvl1star1 = One.star1;
+		newScores.lvl2star1 = Two.star1;
+		newScores.lvl3star1 = Three.star1;
+
+		newScores.lvl1star2 = One.star2;
+		newScores.lvl2star2 = Two.star2;
+		newScores.lvl3star2 = Three.star2;
+
+		newScores.lvl1star3 = One.star3;
+		newScores.lvl2star3 = Two.star3;
+		newScores.lvl3star3 = Three.star3;
 
 		bf.Serialize (file, newScores);
 		file.Close ();
@@ -80,7 +104,26 @@ public class highScoreManager : MonoBehaviour {
 
 [Serializable]
 class playerScores {
+	public int highScore1;
+	public int highScore2;
+	public int highScore3;
+
+	public bool lvl1star1;
+	public bool lvl1star2;
+	public bool lvl1star3;
+
+	public bool lvl2star1;
+	public bool lvl2star2;
+	public bool lvl2star3;
+
+	public bool lvl3star1;
+	public bool lvl3star2;
+	public bool lvl3star3;
+}
+
+/*
+class playerScores {
 	public highScoreManager.level one { get; set; }
 	public highScoreManager.level two { get; set; }
-	public highScoreManager.level three { get; set; }
-}
+	public highScoreManager.level three { get; set; } 
+} */
