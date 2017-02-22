@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //sets scale up on complete message
 //instaniates stars if player has reached certain score
 //sets up time delay between text and star instantiation
 //activates score number after its time delay has passed. score number must be inactive to start with or player will see it.
+//updates max attained stars on high score singleton
 public class blowUp : MonoBehaviour {
 	public float textDelay;		//delay time between appearance of text: max streak, far shots, score
-//	public float postScoreDelay;	//delays between score and stars appearing
-//	public float starDelay;		//delay time between appearance of each star
 
 	public Transform starfill1;
 	public Transform starfill2;
@@ -39,11 +39,9 @@ public class blowUp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		scoreNumber = transform.Find ("scoreNumber").gameObject;
 		timePassed = 0;
 		scoreNumInstantiated = false;
 		calcScoreDelay ();
-//		setStarTimeDelays ();
 		setStarThresholds ();
 		inactivateStars ();
 	}
@@ -60,11 +58,6 @@ public class blowUp : MonoBehaviour {
 			timePassed = 0;
 			scoreNumInstantiated = true;
 		}
-
-//		needScaling = GetComponent<scaleSetup> ().needScaling;
-//		if (needScaling == false) {
-//			scoreNumber.SetActive (true);
-//		}
 	}
 
 	void calcScoreDelay() {
@@ -78,21 +71,8 @@ public class blowUp : MonoBehaviour {
 		for (int i = 0; i < scaleSetups.Length; i++) {
 			scaleSetups [i].GetComponent<scaleSetup>().timeDelay = textDelay;
 		}
-
-//		scoreNumDelay = scoreNumber.GetComponent<scaleSetup>().timeDelay;
-//		Debug.Log (scoreNumber.GetComponent<scaleSetup> ().timeDelay);
 	}
 
-	//set the time delays between instantiation of level complete message and star objects
-/*	void setStarTimeDelays() {
-		Transform[] stars = {star1, star2, star3};
-
-		for (int i = 0; i < stars.Length; i++) {
-			stars [i].GetComponent<scaleSetup> ().timeDelay = textDelay * 6 + postScoreDelay + starDelay * (i + 1);
-			stars [i].GetComponent<RectTransform> ().SetAsLastSibling ();
-		}
-	}
-*/
 	void setStarThresholds() {
 		star1score = manager.GetComponent<starThreshold> ().threshold1;
 		star2score = manager.GetComponent<starThreshold> ().threshold2;
@@ -101,16 +81,46 @@ public class blowUp : MonoBehaviour {
 
 	//if player does not have sufficient score stars are inactivated
 	void inactivateStars() {
-		if (playerScore < star1score) {
-			starfill1.gameObject.SetActive (false);
+		string currentScene = SceneManager.GetActiveScene ().name;
+		switch (currentScene) {
+		case "level 1":
+			highScoreManager.Instance.One = resetAllScores (highScoreManager.Instance.One);
+			break;
+		case "level 2":
+			highScoreManager.Instance.Two = resetAllScores (highScoreManager.Instance.Two);
+			break;
+		case "level 3":
+			highScoreManager.Instance.Three = resetAllScores (highScoreManager.Instance.Three);
+			break;
 		}
-		if (playerScore < star2score) {
-			starfill2.gameObject.SetActive (false);
-		}
-		if (playerScore < star3score) {
-			starfill3.gameObject.SetActive (false);
-		}
+
 	}
 
+	//resets player high score and player's top star
+	highScoreManager.level resetAllScores(highScoreManager.level level) {
+		if (playerScore > level.highScore) {
+			level.highScore = playerScore;
+		}
+
+		if (playerScore < star1score) {
+			starfill1.gameObject.SetActive (false);
+		} else {
+			level.star1 = true;
+		}
+
+		if (playerScore < star2score) {
+			starfill2.gameObject.SetActive (false);
+		} else {
+			level.star2 = true;
+		}
+
+		if (playerScore < star3score) {
+			starfill3.gameObject.SetActive (false);
+		} else {
+			level.star3 = true;
+		}
+
+		return level;
+	}
 
 }

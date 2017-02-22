@@ -8,6 +8,9 @@ public class setToStar : MonoBehaviour {
 	void Awake() {
 		GetComponent<RectTransform> ().SetAsLastSibling();
 		star.GetComponent<RectTransform> ().SetAsFirstSibling ();
+	}
+
+	void Start() {
 		setFilltoOutline ();
 	}
 
@@ -17,5 +20,9 @@ public class setToStar : MonoBehaviour {
 		GetComponent<RectTransform> ().anchorMin = star.GetComponent<RectTransform> ().anchorMin;
 		GetComponent<RectTransform> ().offsetMax = star.GetComponent<RectTransform> ().offsetMax;
 		GetComponent<RectTransform> ().offsetMin = star.GetComponent<RectTransform> ().offsetMin;
+
+		if (GetComponent<scaleSetup> () == null) {
+			GetComponent<RectTransform> ().localScale = star.GetComponent<RectTransform> ().localScale;
+		}
 	}
 }
