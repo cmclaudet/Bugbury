@@ -23,7 +23,7 @@ public class panMenu2 : MonoBehaviour {
 		onLevel2 = false;
 	}
 
-	public void PressBack() {
+	public void Press() {
 		onLevel2 = forwardButton.GetComponent<panMenu1> ().onLevel2;
 
 		if (onLevel2) {
