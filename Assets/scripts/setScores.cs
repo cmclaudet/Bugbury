@@ -36,9 +36,9 @@ public class setScores : MonoBehaviour {
 
 	public void setScoreNum(Transform scoreNumber) {
 		scoreNumber.GetComponent<Text> ().text = playerScore.ToString();
-		resetHighScore ();
 	}
 
+/*
 	void resetHighScore() {
 		Scene currentScene = SceneManager.GetActiveScene ();
 		switch (currentScene.name) 
@@ -59,5 +59,5 @@ public class setScores : MonoBehaviour {
 			}
 			break;
 		}
-	}
+	}*/
 }
