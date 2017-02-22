@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 //sets up time delay between text and star instantiation
 //activates score number after its time delay has passed. score number must be inactive to start with or player will see it.
 //updates max attained stars on high score singleton
+//saves new high scores on player device after end of each level
 public class blowUp : MonoBehaviour {
 	public float textDelay;		//delay time between appearance of text: max streak, far shots, score
 
@@ -44,6 +45,9 @@ public class blowUp : MonoBehaviour {
 		calcScoreDelay ();
 		setStarThresholds ();
 		inactivateStars ();
+
+		//save new scores
+		highScoreManager.Instance.Save ();
 	}
 	
 	// Update is called once per frame
