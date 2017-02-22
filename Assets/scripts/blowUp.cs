@@ -84,20 +84,20 @@ public class blowUp : MonoBehaviour {
 		string currentScene = SceneManager.GetActiveScene ().name;
 		switch (currentScene) {
 		case "level 1":
-			resetAllScores (highScoreManager.Instance.One);
+			highScoreManager.Instance.One = resetAllScores (highScoreManager.Instance.One);
 			break;
 		case "level 2":
-			resetAllScores (highScoreManager.Instance.Two);
+			highScoreManager.Instance.Two = resetAllScores (highScoreManager.Instance.Two);
 			break;
 		case "level 3":
-			resetAllScores (highScoreManager.Instance.Three);
+			highScoreManager.Instance.Three = resetAllScores (highScoreManager.Instance.Three);
 			break;
 		}
 
 	}
 
 	//resets player high score and player's top star
-	void resetAllScores(highScoreManager.level level) {
+	highScoreManager.level resetAllScores(highScoreManager.level level) {
 		if (playerScore > level.highScore) {
 			level.highScore = playerScore;
 		}
@@ -105,21 +105,22 @@ public class blowUp : MonoBehaviour {
 		if (playerScore < star1score) {
 			starfill1.gameObject.SetActive (false);
 		} else {
-			level.star1 = false;
+			level.star1 = true;
 		}
 
 		if (playerScore < star2score) {
 			starfill2.gameObject.SetActive (false);
 		} else {
-			level.star2 = false;
+			level.star2 = true;
 		}
 
 		if (playerScore < star3score) {
 			starfill3.gameObject.SetActive (false);
 		} else {
-			level.star3 = false;
+			level.star3 = true;
 		}
 
+		return level;
 	}
 
 }

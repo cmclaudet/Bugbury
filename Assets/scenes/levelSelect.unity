@@ -2672,9 +2672,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ebe81f8ae63c4e80b4b6d535445b262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level1Score: {fileID: 2081303865}
-  level2Score: {fileID: 1760088702}
-  level3Score: {fileID: 2040309234}
+  level1: {fileID: 786756359}
+  level2: {fileID: 822929726}
+  level3: {fileID: 869130756}
+  canvas: {fileID: 1605478907}
+  starFill: {fileID: 224098110172705556, guid: 7dbb017a692a24663a509b17d4f28746, type: 2}
 --- !u!4 &1724604819
 Transform:
   m_ObjectHideFlags: 0
