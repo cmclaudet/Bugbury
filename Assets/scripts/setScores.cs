@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //rewrites text on level complete message to display correct scores
 public class setScores : MonoBehaviour {
@@ -35,5 +36,21 @@ public class setScores : MonoBehaviour {
 
 	public void setScoreNum(Transform scoreNumber) {
 		scoreNumber.GetComponent<Text> ().text = playerScore.ToString();
+		resetHighScore ();
+	}
+
+	void resetHighScore() {
+		Scene currentScene = SceneManager.GetActiveScene ();
+		switch (currentScene.name) 
+		{
+		case "level 1":
+			highScoreManager.Instance.level1HighScore = playerScore;
+			break;
+		case "level 2":
+			highScoreManager.Instance.level2HighScore = playerScore;
+			break;
+		case "level 3":
+			highScoreManager.Instance.level3HighScore = playerScore;
+		}
 	}
 }
