@@ -7,43 +7,58 @@ using UnityEngine.UI;
 //takes minimum and maximum caterpillar speeds as arguments. caterpillar speed increases linearly over spawn number up to total caterpillar number
 //removed life from player if player misses caterpillar
 public class caterpillarManager : MonoBehaviour {
-	public float interbugDistance;	//desired distance between subsequently spawning bugs
-	public float minVel;		//minimum possible velocity for caterpillar
-	public float maxVel;		//max possible velocity for caterpillar
-	public int lanes;			//number of lanes caterpillars spawn on
-	public float finishLine;	//finish line y co-ordinated in world space
-	public float endDelay;		//time between final caterpillar being inactivated and level complete message appears
-	public float cameraScoreNumShakeDuration;	//camera shake duration for landing of score number
 
-	public Rigidbody2D caterpillars;	//caterpillar prefab
-	public int totalCaterpillars;	//total caterpillars for this level
+	private static caterpillarManager _instance;
+
+	public static caterpillarManager Instance {
+		get {
+			if (_instance == null) {
+				GameObject go = new GameObject ("caterpillarManager");
+				go.AddComponent<caterpillarManager> ();
+			}
+			return _instance;
+		}
+	}
+
+	public float interbugDistance = 3;	//desired distance between subsequently spawning bugs
+	public int lanes = 6;			//number of lanes caterpillars spawn on
+	public float finishLine = -3.0f;	//finish line y co-ordinated in world space
+	public float endDelay = 2.0f;		//time between final caterpillar being inactivated and level complete message appears
+	public float cameraScoreNumShakeDuration = 0.5f;	//camera shake duration for landing of score number
+
+	public float minVel { get; set; }		//minimum possible velocity for caterpillar
+	public float maxVel { get; set; }		//max possible velocity for caterpillar
+	public int totalCaterpillars{ get; set; }	//total caterpillars for this level
+	public Rigidbody2D caterpillars{ get; set; }	//caterpillar prefab
+
 	public int currentSpawn{ get; set; }	//number of the most recent caterpillar
 	public bool levelEnd{ get; set; }		//triggers end menu when true
 	public int caterpillarsInactivated{ get; set; }		//equals caterpillars killed + caterpillars passed over finish line
 	public int caterpillarsKilled{ get; set; }			//total caterpillars player successfully killed
+	private float minimunY{get;set;}			//minimum possible y value for caterpillars before going inactive
 
-	public Transform completeMessage;	//UI menu displaying end of level scores
-	public Transform canvas;
-	public new GameObject camera;
-	public Button pauseButton;
+	public GameObject levelComplete{ get; set; }
 
 	private float spawnFrequency;	//changes depending on speed of caterpillar to keep interbugDistance constant
 	private float timeSinceSpawn;
 	private GameObject[] allCaterpillars;
-	private float minimunY;			//minimum possible y value for caterpillars before going inactive
 
 	private bool levelOngoing = true;
 	private bool setupNotDone = true;	//ensures end menu is not repeatedley instantiated
 
 	private float timeAfterEnd;		//counts time passed since final caterpillar is inactivated
 
+	void Awake() {
+		_instance = this;
+	}
+
 	void Start() {
+		currentSpawn = 0;
+		levelEnd = false;
 		caterpillarsInactivated = 0;
 		caterpillarsKilled = 0;
-		levelEnd = false;
 		findAllBugs ();		//finds all caterpillars currently in heirarchy
 
-		currentSpawn = 0;
 		timeSinceSpawn = spawnFrequency;	//set so that caterpillar spawns right away
 		timeAfterEnd = 0;
 	}
@@ -95,7 +110,8 @@ public class caterpillarManager : MonoBehaviour {
 			timeAfterEnd += Time.deltaTime;
 
 			if (timeAfterEnd >= endDelay) {
-				setupEnd ();
+				levelComplete.GetComponent<triggerLevelComplete> ().setupEnd ();
+				setupNotDone = false;
 			}
 		}
 	}
@@ -114,27 +130,19 @@ public class caterpillarManager : MonoBehaviour {
 	}
 
 	//displays player scores
-	void setupEnd() {
-		camera.GetComponent<CameraShake> ().shakeDuration = cameraScoreNumShakeDuration;
-		lifeManager.Instance.control = false;
-		pauseButton.interactable = false;
 
-		resetMaxStreak ();
-
-		Transform levelDone = Instantiate (completeMessage);
-		levelDone.transform.SetParent (canvas, false);
-		setupNotDone = false;
-	}
 
 	void findMinY() {
-		float screenHeight = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0)).y;
+//		float screenHeight = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0)).y;
 		minimunY = allCaterpillars [0].GetComponent<move> ().yMin;
-		minimunY += (screenHeight + finishLine);
+		minimunY += (ScreenVariables.worldHeight + finishLine);
 	}
 
-	void resetMaxStreak() {
+	public void resetMaxStreak() {
 		if (scoreCount.Instance.playerCombo > scoreCount.Instance.maxPlayerStreak) {
 			scoreCount.Instance.maxPlayerStreak = scoreCount.Instance.playerCombo;
 		}
 	}
+
+
 }

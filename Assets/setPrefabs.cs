@@ -9,6 +9,7 @@ public class setPrefabs : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		rockManager.Instance.rocks = rocks;
+		caterpillarManager.Instance.caterpillars = caterpillars;
 	}
 	
 	// Update is called once per frame

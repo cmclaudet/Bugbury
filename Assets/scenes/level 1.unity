@@ -133,20 +133,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interbugDistance: 3
-  minVel: 0.3
-  maxVel: 1
   lanes: 6
   finishLine: -3
   endDelay: 2
   cameraScoreNumShakeDuration: 0.5
-  caterpillars: {fileID: 50329199488362526, guid: d680205b3e643574094ef82e2d68b7a3,
-    type: 2}
-  totalCaterpillars: 10
-  completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
-    type: 2}
-  canvas: {fileID: 1770821641}
-  camera: {fileID: 1849413118}
-  pauseButton: {fileID: 1924707628}
 --- !u!114 &1144495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,6 +1174,51 @@ Transform:
   m_Father: {fileID: 1515061901}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &881261684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 881261686}
+  - component: {fileID: 881261685}
+  m_Layer: 0
+  m_Name: levelComplete
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &881261685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 881261684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb60797a94b84c79aa25a44a75c3f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1849413118}
+  pauseButton: {fileID: 1924707628}
+  completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
+    type: 2}
+  canvas: {fileID: 1770821641}
+--- !u!4 &881261686
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 881261684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2268002, y: 0.13327625, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884040081
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,6 +1465,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farBonus: 3
+  minVelocity: 0.3
+  maxVelocity: 1
+  totalCaterpillars: 10
 --- !u!4 &1081278979
 Transform:
   m_ObjectHideFlags: 0

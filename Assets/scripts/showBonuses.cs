@@ -12,7 +12,6 @@ public class showBonuses : MonoBehaviour {
 	private bool isFar;
 
 	private bool bonusNotInstantiated = true;
-	private GameObject manager;
 
 	private GameObject thisBonusText;
 	private Transform streakText;
@@ -28,7 +27,6 @@ public class showBonuses : MonoBehaviour {
 	void Start () {
 	//	Debug.Log (transform.position);
 		dead = false;
-		manager = GameObject.Find ("game manager");
 		farShotBonus = scoreCount.Instance.farShotBonus;
 		comboNumber = 0;
 		isFar = false;
@@ -39,8 +37,8 @@ public class showBonuses : MonoBehaviour {
 	void Update () {
 		//when caterpillar dies grab updated combo number and far status so that bonus text can be set correctly
 		if (bonusNotInstantiated && dead) {
-			comboNumber = manager.GetComponent<scoreCount> ().playerCombo;
-			isFar = manager.GetComponent<scoreCount> ().far;
+			comboNumber = scoreCount.Instance.playerCombo;
+			isFar = scoreCount.Instance.far;
 			instantiateBonus ();
 			findTextMeshes ();
 			setTextMeshes ();

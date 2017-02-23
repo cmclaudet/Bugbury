@@ -18,7 +18,7 @@ public class lifeManager : MonoBehaviour {
 	}
 
 
-	public GameObject camera{ get; set; }
+	public new GameObject camera{ get; set; }
 
 	public bool lifeLost{ get; set; }
 	private int lives;

@@ -160,40 +160,40 @@ public class projectileShoot : MonoBehaviour {
 			GameObject splatter = Instantiate (splatters);
 			splatter.transform.position = col.transform.position;
 
-			manager.GetComponent<caterpillarManager> ().caterpillarsInactivated += 1;	//caterpillars inactivated includes both killed caterpillars and those which pass off the screen
-			manager.GetComponent<caterpillarManager> ().caterpillarsKilled += 1;		//to inform player of total number of caterpillars killed
+			caterpillarManager.Instance.caterpillarsInactivated += 1;	//caterpillars inactivated includes both killed caterpillars and those which pass off the screen
+			caterpillarManager.Instance.caterpillarsKilled += 1;		//to inform player of total number of caterpillars killed
 
 			updateScores (col);
 			this.gameObject.SetActive(false);
 			//if player kills final caterpillar level ends
-			if (manager.GetComponent<caterpillarManager> ().caterpillarsInactivated == manager.GetComponent<caterpillarManager> ().totalCaterpillars) {
-				manager.GetComponent<caterpillarManager> ().levelEnd = true;
+			if (caterpillarManager.Instance.caterpillarsInactivated == caterpillarManager.Instance.totalCaterpillars) {
+				caterpillarManager.Instance.levelEnd = true;
 			}
 		}
 	}
 
 	void updateScores(Collision2D col) {
 		//add 1 to player streak
-		manager.GetComponent<scoreCount> ().playerCombo += 1;
-		int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
+		scoreCount.Instance.playerCombo += 1;
+		int currentCombo = scoreCount.Instance.playerCombo;
 
 		//update manager if the shot is far, ie if user hits caterpillar over the mid way point
 		updateIfFarShot(col);
-		bool farShot = manager.GetComponent<scoreCount> ().far;
+		bool farShot = scoreCount.Instance.far;
 
 		//update score
 		int newScore = getNewScore(currentCombo, farShot);
-		manager.GetComponent<scoreCount> ().changeScore (newScore);
+		scoreCount.Instance.changeScore (newScore);
 	}
 
 	void updateIfFarShot(Collision2D col) {
 		float arenaFarpoint = getFarPoint (col);
 
 		if (col.transform.position.y > arenaFarpoint) {
-			manager.GetComponent<scoreCount> ().farShots += 1;		//add 1 to total far shots
-			manager.GetComponent<scoreCount> ().far = true;
+			scoreCount.Instance.farShots += 1;		//add 1 to total far shots
+			scoreCount.Instance.far = true;
 		} else {
-			manager.GetComponent<scoreCount> ().far = false;
+			scoreCount.Instance.far = false;
 		}
 	}
 /*
@@ -207,16 +207,15 @@ public class projectileShoot : MonoBehaviour {
 */
 	//get point 70% of the way up from the finish line. Here upwards it will be considered a far shot
 	float getFarPoint(Collision2D col) {
-		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
-		float finishLine = manager.GetComponent<caterpillarManager>().finishLine;
-		float farPoint = finishLine + (screenHeight - finishLine) * 0.7f;
+		float finishLine = caterpillarManager.Instance.finishLine;
+		float farPoint = finishLine + (ScreenVariables.worldHeight - finishLine) * 0.7f;
 		return farPoint;
 	}
 
 	int getNewScore(int currentCombo, bool farShot) {
 		int newScore = currentCombo;
 		if (farShot) {
-			newScore += manager.GetComponent<scoreCount>().farShotBonus;
+			newScore += scoreCount.Instance.farShotBonus;
 		}
 		return newScore;
 	}
