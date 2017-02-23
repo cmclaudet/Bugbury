@@ -77,11 +77,11 @@ public class caterpillarManager : MonoBehaviour {
 			if (allCaterpillars [i].transform.position.y < minimunY) {
 				allCaterpillars [i].gameObject.SetActive (false);
 				caterpillarsInactivated += 1;
-				GetComponent<lifeManager> ().lifeLost = true;	//triggers removal of one of player's lives
+				lifeManager.Instance.lifeLost = true;	//triggers removal of one of player's lives
 
 				resetMaxStreak ();
 
-				GetComponent<scoreCount> ().playerCombo = 0;
+				scoreCount.Instance.playerCombo = 0;
 				findAllBugs ();		//recount caterpillars after inactivation
 
 				//ends level once all caterpillars are inactivated
@@ -135,8 +135,8 @@ public class caterpillarManager : MonoBehaviour {
 	}
 
 	void resetMaxStreak() {
-		if (GetComponent<scoreCount> ().playerCombo > GetComponent<scoreCount> ().maxPlayerStreak) {
-			GetComponent<scoreCount> ().maxPlayerStreak = GetComponent<scoreCount> ().playerCombo;
+		if (scoreCount.Instance.playerCombo > scoreCount.Instance.maxPlayerStreak) {
+			scoreCount.Instance.maxPlayerStreak = scoreCount.Instance.playerCombo;
 		}
 	}
 }

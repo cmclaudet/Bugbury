@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class setPrefabs : MonoBehaviour {
-	public Rigidbody2D rocks;
-	public Rigidbody2D caterpillars;
-	public Transform gameOverMessage;
+public class setGameObjects : MonoBehaviour {
+
 	// Use this for initialization
 	void Awake () {
-		rockManager.Instance.rocks = rocks;
+
 	}
 	
 	// Update is called once per frame

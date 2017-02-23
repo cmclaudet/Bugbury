@@ -100,7 +100,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1144491}
   - component: {fileID: 1144492}
-  - component: {fileID: 1144494}
   - component: {fileID: 1144495}
   m_Layer: 0
   m_Name: game manager
@@ -148,25 +147,6 @@ MonoBehaviour:
   canvas: {fileID: 1770821641}
   camera: {fileID: 1849413118}
   pauseButton: {fileID: 1924707628}
---- !u!114 &1144494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1144489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ff9ba977f7c4f9ca11762604323335, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeImages: {fileID: 1141496163}
-  gameOverMessage: {fileID: 224667786381794034, guid: 59dfbed232a0c4d5d885e81259f17d28,
-    type: 2}
-  pauseButton: {fileID: 1924707628}
-  canvas: {fileID: 1770821641}
-  camera: {fileID: 1849413118}
-  cameraLifeShakeDuration: 0.2
-  hurtSound: {fileID: 435618072}
 --- !u!114 &1144495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1430,6 +1410,7 @@ GameObject:
   - component: {fileID: 1081278979}
   - component: {fileID: 1081278978}
   - component: {fileID: 1081278980}
+  - component: {fileID: 1081278981}
   m_Layer: 0
   m_Name: setSceneVars
   m_TagString: Untagged
@@ -1476,6 +1457,19 @@ MonoBehaviour:
   rocks: {fileID: 50435492825116804, guid: 5e1a4dd8042d74d7396bb196ddfbbde0, type: 2}
   caterpillars: {fileID: 50329199488362526, guid: d680205b3e643574094ef82e2d68b7a3,
     type: 2}
+  gameOverMessage: {fileID: 224667786381794034, guid: 59dfbed232a0c4d5d885e81259f17d28,
+    type: 2}
+--- !u!114 &1081278981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1081278977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b81a0ce9812478dab8e962eb0d8e5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1139264870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,7 +3206,7 @@ GameObject:
   - component: {fileID: 1849413120}
   - component: {fileID: 1849413119}
   - component: {fileID: 1849413124}
-  - component: {fileID: 1849413125}
+  - component: {fileID: 1849413126}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3303,17 +3297,23 @@ MonoBehaviour:
   shakeDuration: 0.5
   shakeAmount: 0.2
   decreaseFactor: 1
---- !u!114 &1849413125
+--- !u!114 &1849413126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1849413118}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0699d8f6e8a347b381d329abb369c9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b7a4bd9fdcfb49e38ebb17adc7cbe4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeImages: {fileID: 1141496163}
+  gameOverMessage: {fileID: 224667786381794034, guid: 59dfbed232a0c4d5d885e81259f17d28,
+    type: 2}
+  pauseButton: {fileID: 1924707628}
+  canvas: {fileID: 1770821641}
+  hurtSound: {fileID: 435618072}
 --- !u!1001 &1856601265
 Prefab:
   m_ObjectHideFlags: 0
