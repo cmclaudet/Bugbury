@@ -38,6 +38,7 @@ public class projectileShoot : MonoBehaviour {
 		manager = GameObject.Find ("game manager");
 
 		springAnchor = GameObject.Find ("spring anchor");
+
 	}
 
 	// Use this for initialization
@@ -77,6 +78,7 @@ public class projectileShoot : MonoBehaviour {
 			if (Input.touchCount > 0 && rockGen) {	//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
 				Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
 				Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
+//				Debug.Log (worldPos.x);
 
 				if (shootingSpace.Contains (worldPos)) {
 					GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
@@ -112,7 +114,7 @@ public class projectileShoot : MonoBehaviour {
 			middleLine.enabled = false;
 
 			if (rockGen) {
-				manager.GetComponent<rockManager> ().makeRockNow = true;	//changes value in rock manager to instantiate another rock
+				rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
 			}
 			rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
 		}
@@ -130,12 +132,13 @@ public class projectileShoot : MonoBehaviour {
 	//Define area which player can shoot from
 	//Defined from position of slingshot
 	void setupShootingSpace() {
-		screenDim = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0));
-		float screenWidth = screenDim.x;
-		float screenHeight = screenDim.y;
-		float boundHeight = (screenHeight + leftSlingshot.transform.position.y) / 2;
+		float boundHeight = (ScreenVariables.worldHeight + leftSlingshot.transform.position.y) / 2;
 		float yCenter = leftSlingshot.transform.position.y - boundHeight;
-		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*screenWidth, 2*boundHeight, 0));
+//		Debug.Log (boundHeight);
+//		Debug.Log (yCenter);
+		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*ScreenVariables.worldWidth, 2*boundHeight, 0));
+//		Debug.Log (ScreenVariables.worldWidth);
+//		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*ScreenVariables.worldWidth, 2*ScreenVariables.worldHeight, 0));
 	}
 
 	//constantly updates 2nd and 3rd line renderer point to be attached to rock edge

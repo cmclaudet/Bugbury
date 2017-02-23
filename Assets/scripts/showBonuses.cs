@@ -29,7 +29,7 @@ public class showBonuses : MonoBehaviour {
 	//	Debug.Log (transform.position);
 		dead = false;
 		manager = GameObject.Find ("game manager");
-		farShotBonus = manager.GetComponent<scoreCount> ().farShotBonus;
+		farShotBonus = scoreCount.Instance.farShotBonus;
 		comboNumber = 0;
 		isFar = false;
 		yLimit = 4.0f;

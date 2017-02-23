@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class rewrite : MonoBehaviour {
 
 	void Start() {
+		scoreCount.Instance.scoreObject = gameObject;
 		rewriteScore ("0");
 	}
 

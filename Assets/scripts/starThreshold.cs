@@ -22,7 +22,7 @@ public class starThreshold : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		totalCaterpillars = GetComponent<caterpillarManager> ().totalCaterpillars;
-		farShotBonus = GetComponent<scoreCount> ().farShotBonus;
+		farShotBonus = scoreCount.Instance.farShotBonus;
 
 		//ensure threhsolds are only set if they are attainable
 		if (checkFrac ()) {

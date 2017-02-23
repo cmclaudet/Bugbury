@@ -5,17 +5,33 @@ using UnityEngine;
 //instantiates new rock when current rock is launched. Inactivates rocks which have passed off the screen.
 //updates player's max player streak
 public class rockManager : MonoBehaviour {
+
+	private static rockManager _instance;
+
+	public static rockManager Instance {
+		get {
+			if (_instance == null) {
+				GameObject go = new GameObject ("rockManager");
+				go.AddComponent<rockManager> ();
+			}
+			return _instance;
+		}
+	}
+
 	public Rigidbody2D rocks;
 	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
-	private float screenLength;
+
+//	private ScreenVariables screen;		//grab screen dimensions
 	private GameObject[] allRocks;
+	private float rockRadius;
 
 	void Awake() {
-		screenLength = Camera.main.ScreenToWorldPoint (new Vector3 (0, Screen.height, 0)).y;
+		_instance = this;
+//		screen = new ScreenVariables ();
 	}
 
 	void Start() {
-		Instantiate (rocks);
+		rockRadius = rocks.GetComponent<CircleCollider2D> ().radius;
 	}
 
 	// Update is called once per frame
@@ -29,19 +45,18 @@ public class rockManager : MonoBehaviour {
 
 		//checks if rocks have gone off screen
 		for (int i = 0; i < allRocks.Length; i++) {
-			float rockRadius = allRocks [i].GetComponent<CircleCollider2D> ().radius;
-			if ((allRocks [i].transform.position.y > (screenLength + rockRadius)) || (allRocks[i].transform.position.y < (-screenLength - rockRadius))) {
+			if ((allRocks [i].transform.position.y > (ScreenVariables.worldHeight + rockRadius)) || (allRocks[i].transform.position.y < (-ScreenVariables.worldHeight - rockRadius))) {
 				allRocks [i].SetActive (false);
 				resetMaxPlayerStreak ();
-				GetComponent<scoreCount> ().playerCombo = 0;
+				scoreCount.Instance.playerCombo = 0;
 			}
 		}
 		
 	}
 
 	void resetMaxPlayerStreak() {
-		if (GetComponent<scoreCount> ().playerCombo > GetComponent<scoreCount> ().maxPlayerStreak) {
-			GetComponent<scoreCount> ().maxPlayerStreak = GetComponent<scoreCount> ().playerCombo;
+		if (scoreCount.Instance.playerCombo > scoreCount.Instance.maxPlayerStreak) {
+			scoreCount.Instance.maxPlayerStreak = scoreCount.Instance.playerCombo;
 		}
 	}
 }
