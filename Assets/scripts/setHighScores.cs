@@ -14,7 +14,7 @@ public class setHighScores : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//load high scores from previous games
-		highScoreManager.Instance.Load();
+//		highScoreManager.Instance.Load();
 		highScore ();
 		checkLevels ();
 	}
