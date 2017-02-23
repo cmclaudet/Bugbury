@@ -47,7 +47,7 @@ public class blowUp : MonoBehaviour {
 		inactivateStars ();
 
 		//save new scores
-		highScoreManager.Instance.Save ();
+//		highScoreManager.Instance.Save ();
 	}
 	
 	// Update is called once per frame
