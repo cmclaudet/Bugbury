@@ -7,19 +7,13 @@ public class setWallPosition : MonoBehaviour {
 	private Transform leftWall;
 	private Transform rightWall;
 
-	private float screenHeight;
-	private float screenWidth;
-
 	// Use this for initialization
 	void Start () {
 		leftWall = transform.Find("leftWall");
 		rightWall = transform.Find("rightWall");
 
-		screenHeight = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, 0)).y;
-		screenWidth = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, 0)).x;
-
-		fixWallSizePosition (leftWall, -screenWidth);
-		fixWallSizePosition (rightWall, screenWidth);
+		fixWallSizePosition (leftWall, -ScreenVariables.worldWidth);
+		fixWallSizePosition (rightWall, ScreenVariables.worldWidth);
 /*
 		leftWall.GetComponent<EdgeCollider2D>().points [0].y = screenHeight;
 		leftWall.GetComponent<EdgeCollider2D>().points [1].y = - screenHeight;
@@ -36,8 +30,8 @@ public class setWallPosition : MonoBehaviour {
 	}
 
 	void fixWallSizePosition(Transform wall, float xPos) {
-		wall.GetComponent<EdgeCollider2D>().points [0].y = screenHeight;
-		wall.GetComponent<EdgeCollider2D>().points [1].y = - screenHeight;
+		wall.GetComponent<EdgeCollider2D>().points [0].y = ScreenVariables.worldHeight;
+		wall.GetComponent<EdgeCollider2D>().points [1].y = - ScreenVariables.worldHeight;
 		wall.transform.position = new Vector3(xPos, 0, 0);
 
 /*

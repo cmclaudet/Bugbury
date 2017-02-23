@@ -26,6 +26,11 @@ public class scoreCount : MonoBehaviour {
 	public int farShots{ get; set; }
 	public bool far { get; set; }
 
+	//score thresholds for getting the first, second and third star
+	public int star1threshold{ get; set; }
+	public int star2threshold{ get; set; }
+	public int star3threshold{ get; set; }
+
 	public GameObject scoreObject;
 
 	void Awake() {

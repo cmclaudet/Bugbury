@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 //rewrites text on level complete message to display correct scores
 public class setScores : MonoBehaviour {
 
-	private GameObject manager;
 	private int maxStreak;
 	private int totfarShots;
 	private int playerScore;
@@ -15,15 +14,14 @@ public class setScores : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//finds all values needed to display score
-		manager = GameObject.Find ("game manager");
 		findMaxStreakFarShots();
 		setupText ();
 	}
 
 	void findMaxStreakFarShots() {
-		maxStreak = manager.GetComponent<scoreCount> ().maxPlayerStreak;
-		totfarShots = manager.GetComponent<scoreCount> ().farShots;
-		playerScore = manager.GetComponent<scoreCount> ().playerScore;
+		maxStreak = scoreCount.Instance.maxPlayerStreak;
+		totfarShots = scoreCount.Instance.farShots;
+		playerScore = scoreCount.Instance.playerScore;
 	}
 
 	void setupText() {

@@ -15,13 +15,13 @@ public class starThreshold : MonoBehaviour {
 	private int totalCaterpillars;
 	private int farShotBonus;
 
-	public int threshold1{ get; set; }
-	public int threshold2{ get; set; }
-	public int threshold3{ get; set; }
+	private int threshold1;
+	private int threshold2;
+	private int threshold3;
 
 	// Use this for initialization
 	void Start () {
-		totalCaterpillars = GetComponent<caterpillarManager> ().totalCaterpillars;
+		totalCaterpillars = caterpillarManager.Instance.totalCaterpillars;
 		farShotBonus = scoreCount.Instance.farShotBonus;
 
 		//ensure threhsolds are only set if they are attainable
@@ -32,6 +32,8 @@ public class starThreshold : MonoBehaviour {
 		} else {
 			Debug.Log ("Required score threshold is too high for star!");
 		}
+
+		setStarThresholds ();
 	}
 		
 	bool checkFrac() {
@@ -47,5 +49,11 @@ public class starThreshold : MonoBehaviour {
 		float apxScore = (AC * (AC + 1.0f) / 2.0f) * frac + AC*farShotBonus;
 		int scoreThreshold = Mathf.FloorToInt(apxScore);
 		return scoreThreshold;
+	}
+
+	void setStarThresholds() {
+		scoreCount.Instance.star1threshold = threshold1;
+		scoreCount.Instance.star2threshold = threshold2;
+		scoreCount.Instance.star3threshold = threshold3;
 	}
 }
