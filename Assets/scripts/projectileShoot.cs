@@ -74,7 +74,7 @@ public class projectileShoot : MonoBehaviour {
 	{
 		//make rock follow player finger whilst finger is down inside the shooting space
 		//ensures spring is disabled in this time and the rock is kinematic
-		if (manager.GetComponent<caterpillarManager>().control) {
+		if (lifeManager.Instance.control) {
 			if (Input.touchCount > 0 && rockGen) {	//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
 				Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
 				Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);

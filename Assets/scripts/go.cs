@@ -10,7 +10,6 @@ public class go : MonoBehaviour {
 	public Button pauseButton;
 
 	private float timetoStart;
-	public GameObject manager;
 	public AudioSource whistle;	//whistle sound for starting
 
 	private bool whistlePlayed;
@@ -32,7 +31,7 @@ public class go : MonoBehaviour {
 		}
 		if (timetoStart >= 1.5f * startTime) {
 			GetComponent<RectTransform> ().gameObject.SetActive (false);
-			manager.GetComponent<caterpillarManager> ().control = true;
+			lifeManager.Instance.control = true;
 			pauseButton.interactable = true;
 		}
 	}

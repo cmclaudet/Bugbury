@@ -18,7 +18,6 @@ public class caterpillarManager : MonoBehaviour {
 	public Rigidbody2D caterpillars;	//caterpillar prefab
 	public int totalCaterpillars;	//total caterpillars for this level
 	public int currentSpawn{ get; set; }	//number of the most recent caterpillar
-	public bool control{ get; set; }		//whether play can control the slingshot or not
 	public bool levelEnd{ get; set; }		//triggers end menu when true
 	public int caterpillarsInactivated{ get; set; }		//equals caterpillars killed + caterpillars passed over finish line
 	public int caterpillarsKilled{ get; set; }			//total caterpillars player successfully killed
@@ -42,7 +41,6 @@ public class caterpillarManager : MonoBehaviour {
 		caterpillarsInactivated = 0;
 		caterpillarsKilled = 0;
 		levelEnd = false;
-		control = false;
 		findAllBugs ();		//finds all caterpillars currently in heirarchy
 
 		currentSpawn = 0;
@@ -52,7 +50,7 @@ public class caterpillarManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (control) {
+		if (lifeManager.Instance.control) {
 			timeSinceSpawn += Time.deltaTime;
 		}
 
@@ -68,7 +66,7 @@ public class caterpillarManager : MonoBehaviour {
 			}
 		}
 
-		if (control) {	//can only be done when control is true as before this there are no caterpillars to grab minimum y value from
+		if (lifeManager.Instance.control) {	//can only be done when control is true as before this there are no caterpillars to grab minimum y value from
 			findMinY ();
 		}
 
@@ -86,7 +84,7 @@ public class caterpillarManager : MonoBehaviour {
 
 				//ends level once all caterpillars are inactivated
 				if (caterpillarsInactivated == totalCaterpillars) {
-					control = false;
+					lifeManager.Instance.control = false;
 					levelEnd = true;
 				}
 			}
@@ -118,7 +116,7 @@ public class caterpillarManager : MonoBehaviour {
 	//displays player scores
 	void setupEnd() {
 		camera.GetComponent<CameraShake> ().shakeDuration = cameraScoreNumShakeDuration;
-		control = false;
+		lifeManager.Instance.control = false;
 		pauseButton.interactable = false;
 
 		resetMaxStreak ();
