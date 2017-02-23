@@ -40,8 +40,6 @@ public class scoreCount : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//far shot bonus is rewritten at beginning of every level
-		farShotBonus = 3;
 		playerScore = 0;
 		playerCombo = 0;
 		maxPlayerStreak = 0;
