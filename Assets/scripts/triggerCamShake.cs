@@ -12,10 +12,8 @@ public class triggerCamShake : MonoBehaviour {
 	void Start () {
 		Camera = caterpillarManager.Instance.levelComplete.GetComponent<triggerLevelComplete>().camera;
 		bam = caterpillarManager.Instance.levelComplete.GetComponent<triggerLevelComplete> ().bam;
-//		Camera = GameObject.Find ("Main Camera");
 		doneScaling = false;
 		doneShaking = false;
-//		bam = GameObject.Find ("bam").GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame

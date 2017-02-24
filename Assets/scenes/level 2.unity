@@ -1416,6 +1416,7 @@ GameObject:
   - component: {fileID: 702104803}
   - component: {fileID: 702104802}
   - component: {fileID: 702104800}
+  - component: {fileID: 702104801}
   m_Layer: 0
   m_Name: setSceneVars
   m_TagString: Untagged
@@ -1437,6 +1438,22 @@ MonoBehaviour:
   star1Frac: 3
   star2Frac: 2
   star3Frac: 1.5
+--- !u!114 &702104801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 702104799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b81a0ce9812478dab8e962eb0d8e5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slingshotLeft: {fileID: 1567680017}
+  slingshotRight: {fileID: 1669298758}
+  springAnchor: {fileID: 1714009864}
+  throwSound: {fileID: 290219786}
+  splatSounds: {fileID: 1926380659}
 --- !u!114 &702104802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1942,6 +1959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdb4d8d88be9442a98d2c856c3fc126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftWall: {fileID: 973692382}
+  rightWall: {fileID: 1420620700}
 --- !u!4 &1003989558
 Transform:
   m_ObjectHideFlags: 0
@@ -3288,6 +3307,7 @@ MonoBehaviour:
   completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
   canvas: {fileID: 1770821641}
+  bam: {fileID: 143216193}
 --- !u!4 &1709009011
 Transform:
   m_ObjectHideFlags: 0
@@ -3632,6 +3652,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: pause
       objectReference: {fileID: 0}
+    - target: {fileID: 114975879188857952, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3,
+        type: 2}
+      propertyPath: click
+      value: 
+      objectReference: {fileID: 2044995847}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3, type: 2}
   m_IsPrefabParent: 0
@@ -4190,6 +4215,11 @@ Prefab:
 --- !u!4 &2044995846 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4119634006826874, guid: 0b4faf803a1f74228ab06ac81c4d3058,
+    type: 2}
+  m_PrefabInternal: {fileID: 2044995845}
+--- !u!82 &2044995847 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82140905286548102, guid: 0b4faf803a1f74228ab06ac81c4d3058,
     type: 2}
   m_PrefabInternal: {fileID: 2044995845}
 --- !u!1001 &2071350289
