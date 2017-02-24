@@ -14,7 +14,6 @@ public class projectileShoot : MonoBehaviour {
 	private GameObject leftSlingshot;
 	private GameObject rightSlingshot;
 	private GameObject springAnchor;
-	private GameObject manager;
 
 	private LineRenderer middleLine;
 	private SpringJoint2D spring;
@@ -27,22 +26,19 @@ public class projectileShoot : MonoBehaviour {
 	private bool rockGen = true;
 
 	void Awake() {
-		setupSounds();
-
 		spring = GetComponent<SpringJoint2D> ();
 		radius = GetComponent<CircleCollider2D> ().radius;
 		middleLine = GetComponent<LineRenderer> ();
-
-		leftSlingshot = GameObject.Find ("slingshot left");
-		rightSlingshot = GameObject.Find ("slingshot right");
-		manager = GameObject.Find ("game manager");
-
-		springAnchor = GameObject.Find ("spring anchor");
 
 	}
 
 	// Use this for initialization
 	void Start () {
+		setupSounds();
+		leftSlingshot = rockManager.Instance.slingshotLeft;
+		rightSlingshot = rockManager.Instance.slingshotRight;
+		springAnchor = rockManager.Instance.springAnchor;
+
 		transform.position = spawnPosition;
 		setupLineRenderer ();
 		setupShootingSpace ();
@@ -61,10 +57,10 @@ public class projectileShoot : MonoBehaviour {
 
 	void setupSounds() {
 		//vary pitch and source of sounds to make them less repetitive
-		throwSound = GameObject.Find ("throw").GetComponent<AudioSource> ();
+		throwSound = rockManager.Instance.throwSound.GetComponent<AudioSource> ();
 		throwSound.pitch = Random.Range (0.8f, 1.2f);
 
-		GameObject splatSoundsObj = GameObject.Find ("splatSounds");
+		GameObject splatSoundsObj = rockManager.Instance.splatSounds;
 		AudioSource[] splatSounds = splatSoundsObj.GetComponentsInChildren<AudioSource> ();
 		splatSound = splatSounds [Random.Range (0, splatSounds.Length - 1)];
 		splatSound.pitch = Random.Range (0.8f, 1.2f);

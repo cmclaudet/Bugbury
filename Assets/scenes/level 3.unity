@@ -965,7 +965,6 @@ GameObject:
   - component: {fileID: 440147145}
   - component: {fileID: 440147144}
   - component: {fileID: 440147143}
-  - component: {fileID: 440147142}
   - component: {fileID: 440147141}
   m_Layer: 0
   m_Name: setSceneVars
@@ -988,17 +987,6 @@ MonoBehaviour:
   star1Frac: 3
   star2Frac: 2
   star3Frac: 1.5
---- !u!114 &440147142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 440147140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b81a0ce9812478dab8e962eb0d8e5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &440147143
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -272,6 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdb4d8d88be9442a98d2c856c3fc126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftWall: {fileID: 114249130}
+  rightWall: {fileID: 554213137}
 --- !u!4 &125284271
 Transform:
   m_ObjectHideFlags: 0
@@ -668,6 +670,11 @@ Prefab:
 --- !u!4 &398124293 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4119634006826874, guid: 0b4faf803a1f74228ab06ac81c4d3058,
+    type: 2}
+  m_PrefabInternal: {fileID: 398124292}
+--- !u!82 &398124294 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82140905286548102, guid: 0b4faf803a1f74228ab06ac81c4d3058,
     type: 2}
   m_PrefabInternal: {fileID: 398124292}
 --- !u!1 &435618071
@@ -1146,6 +1153,7 @@ MonoBehaviour:
   completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
   canvas: {fileID: 1770821641}
+  bam: {fileID: 318686599}
 --- !u!4 &881261686
 Transform:
   m_ObjectHideFlags: 0
@@ -1385,8 +1393,8 @@ GameObject:
   - component: {fileID: 1081278979}
   - component: {fileID: 1081278978}
   - component: {fileID: 1081278980}
-  - component: {fileID: 1081278981}
   - component: {fileID: 1081278982}
+  - component: {fileID: 1081278981}
   m_Layer: 0
   m_Name: setSceneVars
   m_TagString: Untagged
@@ -1449,6 +1457,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b81a0ce9812478dab8e962eb0d8e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slingshotLeft: {fileID: 1567680017}
+  slingshotRight: {fileID: 1669298758}
+  springAnchor: {fileID: 1714009864}
+  throwSound: {fileID: 1237086284}
+  splatSounds: {fileID: 1515061900}
 --- !u!114 &1081278982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3551,6 +3564,11 @@ Prefab:
       propertyPath: manager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114975879188857952, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3,
+        type: 2}
+      propertyPath: click
+      value: 
+      objectReference: {fileID: 398124294}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3, type: 2}
   m_IsPrefabParent: 0

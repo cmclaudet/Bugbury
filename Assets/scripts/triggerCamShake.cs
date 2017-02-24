@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//triggers camera shaking when score number lands on level complete message
 public class triggerCamShake : MonoBehaviour {
 	private GameObject Camera;
 	private bool doneScaling;
@@ -9,10 +10,12 @@ public class triggerCamShake : MonoBehaviour {
 	private AudioSource bam;
 	// Use this for initialization
 	void Start () {
-		Camera = GameObject.Find ("Main Camera");
+		Camera = caterpillarManager.Instance.levelComplete.GetComponent<triggerLevelComplete>().camera;
+		bam = caterpillarManager.Instance.levelComplete.GetComponent<triggerLevelComplete> ().bam;
+//		Camera = GameObject.Find ("Main Camera");
 		doneScaling = false;
 		doneShaking = false;
-		bam = GameObject.Find ("bam").GetComponent<AudioSource> ();
+//		bam = GameObject.Find ("bam").GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame

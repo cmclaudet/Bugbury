@@ -9,6 +9,7 @@ public class triggerLevelComplete : MonoBehaviour {
 	public Button pauseButton;
 	public Transform completeMessage;
 	public Transform canvas;
+	public AudioSource bam;
 
 	void Awake() {
 		caterpillarManager.Instance.levelComplete = gameObject;

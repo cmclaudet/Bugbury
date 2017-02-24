@@ -4,14 +4,11 @@ using UnityEngine;
 
 //set up walls so that they match the screen size
 public class setWallPosition : MonoBehaviour {
-	private Transform leftWall;
-	private Transform rightWall;
+	public Transform leftWall;
+	public Transform rightWall;
 
 	// Use this for initialization
 	void Start () {
-		leftWall = transform.Find("leftWall");
-		rightWall = transform.Find("rightWall");
-
 		fixWallSizePosition (leftWall, -ScreenVariables.worldWidth);
 		fixWallSizePosition (rightWall, ScreenVariables.worldWidth);
 /*

@@ -19,6 +19,11 @@ public class rockManager : MonoBehaviour {
 	}
 
 	public Rigidbody2D rocks;
+	public GameObject slingshotLeft;
+	public GameObject slingshotRight;
+	public GameObject springAnchor;
+	public GameObject throwSound;
+	public GameObject splatSounds;
 	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
 
 //	private ScreenVariables screen;		//grab screen dimensions

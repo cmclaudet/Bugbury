@@ -4,13 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class unPause : MonoBehaviour {
-	private AudioSource click;
-	private Button pauseButton;
-
-	void Awake() {
-		click = GameObject.Find ("click").GetComponent<AudioSource> ();
-		pauseButton = GameObject.Find ("pauseButton").GetComponent<Button> ();
-	}
+	public AudioSource click{ get; set; }
+	public Button pauseButton{ get; set; }
 
 	public void unpause() {
 		pauseButton.interactable = true;

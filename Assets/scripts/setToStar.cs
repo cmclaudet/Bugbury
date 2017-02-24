@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//sets star fill to star position. if there is no scaling up sets star fill scale to star silhouette scale
 public class setToStar : MonoBehaviour {
 	public Transform star;
 
