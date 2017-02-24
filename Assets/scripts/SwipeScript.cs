@@ -55,15 +55,15 @@ public class SwipeScript : MonoBehaviour {
 						//swipe triggers button press functions if buttons are interactable
 						if(swipeType.x != 0.0f){
 							if(swipeType.x > 0.0f){
-								panMenu2 panMenu2 = GetComponent<panMenu2> ();
-								if (panMenu2 != null && backButton.interactable) {
-									panMenu2.Press ();
-								}
+//								panMenu2 panMenu2 = GetComponent<panMenu2> ();
+//								if (panMenu2 != null && backButton.interactable) {
+//									panMenu2.Press ();
+//								}
 							}else{
-								panMenu1 panMenu1 = GetComponent<panMenu1> ();
-								if (panMenu1 != null && forwardButton.interactable) {
-									panMenu1.Press ();
-								}
+//								panMenu1 panMenu1 = GetComponent<panMenu1> ();
+//								if (panMenu1 != null && forwardButton.interactable) {
+//									panMenu1.Press ();
+//								}
 							}
 						}
 
