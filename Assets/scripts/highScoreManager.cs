@@ -52,9 +52,9 @@ public class highScoreManager : MonoBehaviour {
 	}
 
 	void OnEnable() {
-		if (File.Exists (Application.persistentDataPath + "/playerScores.dat")) {
+		if (File.Exists (Application.persistentDataPath + "/bugburyScores.dat")) {
 			BinaryFormatter bf = new BinaryFormatter ();
-			FileStream file = File.Open (Application.persistentDataPath + "/playerScores.dat", FileMode.Open);
+			FileStream file = File.Open (Application.persistentDataPath + "/bugburyScores.dat", FileMode.Open);
 			playerScores currentScores = (playerScores)bf.Deserialize (file);
 			file.Close ();
 
@@ -85,7 +85,7 @@ public class highScoreManager : MonoBehaviour {
 
 	void OnDisable() {
 		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Create (Application.persistentDataPath + "/playerScores.dat");
+		FileStream file = File.Create (Application.persistentDataPath + "/bugburyScores.dat");
 
 		playerScores newScores = new playerScores ();
 

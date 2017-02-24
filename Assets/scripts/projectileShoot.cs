@@ -38,6 +38,7 @@ public class projectileShoot : MonoBehaviour {
 		manager = GameObject.Find ("game manager");
 
 		springAnchor = GameObject.Find ("spring anchor");
+
 	}
 
 	// Use this for initialization
@@ -73,10 +74,11 @@ public class projectileShoot : MonoBehaviour {
 	{
 		//make rock follow player finger whilst finger is down inside the shooting space
 		//ensures spring is disabled in this time and the rock is kinematic
-		if (manager.GetComponent<caterpillarManager>().control) {
+		if (lifeManager.Instance.control) {
 			if (Input.touchCount > 0 && rockGen) {	//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
 				Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
 				Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
+//				Debug.Log (worldPos.x);
 
 				if (shootingSpace.Contains (worldPos)) {
 					GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
@@ -112,7 +114,7 @@ public class projectileShoot : MonoBehaviour {
 			middleLine.enabled = false;
 
 			if (rockGen) {
-				manager.GetComponent<rockManager> ().makeRockNow = true;	//changes value in rock manager to instantiate another rock
+				rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
 			}
 			rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
 		}
@@ -130,12 +132,13 @@ public class projectileShoot : MonoBehaviour {
 	//Define area which player can shoot from
 	//Defined from position of slingshot
 	void setupShootingSpace() {
-		screenDim = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0));
-		float screenWidth = screenDim.x;
-		float screenHeight = screenDim.y;
-		float boundHeight = (screenHeight + leftSlingshot.transform.position.y) / 2;
+		float boundHeight = (ScreenVariables.worldHeight + leftSlingshot.transform.position.y) / 2;
 		float yCenter = leftSlingshot.transform.position.y - boundHeight;
-		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*screenWidth, 2*boundHeight, 0));
+//		Debug.Log (boundHeight);
+//		Debug.Log (yCenter);
+		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*ScreenVariables.worldWidth, 2*boundHeight, 0));
+//		Debug.Log (ScreenVariables.worldWidth);
+//		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*ScreenVariables.worldWidth, 2*ScreenVariables.worldHeight, 0));
 	}
 
 	//constantly updates 2nd and 3rd line renderer point to be attached to rock edge
@@ -157,40 +160,40 @@ public class projectileShoot : MonoBehaviour {
 			GameObject splatter = Instantiate (splatters);
 			splatter.transform.position = col.transform.position;
 
-			manager.GetComponent<caterpillarManager> ().caterpillarsInactivated += 1;	//caterpillars inactivated includes both killed caterpillars and those which pass off the screen
-			manager.GetComponent<caterpillarManager> ().caterpillarsKilled += 1;		//to inform player of total number of caterpillars killed
+			caterpillarManager.Instance.caterpillarsInactivated += 1;	//caterpillars inactivated includes both killed caterpillars and those which pass off the screen
+			caterpillarManager.Instance.caterpillarsKilled += 1;		//to inform player of total number of caterpillars killed
 
 			updateScores (col);
 			this.gameObject.SetActive(false);
 			//if player kills final caterpillar level ends
-			if (manager.GetComponent<caterpillarManager> ().caterpillarsInactivated == manager.GetComponent<caterpillarManager> ().totalCaterpillars) {
-				manager.GetComponent<caterpillarManager> ().levelEnd = true;
+			if (caterpillarManager.Instance.caterpillarsInactivated == caterpillarManager.Instance.totalCaterpillars) {
+				caterpillarManager.Instance.levelEnd = true;
 			}
 		}
 	}
 
 	void updateScores(Collision2D col) {
 		//add 1 to player streak
-		manager.GetComponent<scoreCount> ().playerCombo += 1;
-		int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
+		scoreCount.Instance.playerCombo += 1;
+		int currentCombo = scoreCount.Instance.playerCombo;
 
 		//update manager if the shot is far, ie if user hits caterpillar over the mid way point
 		updateIfFarShot(col);
-		bool farShot = manager.GetComponent<scoreCount> ().far;
+		bool farShot = scoreCount.Instance.far;
 
 		//update score
 		int newScore = getNewScore(currentCombo, farShot);
-		manager.GetComponent<scoreCount> ().changeScore (newScore);
+		scoreCount.Instance.changeScore (newScore);
 	}
 
 	void updateIfFarShot(Collision2D col) {
 		float arenaFarpoint = getFarPoint (col);
 
 		if (col.transform.position.y > arenaFarpoint) {
-			manager.GetComponent<scoreCount> ().farShots += 1;		//add 1 to total far shots
-			manager.GetComponent<scoreCount> ().far = true;
+			scoreCount.Instance.farShots += 1;		//add 1 to total far shots
+			scoreCount.Instance.far = true;
 		} else {
-			manager.GetComponent<scoreCount> ().far = false;
+			scoreCount.Instance.far = false;
 		}
 	}
 /*
@@ -204,16 +207,15 @@ public class projectileShoot : MonoBehaviour {
 */
 	//get point 70% of the way up from the finish line. Here upwards it will be considered a far shot
 	float getFarPoint(Collision2D col) {
-		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
-		float finishLine = manager.GetComponent<caterpillarManager>().finishLine;
-		float farPoint = finishLine + (screenHeight - finishLine) * 0.7f;
+		float finishLine = caterpillarManager.Instance.finishLine;
+		float farPoint = finishLine + (ScreenVariables.worldHeight - finishLine) * 0.7f;
 		return farPoint;
 	}
 
 	int getNewScore(int currentCombo, bool farShot) {
 		int newScore = currentCombo;
 		if (farShot) {
-			newScore += manager.GetComponent<scoreCount>().farShotBonus;
+			newScore += scoreCount.Instance.farShotBonus;
 		}
 		return newScore;
 	}

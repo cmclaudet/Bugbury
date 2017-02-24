@@ -17,7 +17,6 @@ public class unPause : MonoBehaviour {
 		click.Play ();
 		Time.timeScale = 1.0f;
 		gameObject.SetActive (false);
-		GameObject manager = GameObject.Find ("game manager");
-		manager.GetComponent<caterpillarManager> ().control = true;
+		lifeManager.Instance.control = true;
 	}
 }

@@ -14,8 +14,6 @@ public class scaleTextObject : MonoBehaviour {
 	public float minMaxScale;		//smallest max value object scales up to
 	public float maxMaxScale;		//largest max value object scales up to
 
-	private GameObject manager;
-
 	private float maxScale;			//max value this particular object will scale up to. depends on current combo number. 
 	private bool needScaling;
 
@@ -59,9 +57,8 @@ public class scaleTextObject : MonoBehaviour {
 
 	//finds max scale this particular combo text should scale up to
 	void findMaxScale() {
-		manager = GameObject.Find ("game manager");
-		int currentCombo = manager.GetComponent<scoreCount> ().playerCombo;
-		int numOfCaterpillars = manager.GetComponent<caterpillarManager>().totalCaterpillars;
+		int currentCombo = scoreCount.Instance.playerCombo;
+		int numOfCaterpillars = caterpillarManager.Instance.totalCaterpillars;
 		maxScale = minMaxScale + currentCombo*(maxMaxScale - minMaxScale) /numOfCaterpillars;
 	}
 }

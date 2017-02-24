@@ -22,7 +22,6 @@ public class blowUp : MonoBehaviour {
 	private int star3score;	//necessary score for 3 stars
 
 	private int playerScore;
-	private GameObject manager;
 	private bool needScaling;
 
 	public Transform scoreNumber;		//score number object. must define because this is activated in the script
@@ -33,8 +32,7 @@ public class blowUp : MonoBehaviour {
 	public blowUpGeneral endMessage;
 
 	void Awake() {
-		manager = GameObject.Find ("game manager");
-		playerScore = manager.GetComponent<scoreCount> ().playerScore;
+		playerScore = scoreCount.Instance.playerScore;
 		setTextTimeDelays ();
 	}
 
@@ -78,9 +76,9 @@ public class blowUp : MonoBehaviour {
 	}
 
 	void setStarThresholds() {
-		star1score = manager.GetComponent<starThreshold> ().threshold1;
-		star2score = manager.GetComponent<starThreshold> ().threshold2;
-		star3score = manager.GetComponent<starThreshold> ().threshold3;
+		star1score = scoreCount.Instance.star1threshold;
+		star2score = scoreCount.Instance.star2threshold;
+		star3score = scoreCount.Instance.star3threshold;
 	}
 
 	//if player does not have sufficient score stars are inactivated
