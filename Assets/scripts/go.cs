@@ -24,7 +24,7 @@ public class go : MonoBehaviour {
 		timetoStart += Time.deltaTime;
 
 		if (timetoStart >= startTime && whistlePlayed == false) {
-			Transform lvl2text = transform.Find ("levelStart");
+			Text lvl2text = GetComponentInChildren<Text> ();
 			lvl2text.GetComponent<Text> ().text = "SHOOT!";
 			whistle.Play ();
 			whistlePlayed = true;

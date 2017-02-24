@@ -96,6 +96,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4484674456679026, guid: fa5bdeeec046b4cfaad7b4b267d37106,
     type: 2}
   m_PrefabInternal: {fileID: 589806066}
+--- !u!82 &40333187 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82140905286548102, guid: 0b4faf803a1f74228ab06ac81c4d3058,
+    type: 2}
+  m_PrefabInternal: {fileID: 2044995845}
 --- !u!1 &54172174
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +947,7 @@ MonoBehaviour:
   completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
   canvas: {fileID: 1770821641}
+  bam: {fileID: 858786889}
 --- !u!4 &415945857
 Transform:
   m_ObjectHideFlags: 0
@@ -965,8 +971,8 @@ GameObject:
   - component: {fileID: 440147145}
   - component: {fileID: 440147144}
   - component: {fileID: 440147143}
-  - component: {fileID: 440147142}
   - component: {fileID: 440147141}
+  - component: {fileID: 440147142}
   m_Layer: 0
   m_Name: setSceneVars
   m_TagString: Untagged
@@ -985,8 +991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dd795c7d6f4a0889a67b7f27681f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star1Frac: 3
-  star2Frac: 2
+  star1Frac: 4
+  star2Frac: 2.5
   star3Frac: 1.5
 --- !u!114 &440147142
 MonoBehaviour:
@@ -999,6 +1005,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b81a0ce9812478dab8e962eb0d8e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slingshotLeft: {fileID: 1567680017}
+  slingshotRight: {fileID: 1669298758}
+  springAnchor: {fileID: 1714009864}
+  throwSound: {fileID: 290219786}
+  splatSounds: {fileID: 1173986086}
 --- !u!114 &440147143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,9 +1037,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374751605bb6f4031a3b7e4782115931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farBonus: 8
+  farBonus: 9
   minVelocity: 0.7
-  maxVelocity: 1.4
+  maxVelocity: 1.1
   totalCaterpillars: 25
 --- !u!4 &440147145
 Transform:
@@ -2780,6 +2791,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114975879188857952, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3,
+        type: 2}
+      propertyPath: click
+      value: 
+      objectReference: {fileID: 40333187}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b42a393fdb0e45ec8a556a0be2a5ea3, type: 2}
   m_IsPrefabParent: 0
@@ -3469,11 +3485,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4484674456679026, guid: fa5bdeeec046b4cfaad7b4b267d37106, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.6384
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 4484674456679026, guid: fa5bdeeec046b4cfaad7b4b267d37106, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.0609
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 68928850404784266, guid: fa5bdeeec046b4cfaad7b4b267d37106,
         type: 2}
@@ -3559,6 +3575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdb4d8d88be9442a98d2c856c3fc126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftWall: {fileID: 311572908}
+  rightWall: {fileID: 610466180}
 --- !u!4 &1726489945
 Transform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+//holds high score data and player star count for all levels
+//saves and loads data so that player can keep improving high score
 public class highScoreManager : MonoBehaviour {
 
 	private static highScoreManager _instance;
@@ -41,7 +43,6 @@ public class highScoreManager : MonoBehaviour {
 	public level Three;
 
 	void Awake() {
-//		DontDestroyOnLoad (this);
 		_instance = this;
 
 		//all stars start out false
@@ -57,12 +58,6 @@ public class highScoreManager : MonoBehaviour {
 			FileStream file = File.Open (Application.persistentDataPath + "/bugburyScores.dat", FileMode.Open);
 			playerScores currentScores = (playerScores)bf.Deserialize (file);
 			file.Close ();
-
-			/*
-			One = currentScores.one;
-			Two = currentScores.two;
-			Three = currentScores.three;
-			*/
 
 			//can only seem to save and load ints and bools... not custom data types
 			One.highScore = currentScores.highScore1;
@@ -89,12 +84,6 @@ public class highScoreManager : MonoBehaviour {
 
 		playerScores newScores = new playerScores ();
 
-		/*
-		newScores.one = One;
-		newScores.two = Two;
-		newScores.three = Three;
-		*/
-
 		newScores.highScore1 = One.highScore;
 		newScores.highScore2 = Two.highScore;
 		newScores.highScore3 = Three.highScore;
@@ -116,15 +105,6 @@ public class highScoreManager : MonoBehaviour {
 	}
 		
 }
-
-/*
-[Serializable]
-class playerScores {
-	public highScoreManager.level one;
-	public highScoreManager.level two;
-	public highScoreManager.level three;
-} 
-*/
 
 
 [Serializable]

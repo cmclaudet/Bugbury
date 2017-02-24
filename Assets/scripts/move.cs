@@ -21,6 +21,7 @@ public class move : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		//grab caterpillar manager values
 		laneNumber = caterpillarManager.Instance.lanes;
 		minVelocity = caterpillarManager.Instance.minVel;
 		maxVelocity = caterpillarManager.Instance.maxVel;

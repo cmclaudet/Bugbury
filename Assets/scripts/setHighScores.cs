@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//placed on empty gameobject in level select scene. Rewrites high score and star appearances if necessary so player sees updated version of their score
 public class setHighScores : MonoBehaviour {
 	public Transform level1;
 	public Transform level2;
@@ -13,8 +14,6 @@ public class setHighScores : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//load high scores from previous games
-//		highScoreManager.Instance.Load();
 		highScore ();
 		checkLevels ();
 	}

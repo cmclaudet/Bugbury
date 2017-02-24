@@ -4,14 +4,13 @@ using UnityEngine;
 
 //add to object which requires scaling upon instantiation
 public class scaleSetup : MonoBehaviour {
-	public blowUpGeneral scalingObj;
-	public float timeDelay{ get; set; }	//delay in seconds for object to appear
-	public float vel;
+	public blowUpGeneral scalingObj;		//create instance of scaling object with blowUpGeneral script to calculate all values of scale
+	public float timeDelay{ get; set; }	//total delay for object to appear = timeDelay * order (see below)
+	public int order;				//the order which the text comes up. max streak = 1, max streak num = 2, etc. set to 0 for object to scale immediately
+	public float vel;				//velocity and acceleration of scaling
 	public float acc;
 	public float startScale;		//start scale, ie value which object starts at
 	public bool lowTimeStep;		//set to true if scaling needs many checks per second to be precise
-//	public bool isScoreNumber;		//set to true if this object is the score number. this is because score number must only be instantiated after its time delay has passed (or the player will see it)
-	public int order;				//the order which the text comes up. max streak = 1, max streak num = 2, etc
 	public string desiredSoundEffect;	//input name of desired sound effect in hierarchy. If no name is placed there will be no sound effect
 
 	private AudioSource soundEffect;
@@ -25,9 +24,6 @@ public class scaleSetup : MonoBehaviour {
 	void Awake() {
 		needScaling = false;	//set to false so that object only scales after time delay
 		doneScaling = false;
-//		if (isScoreNumber) {
-//			timeDelay *= order;	//higher time delay if object has higher order
-//		}
 	}
 
 	// Use this for initialization
@@ -39,18 +35,11 @@ public class scaleSetup : MonoBehaviour {
 		scalingObj= new blowUpGeneral (vel, acc, startScale);
 
 		scalingUp = checkScalingDir ();
-
-		//if object is the score number skip time delay. parent object only initializes this until its time delay has passed
-//		if (isScoreNumber) {
-//			stopCount ();
-//			setTimeStep ();
-//		} else {
 		timeDelay *= order;
 
 		setSoundEffect ();
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
 		if (countTime) {
 			addTime ();
@@ -105,9 +94,6 @@ public class scaleSetup : MonoBehaviour {
 
 	void playSound() {
 		if (soundEffect != null) {
-//			soundEffect.enabled = true;
-//			soundEffect.pitch -= 1;
-//			soundEffect.pitch *= Mathf.Pow (1.05946f, (float)order);	//make pitch raise by a semi tone each time new object scales up
 			soundEffect.Play();
 		}
 	}

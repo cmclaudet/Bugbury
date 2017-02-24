@@ -23,7 +23,6 @@ public class scaleTextObject : MonoBehaviour {
 	void Start () {
 		findMaxScale ();
 		needScaling = true;
-		//maxScale = GetComponent<Transform> ().localScale.x;
 		GetComponent<Transform> ().localScale = new Vector3(minScale, minScale);
 		scaleUp = new blowUpGeneral (vel, acc, minScale);
 

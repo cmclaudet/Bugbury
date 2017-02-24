@@ -11,9 +11,4 @@ public class setPrefabs : MonoBehaviour {
 		rockManager.Instance.rocks = rocks;
 		caterpillarManager.Instance.caterpillars = caterpillars;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

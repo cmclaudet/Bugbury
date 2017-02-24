@@ -36,26 +36,5 @@ public class setScores : MonoBehaviour {
 		scoreNumber.GetComponent<Text> ().text = playerScore.ToString();
 	}
 
-/*
-	void resetHighScore() {
-		Scene currentScene = SceneManager.GetActiveScene ();
-		switch (currentScene.name) 
-		{
-		case "level 1":
-			if (playerScore > highScoreManager.Instance.level1HighScore) {
-				highScoreManager.Instance.level1HighScore = playerScore;
-			}
-			break;
-		case "level 2":
-			if (playerScore > highScoreManager.Instance.level2HighScore) {
-				highScoreManager.Instance.level2HighScore = playerScore;
-			}
-			break;
-		case "level 3":
-			if (playerScore > highScoreManager.Instance.level3HighScore) {
-				highScoreManager.Instance.level3HighScore = playerScore;
-			}
-			break;
-		}
-	}*/
+
 }

@@ -15,9 +15,9 @@ public class panMenu2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		lvl1.speed = 2.0f;
-		lvl2.speed = 2.0f;
-		lvl3.speed = 2.0f;
+		lvl1.speed = 3.0f;
+		lvl2.speed = 3.0f;
+		lvl3.speed = 3.0f;
 		GetComponent<Button> ().interactable = false;	//set to false as player can only go back once they have gone forward
 
 		onLevel2 = false;

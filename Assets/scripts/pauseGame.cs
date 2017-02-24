@@ -6,13 +6,12 @@ using UnityEngine.UI;
 public class pauseGame : MonoBehaviour {
 	public Transform pauseMenu;
 	public Transform canvas;
+	public AudioSource click;
 
 	private Transform menu;
-	private AudioSource click;
 
 	void Awake() {
 		GetComponent<Button> ().interactable = false;
-		click = GameObject.Find ("click").GetComponent<AudioSource> ();
 	}
 
 	public void pause() {
@@ -21,6 +20,9 @@ public class pauseGame : MonoBehaviour {
 		Time.timeScale = 0;
 		menu = Instantiate (pauseMenu);
 		menu.SetParent (canvas, false);
+		menu.GetComponent<unPause> ().click = click;
+		menu.GetComponent<unPause> ().pauseButton = gameObject.GetComponent<Button> ();
+
 		GetComponent<Button> ().interactable = false;
 	}
 }

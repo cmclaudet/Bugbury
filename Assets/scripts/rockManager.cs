@@ -18,16 +18,20 @@ public class rockManager : MonoBehaviour {
 		}
 	}
 
+	//values are set from setSceneVars gameobject and grabbed from projectileShoot script on rock prefab
 	public Rigidbody2D rocks;
+	public GameObject slingshotLeft;
+	public GameObject slingshotRight;
+	public GameObject springAnchor;
+	public GameObject throwSound;
+	public GameObject splatSounds;
 	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
 
-//	private ScreenVariables screen;		//grab screen dimensions
 	private GameObject[] allRocks;
 	private float rockRadius;
 
 	void Awake() {
 		_instance = this;
-//		screen = new ScreenVariables ();
 	}
 
 	void Start() {

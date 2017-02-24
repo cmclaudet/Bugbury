@@ -26,6 +26,7 @@ public class caterpillarManager : MonoBehaviour {
 	public float endDelay = 2.0f;		//time between final caterpillar being inactivated and level complete message appears
 	public float cameraScoreNumShakeDuration = 0.5f;	//camera shake duration for landing of score number
 
+	//values are set in the inspector and set to this class as they are scene specific
 	public float minVel { get; set; }		//minimum possible velocity for caterpillar
 	public float maxVel { get; set; }		//max possible velocity for caterpillar
 	public int totalCaterpillars{ get; set; }	//total caterpillars for this level
@@ -92,8 +93,8 @@ public class caterpillarManager : MonoBehaviour {
 				caterpillarsInactivated += 1;
 				lifeManager.Instance.lifeLost = true;	//triggers removal of one of player's lives
 
+				//resets player combo and checks if max streak has been overtaken
 				resetMaxStreak ();
-
 				scoreCount.Instance.playerCombo = 0;
 				findAllBugs ();		//recount caterpillars after inactivation
 
