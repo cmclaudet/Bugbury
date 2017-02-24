@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//sets scale up on complete message
 //instaniates stars if player has reached certain score
 //sets up time delay between text and star instantiation
 //activates score number after its time delay has passed. score number must be inactive to start with or player will see it.
@@ -43,9 +42,6 @@ public class blowUp : MonoBehaviour {
 		calcScoreDelay ();
 		setStarThresholds ();
 		inactivateStars ();
-
-		//save new scores
-//		highScoreManager.Instance.Save ();
 	}
 	
 	// Update is called once per frame

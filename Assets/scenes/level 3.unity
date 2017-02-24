@@ -991,8 +991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dd795c7d6f4a0889a67b7f27681f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star1Frac: 3
-  star2Frac: 2
+  star1Frac: 4
+  star2Frac: 2.5
   star3Frac: 1.5
 --- !u!114 &440147142
 MonoBehaviour:
@@ -1037,9 +1037,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374751605bb6f4031a3b7e4782115931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farBonus: 8
+  farBonus: 9
   minVelocity: 0.7
-  maxVelocity: 1.4
+  maxVelocity: 1.1
   totalCaterpillars: 25
 --- !u!4 &440147145
 Transform:
@@ -3485,11 +3485,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4484674456679026, guid: fa5bdeeec046b4cfaad7b4b267d37106, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.6384
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 4484674456679026, guid: fa5bdeeec046b4cfaad7b4b267d37106, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.0609
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 68928850404784266, guid: fa5bdeeec046b4cfaad7b4b267d37106,
         type: 2}
