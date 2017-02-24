@@ -50,6 +50,7 @@ public class loadMain : MonoBehaviour {
 	public void loadChooselvl() {
 		DontDestroyOnLoad (backgroundmusic.transform.gameObject);
 		backgroundmusic.transform.gameObject.tag = "Untagged";
+		Time.timeScale = 1.0f;
 		SceneManager.LoadScene ("levelSelect");
 		click.Play ();
 	}

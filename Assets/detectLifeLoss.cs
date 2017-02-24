@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class detectLifeLoss : MonoBehaviour {
 	public GameObject lifeImages;
@@ -61,7 +62,6 @@ public class detectLifeLoss : MonoBehaviour {
 				GetComponent<CameraShake> ().stopAndReset ();	//ensures camera does not keep shaking after game over screen appears
 				Time.timeScale = 0;		//only pause time after scaling is done, or object won't scale
 			}
-
 		}
 	}
 
@@ -80,5 +80,5 @@ public class detectLifeLoss : MonoBehaviour {
 		gameOverSign.transform.SetParent (canvas, false); 
 		gameOverNotDone = false;
 		checkWhenScalingIsDone = true;
-	}
+	} 
 }
