@@ -17,9 +17,9 @@ public class panMenu1 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		backButton.interactable = false;
-		lvl1.speed = 2.0f;
-		lvl2.speed = 2.0f;
-		lvl3.speed = 2.0f;
+		lvl1.speed = 3.0f;
+		lvl2.speed = 3.0f;
+		lvl3.speed = 3.0f;
 
 		//set to false to ensure default animation is only played when player presses the button, not on scene load
 		lvl1.enabled = false;
