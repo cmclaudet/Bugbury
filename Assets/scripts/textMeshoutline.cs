@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+//creates outline for text mesh
 public class textMeshoutline : MonoBehaviour {
 
 	public float pixelSize = 1;
@@ -19,8 +21,6 @@ public class textMeshoutline : MonoBehaviour {
 
 		for (int i = 0; i < 8; i++) {
 			GameObject outline = new GameObject("outline", typeof(TextMesh));
-//			outline.AddComponent<fadeText> ();
-//			outline.GetComponent<fadeText> ().fadeTime = GetComponent<fadeText> ().fadeTime;
 			outline.transform.parent = transform;
 			outline.transform.localScale = new Vector3(1, 1, 1);
 

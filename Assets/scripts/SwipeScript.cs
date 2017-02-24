@@ -49,7 +49,6 @@ public class SwipeScript : MonoBehaviour {
 							swipeType = Vector2.right * Mathf.Sign(direction.x);
 						}else{
 							// the swipe is vertical - nothing happens
-//							swipeType = Vector2.up * Mathf.Sign(direction.y);
 							swipeType = Vector2.zero;
 						}
 
@@ -67,14 +66,6 @@ public class SwipeScript : MonoBehaviour {
 								}
 							}
 						}
-						/*
-						if(swipeType.y != 0.0f ){
-							if(swipeType.y > 0.0f){
-								// MOVE UP
-							}else{
-								// MOVE DOWN
-							}
-						}*/
 
 					}
 

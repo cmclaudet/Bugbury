@@ -48,7 +48,7 @@ public class projectileShoot : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		updateLineRenderer ();
 		drag ();
 		shoot ();
@@ -74,7 +74,6 @@ public class projectileShoot : MonoBehaviour {
 			if (Input.touchCount > 0 && rockGen) {	//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
 				Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
 				Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
-//				Debug.Log (worldPos.x);
 
 				if (shootingSpace.Contains (worldPos)) {
 					GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
@@ -89,7 +88,6 @@ public class projectileShoot : MonoBehaviour {
 
 	void shoot() {
 		//when player releases finger after touching active shooting area, spring physics is enabled
-		//sound effect
 		if (Input.touchCount > 0) {
 			if (Input.GetTouch (0).phase == TouchPhase.Ended && fingerDown) {
 				throwSound.Play ();
@@ -130,11 +128,7 @@ public class projectileShoot : MonoBehaviour {
 	void setupShootingSpace() {
 		float boundHeight = (ScreenVariables.worldHeight + leftSlingshot.transform.position.y) / 2;
 		float yCenter = leftSlingshot.transform.position.y - boundHeight;
-//		Debug.Log (boundHeight);
-//		Debug.Log (yCenter);
 		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*ScreenVariables.worldWidth, 2*boundHeight, 0));
-//		Debug.Log (ScreenVariables.worldWidth);
-//		shootingSpace = new Bounds (new Vector3 (0, yCenter, 0), new Vector3 (2*ScreenVariables.worldWidth, 2*ScreenVariables.worldHeight, 0));
 	}
 
 	//constantly updates 2nd and 3rd line renderer point to be attached to rock edge
@@ -192,15 +186,7 @@ public class projectileShoot : MonoBehaviour {
 			scoreCount.Instance.far = false;
 		}
 	}
-/*
-	float getMidPoint(Collision2D col) {
-		float screenHeight = col.gameObject.GetComponent<move> ().screenHeight;
-		float finishLine = manager.GetComponent<caterpillarManager>().finishLine;
-		//mid-point of actual shooting space
-		float arenaMidpoint = (screenHeight + finishLine) / 2;
-		return arenaMidpoint;
-	}
-*/
+
 	//get point 70% of the way up from the finish line. Here upwards it will be considered a far shot
 	float getFarPoint(Collision2D col) {
 		float finishLine = caterpillarManager.Instance.finishLine;

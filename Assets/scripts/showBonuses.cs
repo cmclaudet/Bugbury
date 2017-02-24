@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Instantiates bonus text score when caterpillar is killed
+//Instantiates bonus text score when caterpillar is killed in correct position with correct bonus numbers showing
 public class showBonuses : MonoBehaviour {
 	public GameObject bonusText;
 
@@ -50,6 +50,7 @@ public class showBonuses : MonoBehaviour {
 	void instantiateBonus() {
 		thisBonusText = Instantiate (bonusText);
 
+		//x position depends on which side of the screen caterpillar is on
 		if (caterpillarIsOnRight ()) {
 			thisBonusText.transform.position = new Vector3(transform.position.x - 0.55f, transform.position.y + 0.05f, transform.position.z);
 		} else {

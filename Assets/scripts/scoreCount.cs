@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//stores player score, player streak number, number of far shots and whether the last shot was a far shot or not
+//stores star thresholds. these are set in star threshold script on setSceneVars gameobject in hierarchy
 public class scoreCount : MonoBehaviour {
 
 	private static scoreCount _instance;

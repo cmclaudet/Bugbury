@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//unpauses when player presses resume
 public class unPause : MonoBehaviour {
 	public AudioSource click{ get; set; }
 	public Button pauseButton{ get; set; }
