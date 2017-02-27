@@ -93,6 +93,9 @@ public class blowUp : MonoBehaviour {
 		case "level 4":
 			highScoreManager.Instance.Four = resetAllScores (highScoreManager.Instance.Four);
 			break;
+		case "level 5":
+			highScoreManager.Instance.Five = resetAllScores (highScoreManager.Instance.Five);
+			break;
 		}
 
 	}
