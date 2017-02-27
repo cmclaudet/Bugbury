@@ -12,6 +12,7 @@ public class panMenu1 : MonoBehaviour {
 	public Animator lvl1;
 	public Animator lvl2;
 	public Animator lvl3;
+	public Animator lvl4;
 	public AudioSource woosh;
 
 	private int currentLevel;
@@ -21,7 +22,7 @@ public class panMenu1 : MonoBehaviour {
 	void Start () {
 		backButton.interactable = false;
 		currentLevel = 1;
-		levelAnimators = new Animator[] { lvl1, lvl2, lvl3};
+		levelAnimators = new Animator[] { lvl1, lvl2, lvl3, lvl4};
 
 		foreach (Animator level in levelAnimators) { 
 			level.speed = 3.0f;

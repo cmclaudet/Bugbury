@@ -10,8 +10,11 @@ public class loadMain : MonoBehaviour {
 	private AudioSource click;
 	private GameObject loadedMusic;
 
+	private string[] allLevels;
+
 	void Awake() {
 		click = GameObject.Find ("click").GetComponent<AudioSource>();
+		allLevels = new string[] { "level 1", "level 2", "level 3", "level 4" };
 	}
 
 	public void replay() {
@@ -21,11 +24,18 @@ public class loadMain : MonoBehaviour {
 	}
 
 	public void nextLevel() {
+		for (int i = 0; i < allLevels.Length; i++ ) {
+			if (SceneManager.GetActiveScene ().name == allLevels [i]) {
+				SceneManager.LoadScene (allLevels [i + 1]);
+			}
+		}
+
+/*
 		if (SceneManager.GetActiveScene ().name == "level 1") {
 			SceneManager.LoadScene ("level 2");
 		} else {
 			SceneManager.LoadScene ("level 3");
-		}
+		}*/
 		click.Play ();
 	}
 
@@ -45,6 +55,11 @@ public class loadMain : MonoBehaviour {
 		resetMusic ();
 		SceneManager.LoadScene ("level 3");
 		click.Play ();
+	}
+
+	public void loadFourthlvl() {
+		resetMusic ();
+		SceneManager.LoadScene ("level 4");
 	}
 
 	public void loadChooselvl() {

@@ -89,11 +89,12 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  order: 0
   vel: -400
   acc: 100
   startScale: 150
   lowTimeStep: 1
-  order: 0
+  desiredSoundEffect: 
 --- !u!222 &222688714764602744
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -113,8 +114,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.28530794, y: 0.393}
-  m_AnchorMax: {x: 0.6896921, y: 0.571885}
-  m_AnchoredPosition: {x: 0.9460983, y: -0.34199905}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.14625609, y: 0.393}
+  m_AnchorMax: {x: 0.827, y: 0.571885}
+  m_AnchoredPosition: {x: 1, y: -0.34199905}
+  m_SizeDelta: {x: 4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
