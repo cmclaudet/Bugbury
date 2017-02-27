@@ -42,6 +42,7 @@ public class highScoreManager : MonoBehaviour {
 	public level Two;
 	public level Three;
 	public level Four;
+	public level Five;
 
 	void Awake() {
 		_instance = this;
@@ -51,6 +52,7 @@ public class highScoreManager : MonoBehaviour {
 		Two = new level (0, false, false, false);
 		Three = new level (0, false, false, false);
 		Four = new level (0, false, false, false);
+		Five = new level (0, false, false, false);
 	}
 
 	void OnEnable() {
@@ -65,21 +67,25 @@ public class highScoreManager : MonoBehaviour {
 			Two.highScore = currentScores.highScore2;
 			Three.highScore = currentScores.highScore3;
 			Four.highScore = currentScores.highScore4;
+			Five.highScore = currentScores.highScore5;
 
 			One.star1 = currentScores.lvl1star1;
 			Two.star1 = currentScores.lvl2star1;
 			Three.star1 = currentScores.lvl3star1;
 			Four.star1 = currentScores.lvl4star1;
+			Five.star1 = currentScores.lvl5star1;
 
 			One.star2 = currentScores.lvl1star2;
 			Two.star2 = currentScores.lvl2star2;
 			Three.star2 = currentScores.lvl3star2;
 			Four.star2 = currentScores.lvl4star2;
+			Five.star2 = currentScores.lvl5star2;
 
 			One.star3 = currentScores.lvl1star3;
 			Two.star3 = currentScores.lvl2star3;
 			Three.star3 = currentScores.lvl3star3;
 			Four.star3 = currentScores.lvl4star3;
+			Five.star3 = currentScores.lvl5star3;
 		}
 	}
 
@@ -122,6 +128,7 @@ class playerScores {
 	public int highScore2;
 	public int highScore3;
 	public int highScore4;
+	public int highScore5;
 
 	public bool lvl1star1;
 	public bool lvl1star2;
@@ -138,5 +145,9 @@ class playerScores {
 	public bool lvl4star1;
 	public bool lvl4star2;
 	public bool lvl4star3;
+
+	public bool lvl5star1;
+	public bool lvl5star2;
+	public bool lvl5star3;
 }
 

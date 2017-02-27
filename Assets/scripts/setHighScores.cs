@@ -9,6 +9,7 @@ public class setHighScores : MonoBehaviour {
 	public Transform level2;
 	public Transform level3;
 	public Transform level4;
+	public Transform level5;
 
 	public Transform canvas;
 	public Transform starFill;
@@ -24,6 +25,7 @@ public class setHighScores : MonoBehaviour {
 		level2.transform.Find("highScore").GetComponent<Text>().text = "High Score: " + highScoreManager.Instance.Two.highScore;
 		level3.transform.Find("highScore").GetComponent<Text>().text = "High Score: " + highScoreManager.Instance.Three.highScore;
 		level4.transform.Find("highScore").GetComponent<Text>().text = "High Score: " + highScoreManager.Instance.Four.highScore;
+		level5.transform.Find("highScore").GetComponent<Text>().text = "High Score: " + highScoreManager.Instance.Five.highScore;
 	}
 
 	void checkLevels() {
@@ -31,6 +33,7 @@ public class setHighScores : MonoBehaviour {
 		checkStars (highScoreManager.Instance.Two, level2);
 		checkStars (highScoreManager.Instance.Three, level3);
 		checkStars (highScoreManager.Instance.Four, level4);
+		checkStars (highScoreManager.Instance.Five, level5);
 
 	}
 
