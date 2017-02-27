@@ -99,21 +99,25 @@ public class highScoreManager : MonoBehaviour {
 		newScores.highScore2 = Two.highScore;
 		newScores.highScore3 = Three.highScore;
 		newScores.highScore4 = Four.highScore;
+		newScores.highScore5 = Five.highScore;
 
 		newScores.lvl1star1 = One.star1;
 		newScores.lvl2star1 = Two.star1;
 		newScores.lvl3star1 = Three.star1;
 		newScores.lvl4star1 = Four.star1;
+		newScores.lvl5star1 = Five.star1;
 
 		newScores.lvl1star2 = One.star2;
 		newScores.lvl2star2 = Two.star2;
 		newScores.lvl3star2 = Three.star2;
 		newScores.lvl4star2 = Four.star2;
+		newScores.lvl5star2 = Five.star2;
 
 		newScores.lvl1star3 = One.star3;
 		newScores.lvl2star3 = Two.star3;
 		newScores.lvl3star3 = Three.star3;
 		newScores.lvl4star3 = Four.star3;
+		newScores.lvl5star3 = Five.star3;
 
 		bf.Serialize (file, newScores);
 		file.Close ();
