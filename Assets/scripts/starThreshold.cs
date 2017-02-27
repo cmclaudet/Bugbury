@@ -8,6 +8,7 @@ public class starThreshold : MonoBehaviour {
 	//ie, star1Frac = 3, player (on average!!) needs to get at least 3 straight streaks. Thus average top streak will be 1/3 of total caterpillars.
 	//number of far shots necessary will also depend on this (frac = 3, need 1/3 far shots)
 	//Therefore frac cannot be less than 1 (need an impossible score to get the star)
+	//frac is set such that one cannot obtain all stars without any far shots or any streak shots
 	public float star1Frac;
 	public float star2Frac;
 	public float star3Frac;
