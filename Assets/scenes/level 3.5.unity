@@ -1649,10 +1649,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374751605bb6f4031a3b7e4782115931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farBonus: 7
+  farBonus: 9
   minVelocity: 0.6
-  maxVelocity: 1
-  totalCaterpillars: 20
+  maxVelocity: 1.1
+  totalCaterpillars: 25
 --- !u!4 &702104804
 Transform:
   m_ObjectHideFlags: 0
@@ -1766,7 +1766,7 @@ Prefab:
     - target: {fileID: 114522773419126186, guid: d841007594f014462bd34d55b9699ff7,
         type: 2}
       propertyPath: m_Text
-      value: Level 3
+      value: Level 4
       objectReference: {fileID: 0}
     - target: {fileID: 1483105249837076, guid: d841007594f014462bd34d55b9699ff7, type: 2}
       propertyPath: m_IsActive

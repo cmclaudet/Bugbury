@@ -1037,10 +1037,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374751605bb6f4031a3b7e4782115931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farBonus: 9
+  farBonus: 11
   minVelocity: 0.7
   maxVelocity: 1.1
-  totalCaterpillars: 25
+  totalCaterpillars: 30
 --- !u!4 &440147145
 Transform:
   m_ObjectHideFlags: 0
