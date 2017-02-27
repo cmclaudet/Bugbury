@@ -29,10 +29,10 @@ public class starThreshold : MonoBehaviour {
 			threshold1 = calcThreshold (star1Frac);
 			threshold2 = calcThreshold (star2Frac);
 			threshold3 = calcThreshold (star3Frac);
-			Debug.Log (threshold1);
+/*			Debug.Log (threshold1);
 			Debug.Log (threshold2);
 			Debug.Log (threshold3);
-			Debug.Log (calcThreshold (1));
+			Debug.Log (calcThreshold (1));*/
 		} else {
 			Debug.Log ("Required score threshold is too high for star!");
 		}
