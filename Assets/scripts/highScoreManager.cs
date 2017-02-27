@@ -41,6 +41,7 @@ public class highScoreManager : MonoBehaviour {
 	public level One;
 	public level Two;
 	public level Three;
+	public level Four;
 
 	void Awake() {
 		_instance = this;
@@ -49,7 +50,7 @@ public class highScoreManager : MonoBehaviour {
 		One = new level (0, false, false, false);
 		Two = new level (0, false, false, false);
 		Three = new level (0, false, false, false);
-
+		Four = new level (0, false, false, false);
 	}
 
 	void OnEnable() {
@@ -63,18 +64,22 @@ public class highScoreManager : MonoBehaviour {
 			One.highScore = currentScores.highScore1;
 			Two.highScore = currentScores.highScore2;
 			Three.highScore = currentScores.highScore3;
+			Four.highScore = currentScores.highScore4;
 
 			One.star1 = currentScores.lvl1star1;
 			Two.star1 = currentScores.lvl2star1;
 			Three.star1 = currentScores.lvl3star1;
+			Four.star1 = currentScores.lvl4star1;
 
 			One.star2 = currentScores.lvl1star2;
 			Two.star2 = currentScores.lvl2star2;
 			Three.star2 = currentScores.lvl3star2;
+			Four.star2 = currentScores.lvl4star2;
 
 			One.star3 = currentScores.lvl1star3;
 			Two.star3 = currentScores.lvl2star3;
 			Three.star3 = currentScores.lvl3star3;
+			Four.star3 = currentScores.lvl4star3;
 		}
 	}
 
@@ -87,18 +92,22 @@ public class highScoreManager : MonoBehaviour {
 		newScores.highScore1 = One.highScore;
 		newScores.highScore2 = Two.highScore;
 		newScores.highScore3 = Three.highScore;
+		newScores.highScore4 = Four.highScore;
 
 		newScores.lvl1star1 = One.star1;
 		newScores.lvl2star1 = Two.star1;
 		newScores.lvl3star1 = Three.star1;
+		newScores.lvl4star1 = Four.star1;
 
 		newScores.lvl1star2 = One.star2;
 		newScores.lvl2star2 = Two.star2;
 		newScores.lvl3star2 = Three.star2;
+		newScores.lvl4star2 = Four.star2;
 
 		newScores.lvl1star3 = One.star3;
 		newScores.lvl2star3 = Two.star3;
 		newScores.lvl3star3 = Three.star3;
+		newScores.lvl4star3 = Four.star3;
 
 		bf.Serialize (file, newScores);
 		file.Close ();
@@ -112,6 +121,7 @@ class playerScores {
 	public int highScore1;
 	public int highScore2;
 	public int highScore3;
+	public int highScore4;
 
 	public bool lvl1star1;
 	public bool lvl1star2;
@@ -124,5 +134,9 @@ class playerScores {
 	public bool lvl3star1;
 	public bool lvl3star2;
 	public bool lvl3star3;
+
+	public bool lvl4star1;
+	public bool lvl4star2;
+	public bool lvl4star3;
 }
 
