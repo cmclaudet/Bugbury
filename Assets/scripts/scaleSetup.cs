@@ -5,7 +5,7 @@ using UnityEngine;
 //add to object which requires scaling upon instantiation
 public class scaleSetup : MonoBehaviour {
 	public blowUpGeneral scalingObj;		//create instance of scaling object with blowUpGeneral script to calculate all values of scale
-	public float timeDelay{ get; set; }	//total delay for object to appear = timeDelay * order (see below)
+	public float timeDelay;	//total delay for object to appear = timeDelay * order (see below)
 	public int order;				//the order which the text comes up. max streak = 1, max streak num = 2, etc. set to 0 for object to scale immediately
 	public float vel;				//velocity and acceleration of scaling
 	public float acc;
