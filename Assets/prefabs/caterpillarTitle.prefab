@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 50840910892885362}
   - component: {fileID: 61197432598498402}
   - component: {fileID: 114060290129680898}
+  - component: {fileID: 114227205549625750}
   m_Layer: 0
   m_Name: caterpillarTitle
   m_TagString: caterpillar
@@ -670,6 +671,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
+--- !u!114 &114227205549625750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1111587358091946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c4c6baa6e8644f7acba874a85df34b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splatter: {fileID: 4668959290546780, guid: be003e062248c4892b80028ae087def9, type: 2}
 --- !u!114 &114295868736219356
 MonoBehaviour:
   m_ObjectHideFlags: 1

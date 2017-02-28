@@ -7,14 +7,16 @@ using Spriter2UnityDX;
 public class spawnTitleCaterpillars : MonoBehaviour {
 	public Rigidbody2D caterpillarTitle;
 	public float spawnFrequency;
+	public GameObject splats;
 
+	private AudioSource[] splatSounds;
 	private float timeSinceSpawn;
 	private Bounds screen;
 	private int currentSortingOrder;
 	// Use this for initialization
 	void Start () {
 		timeSinceSpawn = spawnFrequency;
-
+		splatSounds = splats.GetComponentsInChildren<AudioSource> ();
 		//define screen as the bound that caterpillars must be in to prevent being inactivated
 		//width + 1 ensures all caterpillar body is off screen before inactivation
 		screen = new Bounds (Vector3.zero, new Vector3 (2.0f * ScreenVariables.worldWidth + 1, 2.0f * ScreenVariables.worldHeight));
@@ -31,6 +33,7 @@ public class spawnTitleCaterpillars : MonoBehaviour {
 			Rigidbody2D caterpillar2 = Instantiate (caterpillarTitle);
 			Rigidbody2D caterpillar3 = Instantiate (caterpillarTitle);
 			setSortingOrder (new Rigidbody2D[] {caterpillar1, caterpillar2, caterpillar3});
+			setSplatSounds (new Rigidbody2D[] {caterpillar1, caterpillar2, caterpillar3});
 			timeSinceSpawn = 0;
 
 			inactivateCaterpillars ();
@@ -46,6 +49,12 @@ public class spawnTitleCaterpillars : MonoBehaviour {
 		caterpillars [1].GetComponent<EntityRenderer> ().SortingOrder = currentSortingOrder + 1;
 		caterpillars [2].GetComponent<EntityRenderer> ().SortingOrder = currentSortingOrder + 2;
 		currentSortingOrder += 3;
+	}
+
+	void setSplatSounds(Rigidbody2D[] caterpillars) {
+		foreach (Rigidbody2D caterpillar in caterpillars) {
+			caterpillar.GetComponent<splatOnTouch> ().splats = splatSounds;
+		}
 	}
 
 	//inactivates caterpillars that have gone off screen
