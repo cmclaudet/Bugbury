@@ -46,6 +46,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 36173187
+    locked: 0
+  - name: caterpillar
+    uniqueID: 3697489799
+    locked: 0
   - name: Foreground
     uniqueID: 2944472527
     locked: 0
