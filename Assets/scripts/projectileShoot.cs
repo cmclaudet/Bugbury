@@ -88,14 +88,12 @@ public class projectileShoot : MonoBehaviour {
 
 	void shoot() {
 		//when player releases finger after touching active shooting area, spring physics is enabled
-		if (Input.touchCount > 0) {
-			if (Input.GetTouch (0).phase == TouchPhase.Ended && fingerDown) {
-				throwSound.Play ();
-				spring.enabled = true;
-				GetComponent<SpringJoint2D> ().enabled = true;
-				GetComponent<Rigidbody2D> ().isKinematic = false;
-				fingerDown = false;
-			}
+		if (Input.touchCount == 0 && fingerDown) {
+			throwSound.Play ();
+			spring.enabled = true;
+			GetComponent<SpringJoint2D> ().enabled = true;
+			GetComponent<Rigidbody2D> ().isKinematic = false;
+			fingerDown = false;
 		}
 	}
 
