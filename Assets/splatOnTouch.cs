@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spriter2UnityDX;
 
+//detects when player taps on caterpillars in title screen and destroys them
+//places splatter in their place and triggers splat sound effect
 public class splatOnTouch : MonoBehaviour {
 	public AudioSource[] splats{get;set;}
 	public Transform splatter;
