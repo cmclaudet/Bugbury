@@ -6,6 +6,7 @@ using UnityEngine;
 //ensures devices with different aspect ratios will still have even width for all lanes
 public class positionThinWalls : MonoBehaviour {
 	//insert indices for x and y position of highest thin wall of the group
+	//x indices range from 0 to 6, y indices from 0 to 8 (game has been designed like this)
 	public float xIndex;
 	public float yIndex;
 
@@ -27,9 +28,5 @@ public class positionThinWalls : MonoBehaviour {
 
 		transform.position = new Vector3 (worldXpos, worldYpos);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//rewrites text on level complete message to display correct scores
+//rewrites text for max streak number, far shots number and score number on level complete message to display correct scores
 public class setScores : MonoBehaviour {
 
 	private int maxStreak;

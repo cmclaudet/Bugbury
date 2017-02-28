@@ -130,11 +130,7 @@ public class caterpillarManager : MonoBehaviour {
 		allCaterpillars = GameObject.FindGameObjectsWithTag ("caterpillar");
 	}
 
-	//displays player scores
-
-
 	void findMinY() {
-//		float screenHeight = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0)).y;
 		minimunY = allCaterpillars [0].GetComponent<move> ().yMin;
 		minimunY += (ScreenVariables.worldHeight + finishLine);
 	}

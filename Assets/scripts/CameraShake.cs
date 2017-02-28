@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//makes camera shake
 public class CameraShake : MonoBehaviour
 {
 	// Transform of the camera to shake. Grabs the gameObject's transform

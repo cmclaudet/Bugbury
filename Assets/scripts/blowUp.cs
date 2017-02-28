@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//instaniates stars if player has reached certain score
-//sets up time delay between text and star instantiation
-//activates score number after its time delay has passed. score number must be inactive to start with or player will see it.
-//updates max attained stars on high score singleton
-//saves new high scores on player device after end of each level
+/*sets stars to inactive if player has not reached star threshold scores
+  sets up time delay between text and star instantiation
+  activates score number after its time delay has passed. score number must be inactive to start with or player will see it.
+  updates max attained stars and high score on high score singleton */
 public class blowUp : MonoBehaviour {
 	public float textDelay;		//delay time between appearance of text: max streak, far shots, score
 
@@ -50,6 +49,7 @@ public class blowUp : MonoBehaviour {
 			timePassed += Time.deltaTime;
 		}
 		if (timePassed > scoreNumDelay) {
+			//instantiate score number when score number time delay has passed
 			Transform scoreNum = Instantiate (scoreNumber);
 			scoreNum.SetParent (this.transform, false);
 			GetComponent<setScores> ().setScoreNum (scoreNum);
@@ -59,6 +59,7 @@ public class blowUp : MonoBehaviour {
 	}
 
 	void calcScoreDelay() {
+		//6 is used because there are 5 objects which appear before the score number, thus score number order = 6
 		scoreNumDelay = 6 * textDelay;
 	}
 

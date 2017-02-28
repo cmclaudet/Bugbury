@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//add to object which requires scaling upon instantiation
+/*add to object which requires scaling upon instantiation. A time delay and sound effect can be set for this scaling
+  An instance of the custom class blowUpGeneral is made to find how the object should scale with time with a given velocity and acceleration (as non linear scaling is better than linear)
+  Time delay is time in seconds before object appears. It is equal to: order*timeDelay. Order value is used here so that object appearance can easily be ordered
+  Useful for level complete menu which has many objects that require scaling with different time delays */
 public class scaleSetup : MonoBehaviour {
 	public blowUpGeneral scalingObj;		//create instance of scaling object with blowUpGeneral script to calculate all values of scale
-	public float timeDelay;	//total delay for object to appear = timeDelay * order (see below)
+
+	//total delay for object to appear = timeDelay * order (see below)
+	public float timeDelay;
 	public int order;				//the order which the text comes up. max streak = 1, max streak num = 2, etc. set to 0 for object to scale immediately
 	public float vel;				//velocity and acceleration of scaling
 	public float acc;
@@ -30,7 +35,7 @@ public class scaleSetup : MonoBehaviour {
 	void Start () {
 		timePassed = 0;
 		countTime = true;	//set to true as it is necessary to count the time until time delay has passed
-		finalScale = GetComponent<RectTransform> ().localScale.x;
+		finalScale = GetComponent<RectTransform> ().localScale.x;	//final scale should always be object default value (before initial scale is set)
 		GetComponent<RectTransform> ().localScale = new Vector3(startScale, startScale);
 		scalingObj= new blowUpGeneral (vel, acc, startScale);
 
@@ -55,7 +60,7 @@ public class scaleSetup : MonoBehaviour {
 			updateObjScale ();
 		}
 
-		if (doneScaling == false) {
+		if (!doneScaling) {
 			checkScalingDone ();
 		}
 	}
@@ -99,6 +104,7 @@ public class scaleSetup : MonoBehaviour {
 	}
 
 	void updateObjScale() {
+		//finds new value of object scale through blowUpGeneral functions and sets these to the object
 		scalingObj.updateVelocity ();
 		scalingObj.updateScale ();
 		GetComponent<RectTransform> ().localScale = new Vector3 (scalingObj.scale, scalingObj.scale);

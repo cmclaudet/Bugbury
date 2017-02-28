@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+//alows player to swipe across screen to choose level on level select scene
 public class SwipeScript : MonoBehaviour {
 
 	public float minSwipeDist  = 50.0f;

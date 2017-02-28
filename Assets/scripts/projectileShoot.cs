@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//defines slingshot shooting mechanics including dragging projectile on hold, launching on release and instantiation of new projectiles.
-//manages events which occur due to caterpillar projectile collision including inactivation of the gameobjects, updating player score and combo and displaying bonuses on screen
+/*defines slingshot shooting mechanics including dragging projectile on hold, launching on release and instantiation of new projectiles.
+manages events which occur due to caterpillar projectile collision including inactivation of the gameobjects,
+updating player score and combo and displaying bonuses on screen */
 public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;	//insert desired speed for rocks
 	public Vector3 spawnPosition;	//rock spawn position
@@ -20,8 +21,7 @@ public class projectileShoot : MonoBehaviour {
 	private float radius;
 	private bool fingerDown = false;	//becomes true when screen touched in active shooting area
 
-	private Bounds shootingSpace;
-	private Vector3 screenDim;
+	private Bounds shootingSpace;		//space player is allowed to draw slingshot back into
 
 	private bool rockGen = true;
 
@@ -35,6 +35,8 @@ public class projectileShoot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		setupSounds();
+
+		//find relevant gameobjects stored in rock manager singleton
 		leftSlingshot = rockManager.Instance.slingshotLeft;
 		rightSlingshot = rockManager.Instance.slingshotRight;
 		springAnchor = rockManager.Instance.springAnchor;
@@ -57,6 +59,7 @@ public class projectileShoot : MonoBehaviour {
 
 	void setupSounds() {
 		//vary pitch and source of sounds to make them less repetitive
+		//3 different splat sounds and the throw sound are stored in rock manager singleton
 		throwSound = rockManager.Instance.throwSound.GetComponent<AudioSource> ();
 		throwSound.pitch = Random.Range (0.8f, 1.2f);
 
@@ -149,7 +152,7 @@ public class projectileShoot : MonoBehaviour {
 			splatter.transform.position = col.transform.position;
 
 			caterpillarManager.Instance.caterpillarsInactivated += 1;	//caterpillars inactivated includes both killed caterpillars and those which pass off the screen
-			caterpillarManager.Instance.caterpillarsKilled += 1;		//to inform player of total number of caterpillars killed
+			caterpillarManager.Instance.caterpillarsKilled += 1;
 
 			updateScores (col);
 			this.gameObject.SetActive(false);
@@ -165,7 +168,7 @@ public class projectileShoot : MonoBehaviour {
 		scoreCount.Instance.playerCombo += 1;
 		int currentCombo = scoreCount.Instance.playerCombo;
 
-		//update manager if the shot is far, ie if user hits caterpillar over the mid way point
+		//update manager if the shot is far, ie if user hits caterpillar over the 70% point
 		updateIfFarShot(col);
 		bool farShot = scoreCount.Instance.far;
 
@@ -192,6 +195,7 @@ public class projectileShoot : MonoBehaviour {
 		return farPoint;
 	}
 
+	//new score is current streak number + far shot bonus if applicable
 	int getNewScore(int currentCombo, bool farShot) {
 		int newScore = currentCombo;
 		if (farShot) {
