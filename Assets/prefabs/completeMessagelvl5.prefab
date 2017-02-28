@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 114940067768440950}
   - component: {fileID: 114526426703321896}
   m_Layer: 8
-  m_Name: nextLevel
+  m_Name: credit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 114729955862808452}
   - component: {fileID: 114659587095239118}
   m_Layer: 8
-  m_Name: completeMessage
+  m_Name: completeMessagelvl5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -899,7 +899,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114167810006948324}
-        m_MethodName: nextLevel
+        m_MethodName: loadCredits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1377,7 +1377,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8f66bbe8f31c34403b21c6090778e0a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6ce20ff11b514303b273ef27179bf5c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
