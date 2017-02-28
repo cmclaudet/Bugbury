@@ -525,7 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caterpillarTitle: {fileID: 50840910892885362, guid: 9b9192c9427ec4aecbdfe30e3d71d190,
     type: 2}
-  spawnFrequency: 10
+  spawnFrequency: 7
   splats: {fileID: 1213915182}
 --- !u!4 &452484317
 Transform:
