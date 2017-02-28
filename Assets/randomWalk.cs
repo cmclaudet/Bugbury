@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//sets position, direction and speed of caterpillars on the title screen
 public class randomWalk : MonoBehaviour {
 	public float speed;
 	private float caterpillarLength;
@@ -18,13 +19,7 @@ public class randomWalk : MonoBehaviour {
 		//Set velocity
 		Vector3 direction = genDir(spawnSide, position);
 		GetComponent<Rigidbody2D>().velocity = direction * speed;
-		Debug.Log (direction);
 		setRotation (direction);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	/*Function generates a random position for body outside one of the four possible edges.
@@ -73,6 +68,8 @@ public class randomWalk : MonoBehaviour {
 		return direction;
 	}
 
+	//rotates caterpillar body according to its direction of movement
+	//ensures caterpillar is facing the right direction
 	void setRotation(Vector3 direction) {
 		float angle1 = Mathf.Atan (Mathf.Abs(direction.x) / Mathf.Abs(direction.y));
 		float angleDegrees1 = 180.0f * angle1 / Mathf.PI;
@@ -93,6 +90,6 @@ public class randomWalk : MonoBehaviour {
 				transform.Rotate (new Vector3 (0, 0, 270 + angleDegrees2));
 			}
 		}
+	}
 
-		}
 }
