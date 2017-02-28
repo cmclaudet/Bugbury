@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114161775702658126}
   - component: {fileID: 114568520839110528}
   - component: {fileID: 114039336577788854}
+  - component: {fileID: 114695236140320990}
   m_Layer: 5
   m_Name: scoreNumber
   m_TagString: Untagged
@@ -89,12 +90,25 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 0
-  vel: -400
-  acc: 100
-  startScale: 150
+  vel: -30
+  acc: 8
+  startScale: 10
   lowTimeStep: 1
   desiredSoundEffect: 
+--- !u!114 &114695236140320990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1390621048483836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9150b785792423b9d1f3ae55765935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.5
 --- !u!222 &222688714764602744
 CanvasRenderer:
   m_ObjectHideFlags: 1
