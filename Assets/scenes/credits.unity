@@ -250,10 +250,10 @@ RectTransform:
   m_Father: {fileID: 1605478907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.03728898, y: 0.81956327}
-  m_AnchorMax: {x: 0.162, y: 0.8754368}
-  m_AnchoredPosition: {x: -0.66900635, y: -2}
-  m_SizeDelta: {x: 0.66999817, y: -4}
+  m_AnchorMin: {x: 0.03728898, y: 0.92700005}
+  m_AnchorMax: {x: 0.162, y: 0.97865736}
+  m_AnchoredPosition: {x: -0.67002, y: 1}
+  m_SizeDelta: {x: 0.66999817, y: 1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &224422330
 MonoBehaviour:
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundmusic: {fileID: 0}
+  music: {fileID: 0}
 --- !u!114 &224422331
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundmusic: {fileID: 0}
+  music: {fileID: 0}
 --- !u!114 &115926476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2133,7 +2133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundmusic: {fileID: 0}
+  music: {fileID: 0}
 --- !u!1 &1358741549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,7 +2251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundmusic: {fileID: 0}
+  music: {fileID: 0}
 --- !u!114 &1393650950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2386,7 +2386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundmusic: {fileID: 0}
+  music: {fileID: 0}
 --- !u!114 &1448563268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2827,10 +2827,10 @@ RectTransform:
   m_Father: {fileID: 1605478907}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.032500003, y: 0.8254367}
-  m_AnchorMax: {x: 0.147, y: 0.8785625}
-  m_AnchoredPosition: {x: 1.5999756, y: 1.4700003}
-  m_SizeDelta: {x: 0.56002426, y: 0.47000122}
+  m_AnchorMin: {x: 0.032500003, y: 0.9273428}
+  m_AnchorMax: {x: 0.142, y: 0.9835899}
+  m_AnchoredPosition: {x: 0.0000019073486, y: -2}
+  m_SizeDelta: {x: 4.5600243, y: -3.5299988}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1591871498
 MonoBehaviour:
@@ -2928,7 +2928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundmusic: {fileID: 0}
+  music: {fileID: 0}
 --- !u!1 &1605478903
 GameObject:
   m_ObjectHideFlags: 0
@@ -4423,7 +4423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundmusic: {fileID: 0}
+  music: {fileID: 0}
 --- !u!114 &2088477669
 MonoBehaviour:
   m_ObjectHideFlags: 0
