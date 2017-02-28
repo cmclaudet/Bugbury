@@ -29,13 +29,6 @@ public class loadMain : MonoBehaviour {
 				SceneManager.LoadScene (allLevels [i + 1]);
 			}
 		}
-
-/*
-		if (SceneManager.GetActiveScene ().name == "level 1") {
-			SceneManager.LoadScene ("level 2");
-		} else {
-			SceneManager.LoadScene ("level 3");
-		}*/
 		click.Play ();
 	}
 
@@ -79,6 +72,13 @@ public class loadMain : MonoBehaviour {
 		resetMusic ();
 		Time.timeScale = 1.0f;
 		SceneManager.LoadScene ("title");
+		click.enabled = true;
+		click.Play ();
+	}
+
+	public void loadCredits() {
+		resetMusic ();
+		SceneManager.LoadScene ("credits");
 		click.enabled = true;
 		click.Play ();
 	}
