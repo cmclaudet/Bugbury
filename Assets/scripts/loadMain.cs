@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 //public functions which are attached to buttons to load different scenes
 //ensures button sound effects are played and background music is destroyed/not destroyed when appropriate
 public class loadMain : MonoBehaviour {
-	public AudioSource backgroundmusic;
+	public AudioSource music;
 
 	private AudioSource click;
 	private GameObject loadedMusic;
@@ -29,71 +29,80 @@ public class loadMain : MonoBehaviour {
 				SceneManager.LoadScene (allLevels [i + 1]);
 			}
 		}
-
-/*
-		if (SceneManager.GetActiveScene ().name == "level 1") {
-			SceneManager.LoadScene ("level 2");
-		} else {
-			SceneManager.LoadScene ("level 3");
-		}*/
 		click.Play ();
 	}
 
 	public void loadFirstlvl () {
-		resetMusic ();
+		destroyMusic ();
 		SceneManager.LoadScene ("level 1");
 		click.Play ();
 	}
 
 	public void loadSecondlvl() {
-		resetMusic ();
+		destroyMusic ();
 		SceneManager.LoadScene ("level 2");
 		click.Play ();
 	}
 
 	public void loadThirdlvl () {
-		resetMusic ();
+		destroyMusic ();
 		SceneManager.LoadScene ("level 3");
 		click.Play ();
 	}
 
 	public void loadFourthlvl() {
-		resetMusic ();
+		destroyMusic ();
 		SceneManager.LoadScene ("level 4");
+		click.Play ();
 	}
 
 	public void loadFifthlvl() {
-		resetMusic ();
+		destroyMusic ();
 		SceneManager.LoadScene ("level 5");
+		click.Play ();
 	}
 
 	public void loadChooselvl() {
-		DontDestroyOnLoad (backgroundmusic.transform.gameObject);
-		backgroundmusic.transform.gameObject.tag = "Untagged";
+		if (musicManager.Instance.isPlaying) {
+			DontDestroyOnLoad (musicManager.Instance.music);
+		} else {
+			AudioSource newMusic = Instantiate (music);
+			newMusic.Play ();
+			musicManager.Instance.isPlaying = true;
+			musicManager.Instance.music = newMusic.gameObject;
+			DontDestroyOnLoad (musicManager.Instance.music);
+		}
+
 		Time.timeScale = 1.0f;
 		SceneManager.LoadScene ("levelSelect");
 		click.Play ();
 	}
 
 	public void loadMainMenu() {
-		resetMusic ();
 		Time.timeScale = 1.0f;
 		SceneManager.LoadScene ("title");
 		click.enabled = true;
 		click.Play ();
 	}
 
-	public void backToMenuFromSelect() {
-		SceneManager.LoadScene ("title");
-		GameObject initialMusic = GameObject.FindGameObjectWithTag ("initialMusic");
-		Destroy (initialMusic);
+	public void loadCredits() {
+		if (musicManager.Instance.isPlaying) {
+			DontDestroyOnLoad (musicManager.Instance.music);
+		} else {
+			AudioSource newMusic = Instantiate (music);
+			newMusic.Play ();
+			musicManager.Instance.isPlaying = true;
+			musicManager.Instance.music = newMusic.gameObject;
+			DontDestroyOnLoad (musicManager.Instance.music);
+		}
+
+		SceneManager.LoadScene ("credits");
+		click.enabled = true;
 		click.Play ();
 	}
 
-	void resetMusic() {
-		loadedMusic = GameObject.Find ("music");
-		if (loadedMusic != null) {
-			Destroy (loadedMusic);
-		}
+	void destroyMusic() {
+		Destroy (musicManager.Instance.music);
+		musicManager.Instance.isPlaying = false;
 	}
 }

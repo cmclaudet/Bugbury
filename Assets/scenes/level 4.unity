@@ -355,7 +355,7 @@ Prefab:
     - target: {fileID: 68928850404784266, guid: fa5bdeeec046b4cfaad7b4b267d37106,
         type: 2}
       propertyPath: m_Points.Array.data[1].y
-      value: -7.8
+      value: -7.62
       objectReference: {fileID: 0}
     - target: {fileID: 68928850404784266, guid: fa5bdeeec046b4cfaad7b4b267d37106,
         type: 2}
