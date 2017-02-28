@@ -57,11 +57,11 @@ public class SwipeScript : MonoBehaviour {
 						if(swipeType.x != 0.0f){
 							if(swipeType.x > 0.0f){
 								if (backButton.interactable) {
-									GetComponent<panMenu1> ().toLastLevel ();
+									GetComponent<panMenu> ().toLastLevel ();
 								}
 							}else{
 								if (forwardButton.interactable) {
-									GetComponent<panMenu1> ().toNextLevel ();
+									GetComponent<panMenu> ().toNextLevel ();
 								}
 							}
 						}

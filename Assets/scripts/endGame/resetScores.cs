@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
   sets up time delay between text and star instantiation
   activates score number after its time delay has passed. score number must be inactive to start with or player will see it.
   updates max attained stars and high score on high score singleton */
-public class blowUp : MonoBehaviour {
+public class resetScores : MonoBehaviour {
 	public float textDelay;		//delay time between appearance of text: max streak, far shots, score
 
 	public Transform starfill1;

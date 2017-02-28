@@ -5,7 +5,7 @@ using UnityEngine;
 //add to combo text to make text scale up then scale down before disappearing
 //text will scale up to a larger maximum value the larger the combo number is
 //An instance of custom class blowUpGeneral is created to find how object scales over time with a given velocity and acceleration
-public class scaleTextObject : MonoBehaviour {
+public class scaleBonusText : MonoBehaviour {
 	public float timePresent;		//time text is present
 	public blowUpGeneral scaleUp;
 	public float vel;

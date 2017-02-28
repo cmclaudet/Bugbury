@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 //triggers panning animation when player presses forward or back button to focus on different level
 //disables forward button if player focuses on last level or back button if player focuses on first level
-public class panMenu1 : MonoBehaviour {
+public class panMenu : MonoBehaviour {
 	public Button backButton;
 	public Button forwardButton;
 	public Animator lvl1;

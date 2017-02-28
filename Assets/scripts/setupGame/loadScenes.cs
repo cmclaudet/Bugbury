@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 //public functions which are attached to buttons to load different scenes
 //ensures button sound effects are played and background music is destroyed/not destroyed/created when appropriate
-public class loadMain : MonoBehaviour {
+public class loadScenes : MonoBehaviour {
 	public AudioSource music;
 
 	private AudioSource click;
