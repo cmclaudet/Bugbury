@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 //public functions which are attached to buttons to load different scenes
-//ensures button sound effects are played and background music is destroyed/not destroyed when appropriate
+//ensures button sound effects are played and background music is destroyed/not destroyed/created when appropriate
 public class loadMain : MonoBehaviour {
 	public AudioSource music;
 
 	private AudioSource click;
-	private GameObject loadedMusic;
 
 	private string[] allLevels;
 
@@ -17,12 +16,14 @@ public class loadMain : MonoBehaviour {
 		allLevels = new string[] { "level 1", "level 2", "level 3", "level 4", "level 5" };
 	}
 
+	//load from level complete
 	public void replay() {
 		Scene currentScene = SceneManager.GetActiveScene ();
 		SceneManager.LoadScene (currentScene.name);
 		click.Play ();
 	}
 
+	//load from level complete
 	public void nextLevel() {
 		for (int i = 0; i < allLevels.Length; i++ ) {
 			if (SceneManager.GetActiveScene ().name == allLevels [i]) {
@@ -32,37 +33,44 @@ public class loadMain : MonoBehaviour {
 		click.Play ();
 	}
 
+	//load from level select
 	public void loadFirstlvl () {
 		destroyMusic ();
 		SceneManager.LoadScene ("level 1");
 		click.Play ();
 	}
 
+	//load from level select
 	public void loadSecondlvl() {
 		destroyMusic ();
 		SceneManager.LoadScene ("level 2");
 		click.Play ();
 	}
 
+	//load from level select
 	public void loadThirdlvl () {
 		destroyMusic ();
 		SceneManager.LoadScene ("level 3");
 		click.Play ();
 	}
 
+	//load from level select
 	public void loadFourthlvl() {
 		destroyMusic ();
 		SceneManager.LoadScene ("level 4");
 		click.Play ();
 	}
 
+	//load from level select
 	public void loadFifthlvl() {
 		destroyMusic ();
 		SceneManager.LoadScene ("level 5");
 		click.Play ();
 	}
 
+	//load from title
 	public void loadChooselvl() {
+		//if music is playing already keep music object between scenes
 		if (musicManager.Instance.isPlaying) {
 			DontDestroyOnLoad (musicManager.Instance.music);
 		} else {
@@ -78,6 +86,7 @@ public class loadMain : MonoBehaviour {
 		click.Play ();
 	}
 
+	//load from level select, level complete and credits
 	public void loadMainMenu() {
 		Time.timeScale = 1.0f;
 		SceneManager.LoadScene ("title");
@@ -85,6 +94,7 @@ public class loadMain : MonoBehaviour {
 		click.Play ();
 	}
 
+	//load from title
 	public void loadCredits() {
 		if (musicManager.Instance.isPlaying) {
 			DontDestroyOnLoad (musicManager.Instance.music);

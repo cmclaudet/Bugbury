@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//set up walls so that they match the screen size
+//set up side walls so that they match the screen size
 public class setWallPosition : MonoBehaviour {
 	public Transform leftWall;
 	public Transform rightWall;

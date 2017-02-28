@@ -20,6 +20,7 @@ public class setHighScores : MonoBehaviour {
 		checkLevels ();
 	}
 
+	//updates visible highscore
 	void highScore() {
 		level1.transform.Find("highScore").GetComponent<Text>().text = "High Score: " + highScoreManager.Instance.One.highScore;
 		level2.transform.Find("highScore").GetComponent<Text>().text = "High Score: " + highScoreManager.Instance.Two.highScore;
@@ -28,6 +29,7 @@ public class setHighScores : MonoBehaviour {
 		level5.transform.Find("highScore").GetComponent<Text>().text = "High Score: " + highScoreManager.Instance.Five.highScore;
 	}
 
+	//fills stars in correct place if player has acquired them in levels
 	void checkLevels() {
 		checkStars (highScoreManager.Instance.One, level1);
 		checkStars (highScoreManager.Instance.Two, level2);

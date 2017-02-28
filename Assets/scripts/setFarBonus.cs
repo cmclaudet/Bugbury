@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//place on object in hierarchy so that public values can be set according to scene, ie level.
+//values are set in singleton manager classes so they can be easily referred to in other scripts
 public class setFarBonus : MonoBehaviour {
 	public int farBonus;
 	public float minVelocity;
@@ -14,9 +16,5 @@ public class setFarBonus : MonoBehaviour {
 		caterpillarManager.Instance.maxVel = maxVelocity;
 		caterpillarManager.Instance.totalCaterpillars = totalCaterpillars;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

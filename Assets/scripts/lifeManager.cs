@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*stores number of lives player has. When life has been lost lifeLost function in camera script is triggeres
+ *stores whether player can control slingshot or not
+ */
 public class lifeManager : MonoBehaviour {
 
 	private static lifeManager _instance;

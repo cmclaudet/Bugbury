@@ -25,7 +25,6 @@ public class showBonuses : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	//	Debug.Log (transform.position);
 		dead = false;
 		farShotBonus = scoreCount.Instance.farShotBonus;
 		comboNumber = 0;
@@ -71,6 +70,7 @@ public class showBonuses : MonoBehaviour {
 		}
 	}
 
+	//find meshes within bonus text object
 	void findTextMeshes() {
 		Transform streak = thisBonusText.transform.Find ("streak");
 		streakText = streak.Find ("streakText");
@@ -81,6 +81,7 @@ public class showBonuses : MonoBehaviour {
 		farNum = far.transform.Find ("farNum");
 	}
 
+	//set text on text meshes so that they display the correct bonus numbers
 	void setTextMeshes() {
 		if (comboNumber > 1) {
 			streakText.gameObject.GetComponent<TextMesh> ().text = comboNumber + " STREAK!";

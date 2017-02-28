@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-//custom class for objects which scale up from small size to max size upon entry
-//can also be used for scaling down
+//custom class for objects which scale up from one size to another on entry
+//can be used for scaling down or up
 public class blowUpGeneral {
 	public float velocity;	//initial scale speed
 	public float acceleration;	//scale acceleration (should be negative for more natural scaling

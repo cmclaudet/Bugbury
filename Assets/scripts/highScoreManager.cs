@@ -5,8 +5,9 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-//holds high score data and player star count for all levels
-//saves and loads data so that player can keep improving high score
+/*holds high score data and player star count for all levels
+saves and loads data so that player can keep improving high score
+Saved data: high score and whether any of the 3 stars have been obtained for each level */
 public class highScoreManager : MonoBehaviour {
 
 	private static highScoreManager _instance;
@@ -55,6 +56,7 @@ public class highScoreManager : MonoBehaviour {
 		Five = new level (0, false, false, false);
 	}
 
+	//loads data when script is enabled, ie when game loads
 	void OnEnable() {
 		if (File.Exists (Application.persistentDataPath + "/bugburyScores.dat")) {
 			BinaryFormatter bf = new BinaryFormatter ();
@@ -89,6 +91,7 @@ public class highScoreManager : MonoBehaviour {
 		}
 	}
 
+	//saves data when script is destroyed, ie when player exits the game
 	void OnDisable() {
 		BinaryFormatter bf = new BinaryFormatter ();
 		FileStream file = File.Create (Application.persistentDataPath + "/bugburyScores.dat");

@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*triggers camera shake and deletion of rock image in top left which represents player lives
+when player runs out of lives script triggers gameover message */
 public class detectLifeLoss : MonoBehaviour {
-	public GameObject lifeImages;
+	public GameObject lifeImages;	//images of the 3 rocks on top left of screen
 	public Transform gameOverMessage;
 	public Button pauseButton;
 	public Transform canvas;
@@ -15,8 +17,8 @@ public class detectLifeLoss : MonoBehaviour {
 	private Image life2;
 	private Image life3;
 
-	private bool gameOverNotDone;
-	private bool checkWhenScalingIsDone;
+	private bool gameOverNotDone;			//set to false when game over is done so that only one game over sign is instantiated
+	private bool checkWhenScalingIsDone;	//triggered when it is necessary to check when game over scaling has finished so that time may be stopped
 
 	private Transform gameOverSign;
 	private float cameraLifeShakeDuration = 0.2f;

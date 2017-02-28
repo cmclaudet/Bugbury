@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //instantiates new rock when current rock is launched. Inactivates rocks which have passed off the screen.
-//updates player's max player streak
+//updates player's max player streak (as this can only be changed when player misses a shot, completes the level or misses a caterpillar)
 public class rockManager : MonoBehaviour {
 
 	private static rockManager _instance;

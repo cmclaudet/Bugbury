@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*manages when music should stop and start.
+  when music should be playing this script is checked to be sure there is not already music playing
+*/
 public class musicManager : MonoBehaviour {
 
 	private static musicManager _instance;
