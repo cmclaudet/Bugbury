@@ -3010,7 +3010,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4470240456364158, guid: 720813d2e5c4b4f0e9087806835079c9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4470240456364158, guid: 720813d2e5c4b4f0e9087806835079c9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3108,7 +3108,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 1849413122}
-  m_PlaneDistance: 10
+  m_PlaneDistance: 15
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
