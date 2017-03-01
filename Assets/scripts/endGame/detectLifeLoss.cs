@@ -61,6 +61,7 @@ public class detectLifeLoss : MonoBehaviour {
 	void Update() {
 		if (checkWhenScalingIsDone) {
 			if (gameOverSign.GetComponent<scaleSetup> ().doneScaling) {
+				inactivateBonusText ();
 				GetComponent<CameraShake> ().stopAndReset ();	//ensures camera does not keep shaking after game over screen appears
 				Time.timeScale = 0;		//only pause time after scaling is done, or object won't scale
 			}
@@ -83,4 +84,11 @@ public class detectLifeLoss : MonoBehaviour {
 		gameOverNotDone = false;
 		checkWhenScalingIsDone = true;
 	} 
+
+	void inactivateBonusText() {
+		GameObject[] allBonusText = GameObject.FindGameObjectsWithTag ("bonusText");
+		foreach (GameObject bonusText in allBonusText) {
+			bonusText.SetActive (false);
+		}
+	}
 }
