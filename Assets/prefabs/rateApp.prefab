@@ -198,14 +198,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
-  timeDelay: 1
+  timeDelay: 1.5
   order: 1
   vel: 4
   acc: -4.5
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: zoomSound
-  downscaleSound: zoomSoundBackwards
+  downscaleSound: zoomSoundbackwards
 --- !u!114 &114431383483457460
 MonoBehaviour:
   m_ObjectHideFlags: 1

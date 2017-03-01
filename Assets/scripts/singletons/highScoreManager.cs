@@ -45,6 +45,8 @@ public class highScoreManager : MonoBehaviour {
 	public level Four;
 	public level Five;
 
+	public bool askedForRating;
+
 	void Awake() {
 		_instance = this;
 
@@ -88,6 +90,8 @@ public class highScoreManager : MonoBehaviour {
 			Three.star3 = currentScores.lvl3star3;
 			Four.star3 = currentScores.lvl4star3;
 			Five.star3 = currentScores.lvl5star3;
+
+			askedForRating = currentScores.askedForRating;
 		}
 	}
 
@@ -121,6 +125,8 @@ public class highScoreManager : MonoBehaviour {
 		newScores.lvl3star3 = Three.star3;
 		newScores.lvl4star3 = Four.star3;
 		newScores.lvl5star3 = Five.star3;
+
+		newScores.askedForRating = askedForRating;
 
 		bf.Serialize (file, newScores);
 		file.Close ();
@@ -156,5 +162,7 @@ class playerScores {
 	public bool lvl5star1;
 	public bool lvl5star2;
 	public bool lvl5star3;
+
+	public bool askedForRating;
 }
 
