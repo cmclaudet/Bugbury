@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //triggers level complete message when level is done
 //is triggered from caterpillar manager when all caterpillars have been inactivated
@@ -25,6 +26,12 @@ public class triggerLevelComplete : MonoBehaviour {
 		caterpillarManager.Instance.resetMaxStreak ();
 		Transform levelDone = Instantiate (completeMessage);
 		levelDone.transform.SetParent (canvas, false);
+
+		//with beatenLevel5 set to true players can be prompted to rate the app in the credits scene
+		//players will not be prompted more than once
+		if (SceneManager.GetActiveScene ().name == "level 5") {
+			highScoreManager.Instance.beatenLevel5 = true;
+		}
 	}
 	
 
