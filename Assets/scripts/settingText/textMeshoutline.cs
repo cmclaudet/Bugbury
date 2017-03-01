@@ -15,6 +15,7 @@ public class textMeshoutline : MonoBehaviour {
 
 	void Start() {
 		GetComponent<MeshRenderer> ().sortingLayerName = "UI";
+		GetComponent<MeshRenderer> ().sortingOrder = 1;
 
 		textMesh = GetComponent<TextMesh>();    
 		meshRenderer = GetComponent<MeshRenderer>();
@@ -30,6 +31,7 @@ public class textMeshoutline : MonoBehaviour {
 			otherMeshRenderer.receiveShadows = false;
 			otherMeshRenderer.sortingLayerID = meshRenderer.sortingLayerID;
 			otherMeshRenderer.sortingLayerName = meshRenderer.sortingLayerName;
+			otherMeshRenderer.sortingOrder = meshRenderer.sortingOrder;
 		}
 	}
 
@@ -63,6 +65,7 @@ public class textMeshoutline : MonoBehaviour {
 			MeshRenderer otherMeshRenderer = transform.GetChild(i).GetComponent<MeshRenderer>();
 			otherMeshRenderer.sortingLayerID = meshRenderer.sortingLayerID;
 			otherMeshRenderer.sortingLayerName = meshRenderer.sortingLayerName;
+			otherMeshRenderer.sortingOrder = meshRenderer.sortingOrder;
 		}
 	}
 

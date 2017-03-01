@@ -3036,6 +3036,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 1734720882157930, guid: 720813d2e5c4b4f0e9087806835079c9, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 720813d2e5c4b4f0e9087806835079c9, type: 2}
   m_IsPrefabParent: 0
@@ -3102,9 +3106,9 @@ Canvas:
   m_GameObject: {fileID: 1770821637}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1849413122}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
