@@ -1538,8 +1538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dd795c7d6f4a0889a67b7f27681f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star1Frac: 3
-  star2Frac: 2
+  star1Frac: 5
+  star2Frac: 3
   star3Frac: 1.5
 --- !u!114 &702104801
 MonoBehaviour:
