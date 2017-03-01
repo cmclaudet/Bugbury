@@ -198,14 +198,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
-  timeDelay: 1
+  timeDelay: 1.5
   order: 1
   vel: 4
   acc: -4.5
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: zoomSound
-  downscaleSound: zoomSoundBackwards
+  downscaleSound: zoomSoundbackwards
 --- !u!114 &114431383483457460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -542,10 +542,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.16450001, y: 0.45012653}
-  m_AnchorMax: {x: 0.832, y: 0.8443449}
-  m_AnchoredPosition: {x: 1.0000153, y: -1}
-  m_SizeDelta: {x: 0, y: -4}
+  m_AnchorMin: {x: 0.162, y: 0.3423803}
+  m_AnchorMax: {x: 0.841672, y: 0.73344785}
+  m_AnchoredPosition: {x: -1.5999999, y: 0.5}
+  m_SizeDelta: {x: -10, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224730023357347974
 RectTransform:

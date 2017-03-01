@@ -45,6 +45,11 @@ public class highScoreManager : MonoBehaviour {
 	public level Four;
 	public level Five;
 
+	//if player has beaten value becomes true. This value must be true for player to be prompted for a rating! 
+	//Ensures players have played through the game before beating it
+	public bool beatenLevel5;		
+	public bool askedForRating;		//if player has already been asked for a rating this value becomes true
+
 	void Awake() {
 		_instance = this;
 
@@ -54,6 +59,9 @@ public class highScoreManager : MonoBehaviour {
 		Three = new level (0, false, false, false);
 		Four = new level (0, false, false, false);
 		Five = new level (0, false, false, false);
+
+		beatenLevel5 = false;
+		askedForRating = false;
 	}
 
 	//loads data when script is enabled, ie when game loads
@@ -88,7 +96,11 @@ public class highScoreManager : MonoBehaviour {
 			Three.star3 = currentScores.lvl3star3;
 			Four.star3 = currentScores.lvl4star3;
 			Five.star3 = currentScores.lvl5star3;
+
+			beatenLevel5 = currentScores.beatenLevel5;
+			askedForRating = currentScores.askedForRating;
 		}
+
 	}
 
 	//saves data when script is destroyed, ie when player exits the game
@@ -122,8 +134,12 @@ public class highScoreManager : MonoBehaviour {
 		newScores.lvl4star3 = Four.star3;
 		newScores.lvl5star3 = Five.star3;
 
+		newScores.beatenLevel5 = beatenLevel5;
+		newScores.askedForRating = askedForRating;
+
 		bf.Serialize (file, newScores);
 		file.Close ();
+
 	}
 		
 }
@@ -156,5 +172,8 @@ class playerScores {
 	public bool lvl5star1;
 	public bool lvl5star2;
 	public bool lvl5star3;
+
+	public bool beatenLevel5;
+	public bool askedForRating;
 }
 
