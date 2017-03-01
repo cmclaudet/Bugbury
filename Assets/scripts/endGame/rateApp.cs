@@ -7,6 +7,10 @@ public class rateApp : MonoBehaviour {
 	public void rateThisApp() {
 		Application.OpenURL ("market://details?id=com.cmclaudet.Bugbury");
 		gameObject.SetActive (false);
-		highScoreManager.Instance.askedForRating = false;
+		highScoreManager.Instance.askedForRating = true;
+	}
+
+	public void secondButtonRate() {
+		Application.OpenURL ("market://details?id=com.cmclaudet.Bugbury");
 	}
 }

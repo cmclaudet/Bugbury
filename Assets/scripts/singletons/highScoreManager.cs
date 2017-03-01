@@ -101,8 +101,6 @@ public class highScoreManager : MonoBehaviour {
 			askedForRating = currentScores.askedForRating;
 		}
 
-		Debug.Log (beatenLevel5);
-		Debug.Log (askedForRating);
 	}
 
 	//saves data when script is destroyed, ie when player exits the game
@@ -142,8 +140,6 @@ public class highScoreManager : MonoBehaviour {
 		bf.Serialize (file, newScores);
 		file.Close ();
 
-		Debug.Log (beatenLevel5);
-		Debug.Log (askedForRating);
 	}
 		
 }
