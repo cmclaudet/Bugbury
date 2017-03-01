@@ -12,6 +12,7 @@ public class projectileShoot : MonoBehaviour {
 
 	private AudioSource throwSound;	//sound when rock launches
 	private AudioSource splatSound; //sound when caterpillar dies
+	private AudioSource tinkSound;	//sound when rock hits a wall
 	private GameObject leftSlingshot;
 	private GameObject rightSlingshot;
 	private GameObject springAnchor;
@@ -62,6 +63,8 @@ public class projectileShoot : MonoBehaviour {
 		//3 different splat sounds and the throw sound are stored in rock manager singleton
 		throwSound = rockManager.Instance.throwSound.GetComponent<AudioSource> ();
 		throwSound.pitch = Random.Range (0.8f, 1.2f);
+
+		tinkSound = rockManager.Instance.tinkSound.GetComponent<AudioSource> ();
 
 		GameObject splatSoundsObj = rockManager.Instance.splatSounds;
 		AudioSource[] splatSounds = splatSoundsObj.GetComponentsInChildren<AudioSource> ();
@@ -144,7 +147,7 @@ public class projectileShoot : MonoBehaviour {
 	//on collision with caterpillar rock is inactivated, blood splatter is placed and player score + streak number updated
 	//rock is inactivated
 	void OnCollisionEnter2D(Collision2D col) {
-		if (col.gameObject.CompareTag("caterpillar") && (transform.position.y > spawnPosition.y)) {
+		if (col.gameObject.CompareTag ("caterpillar") && (transform.position.y > spawnPosition.y)) {
 			splatSound.Play ();
 			col.gameObject.GetComponent<showBonuses> ().dead = true;
 
@@ -155,11 +158,15 @@ public class projectileShoot : MonoBehaviour {
 			caterpillarManager.Instance.caterpillarsKilled += 1;
 
 			updateScores (col);
-			this.gameObject.SetActive(false);
+			this.gameObject.SetActive (false);
 			//if player kills final caterpillar level ends
 			if (caterpillarManager.Instance.caterpillarsInactivated == caterpillarManager.Instance.totalCaterpillars) {
 				caterpillarManager.Instance.levelEnd = true;
 			}
+		//if rock hits wall make tink sound
+		} else if (col.gameObject.CompareTag ("wall")) {
+			tinkSound.pitch = Random.Range (1.2f, 1.6f);
+			tinkSound.Play ();
 		}
 	}
 
