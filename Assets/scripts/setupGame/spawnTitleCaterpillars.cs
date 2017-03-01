@@ -15,6 +15,8 @@ public class spawnTitleCaterpillars : MonoBehaviour {
 	private int currentSortingOrder;
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 1.0f;
+
 		timeSinceSpawn = spawnFrequency;
 		splatSounds = splats.GetComponentsInChildren<AudioSource> ();
 		//define screen as the bound that caterpillars must be in to prevent being inactivated

@@ -9,6 +9,7 @@ TagManager:
   - lvl2select
   - initialMusic
   - menuSound
+  - bonusText
   layers:
   - Default
   - TransparentFX
