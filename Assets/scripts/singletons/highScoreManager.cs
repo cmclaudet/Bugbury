@@ -59,6 +59,9 @@ public class highScoreManager : MonoBehaviour {
 		Three = new level (0, false, false, false);
 		Four = new level (0, false, false, false);
 		Five = new level (0, false, false, false);
+
+		beatenLevel5 = false;
+		askedForRating = false;
 	}
 
 	//loads data when script is enabled, ie when game loads
@@ -97,6 +100,9 @@ public class highScoreManager : MonoBehaviour {
 			beatenLevel5 = currentScores.beatenLevel5;
 			askedForRating = currentScores.askedForRating;
 		}
+
+		Debug.Log (beatenLevel5);
+		Debug.Log (askedForRating);
 	}
 
 	//saves data when script is destroyed, ie when player exits the game
@@ -135,6 +141,9 @@ public class highScoreManager : MonoBehaviour {
 
 		bf.Serialize (file, newScores);
 		file.Close ();
+
+		Debug.Log (beatenLevel5);
+		Debug.Log (askedForRating);
 	}
 		
 }

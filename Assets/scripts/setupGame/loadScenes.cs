@@ -109,6 +109,8 @@ public class loadScenes : MonoBehaviour {
 		SceneManager.LoadScene ("credits");
 		click.enabled = true;
 		click.Play ();
+
+
 	}
 
 	void destroyMusic() {

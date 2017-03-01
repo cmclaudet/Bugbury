@@ -402,12 +402,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 8
   vel: 4
   acc: -3
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: zoomSound
+  downscaleSound: 
 --- !u!114 &114017068921163868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -420,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 0}
+  rateAppMessage: {fileID: 0}
 --- !u!114 &114027586014175050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -462,12 +465,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 5
   vel: 6
   acc: -0.5
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: menuAppear
+  downscaleSound: 
 --- !u!114 &114118018563624976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -532,6 +537,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 82629840924126518, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
+  rateAppMessage: {fileID: 224685282199773080, guid: 524bcd55a4c1245c3a094d8be5e7e242,
+    type: 2}
 --- !u!114 &114202420456268340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -580,12 +587,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 10
   vel: 4
   acc: -3
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: zoomSound
+  downscaleSound: 
 --- !u!114 &114264977563385668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -766,12 +775,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 1
   vel: 6
   acc: -0.5
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: menuAppear
+  downscaleSound: 
 --- !u!114 &114413757762050718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -787,12 +798,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 9
   vel: 4
   acc: -3
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: zoomSound
+  downscaleSound: 
 --- !u!114 &114453130450036876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -926,12 +939,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 3
   vel: 6
   acc: -0.5
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: menuAppear
+  downscaleSound: 
 --- !u!114 &114601019712520694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -974,12 +989,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 4
   vel: 7
   acc: -0.5
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: menuAppear
+  downscaleSound: 
 --- !u!114 &114643223275854502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1055,12 +1072,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 0
   vel: 4.5
   acc: -5
   startScale: 0.1
   lowTimeStep: 0
   desiredSoundEffect: zoomSound
+  downscaleSound: 
 --- !u!114 &114694666128482496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1319,12 +1338,14 @@ MonoBehaviour:
     velocity: 0
     acceleration: 0
     scale: 0
+  timeDelay: 0
   order: 2
   vel: 7
   acc: -0.5
   startScale: 0
   lowTimeStep: 0
   desiredSoundEffect: menuAppear
+  downscaleSound: 
 --- !u!114 &114907391969300900
 MonoBehaviour:
   m_ObjectHideFlags: 1

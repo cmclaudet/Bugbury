@@ -151,5 +151,6 @@ public class scaleSetup : MonoBehaviour {
 		scalingUp = checkScalingDir ();
 		doneScaling = false;
 		scalingDown = true;
+		highScoreManager.Instance.askedForRating = true;
 	}
 }
