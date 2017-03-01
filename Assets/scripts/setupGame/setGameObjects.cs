@@ -9,6 +9,7 @@ public class setGameObjects : MonoBehaviour {
 	public GameObject slingshotRight;
 	public GameObject springAnchor;
 	public GameObject throwSound;
+	public GameObject tinkSound;
 	public GameObject splatSounds;
 
 	void Awake() {
@@ -17,6 +18,7 @@ public class setGameObjects : MonoBehaviour {
 		rockManager.Instance.springAnchor = springAnchor;
 		rockManager.Instance.throwSound = throwSound;
 		rockManager.Instance.splatSounds = splatSounds;
+		rockManager.Instance.tinkSound = tinkSound;
 
 	}
 

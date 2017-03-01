@@ -24,6 +24,7 @@ public class rockManager : MonoBehaviour {
 	public GameObject slingshotRight;
 	public GameObject springAnchor;
 	public GameObject throwSound;
+	public GameObject tinkSound;
 	public GameObject splatSounds;
 	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
 
