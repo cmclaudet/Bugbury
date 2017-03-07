@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*manages when music should stop and start.
+/*manages when music should stop and start and if player has pressed mute button.
   when music should be playing this script is checked to be sure there is not already music playing
+  if player presses mute button
 */
 public class musicManager : MonoBehaviour {
 
@@ -21,10 +22,12 @@ public class musicManager : MonoBehaviour {
 
 	public bool isPlaying;
 	public GameObject music;
+	public bool isMuted;
 
 	void Awake() {
 		_instance = this;
 		isPlaying = false;
+		isMuted = false;
 		DontDestroyOnLoad (this.gameObject);
 	}
 
