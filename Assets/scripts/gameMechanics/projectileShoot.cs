@@ -53,11 +53,24 @@ public class projectileShoot : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		updateLineRenderer ();
-		drag ();
-		shoot ();
-		launch ();
 
+		//if player is able to control and touches the screen trigger rock dragging function
+		//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
+		if (lifeManager.Instance.control && Input.touchCount > 0 && rockGen) {
+			drag ();
+		}
 
+		//when player releases their finger after having put it down through drag function, shooting is triggered
+		if (Input.touchCount == 0 && fingerDown) {
+			shoot ();
+		}
+
+		//when rock exits the slingshot shooting zone launch is triggered
+		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
+			launch ();
+			makeAnotherRock ();
+		}
+			
 	}
 
 	void setupSounds() {
@@ -78,47 +91,42 @@ public class projectileShoot : MonoBehaviour {
 	{
 		//make rock follow player finger whilst finger is down inside the shooting space
 		//ensures spring is disabled in this time and the rock is kinematic
-		if (lifeManager.Instance.control) {
-			if (Input.touchCount > 0 && rockGen) {	//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
-				Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
-				Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
+		Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
+		Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
-				if (shootingSpace.Contains (worldPos)) {
-					GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
-					spring.enabled = false;
-					GetComponent<Rigidbody2D> ().isKinematic = true;
-					fingerDown = true;
-					transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
-
-				}
-			}
+		//can only shoot is player drags rock back through shooting space
+		if (shootingSpace.Contains (worldPos)) {
+			GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
+			spring.enabled = false;
+			GetComponent<Rigidbody2D> ().isKinematic = true;
+			fingerDown = true;
+			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
+	
 		}
 	}
 
 	void shoot() {
-		//when player releases finger after touching active shooting area, spring physics is enabled
-		if (Input.touchCount == 0 && fingerDown) {
-			throwSound.Play ();
-			spring.enabled = true;
-			GetComponent<SpringJoint2D> ().enabled = true;
-			GetComponent<Rigidbody2D> ().isKinematic = false;
-			fingerDown = false;
-		}
+		//spring physics is enabled
+		throwSound.Play ();
+		spring.enabled = true;
+		GetComponent<SpringJoint2D> ().enabled = true;
+		GetComponent<Rigidbody2D> ().isKinematic = false;
+		fingerDown = false;
 	}
 
 	void launch() {
 		//once rock has passed over the slingshot position, spring and line renderers are disabled.
 		//Velocity is set to magnitude specified above
-		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
-			GetComponent<SpringJoint2D> ().enabled = false;
-			GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
-			middleLine.enabled = false;
+		GetComponent<SpringJoint2D> ().enabled = false;
+		GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
+		middleLine.enabled = false;
+	}
 
-			if (rockGen) {
-				rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
-			}
-			rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
+	void makeAnotherRock() {
+		if (rockGen) {
+			rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
 		}
+		rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
 	}
 
 	//set line renderer's 4 points
