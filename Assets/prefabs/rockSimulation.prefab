@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 212313518894306744}
   - component: {fileID: 50435492825116804}
   - component: {fileID: 231365880645621072}
-  - component: {fileID: 114921812004129910}
   - component: {fileID: 58348707713463384}
   - component: {fileID: 120208345881518944}
+  - component: {fileID: 114803124544317992}
   m_Layer: 8
-  m_Name: rock
-  m_TagString: rock
+  m_Name: rockSimulation
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ CircleCollider2D:
   m_Offset: {x: -0.00073954463, y: 0.01}
   serializedVersion: 2
   m_Radius: 0.15
---- !u!114 &114921812004129910
+--- !u!114 &114803124544317992
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -87,14 +87,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1194249144360712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f1f9e8c887314e588426f7372aefe2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d872b23590ec473c8ce73fbf33fe2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityMagnitude: 15
-  spawnPosition: {x: 0.01, y: -3.63, z: 0}
-  splatters: {fileID: 1929839293047604, guid: be003e062248c4892b80028ae087def9, type: 2}
-  rockSimulation: {fileID: 50435492825116804, guid: 945ecb672332f43b29364d0898154e01,
-    type: 2}
 --- !u!120 &120208345881518944
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -108,7 +103,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0626977d4735d48adaf1eb9bb6a5ea04, type: 2}
+  - {fileID: 2100000, guid: 9f54af1eb1c1b428294665b6ca46d53d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,8 +123,6 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
@@ -193,7 +186,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
   m_UseWorldSpace: 1
 --- !u!212 &212313518894306744
 SpriteRenderer:
@@ -226,7 +219,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1350494769
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 4b4c41ffee521334182b361de31c475c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

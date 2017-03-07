@@ -9,6 +9,7 @@ public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;	//insert desired speed for rocks
 	public Vector3 spawnPosition;	//rock spawn position
 	public GameObject splatters;	//blood splatter of caterpillars
+	public Rigidbody2D rockSimulation;	//gameObject which will simulate rock being shot to generate line for pointer
 
 	private AudioSource throwSound;	//sound when rock launches
 	private AudioSource splatSound; //sound when caterpillar dies
@@ -25,12 +26,13 @@ public class projectileShoot : MonoBehaviour {
 	private Bounds shootingSpace;		//space player is allowed to draw slingshot back into
 
 	private bool rockGen = true;
+	private bool drawPointer = false;	//becomes true when pointer needs to be drawn (when player drags rock back)
+	private GameObject activePointer;
 
 	void Awake() {
 		spring = GetComponent<SpringJoint2D> ();
 		radius = GetComponent<CircleCollider2D> ().radius;
 		middleLine = GetComponent<LineRenderer> ();
-
 	}
 
 	// Use this for initialization
@@ -60,9 +62,18 @@ public class projectileShoot : MonoBehaviour {
 			drag ();
 		}
 
+		//when pointer needs to be drawn and hasn;t already been must instantiate invisible rock for simulation
+		if (drawPointer) {
+			updatePointer ();
+//			Rigidbody2D invisibleRock = Instantiate(rockSimulation);
+//			invisibleRock.GetComponent<drawPointer> ().actualRock = this.gameObject;
+
+		}
+
 		//when player releases their finger after having put it down through drag function, shooting is triggered
 		if (Input.touchCount == 0 && fingerDown) {
 			shoot ();
+			throwSound.Play ();
 		}
 
 		//when rock exits the slingshot shooting zone launch is triggered
@@ -91,6 +102,7 @@ public class projectileShoot : MonoBehaviour {
 	{
 		//make rock follow player finger whilst finger is down inside the shooting space
 		//ensures spring is disabled in this time and the rock is kinematic
+		//drawPointer becomes true as pointer must be drawn when player drags rock back
 		Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
 		Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
@@ -101,13 +113,66 @@ public class projectileShoot : MonoBehaviour {
 			GetComponent<Rigidbody2D> ().isKinematic = true;
 			fingerDown = true;
 			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
-	
+			drawPointer = true;
 		}
+	}
+
+	void updatePointer() {
+		//find direction between rock and spring anchor (pointer direction)
+		Vector3 rayDirection = springAnchor.transform.position - transform.position;
+
+		//find all walls that ray intersects with
+		RaycastHit2D[] collidersInPointer = Physics2D.RaycastAll (transform.position, rayDirection);
+
+		//pointer vertices needs to equal 2 at this point
+		Vector3[] pointerVertices = new Vector3[2];
+		pointerVertices [0] = collidersInPointer [0].point;
+
+
+
+
+
+
+		//if player is pointing rock into the distance
+		if (collidersInPointer.Length == 1) {
+			float endXPos = pointerEndXpos();
+			pointerVertices [1] = new Vector3 (endXPos, ScreenVariables.worldHeight);
+		} else {
+			pointerVertices [1] = collidersInPointer [1].point;
+		}
+
+		//find normal of last object ray collides with
+		Vector3 colliderNormal;
+		colliderNormal = collidersInPointer [collidersInPointer.Length - 1].normal;
+
+		//set pointer indices equal to points at which ray intersects walls
+		LineRenderer[] allRenderers = GetComponentsInChildren<LineRenderer> ();
+		LineRenderer pointer;
+		foreach (LineRenderer renderer in allRenderers) {
+			if (renderer.gameObject != this.gameObject) {
+				pointer = renderer;
+				pointer.numPositions = pointerVertices.Length;
+				pointer.SetPositions (pointerVertices);
+
+			}
+		}
+//		Vector3 pointerDirection = pointer.GetPosition (0) - pointer.GetPosition (1);
+
+
+	}
+
+	//
+	float pointerEndXpos() {
+		Vector3 p2 = springAnchor.transform.position;
+		Vector3 p1 = transform.position;
+		float m = (p2.y - p1.y) / (p2.x - p1.x);
+		float c = p1.y - m * p1.x;
+		float endXPos = (ScreenVariables.worldHeight - c) / m;
+		return endXPos;
 	}
 
 	void shoot() {
 		//spring physics is enabled
-		throwSound.Play ();
 		spring.enabled = true;
 		GetComponent<SpringJoint2D> ().enabled = true;
 		GetComponent<Rigidbody2D> ().isKinematic = false;
