@@ -122,28 +122,28 @@ public class projectileShoot : MonoBehaviour {
 		Vector3 rayDirection = springAnchor.transform.position - transform.position;
 
 		//find all walls that ray intersects with
-		RaycastHit2D[] collidersInPointer = Physics2D.RaycastAll (transform.position, rayDirection);
+		RaycastHit2D[] collidersFound = Physics2D.RaycastAll (transform.position, rayDirection);
+		List<RaycastHit2D> collidersInPointer = new List<RaycastHit2D>(collidersFound);
 
-		//pointer vertices needs to equal 2 at this point
-		Vector3[] pointerVertices = new Vector3[2];
-		pointerVertices [0] = collidersInPointer [0].point;
-
-
+		List<Vector3> pointerVertices = new List<Vector3>();
+		pointerVertices.Add(collidersInPointer [0].point);
 
 
-
-
-		//if player is pointing rock into the distance
-		if (collidersInPointer.Length == 1) {
-			float endXPos = pointerEndXpos();
-			pointerVertices [1] = new Vector3 (endXPos, ScreenVariables.worldHeight);
-		} else {
-			pointerVertices [1] = collidersInPointer [1].point;
+		while (collidersInPointer.Count > 1) {
+			Vector3 lastPoint = collidersInPointer [collidersInPointer.Count - 1].point;
+			pointerVertices.Add(lastPoint);
+			rayDirection = new Vector3 (rayDirection.x, -rayDirection.y);
+			collidersFound = Physics2D.RaycastAll (lastPoint, new Vector3(rayDirection.x, rayDirection.y));
+			collidersInPointer = new List<RaycastHit2D>(collidersFound);
 		}
 
+		//if player is pointing rock into the distance
+		float endXPos = pointerEndXpos(pointerVertices[pointerVertices.Count-1], rayDirection);
+		pointerVertices.Add (new Vector3 (endXPos, ScreenVariables.worldHeight));
+
 		//find normal of last object ray collides with
-		Vector3 colliderNormal;
-		colliderNormal = collidersInPointer [collidersInPointer.Length - 1].normal;
+//		Vector3 colliderNormal;
+//		colliderNormal = collidersInPointer [collidersInPointer.Count - 1].normal;
 
 		//set pointer indices equal to points at which ray intersects walls
 		LineRenderer[] allRenderers = GetComponentsInChildren<LineRenderer> ();
@@ -151,8 +151,8 @@ public class projectileShoot : MonoBehaviour {
 		foreach (LineRenderer renderer in allRenderers) {
 			if (renderer.gameObject != this.gameObject) {
 				pointer = renderer;
-				pointer.numPositions = pointerVertices.Length;
-				pointer.SetPositions (pointerVertices);
+				pointer.numPositions = pointerVertices.Count;
+				pointer.SetPositions (pointerVertices.ToArray());
 
 			}
 		}
@@ -162,9 +162,9 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 	//
-	float pointerEndXpos() {
-		Vector3 p2 = springAnchor.transform.position;
-		Vector3 p1 = transform.position;
+	float pointerEndXpos(Vector3 point, Vector3 dir) {
+		Vector3 p1 = point;
+		Vector3 p2 = point + dir;
 		float m = (p2.y - p1.y) / (p2.x - p1.x);
 		float c = p1.y - m * p1.x;
 		float endXPos = (ScreenVariables.worldHeight - c) / m;
