@@ -56,6 +56,8 @@ public class projectileShoot : MonoBehaviour {
 		drag ();
 		shoot ();
 		launch ();
+
+
 	}
 
 	void setupSounds() {
@@ -87,6 +89,7 @@ public class projectileShoot : MonoBehaviour {
 					GetComponent<Rigidbody2D> ().isKinematic = true;
 					fingerDown = true;
 					transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
+
 				}
 			}
 		}
@@ -143,6 +146,7 @@ public class projectileShoot : MonoBehaviour {
 		middleLine.SetPosition (1, leftPos);
 		middleLine.SetPosition (2, rightPos);
 	}
+
 
 	//on collision with caterpillar rock is inactivated, blood splatter is placed and player score + streak number updated
 	//rock is inactivated
