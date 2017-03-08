@@ -43,6 +43,7 @@ public class projectileShoot : MonoBehaviour {
 		leftSlingshot = rockManager.Instance.slingshotLeft;
 		rightSlingshot = rockManager.Instance.slingshotRight;
 		springAnchor = rockManager.Instance.springAnchor;
+		rockManager.Instance.rockNumber += 1;
 
 		transform.position = spawnPosition;
 		setupLineRenderer ();
@@ -117,7 +118,11 @@ public class projectileShoot : MonoBehaviour {
 			GetComponent<Rigidbody2D> ().isKinematic = true;
 			fingerDown = true;
 			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
-			drawPointer = true;
+
+			//only draw pointer for first 3 rocks
+			if (rockManager.Instance.rockNumber < 4) {
+				drawPointer = true;
+			}
 		}
 	}
 
