@@ -63,7 +63,6 @@ public class projectileShoot : MonoBehaviour {
 			drag ();
 		}
 
-		//when pointer needs to be drawn and hasn;t already been must instantiate invisible rock for simulation
 		if (drawPointer) {
 			updatePointer ();
 //			Rigidbody2D invisibleRock = Instantiate(rockSimulation);
@@ -120,7 +119,7 @@ public class projectileShoot : MonoBehaviour {
 			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
 			//only draw pointer for first 3 rocks
-			if (rockManager.Instance.rockNumber < 4) {
+			if (rockManager.Instance.rockNumber < 10) {
 				drawPointer = true;
 			}
 		}
@@ -146,25 +145,25 @@ public class projectileShoot : MonoBehaviour {
 		//if ray finds another collider besides initial rock a second ray must be cast
 		if (collidersFound.Length > 1) {
 			//add point from last collider found to pointer vertices
-			Vector3 lastPoint = collidersFound [collidersFound.Length - 1].point;
+			Vector3 lastPoint = collidersFound [1].point;
 			pointerVertices.Add (lastPoint);
 
-			//find if x position at screen height of next reflected ray
-			rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
-			float lastXPos = pointerXpos (lastPoint, rayDirection, ScreenVariables.worldHeight);
+			rayDirection = new Vector3 (-rayDirection.x, rayDirection.y*0.95f);
+
+			RaycastHit2D[] colliders = Physics2D.RaycastAll (lastPoint, new Vector3 (rayDirection.x, rayDirection.y));
+			Vector3 nextColliderPoint = setNextColliderPoint (colliders, lastPoint);
 
 			//if this x position is outside screen bounds ray must collide with something before exiting the screen
-			while (lastXPos < -ScreenVariables.worldWidth || lastXPos > ScreenVariables.worldWidth) {
-				//find next collider
-				RaycastHit2D[] newCollidersFound = Physics2D.RaycastAll (lastPoint, new Vector3 (rayDirection.x, rayDirection.y));
-				lastPoint = newCollidersFound [newCollidersFound.Length - 1].point;
-
+			while (nextColliderPoint.y != lastPoint.y) {
 				//add next collider to pointer vertices
-				pointerVertices.Add (lastPoint);
+				pointerVertices.Add (nextColliderPoint);
 
 				//update new x position at screen height for next reflected ray
-				rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
-				lastXPos = pointerXpos (lastPoint, rayDirection, ScreenVariables.worldHeight);
+				rayDirection = new Vector3 (-rayDirection.x, rayDirection.y*0.95f);
+				colliders = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
+				lastPoint = nextColliderPoint;
+
+				nextColliderPoint = setNextColliderPoint (colliders, lastPoint);
 			}
 		}
 
@@ -184,6 +183,30 @@ public class projectileShoot : MonoBehaviour {
 		float c = p1.y - m * p1.x;
 		float XPos = (yPos - c) / m;
 		return XPos;
+	}
+
+	Vector3 setNextColliderPoint(RaycastHit2D[] colliders, Vector3 lastPoint) {
+		Vector3 nextColliderPoint;
+		switch (colliders.Length) {
+		case 0:
+			nextColliderPoint = lastPoint;
+			break;
+		case 1:
+			if (colliders [0].point.y != lastPoint.y) {
+				nextColliderPoint = colliders [0].point;
+			} else {
+				nextColliderPoint = lastPoint;
+			}
+			break;
+		default:
+			if (colliders [0].point.y != lastPoint.y) {
+				nextColliderPoint = colliders [0].point;
+			} else {
+				nextColliderPoint = colliders [1].point;
+			}
+			break;
+		}
+		return nextColliderPoint;
 	}
 
 	//adds points on pointer to line renderer so they can be drawn out
