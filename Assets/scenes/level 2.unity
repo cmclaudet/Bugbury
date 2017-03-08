@@ -1694,9 +1694,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farBonus: 5
-  minVelocity: 0
-  maxVelocity: 0
-  totalCaterpillars: 5
+  minVelocity: 0.5
+  maxVelocity: 0.9
+  totalCaterpillars: 15
 --- !u!4 &702104804
 Transform:
   m_ObjectHideFlags: 0

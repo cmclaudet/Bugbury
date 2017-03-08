@@ -285,7 +285,7 @@ public class projectileShoot : MonoBehaviour {
 
 	//on collision with caterpillar rock is inactivated, blood splatter is placed and player score + streak number updated
 	//rock is inactivated
-	void OnCollisionEnter2D(Collision2D col) {
+	void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.CompareTag ("caterpillar") && (transform.position.y > spawnPosition.y)) {
 			splatSound.Play ();
 			col.gameObject.GetComponent<showBonuses> ().dead = true;
@@ -309,7 +309,7 @@ public class projectileShoot : MonoBehaviour {
 		}
 	}
 
-	void updateScores(Collision2D col) {
+	void updateScores(Collider2D col) {
 		//add 1 to player streak
 		scoreCount.Instance.playerCombo += 1;
 		int currentCombo = scoreCount.Instance.playerCombo;
@@ -323,7 +323,7 @@ public class projectileShoot : MonoBehaviour {
 		scoreCount.Instance.changeScore (newScore);
 	}
 
-	void updateIfFarShot(Collision2D col) {
+	void updateIfFarShot(Collider2D col) {
 		float arenaFarpoint = getFarPoint (col);
 
 		if (col.transform.position.y > arenaFarpoint) {
@@ -335,7 +335,7 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 	//get point 70% of the way up from the finish line. Here upwards it will be considered a far shot
-	float getFarPoint(Collision2D col) {
+	float getFarPoint(Collider2D col) {
 		float finishLine = caterpillarManager.Instance.finishLine;
 		float farPoint = finishLine + (ScreenVariables.worldHeight - finishLine) * 0.7f;
 		return farPoint;
