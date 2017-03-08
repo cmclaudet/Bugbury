@@ -72,7 +72,11 @@ public class projectileShoot : MonoBehaviour {
 
 		//when player releases their finger after having put it down through drag function, shooting is triggered
 		if (Input.touchCount == 0 && fingerDown) {
+			drawPointer = false;
 			shoot ();
+			//line renderer showing pointer is inactivated
+			LineRenderer[] renderers = GetComponentsInChildren<LineRenderer> ();
+			renderers [1].gameObject.SetActive (false);
 			throwSound.Play ();
 		}
 
