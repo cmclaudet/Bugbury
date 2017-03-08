@@ -117,34 +117,68 @@ public class projectileShoot : MonoBehaviour {
 		}
 	}
 
+	/* Draws pointer from rock up to top of the screen showing player where their shot will go
+	 * Creates raycast to find next collidable object. Adds this object point to the pointer vertices.
+	 * Tests whether there is another object to be collided with after this one by finding x position at the top of the screen from following the ray the last object's collision would create
+	 * If x position is within the screen width there are no further objects to collide with and a ray is drawn between the last object and the top of the screen
+	*/
 	void updatePointer() {
 		//find direction between rock and spring anchor (pointer direction)
 		Vector3 rayDirection = springAnchor.transform.position - transform.position;
 
-		//find all walls that ray intersects with
+		//find colliders that ray intersects with
 		RaycastHit2D[] collidersFound = Physics2D.RaycastAll (transform.position, rayDirection);
-		List<RaycastHit2D> collidersInPointer = new List<RaycastHit2D>(collidersFound);
 
+		//Create list for all pointer vertices which will be used later to draw pointer
 		List<Vector3> pointerVertices = new List<Vector3>();
-		pointerVertices.Add(collidersInPointer [0].point);
+		//add initial vertex: point at rock itself
+		pointerVertices.Add(collidersFound [0].point);
 
+		//if ray finds another collider besides initial rock a second ray must be cast
+		if (collidersFound.Length > 1) {
+			//add point from last collider found to pointer vertices
+			Vector3 lastPoint = collidersFound [collidersFound.Length - 1].point;
+			pointerVertices.Add (lastPoint);
 
-		while (collidersInPointer.Count > 1) {
-			Vector3 lastPoint = collidersInPointer [collidersInPointer.Count - 1].point;
-			pointerVertices.Add(lastPoint);
-			rayDirection = new Vector3 (rayDirection.x, -rayDirection.y);
-			collidersFound = Physics2D.RaycastAll (lastPoint, new Vector3(rayDirection.x, rayDirection.y));
-			collidersInPointer = new List<RaycastHit2D>(collidersFound);
+			//find if x position at screen height of next reflected ray
+			rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+			float lastXPos = pointerXpos (lastPoint, rayDirection, ScreenVariables.worldHeight);
+
+			//if this x position is outside screen bounds ray must collide with something before exiting the screen
+			while (lastXPos < -ScreenVariables.worldWidth || lastXPos > ScreenVariables.worldWidth) {
+				//find next collider
+				RaycastHit2D[] newCollidersFound = Physics2D.RaycastAll (lastPoint, new Vector3 (rayDirection.x, rayDirection.y));
+				lastPoint = newCollidersFound [newCollidersFound.Length - 1].point;
+
+				//add next collider to pointer vertices
+				pointerVertices.Add (lastPoint);
+
+				//update new x position at screen height for next reflected ray
+				rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+				lastXPos = pointerXpos (lastPoint, rayDirection, ScreenVariables.worldHeight);
+			}
 		}
 
-		//if player is pointing rock into the distance
-		float endXPos = pointerEndXpos(pointerVertices[pointerVertices.Count-1], rayDirection);
+		//lastXPos will be inside screen bounds if rock's next destination is off the screen from the top or bottom
+		float endXPos = pointerXpos(pointerVertices[pointerVertices.Count-1], rayDirection, ScreenVariables.worldHeight);
 		pointerVertices.Add (new Vector3 (endXPos, ScreenVariables.worldHeight));
 
-		//find normal of last object ray collides with
-//		Vector3 colliderNormal;
-//		colliderNormal = collidersInPointer [collidersInPointer.Count - 1].normal;
+		drawPointerLine (pointerVertices);
 
+	}
+
+	//finds x position at certain y value given the equation of a line
+	float pointerXpos(Vector3 point, Vector3 dir, float yPos) {
+		Vector3 p1 = point;
+		Vector3 p2 = point + dir;
+		float m = (p2.y - p1.y) / (p2.x - p1.x);
+		float c = p1.y - m * p1.x;
+		float XPos = (yPos - c) / m;
+		return XPos;
+	}
+
+	//adds points on pointer to line renderer so they can be drawn out
+	void drawPointerLine(List<Vector3> pointerVertices) {
 		//set pointer indices equal to points at which ray intersects walls
 		LineRenderer[] allRenderers = GetComponentsInChildren<LineRenderer> ();
 		LineRenderer pointer;
@@ -156,19 +190,6 @@ public class projectileShoot : MonoBehaviour {
 
 			}
 		}
-//		Vector3 pointerDirection = pointer.GetPosition (0) - pointer.GetPosition (1);
-
-
-	}
-
-	//
-	float pointerEndXpos(Vector3 point, Vector3 dir) {
-		Vector3 p1 = point;
-		Vector3 p2 = point + dir;
-		float m = (p2.y - p1.y) / (p2.x - p1.x);
-		float c = p1.y - m * p1.x;
-		float endXPos = (ScreenVariables.worldHeight - c) / m;
-		return endXPos;
 	}
 
 	void shoot() {
