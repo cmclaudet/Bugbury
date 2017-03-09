@@ -66,9 +66,9 @@ public class highScoreManager : MonoBehaviour {
 
 	//loads data when script is enabled, ie when game loads
 	void OnEnable() {
-		if (File.Exists (Application.persistentDataPath + "/bugburyScores.dat")) {
+		if (File.Exists (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScores.dat")) {
 			BinaryFormatter bf = new BinaryFormatter ();
-			FileStream file = File.Open (Application.persistentDataPath + "/bugburyScores.dat", FileMode.Open);
+			FileStream file = File.Open (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScores.dat", FileMode.Open);
 			playerScores currentScores = (playerScores)bf.Deserialize (file);
 			file.Close ();
 
@@ -106,7 +106,7 @@ public class highScoreManager : MonoBehaviour {
 	//saves data when script is destroyed, ie when player exits the game
 	void OnDisable() {
 		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Create (Application.persistentDataPath + "/bugburyScores.dat");
+		FileStream file = File.Create (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScores.dat");
 
 		playerScores newScores = new playerScores ();
 
