@@ -143,7 +143,7 @@ public class projectileShoot : MonoBehaviour {
 		if (collidersFound.Length > 1) {
 			//add point from last collider found to pointer vertices
 			Vector3 lastPoint = collidersFound [1].point;
-			lastPoint = new Vector3 (lastPoint.x + pointerXOffset (rayDirection), lastPoint.y);
+			lastPoint = new Vector3 (lastPoint.x + pointerOffsets (rayDirection).x, lastPoint.y + pointerOffsets (rayDirection).y);
 			pointerVertices.Add (lastPoint);
 
 			//find new colliders from new ray direction
@@ -192,7 +192,7 @@ public class projectileShoot : MonoBehaviour {
 		case 1:
 			if (colliders [0].point.y != lastPoint.y) {
 				nextColliderPoint = colliders [0].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerXOffset (rayDirection), nextColliderPoint.y);
+				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerOffsets (rayDirection).x, nextColliderPoint.y + pointerOffsets (rayDirection).y);
 			} else {
 				nextColliderPoint = lastPoint;
 			}
@@ -200,22 +200,26 @@ public class projectileShoot : MonoBehaviour {
 		default:
 			if (colliders [0].point.y != lastPoint.y) {
 				nextColliderPoint = colliders [0].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerXOffset (rayDirection), nextColliderPoint.y);
+				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerOffsets (rayDirection).x, nextColliderPoint.y + pointerOffsets (rayDirection).y);
 			} else {
 				nextColliderPoint = colliders [1].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerXOffset (rayDirection), nextColliderPoint.y);
+				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerOffsets (rayDirection).x, nextColliderPoint.y + pointerOffsets (rayDirection).y);
 			}
 			break;
 		}
 		return nextColliderPoint;
 	}
 
-	float pointerXOffset(Vector3 rayDirection) {
+
+	Vector2 pointerOffsets(Vector3 rayDirection) {
+		float deltax = radius;
 		if (rayDirection.x > 0) {
-			return -2.0f*radius;
-		} else {
-			return 2.0f*radius;
+			deltax = -radius;
 		}
+
+		float tanAngle = Mathf.Abs(rayDirection.x) / rayDirection.y;
+		float deltay = -radius / tanAngle;
+		return new Vector2 (deltax, deltay);
 	}
 
 	//adds points on pointer to line renderer so they can be drawn out
