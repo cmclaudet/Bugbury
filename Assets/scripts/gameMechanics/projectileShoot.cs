@@ -138,12 +138,13 @@ public class projectileShoot : MonoBehaviour {
 		RaycastHit2D[] collidersFound = Physics2D.RaycastAll (transform.position, rayDirection);
 		List<Vector3> pointerVertices = new List<Vector3>();
 		pointerVertices.Add(collidersFound [0].point);
+		bool horizontalReflection = true;
 
 		//if ray finds another collider besides initial rock a second ray must be cast
 		if (collidersFound.Length > 1) {
 			//add point from last collider found to pointer vertices
 			Vector3 lastPoint = collidersFound [1].point;
-			bool horizontalReflection = reflectsInX (collidersFound [1]);
+			horizontalReflection = reflectsInX (collidersFound [1]);
 			Vector2 offsets = pointerOffsets (rayDirection, horizontalReflection);
 			lastPoint = new Vector3 (lastPoint.x + offsets.x, lastPoint.y + offsets.y);
 			pointerVertices.Add (lastPoint);
@@ -158,30 +159,32 @@ public class projectileShoot : MonoBehaviour {
 			Vector3 nextColliderPoint = setNextColliderPoint (colliders, lastPoint, rayDirection);
 
 
-			//if next collider y position is different to last one, need to cast another ray onto another collider
-			while (nextColliderPoint.y != lastPoint.y) {
-				//add next collider to pointer vertices
-				pointerVertices.Add (nextColliderPoint);
-				if (horizontalReflection) {
-					rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
-				} else {
-					rayDirection = new Vector3 (rayDirection.x, -rayDirection.y);
-				}
-				colliders = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
-				lastPoint = nextColliderPoint;
 
-				nextColliderPoint = setNextColliderPoint (colliders, lastPoint, rayDirection);
+			if (horizontalReflection) {
+				//if next collider y position is different to last one, need to cast another ray onto another collider
+				while (nextColliderPoint.y != lastPoint.y) {
+					//add next collider to pointer vertices
+					pointerVertices.Add (nextColliderPoint);
+					rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+					colliders = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
+					lastPoint = nextColliderPoint;
+
+					nextColliderPoint = setNextColliderPoint (colliders, lastPoint, rayDirection);
+				}
+			} else {
+//				pointerVertices.Add (nextColliderPoint);
 			}
 		}
 
-		//lastXPos will be inside screen bounds if rock's next destination is off the screen from the top or bottom
-		float finalYpos = ScreenVariables.worldHeight;
-		if (rayDirection.y < 0) {
-			finalYpos = -ScreenVariables.worldHeight;
+		if (horizontalReflection) {
+			//lastXPos will be inside screen bounds if rock's next destination is off the screen from the top or bottom
+			float finalYpos = ScreenVariables.worldHeight;
+			if (rayDirection.y < 0) {
+				finalYpos = -ScreenVariables.worldHeight;
+			}
+			float endXPos = pointerXpos (pointerVertices [pointerVertices.Count - 1], rayDirection, finalYpos);
+			pointerVertices.Add (new Vector3 (endXPos, finalYpos));
 		}
-		float endXPos = pointerXpos(pointerVertices[pointerVertices.Count-1], rayDirection, finalYpos);
-		pointerVertices.Add (new Vector3 (endXPos, finalYpos));
-
 		drawPointerLine (pointerVertices);
 
 	}
