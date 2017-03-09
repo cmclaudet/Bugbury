@@ -143,11 +143,17 @@ public class projectileShoot : MonoBehaviour {
 		if (collidersFound.Length > 1) {
 			//add point from last collider found to pointer vertices
 			Vector3 lastPoint = collidersFound [1].point;
-			lastPoint = new Vector3 (lastPoint.x + pointerOffsets (rayDirection).x, lastPoint.y + pointerOffsets (rayDirection).y);
+			bool horizontalReflection = reflectsInX (collidersFound [1]);
+			Vector2 offsets = pointerOffsets (rayDirection, horizontalReflection);
+			lastPoint = new Vector3 (lastPoint.x + offsets.x, lastPoint.y + offsets.y);
 			pointerVertices.Add (lastPoint);
 
 			//find new colliders from new ray direction
-			rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+			if (horizontalReflection) {
+				rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+			} else {
+				rayDirection = new Vector3 (rayDirection.x, -rayDirection.y);
+			}
 			RaycastHit2D[] colliders = Physics2D.RaycastAll (lastPoint, new Vector3 (rayDirection.x, rayDirection.y));
 			Vector3 nextColliderPoint = setNextColliderPoint (colliders, lastPoint, rayDirection);
 
@@ -156,7 +162,11 @@ public class projectileShoot : MonoBehaviour {
 			while (nextColliderPoint.y != lastPoint.y) {
 				//add next collider to pointer vertices
 				pointerVertices.Add (nextColliderPoint);
-				rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+				if (horizontalReflection) {
+					rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+				} else {
+					rayDirection = new Vector3 (rayDirection.x, -rayDirection.y);
+				}
 				colliders = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
 				lastPoint = nextColliderPoint;
 
@@ -165,8 +175,12 @@ public class projectileShoot : MonoBehaviour {
 		}
 
 		//lastXPos will be inside screen bounds if rock's next destination is off the screen from the top or bottom
-		float endXPos = pointerXpos(pointerVertices[pointerVertices.Count-1], rayDirection, ScreenVariables.worldHeight);
-		pointerVertices.Add (new Vector3 (endXPos, ScreenVariables.worldHeight));
+		float finalYpos = ScreenVariables.worldHeight;
+		if (rayDirection.y < 0) {
+			finalYpos = -ScreenVariables.worldHeight;
+		}
+		float endXPos = pointerXpos(pointerVertices[pointerVertices.Count-1], rayDirection, finalYpos);
+		pointerVertices.Add (new Vector3 (endXPos, finalYpos));
 
 		drawPointerLine (pointerVertices);
 
@@ -182,6 +196,14 @@ public class projectileShoot : MonoBehaviour {
 		return XPos;
 	}
 
+	bool reflectsInX(RaycastHit2D collider) {
+		if (collider.normal.y == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	//find point of next collider
 	Vector3 setNextColliderPoint(RaycastHit2D[] colliders, Vector3 lastPoint, Vector3 rayDirection) {
 		Vector3 nextColliderPoint;
@@ -191,19 +213,27 @@ public class projectileShoot : MonoBehaviour {
 			break;
 		case 1:
 			if (colliders [0].point.y != lastPoint.y) {
+				bool reflectsHorizontally = reflectsInX (colliders [0]);
+				Vector2 offsets = pointerOffsets (rayDirection, reflectsHorizontally);
 				nextColliderPoint = colliders [0].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerOffsets (rayDirection).x, nextColliderPoint.y + pointerOffsets (rayDirection).y);
+				nextColliderPoint = new Vector3 (nextColliderPoint.x + offsets.x, nextColliderPoint.y + offsets.y);
 			} else {
 				nextColliderPoint = lastPoint;
 			}
 			break;
 		default:
 			if (colliders [0].point.y != lastPoint.y) {
+				bool reflectsHorizontally = reflectsInX (colliders [0]);
+				Vector2 offsets = pointerOffsets (rayDirection, reflectsHorizontally);
+
 				nextColliderPoint = colliders [0].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerOffsets (rayDirection).x, nextColliderPoint.y + pointerOffsets (rayDirection).y);
+				nextColliderPoint = new Vector3 (nextColliderPoint.x + offsets.x, nextColliderPoint.y + offsets.y);
 			} else {
+				bool reflectsHorizontally = reflectsInX (colliders [0]);
+				Vector2 offsets = pointerOffsets (rayDirection, reflectsHorizontally);
+
 				nextColliderPoint = colliders [1].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerOffsets (rayDirection).x, nextColliderPoint.y + pointerOffsets (rayDirection).y);
+				nextColliderPoint = new Vector3 (nextColliderPoint.x + offsets.x, nextColliderPoint.y + offsets.y);
 			}
 			break;
 		}
@@ -211,14 +241,34 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 
-	Vector2 pointerOffsets(Vector3 rayDirection) {
-		float deltax = radius;
-		if (rayDirection.x > 0) {
-			deltax = -radius;
-		}
 
-		float tanAngle = Mathf.Abs(rayDirection.x) / rayDirection.y;
-		float deltay = -radius / tanAngle;
+	Vector2 pointerOffsets(Vector3 rayDirection, bool reflectsInX) {
+		float deltax = radius;
+		float deltay = -radius;
+		float tanAngle = Mathf.Abs (rayDirection.x) / rayDirection.y;
+
+		switch (reflectsInX) {
+		case true:
+			if (rayDirection.x > 0) {
+				deltax = -radius;
+			}
+			if (rayDirection.y > 0) {
+				deltay = -radius / tanAngle;
+			} else {
+				deltay = radius / tanAngle;
+			}
+			break;
+		case false:
+			tanAngle = rayDirection.y / Mathf.Abs (rayDirection.x);
+			deltax = radius / tanAngle;
+			if (rayDirection.x > 0) {
+				deltax = -radius / tanAngle;
+			}
+			if (rayDirection.y < 0) {
+				deltay = radius;
+			}
+			break;
+		}
 		return new Vector2 (deltax, deltay);
 	}
 
