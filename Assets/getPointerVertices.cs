@@ -23,12 +23,11 @@ public class getPointerVertices : MonoBehaviour {
 		//find colliders that ray intersects with and add initial vertex
 		RaycastHit2D[] collidersFound = Physics2D.RaycastAll (transform.position, rayDirection);
 		List<Vector3> pointerVertices = new List<Vector3>();
-		pointerVertices.Add(collidersFound [0].point);
+		pointerVertices.Add(collidersFound [0].point);	//add point at rock itself
 		bool horizontalReflection = true;	//initialise horizontal reflection. Is true if ray reflects in x direction. Assume true to start with.
 
 		//if ray finds another collider besides initial rock a second ray must be cast
 		if (collidersFound.Length > 1) {
-			//add point from last collider found to pointer vertices
 			horizontalReflection = reflectsInX (collidersFound [1]);	//find out if this is a horizontal reflection
 			Vector2 offsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
 
@@ -36,7 +35,7 @@ public class getPointerVertices : MonoBehaviour {
 			Vector3 lastPoint = new Vector3 (collidersFound [1].point.x + offsets.x, collidersFound [1].point.y + offsets.y);
 			pointerVertices.Add (lastPoint);
 
-
+			//if y offset takes rock below the minimum y co-ordinate on the collider the rock will not have a horizontal reflection
 			if (collidersFound [1].collider.bounds.min.y > lastPoint.y) {
 				horizontalReflection = false;
 			}
@@ -53,6 +52,7 @@ public class getPointerVertices : MonoBehaviour {
 
 			if (nextCollider != default(RaycastHit2D) && nextCollider.collider.bounds.min.y > nextColliderPoint.y) {
 				horizontalReflection = false;
+				pointerVertices.Add (nextColliderPoint);
 			}
 
 			//if next collider y position is different to last one, need to cast another ray onto another collider
@@ -67,10 +67,12 @@ public class getPointerVertices : MonoBehaviour {
 
 				if (nextCollider != default(RaycastHit2D) && nextCollider.collider.bounds.min.y > nextColliderPoint.y) {
 					horizontalReflection = false;
+					pointerVertices.Add (nextColliderPoint);
 				}
 			}
 		}
 
+		//only need to add final point at top of the screen if ray reflects horizontally
 		if (horizontalReflection) {
 			//lastXPos will be inside screen bounds if rock's next destination is off the screen from the top or bottom
 			float finalYpos = ScreenVariables.worldHeight;
@@ -105,25 +107,16 @@ public class getPointerVertices : MonoBehaviour {
 
 	//find point of next collider
 	RaycastHit2D getNextCollider(RaycastHit2D[] colliders, Vector3 lastPoint, Vector3 rayDirection) {
+		Debug.Log (colliders.Length);
 		RaycastHit2D nextCollider;
 		switch (colliders.Length) {
+		//if there is no collider next collider does not exist
 		case 0:
-			//			nextColliderPoint = lastPoint;
 			nextCollider = default(RaycastHit2D);
 			break;
-		case 1:
-			if (colliders [0].point.y != lastPoint.y) {
-				nextCollider = colliders [0];
-			} else {
-				nextCollider = default(RaycastHit2D);
-			}
-			break;
+		//if there is a collider next one should be the first one ray contacts
 		default:
-			if (colliders [0].point.y != lastPoint.y) {
-				nextCollider = colliders [0];
-			} else {
-				nextCollider = colliders [1];
-			}
+			nextCollider = colliders [0];
 			break;
 		}
 		return nextCollider;
