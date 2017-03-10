@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114921812004129910}
   - component: {fileID: 58348707713463384}
   - component: {fileID: 120208345881518944}
+  - component: {fileID: 114979616890992130}
   m_Layer: 8
   m_Name: rock
   m_TagString: rock
@@ -125,6 +126,17 @@ MonoBehaviour:
   splatters: {fileID: 1929839293047604, guid: be003e062248c4892b80028ae087def9, type: 2}
   rockSimulation: {fileID: 50435492825116804, guid: 945ecb672332f43b29364d0898154e01,
     type: 2}
+--- !u!114 &114979616890992130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194249144360712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f52b6b0da7d940e5b1a96094d06ef63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &120208345881518944
 LineRenderer:
   m_ObjectHideFlags: 1
