@@ -5,10 +5,14 @@ using UnityEngine;
 public class getPointerVertices : MonoBehaviour {
 	private float radius;
 	private GameObject springAnchor;
+
+	private bool horizontalReflection;
+	private Vector3 rayDirection;
 	// Use this for initialization
 	void Start () {
 		radius = GetComponent<projectileShoot> ().radius;
 		springAnchor = rockManager.Instance.springAnchor;
+		horizontalReflection = true;	//initialise horizontal reflection. Is true if ray reflects in x direction. Assume true to start with.
 	}
 
 	/* Draws pointer from rock up to top of the screen showing player where their shot will go
@@ -18,13 +22,12 @@ public class getPointerVertices : MonoBehaviour {
 	*/
 	public void updatePointer() {
 		//find direction between rock and spring anchor (pointer direction)
-		Vector3 rayDirection = springAnchor.transform.position - transform.position;
+		rayDirection = springAnchor.transform.position - transform.position;
 
 		//find colliders that ray intersects with and add initial vertex
 		RaycastHit2D[] collidersFound = Physics2D.RaycastAll (transform.position, rayDirection);
-		List<Vector3> pointerVertices = new List<Vector3>();
+		List<Vector3> pointerVertices = new List<Vector3> ();
 		pointerVertices.Add(collidersFound [0].point);	//add point at rock itself
-		bool horizontalReflection = true;	//initialise horizontal reflection. Is true if ray reflects in x direction. Assume true to start with.
 
 		//if ray finds another collider besides initial rock a second ray must be cast
 		if (collidersFound.Length > 1) {
@@ -75,12 +78,8 @@ public class getPointerVertices : MonoBehaviour {
 		//only need to add final point at top of the screen if ray reflects horizontally
 		if (horizontalReflection) {
 			//lastXPos will be inside screen bounds if rock's next destination is off the screen from the top or bottom
-			float finalYpos = ScreenVariables.worldHeight;
-			if (rayDirection.y < 0) {
-				finalYpos = -ScreenVariables.worldHeight;
-			}
-			float endXPos = pointerXpos (pointerVertices [pointerVertices.Count - 1], rayDirection, finalYpos);
-			pointerVertices.Add (new Vector3 (endXPos, finalYpos));
+			float endXPos = pointerXpos (pointerVertices [pointerVertices.Count - 1], rayDirection, ScreenVariables.worldHeight);
+			pointerVertices.Add (new Vector3 (endXPos, ScreenVariables.worldHeight));
 		}
 		drawPointerLine (pointerVertices);
 
@@ -107,7 +106,6 @@ public class getPointerVertices : MonoBehaviour {
 
 	//find point of next collider
 	RaycastHit2D getNextCollider(RaycastHit2D[] colliders, Vector3 lastPoint, Vector3 rayDirection) {
-		Debug.Log (colliders.Length);
 		RaycastHit2D nextCollider;
 		switch (colliders.Length) {
 		//if there is no collider next collider does not exist
