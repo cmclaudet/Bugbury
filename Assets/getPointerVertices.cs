@@ -40,12 +40,7 @@ public class getPointerVertices : MonoBehaviour {
 
 		//if ray finds another collider besides initial rock a second ray must be cast
 		if (collidersFound.Length > 1) {
-			horizontalReflection = reflectsInX (collidersFound [1]);	//find out if this is a horizontal reflection
-			rockOffsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
-
-			//add point with offsets taken into account
-			nextColliderPoint = new Vector3 (collidersFound [1].point.x + rockOffsets.x, collidersFound [1].point.y + rockOffsets.y);
-			pointerVertices.Add (nextColliderPoint);
+			addFirstColliderPoint ();
 
 			//if y offset takes rock below the minimum y co-ordinate on the collider the rock will not have a horizontal reflection
 			if (collidersFound [1].collider.bounds.min.y > nextColliderPoint.y) {
@@ -60,13 +55,11 @@ public class getPointerVertices : MonoBehaviour {
 				//add next collider to pointer vertices
 				pointerVertices.Add (nextColliderPoint);
 				setNextCollider ();
-
 			}
 		}
 
 		//only need to add final point at top of the screen if ray reflects horizontally
 		if (horizontalReflection) {
-			//lastXPos will be inside screen bounds if rock's next destination is off the screen from the top or bottom
 			float endXPos = pointerXpos (pointerVertices [pointerVertices.Count - 1], rayDirection, ScreenVariables.worldHeight);
 			pointerVertices.Add (new Vector3 (endXPos, ScreenVariables.worldHeight));
 		}
@@ -74,14 +67,16 @@ public class getPointerVertices : MonoBehaviour {
 		pointerVertices.Clear ();
 	}
 
-	//finds x position at certain y value given the equation of a line
-	float pointerXpos(Vector3 point, Vector3 dir, float yPos) {
-		Vector3 p1 = point;
-		Vector3 p2 = point + dir;
-		float m = (p2.y - p1.y) / (p2.x - p1.x);
-		float c = p1.y - m * p1.x;
-		float XPos = (yPos - c) / m;
-		return XPos;
+
+
+	//first point after initial rock
+	void addFirstColliderPoint() {
+		horizontalReflection = reflectsInX (collidersFound [1]);	//find out if this is a horizontal reflection
+		rockOffsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
+
+		//add point with offsets taken into account
+		nextColliderPoint = new Vector3 (collidersFound [1].point.x + rockOffsets.x, collidersFound [1].point.y + rockOffsets.y);
+		pointerVertices.Add (nextColliderPoint);
 	}
 
 	//find whether ray is reflected by a collider in x or y direction
@@ -91,22 +86,6 @@ public class getPointerVertices : MonoBehaviour {
 		} else {
 			return false;
 		}
-	}
-
-	//find if there is another collider
-	RaycastHit2D getNextCollider(RaycastHit2D[] colliders, Vector3 lastColliderPoint, Vector3 rayDirection) {
-		RaycastHit2D nextCollider;
-		switch (colliders.Length) {
-		//if there is no collider next collider does not exist
-		case 0:
-			nextCollider = default(RaycastHit2D);
-			break;
-		//if there is a collider next one should be the first one ray contacts
-		default:
-			nextCollider = colliders [0];
-			break;
-		}
-		return nextCollider;
 	}
 
 	//find x and y offsets of vertex at collision due to thickness of rock. Must be shifted so that the next ray cast goes to correct place.
@@ -140,12 +119,48 @@ public class getPointerVertices : MonoBehaviour {
 		return new Vector2 (deltax, deltay);
 	}
 
+	//update last collider point, next collider and next collider point
+	void setNextCollider() {
+		setRayDirection();
+		collidersFound = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
+		nextCollider = getNextCollider (collidersFound, nextColliderPoint, rayDirection);
+		nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, nextColliderPoint);
+		checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
+	}
+
+	void setRayDirection() {
+		if (horizontalReflection) {
+			rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+		} else {
+			rayDirection = new Vector3 (rayDirection.x, -rayDirection.y);
+		}
+	}
+
+	//find if there is another collider
+	RaycastHit2D getNextCollider(RaycastHit2D[] colliders, Vector3 lastColliderPoint, Vector3 rayDirection) {
+		RaycastHit2D nextCollider;
+		switch (colliders.Length) {
+		//if there is no collider next collider does not exist
+		case 0:
+			nextCollider = default(RaycastHit2D);
+			break;
+		//if there is a collider next one should be the first one ray contacts
+		default:
+			nextCollider = colliders [0];
+			break;
+		}
+		return nextCollider;
+	}
+
+
+
 	//next collider point is point at which ray hit next collider plus offsets from the thickness of the rock
 	Vector3 getNextColliderPoint(RaycastHit2D collider, Vector3 rayDirection, Vector3 thisColliderPoint) {
 		Vector3 nextColliderPoint = thisColliderPoint;
 		if (collider != default(RaycastHit2D)) {
-			bool reflectsHorizontally = reflectsInX (collider);
-			Vector2 offsets = pointerOffsets (rayDirection, reflectsHorizontally);
+			//here horizontal reflection is only used to calculate offsets. Not meant to update global for finding if rock goes downwards
+			bool horizontalReflection = reflectsInX (collider);
+			Vector2 offsets = pointerOffsets (rayDirection, horizontalReflection);
 			nextColliderPoint = collider.point;
 			nextColliderPoint = new Vector3 (nextColliderPoint.x + offsets.x, nextColliderPoint.y + offsets.y);
 		}
@@ -161,21 +176,14 @@ public class getPointerVertices : MonoBehaviour {
 		}
 	}
 
-	void setRayDirection() {
-		if (horizontalReflection) {
-			rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
-		} else {
-			rayDirection = new Vector3 (rayDirection.x, -rayDirection.y);
-		}
-	}
-
-	//update last collider point, next collider and next collider point
-	void setNextCollider() {
-		setRayDirection();
-		collidersFound = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
-		nextCollider = getNextCollider (collidersFound, nextColliderPoint, rayDirection);
-		nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, nextColliderPoint);
-		checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
+	//finds x position at certain y value given the equation of a line
+	float pointerXpos(Vector3 point, Vector3 dir, float yPos) {
+		Vector3 p1 = point;
+		Vector3 p2 = point + dir;
+		float m = (p2.y - p1.y) / (p2.x - p1.x);
+		float c = p1.y - m * p1.x;
+		float XPos = (yPos - c) / m;
+		return XPos;
 	}
 
 	//adds points on pointer to line renderer so they can be drawn out
