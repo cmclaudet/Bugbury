@@ -8,10 +8,12 @@ public class getPointerVertices : MonoBehaviour {
 
 	private bool horizontalReflection;
 	private Vector3 rayDirection;
+	private List<Vector3> pointerVertices;
 	// Use this for initialization
 	void Start () {
 		radius = GetComponent<projectileShoot> ().radius;
 		springAnchor = rockManager.Instance.springAnchor;
+		pointerVertices = new List<Vector3> ();
 		horizontalReflection = true;	//initialise horizontal reflection. Is true if ray reflects in x direction. Assume true to start with.
 	}
 
@@ -26,8 +28,8 @@ public class getPointerVertices : MonoBehaviour {
 
 		//find colliders that ray intersects with and add initial vertex
 		RaycastHit2D[] collidersFound = Physics2D.RaycastAll (transform.position, rayDirection);
-		List<Vector3> pointerVertices = new List<Vector3> ();
 		pointerVertices.Add(collidersFound [0].point);	//add point at rock itself
+		horizontalReflection = true;
 
 		//if ray finds another collider besides initial rock a second ray must be cast
 		if (collidersFound.Length > 1) {
@@ -52,11 +54,8 @@ public class getPointerVertices : MonoBehaviour {
 			RaycastHit2D[] colliders = Physics2D.RaycastAll (lastPoint, new Vector3 (rayDirection.x, rayDirection.y));
 			RaycastHit2D nextCollider = getNextCollider (colliders, lastPoint, rayDirection);
 			Vector3 nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, lastPoint);
-
-			if (nextCollider != default(RaycastHit2D) && nextCollider.collider.bounds.min.y > nextColliderPoint.y) {
-				horizontalReflection = false;
-				pointerVertices.Add (nextColliderPoint);
-			}
+	
+			checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
 
 			//if next collider y position is different to last one, need to cast another ray onto another collider
 			while (nextColliderPoint.y != lastPoint.y && horizontalReflection) {
@@ -68,10 +67,8 @@ public class getPointerVertices : MonoBehaviour {
 				nextCollider = getNextCollider (colliders, lastPoint, rayDirection);
 				nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, lastPoint);
 
-				if (nextCollider != default(RaycastHit2D) && nextCollider.collider.bounds.min.y > nextColliderPoint.y) {
-					horizontalReflection = false;
-					pointerVertices.Add (nextColliderPoint);
-				}
+				checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
+
 			}
 		}
 
@@ -82,7 +79,7 @@ public class getPointerVertices : MonoBehaviour {
 			pointerVertices.Add (new Vector3 (endXPos, ScreenVariables.worldHeight));
 		}
 		drawPointerLine (pointerVertices);
-
+		pointerVertices.Clear ();
 	}
 
 	//finds x position at certain y value given the equation of a line
@@ -160,6 +157,13 @@ public class getPointerVertices : MonoBehaviour {
 			nextColliderPoint = new Vector3 (nextColliderPoint.x + offsets.x, nextColliderPoint.y + offsets.y);
 		}
 		return nextColliderPoint;
+	}
+
+	void checkRockIsWithinColliderBounds (RaycastHit2D nextCollider, Vector3 nextColliderPoint) {
+		if (nextCollider != default(RaycastHit2D) && nextCollider.collider.bounds.min.y > nextColliderPoint.y) {
+			horizontalReflection = false;
+			pointerVertices.Add (nextColliderPoint);
+		}
 	}
 
 	//adds points on pointer to line renderer so they can be drawn out
