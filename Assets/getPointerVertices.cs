@@ -12,7 +12,6 @@ public class getPointerVertices : MonoBehaviour {
 	private RaycastHit2D[] collidersFound;
 	private RaycastHit2D nextCollider;
 
-	private Vector3 lastColliderPoint;
 	private Vector3 nextColliderPoint;
 	private Vector2 rockOffsets;
 	// Use this for initialization
@@ -45,28 +44,22 @@ public class getPointerVertices : MonoBehaviour {
 			rockOffsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
 
 			//add point with offsets taken into account
-			//set to last collider point as this will be the first collider besides initial rock collision
-			lastColliderPoint = new Vector3 (collidersFound [1].point.x + rockOffsets.x, collidersFound [1].point.y + rockOffsets.y);
-			pointerVertices.Add (lastColliderPoint);
+			nextColliderPoint = new Vector3 (collidersFound [1].point.x + rockOffsets.x, collidersFound [1].point.y + rockOffsets.y);
+			pointerVertices.Add (nextColliderPoint);
 
 			//if y offset takes rock below the minimum y co-ordinate on the collider the rock will not have a horizontal reflection
-			if (collidersFound [1].collider.bounds.min.y > lastColliderPoint.y) {
+			if (collidersFound [1].collider.bounds.min.y > nextColliderPoint.y) {
 				horizontalReflection = false;
 			}
 
 			//find new colliders from new ray direction
-			setRayDirection();
-			collidersFound = Physics2D.RaycastAll (lastColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
-			nextCollider = getNextCollider (collidersFound, lastColliderPoint, rayDirection);
-			nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, lastColliderPoint);	//set to next collider point as this will be second collider found
-	
-			checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
+			setNextCollider();
 
 			//if next collider is default raycasthit2D then it does not exist
 			while (nextCollider != default(RaycastHit2D) && horizontalReflection) {
 				//add next collider to pointer vertices
-				setNextCollider();
-				checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
+				pointerVertices.Add (nextColliderPoint);
+				setNextCollider ();
 
 			}
 		}
@@ -148,8 +141,8 @@ public class getPointerVertices : MonoBehaviour {
 	}
 
 	//next collider point is point at which ray hit next collider plus offsets from the thickness of the rock
-	Vector3 getNextColliderPoint(RaycastHit2D collider, Vector3 rayDirection, Vector3 lastColliderPoint) {
-		Vector3 nextColliderPoint = lastColliderPoint;
+	Vector3 getNextColliderPoint(RaycastHit2D collider, Vector3 rayDirection, Vector3 thisColliderPoint) {
+		Vector3 nextColliderPoint = thisColliderPoint;
 		if (collider != default(RaycastHit2D)) {
 			bool reflectsHorizontally = reflectsInX (collider);
 			Vector2 offsets = pointerOffsets (rayDirection, reflectsHorizontally);
@@ -178,12 +171,11 @@ public class getPointerVertices : MonoBehaviour {
 
 	//update last collider point, next collider and next collider point
 	void setNextCollider() {
-		pointerVertices.Add (nextColliderPoint);
-		rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
+		setRayDirection();
 		collidersFound = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
-		lastColliderPoint = nextColliderPoint;
-		nextCollider = getNextCollider (collidersFound, lastColliderPoint, rayDirection);
-		nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, lastColliderPoint);
+		nextCollider = getNextCollider (collidersFound, nextColliderPoint, rayDirection);
+		nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, nextColliderPoint);
+		checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
 	}
 
 	//adds points on pointer to line renderer so they can be drawn out
