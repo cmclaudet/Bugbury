@@ -45,17 +45,22 @@ public class getPointerVertices : MonoBehaviour {
 
 		raycastEdges (transform.position);
 
-		if (topCollidersFound.Length == 1 && collidersFound.Length == 1) {
-			endPointerFromEdgeRays (topCollidersFound [0], transform.position);
+		if ((topCollidersFound.Length == 1 && collidersFound.Length == 1) || (botCollidersFound.Length == 1 && collidersFound.Length == 1)) {
+			if (topCollidersFound [0].point.y < botCollidersFound [0].point.y) {
+				endPointerFromEdgeRays (topCollidersFound [0], transform.position);
+			} else {
+				endPointerFromEdgeRays (botCollidersFound [0], transform.position);
+			}
 		}
-		if (botCollidersFound.Length == 1 && collidersFound.Length == 1) {
+//		if (botCollidersFound.Length == 1 && collidersFound.Length == 1) {
 			//causes line to end prematurely sometimes. Should implement offset checker for this.
-			endPointerFromEdgeRays (botCollidersFound [0], transform.position);
-		}
-
+//			endPointerFromEdgeRays (botCollidersFound [0], transform.position);
+//		}
 		//if ray finds another collider besides initial rock a second ray must be cast
 		if (collidersFound.Length > 1) {
-			
+//			Debug.Log (collidersFound.Length);
+//			Debug.Log (topCollidersFound.Length);
+//			Debug.Log (botCollidersFound.Length);
 			if (topCollidersFound.Length == collidersFound.Length) {
 				if (topCollidersFound [0].collider != collidersFound[1].collider) {
 					endPointerFromEdgeRays (topCollidersFound [0], transform.position);
@@ -66,22 +71,38 @@ public class getPointerVertices : MonoBehaviour {
 					endPointerFromEdgeRays (botCollidersFound [0], transform.position);
 				}
 			}
-
+//new stuff
+//			Debug.Log(collidersFound[1].point);
+			if (collidersFound [1].collider != topCollidersFound [0].collider || collidersFound [1].collider != botCollidersFound [0].collider) {
+				if (botCollidersFound [0].point.y < topCollidersFound [0].point.y) {
+					if (botCollidersFound [0].point.y < collidersFound [1].point.y) {
+						horizontalReflection = false;
+						endPointerFromEdgeRays (botCollidersFound [0], transform.position);
+					}
+				} else {
+					if (topCollidersFound [0].point.y < collidersFound [1].point.y) {
+						horizontalReflection = false;
+						endPointerFromEdgeRays (topCollidersFound [0], transform.position);
+					}
+				}
+			}
+//
 			if (horizontalReflection) {
 				rockOffsets = pointerOffsets (rayDirection, reflectsInX(collidersFound[1]));	//find offsets of pointer vertex due to rock thickness
 				//add point with offsets taken into account
 				nextColliderPoint = new Vector3 (collidersFound [1].point.x + rockOffsets.x, collidersFound [1].point.y + rockOffsets.y);
 				pointerVertices.Add (nextColliderPoint);
 			}
-
 			//if y offset takes rock below the minimum y co-ordinate on the collider the rock will not have a horizontal reflection
 			if (collidersFound [1].collider.bounds.min.y > nextColliderPoint.y) {
 				horizontalReflection = false;
 			}
-
+		//	if (!reflectsInX (collidersFound [1])) {
+		//		horizontalReflection = false;
+		//	}
 			//find new colliders from new ray direction
-			setNextCollider();
 
+			setNextCollider ();
 			//if next collider is default raycasthit2D then it does not exist
 			while (nextCollider != default(RaycastHit2D) && horizontalReflection) {
 				//add next collider to pointer vertices
@@ -89,7 +110,6 @@ public class getPointerVertices : MonoBehaviour {
 				setNextCollider ();
 			}
 		}
-
 		//only need to add final point at top of the screen if ray reflects horizontally
 		if (horizontalReflection) {
 			float endXPos = pointerXpos (pointerVertices [pointerVertices.Count - 1], rayDirection, ScreenVariables.worldHeight);
@@ -197,12 +217,17 @@ public class getPointerVertices : MonoBehaviour {
 
 	//update last collider point, next collider and next collider point
 	void setNextCollider() {
+//		Debug.Log ("test");
 		setRayDirection();
 		//Debug.Log (rayDirection);
 		rayOffsets = getRayOffsets ();
 		raycastEdges (nextColliderPoint);
 		collidersFound = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
+//		Debug.Log (horizontalReflection);
 
+//		Debug.Log (collidersFound.Length);
+//		Debug.Log (topCollidersFound.Length);
+//		Debug.Log (botCollidersFound.Length);
 
 		if (topCollidersFound.Length > 0) {
 			if (collidersFound.Length > 0) {
@@ -226,7 +251,9 @@ public class getPointerVertices : MonoBehaviour {
 			if (botCollidersFound.Length > 0) {
 				if (collidersFound.Length > 0) {
 					if (botCollidersFound [0].collider != collidersFound [0].collider) {
-						endPointerFromEdgeRays (botCollidersFound [0], nextColliderPoint);
+						if (botCollidersFound [0].point.y < collidersFound [0].point.y) {
+							endPointerFromEdgeRays (botCollidersFound [0], nextColliderPoint);
+						}
 					}
 				} else {
 					endPointerFromEdgeRays (botCollidersFound [0], nextColliderPoint);
