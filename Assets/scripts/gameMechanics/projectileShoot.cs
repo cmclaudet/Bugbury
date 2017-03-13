@@ -9,6 +9,8 @@ public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;	//insert desired speed for rocks
 	public Vector3 spawnPosition;	//rock spawn position
 	public GameObject splatters;	//blood splatter of caterpillars
+	public Rigidbody2D rockSimulation;	//gameObject which will simulate rock being shot to generate line for pointer
+	public int shotsWithPointer;
 
 	private AudioSource throwSound;	//sound when rock launches
 	private AudioSource splatSound; //sound when caterpillar dies
@@ -19,18 +21,19 @@ public class projectileShoot : MonoBehaviour {
 
 	private LineRenderer middleLine;
 	private SpringJoint2D spring;
-	private float radius;
+	public float radius{ get; set; }
 	private bool fingerDown = false;	//becomes true when screen touched in active shooting area
 
 	private Bounds shootingSpace;		//space player is allowed to draw slingshot back into
 
 	private bool rockGen = true;
+	private bool drawPointer = false;	//becomes true when pointer needs to be drawn (when player drags rock back)
+	private GameObject activePointer;
 
 	void Awake() {
 		spring = GetComponent<SpringJoint2D> ();
 		radius = GetComponent<CircleCollider2D> ().radius;
 		middleLine = GetComponent<LineRenderer> ();
-
 	}
 
 	// Use this for initialization
@@ -41,6 +44,7 @@ public class projectileShoot : MonoBehaviour {
 		leftSlingshot = rockManager.Instance.slingshotLeft;
 		rightSlingshot = rockManager.Instance.slingshotRight;
 		springAnchor = rockManager.Instance.springAnchor;
+		rockManager.Instance.rockNumber += 1;
 
 		transform.position = spawnPosition;
 		setupLineRenderer ();
@@ -53,9 +57,33 @@ public class projectileShoot : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		updateLineRenderer ();
-		drag ();
-		shoot ();
-		launch ();
+
+		//if player is able to control and touches the screen trigger rock dragging function
+		//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
+		if (lifeManager.Instance.control && Input.touchCount > 0 && rockGen) {
+			drag ();
+		}
+
+		if (drawPointer) {
+			GetComponent<getPointerVertices> ().updatePointer ();
+		}
+
+		//when player releases their finger after having put it down through drag function, shooting is triggered
+		if (Input.touchCount == 0 && fingerDown) {
+			drawPointer = false;
+			shoot ();
+			//line renderer showing pointer is inactivated
+			LineRenderer[] renderers = GetComponentsInChildren<LineRenderer> ();
+			renderers [1].gameObject.SetActive (false);
+			throwSound.Play ();
+		}
+
+		//when rock exits the slingshot shooting zone launch is triggered
+		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
+			launch ();
+			makeAnotherRock ();
+		}
+			
 	}
 
 	void setupSounds() {
@@ -76,46 +104,46 @@ public class projectileShoot : MonoBehaviour {
 	{
 		//make rock follow player finger whilst finger is down inside the shooting space
 		//ensures spring is disabled in this time and the rock is kinematic
-		if (lifeManager.Instance.control) {
-			if (Input.touchCount > 0 && rockGen) {	//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
-				Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
-				Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
+		//drawPointer becomes true as pointer must be drawn when player drags rock back
+		Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
+		Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
-				if (shootingSpace.Contains (worldPos)) {
-					GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
-					spring.enabled = false;
-					GetComponent<Rigidbody2D> ().isKinematic = true;
-					fingerDown = true;
-					transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
-				}
+		//can only shoot is player drags rock back through shooting space
+		if (shootingSpace.Contains (worldPos)) {
+			GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
+			spring.enabled = false;
+			GetComponent<Rigidbody2D> ().isKinematic = true;
+			fingerDown = true;
+			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
+
+			//only draw pointer for first 6 rocks
+			if (rockManager.Instance.rockNumber <= shotsWithPointer) {
+				drawPointer = true;
 			}
 		}
 	}
 
 	void shoot() {
-		//when player releases finger after touching active shooting area, spring physics is enabled
-		if (Input.touchCount == 0 && fingerDown) {
-			throwSound.Play ();
-			spring.enabled = true;
-			GetComponent<SpringJoint2D> ().enabled = true;
-			GetComponent<Rigidbody2D> ().isKinematic = false;
-			fingerDown = false;
-		}
+		//spring physics is enabled
+		spring.enabled = true;
+		GetComponent<SpringJoint2D> ().enabled = true;
+		GetComponent<Rigidbody2D> ().isKinematic = false;
+		fingerDown = false;
 	}
 
 	void launch() {
 		//once rock has passed over the slingshot position, spring and line renderers are disabled.
 		//Velocity is set to magnitude specified above
-		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
-			GetComponent<SpringJoint2D> ().enabled = false;
-			GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
-			middleLine.enabled = false;
+		GetComponent<SpringJoint2D> ().enabled = false;
+		GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
+		middleLine.enabled = false;
+	}
 
-			if (rockGen) {
-				rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
-			}
-			rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
+	void makeAnotherRock() {
+		if (rockGen) {
+			rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
 		}
+		rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
 	}
 
 	//set line renderer's 4 points
@@ -144,9 +172,10 @@ public class projectileShoot : MonoBehaviour {
 		middleLine.SetPosition (2, rightPos);
 	}
 
+
 	//on collision with caterpillar rock is inactivated, blood splatter is placed and player score + streak number updated
 	//rock is inactivated
-	void OnCollisionEnter2D(Collision2D col) {
+	void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.CompareTag ("caterpillar") && (transform.position.y > spawnPosition.y)) {
 			splatSound.Play ();
 			col.gameObject.GetComponent<showBonuses> ().dead = true;
@@ -164,13 +193,10 @@ public class projectileShoot : MonoBehaviour {
 				caterpillarManager.Instance.levelEnd = true;
 			}
 		//if rock hits wall make tink sound
-		} else if (col.gameObject.CompareTag ("wall")) {
-			tinkSound.pitch = Random.Range (1.2f, 1.6f);
-			tinkSound.Play ();
-		}
+		} 
 	}
 
-	void updateScores(Collision2D col) {
+	void updateScores(Collider2D col) {
 		//add 1 to player streak
 		scoreCount.Instance.playerCombo += 1;
 		int currentCombo = scoreCount.Instance.playerCombo;
@@ -184,7 +210,7 @@ public class projectileShoot : MonoBehaviour {
 		scoreCount.Instance.changeScore (newScore);
 	}
 
-	void updateIfFarShot(Collision2D col) {
+	void updateIfFarShot(Collider2D col) {
 		float arenaFarpoint = getFarPoint (col);
 
 		if (col.transform.position.y > arenaFarpoint) {
@@ -196,7 +222,7 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 	//get point 70% of the way up from the finish line. Here upwards it will be considered a far shot
-	float getFarPoint(Collision2D col) {
+	float getFarPoint(Collider2D col) {
 		float finishLine = caterpillarManager.Instance.finishLine;
 		float farPoint = finishLine + (ScreenVariables.worldHeight - finishLine) * 0.7f;
 		return farPoint;
@@ -209,5 +235,12 @@ public class projectileShoot : MonoBehaviour {
 			newScore += scoreCount.Instance.farShotBonus;
 		}
 		return newScore;
+	}
+
+	void OnCollisionEnter2D(Collision2D col) {
+		if (col.gameObject.CompareTag ("wall")) {
+			tinkSound.pitch = Random.Range (1.2f, 1.6f);
+			tinkSound.Play ();
+		}
 	}
 }
