@@ -192,10 +192,7 @@ public class projectileShoot : MonoBehaviour {
 				caterpillarManager.Instance.levelEnd = true;
 			}
 		//if rock hits wall make tink sound
-		} else if (col.gameObject.CompareTag ("wall")) {
-			tinkSound.pitch = Random.Range (1.2f, 1.6f);
-			tinkSound.Play ();
-		}
+		} 
 	}
 
 	void updateScores(Collider2D col) {
@@ -237,5 +234,12 @@ public class projectileShoot : MonoBehaviour {
 			newScore += scoreCount.Instance.farShotBonus;
 		}
 		return newScore;
+	}
+
+	void OnCollisionEnter2D(Collision2D col) {
+		if (col.gameObject.CompareTag ("wall")) {
+			tinkSound.pitch = Random.Range (1.2f, 1.6f);
+			tinkSound.Play ();
+		}
 	}
 }

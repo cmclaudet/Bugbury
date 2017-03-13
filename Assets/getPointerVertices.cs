@@ -12,6 +12,7 @@ public class getPointerVertices : MonoBehaviour {
 	private RaycastHit2D[] collidersFound;
 	private RaycastHit2D[] topCollidersFound;
 	private RaycastHit2D[] botCollidersFound;
+	private Vector2 rayOffsets;
 
 	private RaycastHit2D nextCollider;
 
@@ -35,78 +36,43 @@ public class getPointerVertices : MonoBehaviour {
 	public void updatePointer() {
 		//find direction between rock and spring anchor (pointer direction)
 		rayDirection = springAnchor.transform.position - transform.position;
-		Vector2 rayOffsets = getRayOffsets ();
+		rayOffsets = getRayOffsets ();
 
 		//find colliders that ray intersects with and add initial vertex
 		collidersFound = Physics2D.RaycastAll (transform.position, rayDirection);
 		pointerVertices.Add(collidersFound [0].point);	//add point at rock itself
 		horizontalReflection = true;
 
-		if (rayDirection.x > 0) {
-			topCollidersFound = Physics2D.RaycastAll (new Vector3 (transform.position.x - rayOffsets.x, transform.position.y + rayOffsets.y), rayDirection);
-			botCollidersFound = Physics2D.RaycastAll (new Vector3 (transform.position.x + rayOffsets.x, transform.position.y - rayOffsets.y), rayDirection);
-		} else {
-			topCollidersFound = Physics2D.RaycastAll (new Vector3 (transform.position.x + rayOffsets.x, transform.position.y + rayOffsets.y), rayDirection);
-			botCollidersFound = Physics2D.RaycastAll (new Vector3 (transform.position.x - rayOffsets.x, transform.position.y - rayOffsets.y), rayDirection);
+		raycastEdges (transform.position);
+
+		if (topCollidersFound.Length == 1 && collidersFound.Length == 1) {
+			endPointerFromEdgeRays (topCollidersFound [0], transform.position);
 		}
-
-		if (topCollidersFound.Length > 1 && collidersFound.Length == 1) {
-			horizontalReflection = false;
-			rockOffsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
-			float colliderXpos = pointerXpos(transform.position, rayDirection, topCollidersFound[1].point.y);
-			//add point with offsets taken into account
-			nextColliderPoint = new Vector3 (colliderXpos + rockOffsets.x, topCollidersFound [1].point.y + rockOffsets.y);
-			pointerVertices.Add (nextColliderPoint);
+		if (botCollidersFound.Length == 1 && collidersFound.Length == 1) {
+			//causes line to end prematurely sometimes. Should implement offset checker for this.
+			endPointerFromEdgeRays (botCollidersFound [0], transform.position);
 		}
-		if (botCollidersFound.Length > 1 && collidersFound.Length == 1) {
-			horizontalReflection = false;
-			rockOffsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
-			float colliderXpos = pointerXpos(transform.position, rayDirection, botCollidersFound[1].point.y);
-
-			//add point with offsets taken into account
-			nextColliderPoint = new Vector3 (colliderXpos + rockOffsets.x, botCollidersFound [1].point.y + rockOffsets.y);
-			pointerVertices.Add (nextColliderPoint);
-		}
-
-
 
 		//if ray finds another collider besides initial rock a second ray must be cast
 		if (collidersFound.Length > 1) {
 			
-			if (topCollidersFound.Length > collidersFound.Length) {
-				if (topCollidersFound [1].point.y < collidersFound[1].point.y) {
-					horizontalReflection = false;
-					rockOffsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
-					float colliderXpos = pointerXpos(transform.position, rayDirection, topCollidersFound[1].point.y);
-
-					//add point with offsets taken into account
-					nextColliderPoint = new Vector3 (colliderXpos + rockOffsets.x, topCollidersFound [1].point.y + rockOffsets.y);
-					pointerVertices.Add (nextColliderPoint);
-					}
-
+			if (topCollidersFound.Length == collidersFound.Length) {
+				if (topCollidersFound [0].collider != collidersFound[1].collider) {
+					endPointerFromEdgeRays (topCollidersFound [0], transform.position);
+				}
 			}
-			if (botCollidersFound.Length > collidersFound.Length) {
-				if (botCollidersFound [1].point.y < collidersFound[1].point.y) {
-					horizontalReflection = false;
-					rockOffsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
-					float colliderXpos = pointerXpos(transform.position, rayDirection, botCollidersFound[1].point.y);
-
-					//add point with offsets taken into account
-					nextColliderPoint = new Vector3 (colliderXpos + rockOffsets.x, botCollidersFound [1].point.y + rockOffsets.y);
-					pointerVertices.Add (nextColliderPoint);
+			if (botCollidersFound.Length == collidersFound.Length) {
+				if (botCollidersFound [0].collider != collidersFound[1].collider) {
+					endPointerFromEdgeRays (botCollidersFound [0], transform.position);
 				}
 			}
 
 			if (horizontalReflection) {
-		//		horizontalReflection = reflectsInX (collidersFound [1]);	//find out if this is a horizontal reflection
 				rockOffsets = pointerOffsets (rayDirection, reflectsInX(collidersFound[1]));	//find offsets of pointer vertex due to rock thickness
-
 				//add point with offsets taken into account
 				nextColliderPoint = new Vector3 (collidersFound [1].point.x + rockOffsets.x, collidersFound [1].point.y + rockOffsets.y);
 				pointerVertices.Add (nextColliderPoint);
 			}
-
-		//	addFirstColliderPoint ();
 
 			//if y offset takes rock below the minimum y co-ordinate on the collider the rock will not have a horizontal reflection
 			if (collidersFound [1].collider.bounds.min.y > nextColliderPoint.y) {
@@ -133,18 +99,51 @@ public class getPointerVertices : MonoBehaviour {
 		pointerVertices.Clear ();
 	}
 
+	void raycastEdges(Vector3 midRayPoint) {
+		if (rayDirection.x > 0) {
+			topCollidersFound = Physics2D.RaycastAll (new Vector3 (midRayPoint.x - rayOffsets.x, midRayPoint.y + rayOffsets.y), rayDirection);
+			botCollidersFound = Physics2D.RaycastAll (new Vector3 (midRayPoint.x + rayOffsets.x, midRayPoint.y - rayOffsets.y), rayDirection);
+		} else {
+			topCollidersFound = Physics2D.RaycastAll (new Vector3 (midRayPoint.x + rayOffsets.x, midRayPoint.y + rayOffsets.y), rayDirection);
+			botCollidersFound = Physics2D.RaycastAll (new Vector3 (midRayPoint.x - rayOffsets.x, midRayPoint.y - rayOffsets.y), rayDirection);
+		}
+		List<RaycastHit2D> topColliderList = new List<RaycastHit2D> ();
+		List<RaycastHit2D> botColliderList = new List<RaycastHit2D> ();
+
+		foreach (RaycastHit2D collider in topCollidersFound) {
+			if (!collider.collider.gameObject.CompareTag ("rock")) {
+				topColliderList.Add (collider);
+			}
+		}
+		foreach (RaycastHit2D collider in botCollidersFound) {
+			if (!collider.collider.gameObject.CompareTag ("rock")) {
+				botColliderList.Add (collider);
+			}
+		}
+		topCollidersFound = topColliderList.ToArray ();
+		botCollidersFound = botColliderList.ToArray ();
+	}
+
 
 
 	Vector2 getRayOffsets() {
 		float sinAngle = Mathf.Abs(rayDirection.y) / Mathf.Pow (Mathf.Pow(rayDirection.y, 2.0f) + Mathf.Pow(rayDirection.x, 2.0f), 0.5f);
-		float cosAngle = rayDirection.x / Mathf.Pow (Mathf.Pow(rayDirection.y, 2.0f) + Mathf.Pow(rayDirection.x, 2.0f), 0.5f);
+		float cosAngle = Mathf.Abs(rayDirection.x) / Mathf.Pow (Mathf.Pow(rayDirection.y, 2.0f) + Mathf.Pow(rayDirection.x, 2.0f), 0.5f);
 
 		float deltaX = radius * sinAngle;
 		float deltaY = radius * cosAngle;
 		return new Vector2 (deltaX, deltaY);
 	}
 
+	void endPointerFromEdgeRays(RaycastHit2D collider, Vector3 midRayPoint) {
+		horizontalReflection = false;
+		rockOffsets = pointerOffsets (rayDirection, horizontalReflection);	//find offsets of pointer vertex due to rock thickness
+		float colliderXpos = pointerXpos(midRayPoint, rayDirection, collider.point.y);
+		//add point with offsets taken into account
+		nextColliderPoint = new Vector3 (colliderXpos + rockOffsets.x, collider.point.y + rockOffsets.y);
+		pointerVertices.Add (nextColliderPoint);
 
+	}
 
 	//first point after initial rock
 	void addFirstColliderPoint() {
@@ -199,10 +198,47 @@ public class getPointerVertices : MonoBehaviour {
 	//update last collider point, next collider and next collider point
 	void setNextCollider() {
 		setRayDirection();
+		//Debug.Log (rayDirection);
+		rayOffsets = getRayOffsets ();
+		raycastEdges (nextColliderPoint);
 		collidersFound = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
-		nextCollider = getNextCollider (collidersFound, nextColliderPoint, rayDirection);
-		nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, nextColliderPoint);
-		checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
+
+
+		if (topCollidersFound.Length > 0) {
+			if (collidersFound.Length > 0) {
+				if (topCollidersFound [0].collider != collidersFound [0].collider) {
+					if (topCollidersFound [0].point.y < collidersFound [0].point.y) {
+						endPointerFromEdgeRays (topCollidersFound [0], nextColliderPoint);
+					}
+				}
+			} else {
+				endPointerFromEdgeRays (topCollidersFound [0], nextColliderPoint);
+			}
+		}
+
+		if (horizontalReflection) {
+			nextCollider = getNextCollider (collidersFound, nextColliderPoint, rayDirection);
+			nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, nextColliderPoint);
+			checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
+		}
+
+		if (horizontalReflection) {
+			if (botCollidersFound.Length > 0) {
+				if (collidersFound.Length > 0) {
+					if (botCollidersFound [0].collider != collidersFound [0].collider) {
+						endPointerFromEdgeRays (botCollidersFound [0], nextColliderPoint);
+					}
+				} else {
+					endPointerFromEdgeRays (botCollidersFound [0], nextColliderPoint);
+				}
+			}
+		}
+
+		if (horizontalReflection) {
+			nextCollider = getNextCollider (collidersFound, nextColliderPoint, rayDirection);
+			nextColliderPoint = getNextColliderPoint (nextCollider, rayDirection, nextColliderPoint);
+			checkRockIsWithinColliderBounds (nextCollider, nextColliderPoint);
+		}
 	}
 
 	void setRayDirection() {
