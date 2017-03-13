@@ -15,8 +15,7 @@ public class splatOnTouch : MonoBehaviour {
 		{
 			//find touch position
 			Vector3 touchPosScreen = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-			Vector2 touchPos = new Vector2(touchPosScreen.x, touchPosScreen.y);
-
+			Vector3 touchPos = new Vector3(touchPosScreen.x, touchPosScreen.y);
 			//if touch position is overlapping object box collider, object is set to inactive
 			if (GetComponent<BoxCollider2D>() == Physics2D.OverlapPoint(touchPos))
 			{

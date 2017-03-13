@@ -10,6 +10,7 @@ public class projectileShoot : MonoBehaviour {
 	public Vector3 spawnPosition;	//rock spawn position
 	public GameObject splatters;	//blood splatter of caterpillars
 	public Rigidbody2D rockSimulation;	//gameObject which will simulate rock being shot to generate line for pointer
+	public int shotsWithPointer;
 
 	private AudioSource throwSound;	//sound when rock launches
 	private AudioSource splatSound; //sound when caterpillar dies
@@ -115,8 +116,8 @@ public class projectileShoot : MonoBehaviour {
 			fingerDown = true;
 			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
-			//only draw pointer for first 3 rocks
-			if (rockManager.Instance.rockNumber < 10) {
+			//only draw pointer for first 6 rocks
+			if (rockManager.Instance.rockNumber <= shotsWithPointer) {
 				drawPointer = true;
 			}
 		}
