@@ -45,6 +45,20 @@ public class getPointerVertices : MonoBehaviour {
 
 		raycastEdges (transform.position);
 
+		if (collidersFound.Length == 1) {
+			if (botCollidersFound.Length == 1 && topCollidersFound.Length == 1) {
+				if (topCollidersFound [0].point.y < botCollidersFound [0].point.y) {
+					endPointerFromEdgeRays (topCollidersFound [0], transform.position);
+				} else {
+					endPointerFromEdgeRays (botCollidersFound [0], transform.position);
+				}
+			} else if (botCollidersFound.Length == 1) {
+				endPointerFromEdgeRays (botCollidersFound [0], transform.position);
+			} else if (topCollidersFound.Length == 1) {
+				endPointerFromEdgeRays (topCollidersFound [0], transform.position);
+			}
+		}
+/*
 		if ((topCollidersFound.Length == 1 && collidersFound.Length == 1) || (botCollidersFound.Length == 1 && collidersFound.Length == 1)) {
 			if (topCollidersFound [0].point.y < botCollidersFound [0].point.y) {
 				endPointerFromEdgeRays (topCollidersFound [0], transform.position);
@@ -52,6 +66,7 @@ public class getPointerVertices : MonoBehaviour {
 				endPointerFromEdgeRays (botCollidersFound [0], transform.position);
 			}
 		}
+		*/
 //		if (botCollidersFound.Length == 1 && collidersFound.Length == 1) {
 			//causes line to end prematurely sometimes. Should implement offset checker for this.
 //			endPointerFromEdgeRays (botCollidersFound [0], transform.position);
@@ -73,6 +88,33 @@ public class getPointerVertices : MonoBehaviour {
 			}
 //new stuff
 //			Debug.Log(collidersFound[1].point);
+
+			if (topCollidersFound.Length > 0 && botCollidersFound.Length > 0) {
+				if (collidersFound [1].collider != topCollidersFound [0].collider || collidersFound [1].collider != botCollidersFound [0].collider) {
+					if (botCollidersFound [0].point.y < topCollidersFound [0].point.y) {
+						if (botCollidersFound [0].point.y < collidersFound [1].point.y) {
+							horizontalReflection = false;
+							endPointerFromEdgeRays (botCollidersFound [0], transform.position);
+						}
+					} else {
+						if (topCollidersFound [0].point.y < collidersFound [1].point.y) {
+							horizontalReflection = false;
+							endPointerFromEdgeRays (topCollidersFound [0], transform.position);
+						}
+					}
+				}
+			} else if (topCollidersFound.Length > 0) {
+				if (collidersFound [1].collider != topCollidersFound [0].collider && topCollidersFound [0].point.y < collidersFound [1].point.y) {
+					horizontalReflection = false;
+					endPointerFromEdgeRays (topCollidersFound [0], transform.position);
+				}
+			} else if (botCollidersFound.Length > 0) {
+				if (collidersFound [1].collider != botCollidersFound [0].collider && botCollidersFound [0].point.y < collidersFound [1].point.y) {
+					horizontalReflection = false;
+					endPointerFromEdgeRays (botCollidersFound [0], transform.position);
+				}
+			}
+/*
 			if (collidersFound [1].collider != topCollidersFound [0].collider || collidersFound [1].collider != botCollidersFound [0].collider) {
 				if (botCollidersFound [0].point.y < topCollidersFound [0].point.y) {
 					if (botCollidersFound [0].point.y < collidersFound [1].point.y) {
@@ -85,7 +127,7 @@ public class getPointerVertices : MonoBehaviour {
 						endPointerFromEdgeRays (topCollidersFound [0], transform.position);
 					}
 				}
-			}
+			}*/
 //
 			if (horizontalReflection) {
 				rockOffsets = pointerOffsets (rayDirection, reflectsInX(collidersFound[1]));	//find offsets of pointer vertex due to rock thickness
