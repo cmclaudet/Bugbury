@@ -20,7 +20,7 @@ public class projectileShoot : MonoBehaviour {
 
 	private LineRenderer middleLine;
 	private SpringJoint2D spring;
-	private float radius;
+	public float radius{ get; set; }
 	private bool fingerDown = false;	//becomes true when screen touched in active shooting area
 
 	private Bounds shootingSpace;		//space player is allowed to draw slingshot back into
@@ -64,10 +64,7 @@ public class projectileShoot : MonoBehaviour {
 		}
 
 		if (drawPointer) {
-			updatePointer ();
-//			Rigidbody2D invisibleRock = Instantiate(rockSimulation);
-//			invisibleRock.GetComponent<drawPointer> ().actualRock = this.gameObject;
-
+			GetComponent<getPointerVertices> ().updatePointer ();
 		}
 
 		//when player releases their finger after having put it down through drag function, shooting is triggered
@@ -121,114 +118,6 @@ public class projectileShoot : MonoBehaviour {
 			//only draw pointer for first 3 rocks
 			if (rockManager.Instance.rockNumber < 10) {
 				drawPointer = true;
-			}
-		}
-	}
-
-	/* Draws pointer from rock up to top of the screen showing player where their shot will go
-	 * Creates raycast to find next collidable object. Adds this object point to the pointer vertices.
-	 * Tests whether there is another object to be collided with after this one by finding x position at the top of the screen from following the ray the last object's collision would create
-	 * If x position is within the screen width there are no further objects to collide with and a ray is drawn between the last object and the top of the screen
-	*/
-	void updatePointer() {
-		//find direction between rock and spring anchor (pointer direction)
-		Vector3 rayDirection = springAnchor.transform.position - transform.position;
-
-		//find colliders that ray intersects with and add initial vertex
-		RaycastHit2D[] collidersFound = Physics2D.RaycastAll (transform.position, rayDirection);
-		List<Vector3> pointerVertices = new List<Vector3>();
-		pointerVertices.Add(collidersFound [0].point);
-
-		//if ray finds another collider besides initial rock a second ray must be cast
-		if (collidersFound.Length > 1) {
-			//add point from last collider found to pointer vertices
-			Vector3 lastPoint = collidersFound [1].point;
-			lastPoint = new Vector3 (lastPoint.x + pointerXOffset (rayDirection), lastPoint.y);
-			pointerVertices.Add (lastPoint);
-
-			//find new colliders from new ray direction
-			rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
-			RaycastHit2D[] colliders = Physics2D.RaycastAll (lastPoint, new Vector3 (rayDirection.x, rayDirection.y));
-			Vector3 nextColliderPoint = setNextColliderPoint (colliders, lastPoint, rayDirection);
-
-
-			//if next collider y position is different to last one, need to cast another ray onto another collider
-			while (nextColliderPoint.y != lastPoint.y) {
-				//add next collider to pointer vertices
-				pointerVertices.Add (nextColliderPoint);
-				rayDirection = new Vector3 (-rayDirection.x, rayDirection.y);
-				colliders = Physics2D.RaycastAll (nextColliderPoint, new Vector3 (rayDirection.x, rayDirection.y));
-				lastPoint = nextColliderPoint;
-
-				nextColliderPoint = setNextColliderPoint (colliders, lastPoint, rayDirection);
-			}
-		}
-
-		//lastXPos will be inside screen bounds if rock's next destination is off the screen from the top or bottom
-		float endXPos = pointerXpos(pointerVertices[pointerVertices.Count-1], rayDirection, ScreenVariables.worldHeight);
-		pointerVertices.Add (new Vector3 (endXPos, ScreenVariables.worldHeight));
-
-		drawPointerLine (pointerVertices);
-
-	}
-
-	//finds x position at certain y value given the equation of a line
-	float pointerXpos(Vector3 point, Vector3 dir, float yPos) {
-		Vector3 p1 = point;
-		Vector3 p2 = point + dir;
-		float m = (p2.y - p1.y) / (p2.x - p1.x);
-		float c = p1.y - m * p1.x;
-		float XPos = (yPos - c) / m;
-		return XPos;
-	}
-
-	//find point of next collider
-	Vector3 setNextColliderPoint(RaycastHit2D[] colliders, Vector3 lastPoint, Vector3 rayDirection) {
-		Vector3 nextColliderPoint;
-		switch (colliders.Length) {
-		case 0:
-			nextColliderPoint = lastPoint;
-			break;
-		case 1:
-			if (colliders [0].point.y != lastPoint.y) {
-				nextColliderPoint = colliders [0].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerXOffset (rayDirection), nextColliderPoint.y);
-			} else {
-				nextColliderPoint = lastPoint;
-			}
-			break;
-		default:
-			if (colliders [0].point.y != lastPoint.y) {
-				nextColliderPoint = colliders [0].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerXOffset (rayDirection), nextColliderPoint.y);
-			} else {
-				nextColliderPoint = colliders [1].point;
-				nextColliderPoint = new Vector3 (nextColliderPoint.x + pointerXOffset (rayDirection), nextColliderPoint.y);
-			}
-			break;
-		}
-		return nextColliderPoint;
-	}
-
-	float pointerXOffset(Vector3 rayDirection) {
-		if (rayDirection.x > 0) {
-			return -2.0f*radius;
-		} else {
-			return 2.0f*radius;
-		}
-	}
-
-	//adds points on pointer to line renderer so they can be drawn out
-	void drawPointerLine(List<Vector3> pointerVertices) {
-		//set pointer indices equal to points at which ray intersects walls
-		LineRenderer[] allRenderers = GetComponentsInChildren<LineRenderer> ();
-		LineRenderer pointer;
-		foreach (LineRenderer renderer in allRenderers) {
-			if (renderer.gameObject != this.gameObject) {
-				pointer = renderer;
-				pointer.numPositions = pointerVertices.Count;
-				pointer.SetPositions (pointerVertices.ToArray());
-
 			}
 		}
 	}
@@ -303,10 +192,7 @@ public class projectileShoot : MonoBehaviour {
 				caterpillarManager.Instance.levelEnd = true;
 			}
 		//if rock hits wall make tink sound
-		} else if (col.gameObject.CompareTag ("wall")) {
-			tinkSound.pitch = Random.Range (1.2f, 1.6f);
-			tinkSound.Play ();
-		}
+		} 
 	}
 
 	void updateScores(Collider2D col) {
@@ -348,5 +234,12 @@ public class projectileShoot : MonoBehaviour {
 			newScore += scoreCount.Instance.farShotBonus;
 		}
 		return newScore;
+	}
+
+	void OnCollisionEnter2D(Collision2D col) {
+		if (col.gameObject.CompareTag ("wall")) {
+			tinkSound.pitch = Random.Range (1.2f, 1.6f);
+			tinkSound.Play ();
+		}
 	}
 }
