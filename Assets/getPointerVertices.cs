@@ -347,9 +347,24 @@ public class getPointerVertices : MonoBehaviour {
 			if (renderer.gameObject != this.gameObject) {
 				pointer = renderer;
 				pointer.numPositions = pointerVertices.Count;
-				pointer.SetPositions (pointerVertices.ToArray());
 
+				float pointerMagnitude = getPointerMagnitude ();
+				pointer.material.SetTextureOffset("_MainTex", new Vector2(-Time.timeSinceLevelLoad, 0f));
+				pointer.material.SetTextureScale("_MainTex", new Vector2(pointerMagnitude, 1f));
+
+				pointer.SetPositions (pointerVertices.ToArray());
+				Debug.Log (pointerMagnitude);
 			}
 		}
+	}
+
+	float getPointerMagnitude() {
+		float pointerMagnitude = 0;
+		for (int i = 0; i < pointerVertices.Count; i++) {
+			if (i != 0) {
+				pointerMagnitude += (pointerVertices [i] - pointerVertices [i - 1]).magnitude;
+			}
+		}
+		return pointerMagnitude;
 	}
 }
