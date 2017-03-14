@@ -3671,7 +3671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.80700004, y: 0.9527816}
   m_AnchorMax: {x: 0.8795001, y: 0.99666214}
-  m_AnchoredPosition: {x: -0.3000183, y: -0.1529541}
+  m_AnchoredPosition: {x: -0.30004883, y: -0.1529541}
   m_SizeDelta: {x: -1.5999985, y: -0.48199844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1918306749
@@ -3951,6 +3951,16 @@ Prefab:
       propertyPath: m_ConnectedRigidBody
       value: 
       objectReference: {fileID: 1714009865}
+    - target: {fileID: 120641520176757126, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
+        type: 2}
+      propertyPath: m_Parameters.textureMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120641520176757126, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
+        type: 2}
+      propertyPath: m_Parameters.alignment
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e1a4dd8042d74d7396bb196ddfbbde0, type: 2}
   m_IsPrefabParent: 0
