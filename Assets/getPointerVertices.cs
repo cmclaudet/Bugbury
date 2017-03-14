@@ -10,6 +10,7 @@ using UnityEngine;
 	 * offset between contact point of ray and collider and the rock position on contact due to rock thickness is calculated and used when casting the next ray
 	 * If offset means rock will actually not land within the collider when the ray says it will, horizontal reflection is set to false so no pointer is cast
 	 * Once there are no longer any objects found ray is drawn between last object and the top of the screen where the rock will go through.
+	 * Pointer also shortens as player shoots until it disappears entirely
 	*/
 public class getPointerVertices : MonoBehaviour {
 	private float radius;
@@ -346,18 +347,24 @@ public class getPointerVertices : MonoBehaviour {
 		foreach (LineRenderer renderer in allRenderers) {
 			if (renderer.gameObject != this.gameObject) {
 				pointer = renderer;
+				if (rockManager.Instance.rockNumber != 1) {
+					fadePointer ();
+				}
+
 				pointer.numPositions = pointerVertices.Count;
 
+				//offset texture with time so that it dashed line moves
+				//scale texture with pointer magnitude so that individual dashes do not change size
 				float pointerMagnitude = getPointerMagnitude ();
 				pointer.material.SetTextureOffset("_MainTex", new Vector2(-Time.timeSinceLevelLoad, 0f));
 				pointer.material.SetTextureScale("_MainTex", new Vector2(pointerMagnitude, 1f));
 
 				pointer.SetPositions (pointerVertices.ToArray());
-				Debug.Log (pointerMagnitude);
+
 			}
 		}
 	}
-
+		
 	float getPointerMagnitude() {
 		float pointerMagnitude = 0;
 		for (int i = 0; i < pointerVertices.Count; i++) {
@@ -367,4 +374,44 @@ public class getPointerVertices : MonoBehaviour {
 		}
 		return pointerMagnitude;
 	}
+
+	//make pointer shorten the more shots the player has fired
+	void fadePointer() {
+		int currentShot = rockManager.Instance.rockNumber;
+		float finishLine = caterpillarManager.Instance.finishLine;
+		float maxHeightFraction = 1;
+		//find fraction of total shooting area height the pointer will reach. The higher the current shot the lower the pointer will go.
+		maxHeightFraction = 1.0f - ((float)currentShot - 1.0f) / GetComponentInParent<projectileShoot> ().shotsWithPointer;
+		
+		//y position the pointer will reach
+		float yPos = finishLine + maxHeightFraction * (ScreenVariables.worldHeight - finishLine);
+
+		int totalVertices = pointerVertices.Count;
+		bool xPosNotFoundYet = true;
+		float xPos = 0;
+
+		//removes all pointer vertices larger than yPos
+		//Using the direction along the point at which yPos is and the final point under yPos, x position of final pointer point can be found
+		for (int i = 0; i < totalVertices; i++) {
+			if (pointerVertices[i].y > yPos) {
+				if (xPosNotFoundYet) {
+					xPos = pointerXpos (pointerVertices [i], pointerVertices [i] - pointerVertices [i - 1], yPos);
+					xPosNotFoundYet = false;
+				}
+				pointerVertices.Remove (pointerVertices[i]);
+				totalVertices -= 1;
+				i -= 1;
+
+			}
+		}
+
+		//if x position is found add final point to vertices
+		//if x position is not found this is not necessary as all points in the pointer were below the maximum y point anyway
+		if (!xPosNotFoundYet) {
+			Vector3 pointerEnd = new Vector3 (xPos, yPos);
+			pointerVertices.Add (pointerEnd);
+		}
+	}
+
+
 }
