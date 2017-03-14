@@ -377,14 +377,8 @@ public class getPointerVertices : MonoBehaviour {
 
 	//make pointer shorten the more shots the player has fired
 	void fadePointer() {
-		int currentShot = rockManager.Instance.rockNumber;
-		float finishLine = caterpillarManager.Instance.finishLine;
-		float maxHeightFraction = 1;
-		//find fraction of total shooting area height the pointer will reach. The higher the current shot the lower the pointer will go.
-		maxHeightFraction = 1.0f - ((float)currentShot - 1.0f) / GetComponentInParent<projectileShoot> ().shotsWithPointer;
-		
-		//y position the pointer will reach
-		float yPos = finishLine + maxHeightFraction * (ScreenVariables.worldHeight - finishLine);
+		//get y position of final vertex on pointer
+		float yPos = pointerEndYpos ();
 
 		int totalVertices = pointerVertices.Count;
 		bool xPosNotFoundYet = true;
@@ -413,5 +407,14 @@ public class getPointerVertices : MonoBehaviour {
 		}
 	}
 
+	float pointerEndYpos() {
+		int currentShot = rockManager.Instance.rockNumber;
+		float finishLine = caterpillarManager.Instance.finishLine;
+		float maxHeightFraction = 1;
+		//find fraction of total shooting area height the pointer will reach. The higher the current shot the lower the pointer will go.
+		maxHeightFraction = 1.0f - ((float)currentShot - 1.0f) / GetComponentInParent<projectileShoot> ().shotsWithPointer;
+		float yPos = finishLine + maxHeightFraction * (ScreenVariables.worldHeight - finishLine);
+		return yPos;
+	}
 
 }
