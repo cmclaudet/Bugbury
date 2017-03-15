@@ -20,6 +20,7 @@ public class projectileShoot : MonoBehaviour {
 	private GameObject springAnchor;
 
 	private LineRenderer middleLine;
+	private LineRenderer pointer;
 	private SpringJoint2D spring;
 	public float radius{ get; set; }
 	private bool fingerDown = false;	//becomes true when screen touched in active shooting area
@@ -52,7 +53,8 @@ public class projectileShoot : MonoBehaviour {
 		setupShootingSpace ();
 		GetComponent<Rigidbody2D> ().mass = 0.0001f;
 		GetComponent<SpringJoint2D> ().connectedBody = springAnchor.GetComponent<Rigidbody2D>();
-
+		LineRenderer[] renderers = GetComponentsInChildren<LineRenderer> ();
+		pointer = renderers [1];
 	}
 	
 	// Update is called once per frame
@@ -74,8 +76,8 @@ public class projectileShoot : MonoBehaviour {
 			drawPointer = false;
 			shoot ();
 			//line renderer showing pointer is inactivated
-			LineRenderer[] renderers = GetComponentsInChildren<LineRenderer> ();
-			renderers [1].gameObject.SetActive (false);
+
+			pointer.gameObject.SetActive (false);
 			throwSound.Play ();
 		}
 
@@ -250,5 +252,10 @@ public class projectileShoot : MonoBehaviour {
 		fingerDown = false;
 		updateLineRenderer ();
 		drawPointer = false;
+		pointer.gameObject.SetActive (false);
+	}
+
+	public void reactivatePointer() {
+		pointer.gameObject.SetActive (true);
 	}
 }

@@ -88,6 +88,7 @@ public class rockManager : MonoBehaviour {
 		if (timeSinceMiss >= coolDownOnMiss) {
 			lifeManager.Instance.control = true;
 			missedShot = false;
+			activeRock.GetComponent<projectileShoot> ().reactivatePointer ();
 		}
 	}
 }
