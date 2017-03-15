@@ -45,6 +45,7 @@ public class projectileShoot : MonoBehaviour {
 		rightSlingshot = rockManager.Instance.slingshotRight;
 		springAnchor = rockManager.Instance.springAnchor;
 		rockManager.Instance.rockNumber += 1;
+		rockManager.Instance.activeRock = gameObject;
 
 		transform.position = spawnPosition;
 		setupLineRenderer ();
@@ -242,5 +243,12 @@ public class projectileShoot : MonoBehaviour {
 			tinkSound.pitch = Random.Range (1.2f, 1.6f);
 			tinkSound.Play ();
 		}
+	}
+
+	public void resetRock() {
+		transform.position = spawnPosition;
+		fingerDown = false;
+		updateLineRenderer ();
+		drawPointer = false;
 	}
 }
