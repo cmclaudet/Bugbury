@@ -32,6 +32,8 @@ public class rockManager : MonoBehaviour {
 
 	private GameObject[] allRocks;
 	private float rockRadius;
+	private float timeSinceMiss;
+	private bool missedShot;
 
 	void Awake() {
 		_instance = this;
@@ -39,6 +41,8 @@ public class rockManager : MonoBehaviour {
 
 	void Start() {
 		rockRadius = rocks.GetComponent<CircleCollider2D> ().radius;
+		timeSinceMiss = 0;
+		missedShot = false;
 	}
 
 	// Update is called once per frame
@@ -56,14 +60,30 @@ public class rockManager : MonoBehaviour {
 				allRocks [i].SetActive (false);
 				resetMaxPlayerStreak ();
 				scoreCount.Instance.playerCombo = 0;
+
+				timeSinceMiss = 0;
+				missedShot = true;
+				lifeManager.Instance.control = false;
 			}
 		}
-		
+
+		if (missedShot) {
+			startCoolDown ();
+		}
 	}
 
 	void resetMaxPlayerStreak() {
 		if (scoreCount.Instance.playerCombo > scoreCount.Instance.maxPlayerStreak) {
 			scoreCount.Instance.maxPlayerStreak = scoreCount.Instance.playerCombo;
+		}
+	}
+
+	void startCoolDown() {
+		timeSinceMiss += Time.deltaTime;
+
+		if (timeSinceMiss >= coolDownOnMiss) {
+			lifeManager.Instance.control = true;
+			missedShot = false;
 		}
 	}
 }
