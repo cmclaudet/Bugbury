@@ -20,12 +20,14 @@ public class rockManager : MonoBehaviour {
 
 	//values are set from setSceneVars gameobject and grabbed from projectileShoot script on rock prefab
 	public Rigidbody2D rocks;
+	public Transform missedText;
 	public GameObject slingshotLeft;
 	public GameObject slingshotRight;
 	public GameObject springAnchor;
 	public GameObject throwSound;
 	public GameObject tinkSound;
 	public GameObject splatSounds;
+	public GameObject missedSound;
 	public GameObject activeRock;		//rock that player has slung on slingshot
 	public float coolDownOnMiss;
 	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
@@ -59,6 +61,7 @@ public class rockManager : MonoBehaviour {
 		for (int i = 0; i < allRocks.Length; i++) {
 			if ((allRocks [i].transform.position.y > (ScreenVariables.worldHeight + rockRadius)) || (allRocks[i].transform.position.y < (-ScreenVariables.worldHeight - rockRadius))) {
 				allRocks [i].SetActive (false);
+				instantiateMissText (allRocks[i]);
 				resetMaxPlayerStreak ();
 				scoreCount.Instance.playerCombo = 0;
 
@@ -90,5 +93,23 @@ public class rockManager : MonoBehaviour {
 			missedShot = false;
 			activeRock.GetComponent<projectileShoot> ().reactivateRock ();
 		}
+	}
+
+	void instantiateMissText(GameObject missedRock) {
+		float textYpos = 0;
+		float textXpos = 0;
+		if (missedRock.transform.position.y > 0) {
+			textYpos = (missedRock.transform.position.y - 0.3f);
+		} else {
+			textYpos = (missedRock.transform.position.y + 0.3f);
+		}
+		if (missedRock.transform.position.x > 0) {
+			textXpos = (missedRock.transform.position.x - 0.5f);
+		} else {
+			textXpos = (missedRock.transform.position.x + 0.5f);
+		}
+
+		Vector3 missTextPos = new Vector3 (textXpos, textYpos);
+		Instantiate (missedText, missTextPos);
 	}
 }

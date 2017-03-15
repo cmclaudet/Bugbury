@@ -102,6 +102,7 @@ public class projectileShoot : MonoBehaviour {
 		AudioSource[] splatSounds = splatSoundsObj.GetComponentsInChildren<AudioSource> ();
 		splatSound = splatSounds [Random.Range (0, splatSounds.Length - 1)];
 		splatSound.pitch = Random.Range (0.8f, 1.2f);
+
 	}
 
 	void drag()
