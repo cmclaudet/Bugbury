@@ -20,7 +20,7 @@ public class setGameObjects : MonoBehaviour {
 		rockManager.Instance.throwSound = throwSound;
 		rockManager.Instance.splatSounds = splatSounds;
 		rockManager.Instance.tinkSound = tinkSound;
-		rockManager.Instance.tinkSound = missedSound;
+		rockManager.Instance.missedSound = missedSound;
 
 	}
 

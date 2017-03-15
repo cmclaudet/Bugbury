@@ -62,6 +62,7 @@ public class rockManager : MonoBehaviour {
 			if ((allRocks [i].transform.position.y > (ScreenVariables.worldHeight + rockRadius)) || (allRocks[i].transform.position.y < (-ScreenVariables.worldHeight - rockRadius))) {
 				allRocks [i].SetActive (false);
 				instantiateMissText (allRocks[i]);
+				missedSound.GetComponent<AudioSource> ().Play ();
 				resetMaxPlayerStreak ();
 				scoreCount.Instance.playerCombo = 0;
 
@@ -99,9 +100,9 @@ public class rockManager : MonoBehaviour {
 		float textYpos = 0;
 		float textXpos = 0;
 		if (missedRock.transform.position.y > 0) {
-			textYpos = (missedRock.transform.position.y - 0.3f);
+			textYpos = (ScreenVariables.worldHeight - 0.3f);
 		} else {
-			textYpos = (missedRock.transform.position.y + 0.3f);
+			textYpos = (-ScreenVariables.worldHeight + 0.3f);
 		}
 		if (missedRock.transform.position.x > 0) {
 			textXpos = (missedRock.transform.position.x - 0.5f);
@@ -110,6 +111,6 @@ public class rockManager : MonoBehaviour {
 		}
 
 		Vector3 missTextPos = new Vector3 (textXpos, textYpos);
-		Instantiate (missedText, missTextPos);
+		Instantiate (missedText, missTextPos, Quaternion.identity);
 	}
 }
