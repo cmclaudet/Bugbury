@@ -35,8 +35,7 @@ public class rockManager : MonoBehaviour {
 
 	private GameObject[] allRocks;
 	private float rockRadius;
-	private float timeSinceMiss;
-	private bool missedShot;
+	public bool startCoolDown;
 
 	void Awake() {
 		_instance = this;
@@ -44,8 +43,7 @@ public class rockManager : MonoBehaviour {
 
 	void Start() {
 		rockRadius = rocks.GetComponent<CircleCollider2D> ().radius;
-		timeSinceMiss = 0;
-		missedShot = false;
+		startCoolDown = false;
 	}
 
 	// Update is called once per frame
@@ -61,22 +59,23 @@ public class rockManager : MonoBehaviour {
 		for (int i = 0; i < allRocks.Length; i++) {
 			if ((allRocks [i].transform.position.y > (ScreenVariables.worldHeight + rockRadius)) || (allRocks[i].transform.position.y < (-ScreenVariables.worldHeight - rockRadius))) {
 				allRocks [i].SetActive (false);
-				instantiateMissText (allRocks[i]);
-				missedSound.GetComponent<AudioSource> ().Play ();
+//				instantiateMissText (allRocks[i]);
+//				missedSound.GetComponent<AudioSource> ().Play ();
 				resetMaxPlayerStreak ();
 				scoreCount.Instance.playerCombo = 0;
 
 				//reset time since player missed and reset active rock's position
-				timeSinceMiss = 0;
-				missedShot = true;
-				lifeManager.Instance.control = false;
-				activeRock.GetComponent<projectileShoot> ().resetRock ();
+//				timeSinceMiss = 0;
+//				missedShot = true;
+//				lifeManager.Instance.control = false;
+//				activeRock.GetComponent<projectileShoot> ().resetRock ();
 			}
 		}
 
-		if (missedShot) {
-			startCoolDown ();
+		if (startCoolDown) {
+
 		}
+
 	}
 
 	void resetMaxPlayerStreak() {
@@ -85,6 +84,12 @@ public class rockManager : MonoBehaviour {
 		}
 	}
 
+	void recolorSlingshot() {
+		slingshotLeft.GetComponent<SpriteRenderer> ().color = Color.white;
+		slingshotRight.GetComponent<SpriteRenderer> ().color = Color.white;
+		lifeManager.Instance.control = true;
+	}
+/*
 	void startCoolDown() {
 		timeSinceMiss += Time.deltaTime;
 
@@ -112,5 +117,7 @@ public class rockManager : MonoBehaviour {
 
 		Vector3 missTextPos = new Vector3 (textXpos, textYpos);
 		Instantiate (missedText, missTextPos, Quaternion.identity);
-	}
+	}*/
+
+
 }
