@@ -11,6 +11,7 @@ public class projectileShoot : MonoBehaviour {
 	public GameObject splatters;	//blood splatter of caterpillars
 	public Rigidbody2D rockSimulation;	//gameObject which will simulate rock being shot to generate line for pointer
 	public int shotsWithPointer;
+	public float fadedColor;		//color slingshot fades to when not useable
 
 	private AudioSource throwSound;	//sound when rock launches
 	private AudioSource splatSound; //sound when caterpillar dies
@@ -253,9 +254,22 @@ public class projectileShoot : MonoBehaviour {
 		updateLineRenderer ();
 		drawPointer = false;
 		pointer.gameObject.SetActive (false);
+
+		Color faded = new Color (fadedColor, fadedColor, fadedColor);
+		setNewColor (faded);
 	}
 
-	public void reactivatePointer() {
-		pointer.gameObject.SetActive (true);
+	void setNewColor(Color newColor) {
+		leftSlingshot.GetComponent<SpriteRenderer> ().color = newColor;
+		rightSlingshot.GetComponent<SpriteRenderer> ().color = newColor;
+		GetComponent<SpriteRenderer> ().color = newColor;
+		middleLine.startColor = newColor;
+		middleLine.endColor = newColor;
 	}
+
+	public void reactivateRock() {
+		pointer.gameObject.SetActive (true);
+		setNewColor (Color.white);
+	}
+
 }

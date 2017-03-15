@@ -3962,6 +3962,11 @@ Prefab:
       propertyPath: m_Parameters.alignment
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
+        type: 2}
+      propertyPath: fadedColor
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e1a4dd8042d74d7396bb196ddfbbde0, type: 2}
   m_IsPrefabParent: 0
