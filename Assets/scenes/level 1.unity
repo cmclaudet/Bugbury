@@ -1600,6 +1600,7 @@ MonoBehaviour:
   farBonus: 3
   minVelocity: 0.4
   maxVelocity: 0.8
+  coolDownOnMiss: 1
   totalCaterpillars: 10
 --- !u!4 &1081278979
 Transform:

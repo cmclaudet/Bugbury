@@ -26,6 +26,7 @@ public class rockManager : MonoBehaviour {
 	public GameObject throwSound;
 	public GameObject tinkSound;
 	public GameObject splatSounds;
+	public float coolDownOnMiss;
 	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
 	public int rockNumber = 0;
 
