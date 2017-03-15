@@ -62,9 +62,11 @@ public class rockManager : MonoBehaviour {
 				resetMaxPlayerStreak ();
 				scoreCount.Instance.playerCombo = 0;
 
+				//reset time since player missed and reset active rock's position
 				timeSinceMiss = 0;
 				missedShot = true;
 				lifeManager.Instance.control = false;
+				activeRock.GetComponent<projectileShoot> ().resetRock ();
 			}
 		}
 
@@ -82,6 +84,7 @@ public class rockManager : MonoBehaviour {
 	void startCoolDown() {
 		timeSinceMiss += Time.deltaTime;
 
+		//once cooldown has passed player can again control the slingshot
 		if (timeSinceMiss >= coolDownOnMiss) {
 			lifeManager.Instance.control = true;
 			missedShot = false;
