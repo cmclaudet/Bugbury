@@ -29,14 +29,15 @@ public class rockManager : MonoBehaviour {
 	public GameObject splatSounds;
 	public GameObject missedSound;
 	public GameObject activeRock;		//rock that player has slung on slingshot
-	public float coolDownOnMiss;
 	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
 	public int rockNumber = 0;
 
 	private GameObject[] allRocks;
 	private float rockRadius;
-	private float timeSinceMiss;
-	private bool missedShot;
+
+	public bool startCoolDown;
+	public float coolDownOnMiss;
+	private float timeSinceLastShot = 0;
 
 	void Awake() {
 		_instance = this;
@@ -44,8 +45,7 @@ public class rockManager : MonoBehaviour {
 
 	void Start() {
 		rockRadius = rocks.GetComponent<CircleCollider2D> ().radius;
-		timeSinceMiss = 0;
-		missedShot = false;
+		startCoolDown = false;
 	}
 
 	// Update is called once per frame
@@ -61,22 +61,23 @@ public class rockManager : MonoBehaviour {
 		for (int i = 0; i < allRocks.Length; i++) {
 			if ((allRocks [i].transform.position.y > (ScreenVariables.worldHeight + rockRadius)) || (allRocks[i].transform.position.y < (-ScreenVariables.worldHeight - rockRadius))) {
 				allRocks [i].SetActive (false);
-				instantiateMissText (allRocks[i]);
-				missedSound.GetComponent<AudioSource> ().Play ();
 				resetMaxPlayerStreak ();
 				scoreCount.Instance.playerCombo = 0;
 
-				//reset time since player missed and reset active rock's position
-				timeSinceMiss = 0;
-				missedShot = true;
-				lifeManager.Instance.control = false;
-				activeRock.GetComponent<projectileShoot> ().resetRock ();
 			}
 		}
 
-		if (missedShot) {
-			startCoolDown ();
+		if (startCoolDown) {
+			timeSinceLastShot += Time.deltaTime;
+
+			if (timeSinceLastShot >= coolDownOnMiss) {
+				recolorSlingshot ();
+				startCoolDown = false;
+				timeSinceLastShot = 0;
+				makeRockNow = true;
+			}
 		}
+
 	}
 
 	void resetMaxPlayerStreak() {
@@ -85,32 +86,11 @@ public class rockManager : MonoBehaviour {
 		}
 	}
 
-	void startCoolDown() {
-		timeSinceMiss += Time.deltaTime;
-
-		//once cooldown has passed player can again control the slingshot
-		if (timeSinceMiss >= coolDownOnMiss) {
-			lifeManager.Instance.control = true;
-			missedShot = false;
-			activeRock.GetComponent<projectileShoot> ().reactivateRock ();
-		}
+	void recolorSlingshot() {
+		slingshotLeft.GetComponent<SpriteRenderer> ().color = Color.white;
+		slingshotRight.GetComponent<SpriteRenderer> ().color = Color.white;
+		lifeManager.Instance.control = true;
 	}
 
-	void instantiateMissText(GameObject missedRock) {
-		float textYpos = 0;
-		float textXpos = 0;
-		if (missedRock.transform.position.y > 0) {
-			textYpos = (ScreenVariables.worldHeight - 0.3f);
-		} else {
-			textYpos = (-ScreenVariables.worldHeight + 0.3f);
-		}
-		if (missedRock.transform.position.x > 0) {
-			textXpos = (missedRock.transform.position.x - 0.5f);
-		} else {
-			textXpos = (missedRock.transform.position.x + 0.5f);
-		}
 
-		Vector3 missTextPos = new Vector3 (textXpos, textYpos);
-		Instantiate (missedText, missTextPos, Quaternion.identity);
-	}
 }

@@ -9,8 +9,7 @@ public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;	//insert desired speed for rocks
 	public Vector3 spawnPosition;	//rock spawn position
 	public GameObject splatters;	//blood splatter of caterpillars
-	public Rigidbody2D rockSimulation;	//gameObject which will simulate rock being shot to generate line for pointer
-	public int shotsWithPointer;
+	public int shotsWithPointer;	//number of initial shots with pointer displayed
 	public float fadedColor;		//color slingshot fades to when not useable
 
 	private AudioSource throwSound;	//sound when rock launches
@@ -30,7 +29,7 @@ public class projectileShoot : MonoBehaviour {
 
 	private bool rockGen = true;
 	private bool drawPointer = false;	//becomes true when pointer needs to be drawn (when player drags rock back)
-	private GameObject activePointer;
+
 
 	void Awake() {
 		spring = GetComponent<SpringJoint2D> ();
@@ -77,17 +76,19 @@ public class projectileShoot : MonoBehaviour {
 			drawPointer = false;
 			shoot ();
 			//line renderer showing pointer is inactivated
-
 			pointer.gameObject.SetActive (false);
 			throwSound.Play ();
+			lifeManager.Instance.control = false;
 		}
 
 		//when rock exits the slingshot shooting zone launch is triggered
-		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
+		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y && rockGen) {
 			launch ();
-			makeAnotherRock ();
+			fadeSlingshot ();
+			rockGen = false;
+			rockManager.Instance.startCoolDown = true;
 		}
-			
+
 	}
 
 	void setupSounds() {
@@ -121,7 +122,7 @@ public class projectileShoot : MonoBehaviour {
 			fingerDown = true;
 			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
-			//only draw pointer for first 6 rocks
+			//only draw pointer for first few rocks
 			if (rockManager.Instance.rockNumber <= shotsWithPointer) {
 				drawPointer = true;
 			}
@@ -142,13 +143,6 @@ public class projectileShoot : MonoBehaviour {
 		GetComponent<SpringJoint2D> ().enabled = false;
 		GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
 		middleLine.enabled = false;
-	}
-
-	void makeAnotherRock() {
-		if (rockGen) {
-			rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
-		}
-		rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
 	}
 
 	//set line renderer's 4 points
@@ -249,28 +243,10 @@ public class projectileShoot : MonoBehaviour {
 		}
 	}
 
-	public void resetRock() {
-		transform.position = spawnPosition;
-		fingerDown = false;
-		updateLineRenderer ();
-		drawPointer = false;
-		pointer.gameObject.SetActive (false);
-
+	void fadeSlingshot() {
 		Color faded = new Color (fadedColor, fadedColor, fadedColor);
-		setNewColor (faded);
-	}
-
-	void setNewColor(Color newColor) {
-		leftSlingshot.GetComponent<SpriteRenderer> ().color = newColor;
-		rightSlingshot.GetComponent<SpriteRenderer> ().color = newColor;
-		GetComponent<SpriteRenderer> ().color = newColor;
-		middleLine.startColor = newColor;
-		middleLine.endColor = newColor;
-	}
-
-	public void reactivateRock() {
-		pointer.gameObject.SetActive (true);
-		setNewColor (Color.white);
+		leftSlingshot.GetComponent<SpriteRenderer> ().color = faded;
+		rightSlingshot.GetComponent<SpriteRenderer> ().color = faded;
 	}
 
 }
