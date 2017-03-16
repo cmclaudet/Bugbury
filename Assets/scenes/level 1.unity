@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374751605bb6f4031a3b7e4782115931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farBonus: 3
+  farBonus: 5
   minVelocity: 0.4
   maxVelocity: 0.8
   coolDownOnMiss: 1
@@ -1771,7 +1771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   star1Frac: 5
   star2Frac: 3
-  star3Frac: 1.5
+  star3Frac: 1.9
 --- !u!1 &1139264870
 GameObject:
   m_ObjectHideFlags: 0

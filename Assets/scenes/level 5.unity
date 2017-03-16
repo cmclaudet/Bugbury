@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   star1Frac: 6
   star2Frac: 4
-  star3Frac: 1.5
+  star3Frac: 2.3
 --- !u!114 &440147142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374751605bb6f4031a3b7e4782115931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  farBonus: 11
+  farBonus: 18
   minVelocity: 0.8
   maxVelocity: 1.1
   coolDownOnMiss: 1
