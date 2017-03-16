@@ -33,6 +33,7 @@ public class go : MonoBehaviour {
 			GetComponent<RectTransform> ().gameObject.SetActive (false);
 			lifeManager.Instance.control = true;
 			pauseButton.interactable = true;
+			caterpillarManager.Instance.levelStart = true;
 		}
 	}
 }

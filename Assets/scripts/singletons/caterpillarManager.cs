@@ -34,6 +34,7 @@ public class caterpillarManager : MonoBehaviour {
 
 	public int currentSpawn{ get; set; }	//number of the most recent caterpillar
 	public bool levelEnd{ get; set; }		//triggers end menu when true
+	public bool levelStart{get;set;}
 	public int caterpillarsInactivated{ get; set; }		//equals caterpillars killed + caterpillars passed over finish line
 	public int caterpillarsKilled{ get; set; }			//total caterpillars player successfully killed
 	private float minimunY;			//minimum possible y value for caterpillars before going inactive
@@ -56,6 +57,7 @@ public class caterpillarManager : MonoBehaviour {
 	void Start() {
 		currentSpawn = 0;
 		levelEnd = false;
+		levelStart = false;
 		caterpillarsInactivated = 0;
 		caterpillarsKilled = 0;
 		findAllBugs ();		//finds all caterpillars currently in heirarchy
@@ -67,7 +69,7 @@ public class caterpillarManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (!levelEnd) {
+		if (levelStart) {
 			timeSinceSpawn += Time.deltaTime;
 		}
 
