@@ -14,7 +14,7 @@ public class move : MonoBehaviour {
 	private float ySize;	//offset of caterpillar
 	private float yheadPos;	//position of caterpillar head from body in world co-ordinates
 
-	public float yMin { get; set; }	//minimum y value for caterpillar to be active. must be calculated here as makes use of caterpillar body length values.
+//	public float yMin { get; set; }	//minimum y value for caterpillar to be active. must be calculated here as makes use of caterpillar body length values.
 
 	private int totalCaterpillars;
 	private float finishLine;
@@ -45,9 +45,6 @@ public class move : MonoBehaviour {
 	void setupPosition() {
 		yOffset = GetComponent<BoxCollider2D> ().offset.y;
 		ySize = GetComponent<BoxCollider2D> ().size.y/2;
-
-		yMin = transform.TransformPoint (new Vector3 (0, ySize - yOffset, 0)).y;
-		yMin = - ScreenVariables.worldHeight - yMin;	//used in manage caterpillar script
 
 		//finding x and y pos for caterpillar
 		float yWorldDim = transform.TransformPoint (new Vector3 (0, yOffset + ySize, 0)).y;	//offset from screenheight spawn pos to make caterpillar spawn off the screen

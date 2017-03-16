@@ -36,7 +36,7 @@ public class caterpillarManager : MonoBehaviour {
 	public bool levelEnd{ get; set; }		//triggers end menu when true
 	public int caterpillarsInactivated{ get; set; }		//equals caterpillars killed + caterpillars passed over finish line
 	public int caterpillarsKilled{ get; set; }			//total caterpillars player successfully killed
-	private float minimunY{get;set;}			//minimum possible y value for caterpillars before going inactive
+	private float minimunY;			//minimum possible y value for caterpillars before going inactive
 
 	public GameObject levelComplete{ get; set; }
 
@@ -59,6 +59,7 @@ public class caterpillarManager : MonoBehaviour {
 		caterpillarsInactivated = 0;
 		caterpillarsKilled = 0;
 		findAllBugs ();		//finds all caterpillars currently in heirarchy
+		minimunY = findMinY();
 
 		timeSinceSpawn = spawnFrequency;	//set so that caterpillar spawns right away
 		timeAfterEnd = 0;
@@ -66,7 +67,7 @@ public class caterpillarManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (lifeManager.Instance.control) {
+		if (!levelEnd) {
 			timeSinceSpawn += Time.deltaTime;
 		}
 
@@ -82,9 +83,6 @@ public class caterpillarManager : MonoBehaviour {
 			}
 		}
 
-		if (lifeManager.Instance.control) {	//can only be done when control is true as before this there are no caterpillars to grab minimum y value from
-			findMinY ();
-		}
 
 		for (int i = 0; i < allCaterpillars.Length; i++) {
 			//inactivates caterpillars if they have surpassed finish line
@@ -130,9 +128,16 @@ public class caterpillarManager : MonoBehaviour {
 		allCaterpillars = GameObject.FindGameObjectsWithTag ("caterpillar");
 	}
 
-	void findMinY() {
-		minimunY = allCaterpillars [0].GetComponent<move> ().yMin;
-		minimunY += (ScreenVariables.worldHeight + finishLine);
+	float findMinY() {
+		float yOffset = caterpillars.GetComponent<BoxCollider2D> ().offset.y;
+		float ySize = caterpillars.GetComponent<BoxCollider2D> ().size.y/2;
+
+		float yMin = transform.TransformPoint (new Vector3 (0, ySize - yOffset, 0)).y;
+		yMin = - ScreenVariables.worldHeight - yMin;
+
+		//minimunY = allCaterpillars [0].GetComponent<move> ().yMin;
+		yMin += (ScreenVariables.worldHeight + finishLine);
+		return yMin;
 	}
 
 	public void resetMaxStreak() {
