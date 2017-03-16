@@ -8,12 +8,14 @@ public class setLevelVariables : MonoBehaviour {
 	public int farBonus;
 	public float minVelocity;
 	public float maxVelocity;
+	public float coolDownOnMiss;
 	public int totalCaterpillars;
 	// Use this for initialization
 	void Awake () {
 		scoreCount.Instance.farShotBonus = farBonus;
 		caterpillarManager.Instance.minVel = minVelocity;
 		caterpillarManager.Instance.maxVel = maxVelocity;
+		rockManager.Instance.coolDownOnMiss = coolDownOnMiss;
 		caterpillarManager.Instance.totalCaterpillars = totalCaterpillars;
 	}
 

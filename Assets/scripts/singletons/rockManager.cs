@@ -20,17 +20,24 @@ public class rockManager : MonoBehaviour {
 
 	//values are set from setSceneVars gameobject and grabbed from projectileShoot script on rock prefab
 	public Rigidbody2D rocks;
+	public Transform missedText;
 	public GameObject slingshotLeft;
 	public GameObject slingshotRight;
 	public GameObject springAnchor;
 	public GameObject throwSound;
 	public GameObject tinkSound;
 	public GameObject splatSounds;
+	public GameObject missedSound;
+	public GameObject activeRock;		//rock that player has slung on slingshot
 	public bool makeRockNow = false;	//ensures rocks do not infinitely instantiate
 	public int rockNumber = 0;
 
 	private GameObject[] allRocks;
 	private float rockRadius;
+
+	public bool startCoolDown;
+	public float coolDownOnMiss;
+	private float timeSinceLastShot = 0;
 
 	void Awake() {
 		_instance = this;
@@ -38,6 +45,7 @@ public class rockManager : MonoBehaviour {
 
 	void Start() {
 		rockRadius = rocks.GetComponent<CircleCollider2D> ().radius;
+		startCoolDown = false;
 	}
 
 	// Update is called once per frame
@@ -55,9 +63,21 @@ public class rockManager : MonoBehaviour {
 				allRocks [i].SetActive (false);
 				resetMaxPlayerStreak ();
 				scoreCount.Instance.playerCombo = 0;
+
 			}
 		}
-		
+
+		if (startCoolDown) {
+			timeSinceLastShot += Time.deltaTime;
+
+			if (timeSinceLastShot >= coolDownOnMiss) {
+				recolorSlingshot ();
+				startCoolDown = false;
+				timeSinceLastShot = 0;
+				makeRockNow = true;
+			}
+		}
+
 	}
 
 	void resetMaxPlayerStreak() {
@@ -65,4 +85,12 @@ public class rockManager : MonoBehaviour {
 			scoreCount.Instance.maxPlayerStreak = scoreCount.Instance.playerCombo;
 		}
 	}
+
+	void recolorSlingshot() {
+		slingshotLeft.GetComponent<SpriteRenderer> ().color = Color.white;
+		slingshotRight.GetComponent<SpriteRenderer> ().color = Color.white;
+		lifeManager.Instance.control = true;
+	}
+
+
 }

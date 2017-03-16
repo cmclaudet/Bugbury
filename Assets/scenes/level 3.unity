@@ -1347,6 +1347,7 @@ MonoBehaviour:
   throwSound: {fileID: 290219786}
   tinkSound: {fileID: 1955738901}
   splatSounds: {fileID: 1926380659}
+  missedSound: {fileID: 0}
 --- !u!114 &702104802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,6 +1362,7 @@ MonoBehaviour:
   rocks: {fileID: 50435492825116804, guid: 5e1a4dd8042d74d7396bb196ddfbbde0, type: 2}
   caterpillars: {fileID: 50329199488362526, guid: d680205b3e643574094ef82e2d68b7a3,
     type: 2}
+  missedText: {fileID: 0}
 --- !u!114 &702104803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,6 +1377,7 @@ MonoBehaviour:
   farBonus: 7
   minVelocity: 0.6
   maxVelocity: 1
+  coolDownOnMiss: 1
   totalCaterpillars: 20
 --- !u!4 &702104804
 Transform:

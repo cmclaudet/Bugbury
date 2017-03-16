@@ -9,8 +9,8 @@ public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;	//insert desired speed for rocks
 	public Vector3 spawnPosition;	//rock spawn position
 	public GameObject splatters;	//blood splatter of caterpillars
-	public Rigidbody2D rockSimulation;	//gameObject which will simulate rock being shot to generate line for pointer
-	public int shotsWithPointer;
+	public int shotsWithPointer;	//number of initial shots with pointer displayed
+	public float fadedColor;		//color slingshot fades to when not useable
 
 	private AudioSource throwSound;	//sound when rock launches
 	private AudioSource splatSound; //sound when caterpillar dies
@@ -20,6 +20,7 @@ public class projectileShoot : MonoBehaviour {
 	private GameObject springAnchor;
 
 	private LineRenderer middleLine;
+	private LineRenderer pointer;
 	private SpringJoint2D spring;
 	public float radius{ get; set; }
 	private bool fingerDown = false;	//becomes true when screen touched in active shooting area
@@ -28,7 +29,7 @@ public class projectileShoot : MonoBehaviour {
 
 	private bool rockGen = true;
 	private bool drawPointer = false;	//becomes true when pointer needs to be drawn (when player drags rock back)
-	private GameObject activePointer;
+
 
 	void Awake() {
 		spring = GetComponent<SpringJoint2D> ();
@@ -45,13 +46,15 @@ public class projectileShoot : MonoBehaviour {
 		rightSlingshot = rockManager.Instance.slingshotRight;
 		springAnchor = rockManager.Instance.springAnchor;
 		rockManager.Instance.rockNumber += 1;
+		rockManager.Instance.activeRock = gameObject;
 
 		transform.position = spawnPosition;
 		setupLineRenderer ();
 		setupShootingSpace ();
 		GetComponent<Rigidbody2D> ().mass = 0.0001f;
 		GetComponent<SpringJoint2D> ().connectedBody = springAnchor.GetComponent<Rigidbody2D>();
-
+		LineRenderer[] renderers = GetComponentsInChildren<LineRenderer> ();
+		pointer = renderers [1];
 	}
 	
 	// Update is called once per frame
@@ -73,17 +76,19 @@ public class projectileShoot : MonoBehaviour {
 			drawPointer = false;
 			shoot ();
 			//line renderer showing pointer is inactivated
-			LineRenderer[] renderers = GetComponentsInChildren<LineRenderer> ();
-			renderers [1].gameObject.SetActive (false);
+			pointer.gameObject.SetActive (false);
 			throwSound.Play ();
+			lifeManager.Instance.control = false;
 		}
 
 		//when rock exits the slingshot shooting zone launch is triggered
-		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
+		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y && rockGen) {
 			launch ();
-			makeAnotherRock ();
+			fadeSlingshot ();
+			rockGen = false;
+			rockManager.Instance.startCoolDown = true;
 		}
-			
+
 	}
 
 	void setupSounds() {
@@ -98,6 +103,7 @@ public class projectileShoot : MonoBehaviour {
 		AudioSource[] splatSounds = splatSoundsObj.GetComponentsInChildren<AudioSource> ();
 		splatSound = splatSounds [Random.Range (0, splatSounds.Length - 1)];
 		splatSound.pitch = Random.Range (0.8f, 1.2f);
+
 	}
 
 	void drag()
@@ -116,7 +122,7 @@ public class projectileShoot : MonoBehaviour {
 			fingerDown = true;
 			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
-			//only draw pointer for first 6 rocks
+			//only draw pointer for first few rocks
 			if (rockManager.Instance.rockNumber <= shotsWithPointer) {
 				drawPointer = true;
 			}
@@ -137,13 +143,6 @@ public class projectileShoot : MonoBehaviour {
 		GetComponent<SpringJoint2D> ().enabled = false;
 		GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
 		middleLine.enabled = false;
-	}
-
-	void makeAnotherRock() {
-		if (rockGen) {
-			rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
-		}
-		rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
 	}
 
 	//set line renderer's 4 points
@@ -243,4 +242,11 @@ public class projectileShoot : MonoBehaviour {
 			tinkSound.Play ();
 		}
 	}
+
+	void fadeSlingshot() {
+		Color faded = new Color (fadedColor, fadedColor, fadedColor);
+		leftSlingshot.GetComponent<SpriteRenderer> ().color = faded;
+		rightSlingshot.GetComponent<SpriteRenderer> ().color = faded;
+	}
+
 }

@@ -416,5 +416,4 @@ public class getPointerVertices : MonoBehaviour {
 		float yPos = finishLine + maxHeightFraction * (ScreenVariables.worldHeight - finishLine);
 		return yPos;
 	}
-
 }
