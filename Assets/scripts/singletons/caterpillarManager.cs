@@ -131,14 +131,7 @@ public class caterpillarManager : MonoBehaviour {
 	}
 
 	float findMinY() {
-		float yOffset = caterpillars.GetComponent<BoxCollider2D> ().offset.y;
-		float ySize = caterpillars.GetComponent<BoxCollider2D> ().size.y/2;
-
-		float yMin = transform.TransformPoint (new Vector3 (0, ySize - yOffset, 0)).y;
-		yMin = - ScreenVariables.worldHeight - yMin;
-
-		//minimunY = allCaterpillars [0].GetComponent<move> ().yMin;
-		yMin += (ScreenVariables.worldHeight + finishLine);
+		float yMin = finishLine - 0.5f;
 		return yMin;
 	}
 
