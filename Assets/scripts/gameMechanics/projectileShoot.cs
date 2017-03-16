@@ -188,8 +188,10 @@ public class projectileShoot : MonoBehaviour {
 			updateScores (col);
 			this.gameObject.SetActive (false);
 			//if player kills final caterpillar level ends
-			if (caterpillarManager.Instance.caterpillarsInactivated == caterpillarManager.Instance.totalCaterpillars) {
-				caterpillarManager.Instance.levelEnd = true;
+			if (!caterpillarManager.Instance.endlessLevel) {
+				if (caterpillarManager.Instance.caterpillarsInactivated == caterpillarManager.Instance.totalCaterpillars) {
+					caterpillarManager.Instance.levelEnd = true;
+				}
 			}
 		//if rock hits wall make tink sound
 		} 

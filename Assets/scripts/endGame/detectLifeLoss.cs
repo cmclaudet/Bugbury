@@ -23,12 +23,15 @@ public class detectLifeLoss : MonoBehaviour {
 	private Transform gameOverSign;
 	private float cameraLifeShakeDuration = 0.2f;
 
+	private bool endless;
+
 	void Awake() {
 		lifeManager.Instance.camera = gameObject;
 	}
 
 	// Use this for initialization
 	void Start () {
+		endless = caterpillarManager.Instance.endlessLevel;
 		Time.timeScale = 1.0f;
 		gameOverNotDone = true;
 
