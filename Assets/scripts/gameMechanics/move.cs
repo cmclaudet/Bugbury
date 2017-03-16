@@ -19,6 +19,9 @@ public class move : MonoBehaviour {
 	private int totalCaterpillars;
 	private float finishLine;
 
+	private bool endless;
+	private float velocityIncrement;
+
 	// Use this for initialization
 	void Awake () {
 		//grab caterpillar manager values
@@ -27,6 +30,8 @@ public class move : MonoBehaviour {
 		maxVelocity = caterpillarManager.Instance.maxVel;
 		totalCaterpillars = caterpillarManager.Instance.totalCaterpillars;
 		finishLine = caterpillarManager.Instance.finishLine;
+		endless = caterpillarManager.Instance.endlessLevel;
+		velocityIncrement = caterpillarManager.Instance.velocityIncrement;
 
 		setupPosition ();
 		setIncreasedSpeed ();
@@ -59,9 +64,14 @@ public class move : MonoBehaviour {
 	//set up speed based on the caterpillar spawn number
 	//speed starts at minVel and increases linearly to maxVel with spawn number
 	void setIncreasedSpeed() {
-		float deltaVelocity = (maxVelocity - minVelocity) / totalCaterpillars;
-		int currentCaterpillar = caterpillarManager.Instance.currentSpawn;
-		float speed = minVelocity + currentCaterpillar * deltaVelocity;
+		float speed = 0;
+		if (endless) {
+			speed = minVelocity + caterpillarManager.Instance.currentSpawn * velocityIncrement;
+		} else {
+			float deltaVelocity = (maxVelocity - minVelocity) / totalCaterpillars;
+			int currentCaterpillar = caterpillarManager.Instance.currentSpawn;
+			speed = minVelocity + currentCaterpillar * deltaVelocity;
+		}
 		GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -speed, 0);
 	}
 }

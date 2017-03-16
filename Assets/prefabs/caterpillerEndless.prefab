@@ -290,10 +290,10 @@ GameObject:
   - component: {fileID: 114000012024974604}
   - component: {fileID: 50329199488362526}
   - component: {fileID: 61298472464426388}
-  - component: {fileID: 114458088591150952}
   - component: {fileID: 114697436439251882}
+  - component: {fileID: 114023775477565310}
   m_Layer: 9
-  m_Name: caterpiller
+  m_Name: caterpillerEndless
   m_TagString: caterpillar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingOrder: 2
   applySpriterZOrder: 0
---- !u!114 &114458088591150952
+--- !u!114 &114023775477565310
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013432531862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3329c9f944ee4d4098e112c0ecaa7c7, type: 3}
+  m_Script: {fileID: 11500000, guid: e6f44d1e12d4742999c71b1f1e5a2ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114697436439251882

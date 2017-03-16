@@ -29,6 +29,7 @@ public class caterpillarManager : MonoBehaviour {
 	//values are set in the inspector and set to this class as they are scene specific
 	public float minVel { get; set; }		//minimum possible velocity for caterpillar
 	public float maxVel { get; set; }		//max possible velocity for caterpillar
+	public float velocityIncrement{get;set;}	//used for endless mode. Amount caterpillar speed increases by each spawn.
 	public int totalCaterpillars{ get; set; }	//total caterpillars for this level
 	public Rigidbody2D caterpillars{ get; set; }	//caterpillar prefab
 
@@ -49,6 +50,8 @@ public class caterpillarManager : MonoBehaviour {
 	private bool setupNotDone = true;	//ensures end menu is not repeatedley instantiated
 
 	private float timeAfterEnd;		//counts time passed since final caterpillar is inactivated
+
+	public bool endlessLevel;
 
 	void Awake() {
 		_instance = this;
@@ -99,9 +102,11 @@ public class caterpillarManager : MonoBehaviour {
 				findAllBugs ();		//recount caterpillars after inactivation
 
 				//ends level once all caterpillars are inactivated
-				if (caterpillarsInactivated == totalCaterpillars) {
-					lifeManager.Instance.control = false;
-					levelEnd = true;
+				if (!endlessLevel) {
+					if (caterpillarsInactivated == totalCaterpillars) {
+						lifeManager.Instance.control = false;
+						levelEnd = true;
+					}
 				}
 			}
 		}
