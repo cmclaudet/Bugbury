@@ -9,8 +9,7 @@ public class projectileShoot : MonoBehaviour {
 	public float velocityMagnitude;	//insert desired speed for rocks
 	public Vector3 spawnPosition;	//rock spawn position
 	public GameObject splatters;	//blood splatter of caterpillars
-	public Rigidbody2D rockSimulation;	//gameObject which will simulate rock being shot to generate line for pointer
-	public int shotsWithPointer;
+	public int shotsWithPointer;	//number of initial shots with pointer displayed
 	public float fadedColor;		//color slingshot fades to when not useable
 
 	private AudioSource throwSound;	//sound when rock launches
@@ -30,11 +29,7 @@ public class projectileShoot : MonoBehaviour {
 
 	private bool rockGen = true;
 	private bool drawPointer = false;	//becomes true when pointer needs to be drawn (when player drags rock back)
-	private GameObject activePointer;
 
-	private float totalCoolDownTime;
-	private float timeSinceShot = 0;
-	private bool startCoolDown = false;
 
 	void Awake() {
 		spring = GetComponent<SpringJoint2D> ();
@@ -87,7 +82,7 @@ public class projectileShoot : MonoBehaviour {
 		}
 
 		//when rock exits the slingshot shooting zone launch is triggered
-		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y) {
+		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y && rockGen) {
 			launch ();
 			fadeSlingshot ();
 			rockGen = false;
@@ -127,7 +122,7 @@ public class projectileShoot : MonoBehaviour {
 			fingerDown = true;
 			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
 
-			//only draw pointer for first 6 rocks
+			//only draw pointer for first few rocks
 			if (rockManager.Instance.rockNumber <= shotsWithPointer) {
 				drawPointer = true;
 			}
@@ -149,13 +144,6 @@ public class projectileShoot : MonoBehaviour {
 		GetComponent<Rigidbody2D> ().velocity = velocityMagnitude * GetComponent<Rigidbody2D> ().velocity.normalized;
 		middleLine.enabled = false;
 	}
-	/*
-	void makeAnotherRock() {
-		if (rockGen) {
-			rockManager.Instance.makeRockNow = true;	//changes value in rock manager to instantiate another rock
-		}
-		rockGen = false;	//set to false to differentiate between launched rocks and not launched rocks
-	}*/
 
 	//set line renderer's 4 points
 	void setupLineRenderer() {
