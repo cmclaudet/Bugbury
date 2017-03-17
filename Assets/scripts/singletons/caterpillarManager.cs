@@ -78,13 +78,14 @@ public class caterpillarManager : MonoBehaviour {
 
 		//instantiate caterpillar when time has elapsed over spawn frequency
 		if (timeSinceSpawn > spawnFrequency && levelOngoing) {
-			if (currentSpawn < totalCaterpillars) {
-				Instantiate (caterpillars);
-				timeSinceSpawn = 0;
-				currentSpawn += 1;
-				calculateSpawnTime ();	//find spawn time for next caterpillar
+			if (endlessLevel) {
+				makeAnotherCaterpillar ();
 			} else {
-				levelOngoing = false;
+				if (currentSpawn < totalCaterpillars) {
+					makeAnotherCaterpillar ();
+				} else {
+					levelOngoing = false;
+				}
 			}
 		}
 
@@ -120,6 +121,13 @@ public class caterpillarManager : MonoBehaviour {
 				setupNotDone = false;
 			}
 		}
+	}
+
+	void makeAnotherCaterpillar() {
+		Instantiate (caterpillars);
+		timeSinceSpawn = 0;
+		currentSpawn += 1;
+		calculateSpawnTime ();	//find spawn time for next caterpillar
 	}
 
 	void calculateSpawnTime() {
