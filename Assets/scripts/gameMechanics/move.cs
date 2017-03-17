@@ -65,11 +65,11 @@ public class move : MonoBehaviour {
 	//speed starts at minVel and increases linearly to maxVel with spawn number
 	void setIncreasedSpeed() {
 		float speed = 0;
+		int currentCaterpillar = caterpillarManager.Instance.currentSpawn;
 		if (endless) {
-			speed = minVelocity + caterpillarManager.Instance.currentSpawn * velocityIncrement;
+			speed = minVelocity + currentCaterpillar * velocityIncrement;
 		} else {
 			float deltaVelocity = (maxVelocity - minVelocity) / totalCaterpillars;
-			int currentCaterpillar = caterpillarManager.Instance.currentSpawn;
 			speed = minVelocity + currentCaterpillar * deltaVelocity;
 		}
 		GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -speed, 0);
