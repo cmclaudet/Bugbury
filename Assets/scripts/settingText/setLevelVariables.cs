@@ -8,6 +8,7 @@ public class setLevelVariables : MonoBehaviour {
 	public int farBonus;
 	public float minVelocity;
 	public float maxVelocity;
+	public float velocityIncrement;
 	public float coolDownOnMiss;
 	public int totalCaterpillars;
 
@@ -17,6 +18,7 @@ public class setLevelVariables : MonoBehaviour {
 		scoreCount.Instance.farShotBonus = farBonus;
 		caterpillarManager.Instance.minVel = minVelocity;
 		caterpillarManager.Instance.maxVel = maxVelocity;
+		caterpillarManager.Instance.velocityIncrement = velocityIncrement;
 		rockManager.Instance.coolDownOnMiss = coolDownOnMiss;
 		caterpillarManager.Instance.totalCaterpillars = totalCaterpillars;
 		caterpillarManager.Instance.endlessLevel = endlessLevel;
