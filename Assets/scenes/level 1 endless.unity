@@ -1337,6 +1337,8 @@ MonoBehaviour:
   pauseButton: {fileID: 1924707628}
   completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
+  completeMessageEndless: {fileID: 224256179553984670, guid: c859cff33099144c896f4b2be7d0727b,
+    type: 2}
   canvas: {fileID: 1770821641}
   bam: {fileID: 318686599}
 --- !u!4 &881261686
@@ -3607,6 +3609,7 @@ MonoBehaviour:
   pauseButton: {fileID: 1924707628}
   canvas: {fileID: 1770821641}
   hurtSound: {fileID: 435618072}
+  levelComplete: {fileID: 881261684}
 --- !u!1001 &1856601265
 Prefab:
   m_ObjectHideFlags: 0

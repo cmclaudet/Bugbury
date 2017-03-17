@@ -767,7 +767,7 @@ MonoBehaviour:
   starfill1: {fileID: 0}
   starfill2: {fileID: 0}
   starfill3: {fileID: 0}
-  scoreNumber: {fileID: 224342785158821954, guid: 0ade211f365ec42738dae499ad2e321d,
+  scoreNumber: {fileID: 224342785158821954, guid: 9e89fdb7c0c644d39b21f2e5d085881f,
     type: 2}
   endMessage:
     velocity: 0
@@ -1313,7 +1313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.18030797, y: 0.6618363}
   m_AnchorMax: {x: 0.5135364, y: 0.717}
-  m_AnchoredPosition: {x: -0.81501, y: -0.6522999}
+  m_AnchoredPosition: {x: -0.8150101, y: -0.652298}
   m_SizeDelta: {x: 1.6300049, y: 4.6527023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224411045443076012

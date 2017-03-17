@@ -10,11 +10,15 @@ public class triggerLevelComplete : MonoBehaviour {
 	public GameObject camera;
 	public Button pauseButton;
 	public Transform completeMessage;
+	public Transform completeMessageEndless;
 	public Transform canvas;
 	public AudioSource bam;
 
+	private bool endless;
+
 	void Awake() {
 		caterpillarManager.Instance.levelComplete = gameObject;
+		endless = caterpillarManager.Instance.endlessLevel;
 	}
 
 	//triggered from caterpillar manager singleton
@@ -22,15 +26,25 @@ public class triggerLevelComplete : MonoBehaviour {
 		camera.GetComponent<CameraShake> ().shakeDuration = caterpillarManager.Instance.cameraScoreNumShakeDuration;
 		lifeManager.Instance.control = false;
 		pauseButton.interactable = false;
-
 		caterpillarManager.Instance.resetMaxStreak ();
-		Transform levelDone = Instantiate (completeMessage);
-		levelDone.transform.SetParent (canvas, false);
 
-		//with beatenLevel5 set to true players can be prompted to rate the app in the credits scene
-		//players will not be prompted more than once
-		if (SceneManager.GetActiveScene ().name == "level 5") {
-			highScoreManager.Instance.beatenLevel5 = true;
+		if (endless) {
+			Transform levelEnded = Instantiate (completeMessageEndless);
+			levelEnded.transform.SetParent (canvas, false);
+		} else {
+//			camera.GetComponent<CameraShake> ().shakeDuration = caterpillarManager.Instance.cameraScoreNumShakeDuration;
+//			lifeManager.Instance.control = false;
+//			pauseButton.interactable = false;
+
+//			caterpillarManager.Instance.resetMaxStreak ();
+			Transform levelDone = Instantiate (completeMessage);
+			levelDone.transform.SetParent (canvas, false);
+
+			//with beatenLevel5 set to true players can be prompted to rate the app in the credits scene
+			//players will not be prompted more than once
+			if (SceneManager.GetActiveScene ().name == "level 5") {
+				highScoreManager.Instance.beatenLevel5 = true;
+			}
 		}
 	}
 	
