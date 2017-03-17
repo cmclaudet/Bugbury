@@ -29,13 +29,15 @@ public class highScoreManager : MonoBehaviour {
 		public bool star1;
 		public bool star2;
 		public bool star3;
+		public int HSEndless;
 
-		public level(int Score, bool one, bool two, bool three)
+		public level(int Score, bool one, bool two, bool three, int scoreEndless)
 		{
 			highScore = Score;
 			star1 = one;
 			star2 = two;
 			star3 = three;
+			HSEndless = scoreEndless;
 		}
 	}
 
@@ -54,11 +56,11 @@ public class highScoreManager : MonoBehaviour {
 		_instance = this;
 
 		//all stars start out false
-		One = new level (0, false, false, false);
-		Two = new level (0, false, false, false);
-		Three = new level (0, false, false, false);
-		Four = new level (0, false, false, false);
-		Five = new level (0, false, false, false);
+		One = new level (0, false, false, false, 0);
+		Two = new level (0, false, false, false, 0);
+		Three = new level (0, false, false, false, 0);
+		Four = new level (0, false, false, false, 0);
+		Five = new level (0, false, false, false, 0);
 
 		beatenLevel5 = false;
 		askedForRating = false;
@@ -78,6 +80,12 @@ public class highScoreManager : MonoBehaviour {
 			Three.highScore = currentScores.highScore3;
 			Four.highScore = currentScores.highScore4;
 			Five.highScore = currentScores.highScore5;
+
+			One.HSEndless = currentScores.endlessHS1;
+			Two.highScore = currentScores.endlessHS2;
+			Three.highScore = currentScores.endlessHS3;
+			Four.highScore = currentScores.endlessHS4;
+			Five.highScore = currentScores.endlessHS5;
 
 			One.star1 = currentScores.lvl1star1;
 			Two.star1 = currentScores.lvl2star1;
@@ -116,6 +124,12 @@ public class highScoreManager : MonoBehaviour {
 		newScores.highScore4 = Four.highScore;
 		newScores.highScore5 = Five.highScore;
 
+		newScores.endlessHS1 = One.HSEndless;
+		newScores.endlessHS2 = Two.HSEndless;
+		newScores.endlessHS3 = Three.HSEndless;
+		newScores.endlessHS4 = Four.HSEndless;
+		newScores.endlessHS5 = Five.HSEndless;
+
 		newScores.lvl1star1 = One.star1;
 		newScores.lvl2star1 = Two.star1;
 		newScores.lvl3star1 = Three.star1;
@@ -152,6 +166,12 @@ class playerScores {
 	public int highScore3;
 	public int highScore4;
 	public int highScore5;
+
+	public int endlessHS1;
+	public int endlessHS2;
+	public int endlessHS3;
+	public int endlessHS4;
+	public int endlessHS5;
 
 	public bool lvl1star1;
 	public bool lvl1star2;
