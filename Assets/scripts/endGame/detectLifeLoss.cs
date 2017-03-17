@@ -82,6 +82,7 @@ public class detectLifeLoss : MonoBehaviour {
 
 	void gameOver() {
 		if (endless) {
+			caterpillarManager.Instance.levelOngoing = false;
 			levelComplete.GetComponent<triggerLevelComplete> ().setupEnd ();
 		} else {
 			lifeManager.Instance.control = false;

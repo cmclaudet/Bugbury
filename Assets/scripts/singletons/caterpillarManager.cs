@@ -46,7 +46,7 @@ public class caterpillarManager : MonoBehaviour {
 	private float timeSinceSpawn;
 	private GameObject[] allCaterpillars;
 
-	private bool levelOngoing = true;
+	public bool levelOngoing{ get; set; }
 	private bool setupNotDone = true;	//ensures end menu is not repeatedley instantiated
 
 	private float timeAfterEnd;		//counts time passed since final caterpillar is inactivated
@@ -58,6 +58,7 @@ public class caterpillarManager : MonoBehaviour {
 	}
 
 	void Start() {
+		levelOngoing = true;
 		currentSpawn = 0;
 		levelEnd = false;
 		levelStart = false;

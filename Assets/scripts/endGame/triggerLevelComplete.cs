@@ -18,6 +18,9 @@ public class triggerLevelComplete : MonoBehaviour {
 
 	void Awake() {
 		caterpillarManager.Instance.levelComplete = gameObject;
+	}
+
+	void Start() {
 		endless = caterpillarManager.Instance.endlessLevel;
 	}
 
