@@ -114,7 +114,6 @@ public class resetScores : MonoBehaviour {
 			highScoreManager.Instance.Five = resetEndlessScore (highScoreManager.Instance.Five);
 			break;
 		}
-
 	}
 
 	//resets player high score and player's top star

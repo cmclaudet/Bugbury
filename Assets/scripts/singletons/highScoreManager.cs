@@ -82,10 +82,10 @@ public class highScoreManager : MonoBehaviour {
 			Five.highScore = currentScores.highScore5;
 
 			One.HSEndless = currentScores.endlessHS1;
-			Two.highScore = currentScores.endlessHS2;
-			Three.highScore = currentScores.endlessHS3;
-			Four.highScore = currentScores.endlessHS4;
-			Five.highScore = currentScores.endlessHS5;
+			Two.HSEndless = currentScores.endlessHS2;
+			Three.HSEndless = currentScores.endlessHS3;
+			Four.HSEndless = currentScores.endlessHS4;
+			Five.HSEndless = currentScores.endlessHS5;
 
 			One.star1 = currentScores.lvl1star1;
 			Two.star1 = currentScores.lvl2star1;
@@ -108,7 +108,7 @@ public class highScoreManager : MonoBehaviour {
 			beatenLevel5 = currentScores.beatenLevel5;
 			askedForRating = currentScores.askedForRating;
 		}
-
+	//	Debug.Log (Two.highScore);
 	}
 
 	//saves data when script is destroyed, ie when player exits the game
