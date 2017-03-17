@@ -108,7 +108,6 @@ public class highScoreManager : MonoBehaviour {
 			beatenLevel5 = currentScores.beatenLevel5;
 			askedForRating = currentScores.askedForRating;
 		}
-	//	Debug.Log (Two.highScore);
 	}
 
 	//saves data when script is destroyed, ie when player exits the game

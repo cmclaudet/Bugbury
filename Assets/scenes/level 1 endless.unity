@@ -1709,7 +1709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farBonus: 5
-  minVelocity: 1
+  minVelocity: 0.5
   maxVelocity: 1
   velocityIncrement: 0.03
   coolDownOnMiss: 1
