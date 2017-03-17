@@ -13,6 +13,8 @@ public class detectLifeLoss : MonoBehaviour {
 	public Transform canvas;
 	public AudioSource hurtSound;
 
+	public GameObject levelComplete;
+
 	private Image life1;
 	private Image life2;
 	private Image life3;
@@ -79,13 +81,17 @@ public class detectLifeLoss : MonoBehaviour {
 	}
 
 	void gameOver() {
-		lifeManager.Instance.control = false;
-		pauseButton.interactable = false;
+		if (endless) {
+			levelComplete.GetComponent<triggerLevelComplete> ().setupEnd ();
+		} else {
+			lifeManager.Instance.control = false;
+			pauseButton.interactable = false;
 
-		gameOverSign = Instantiate (gameOverMessage);
-		gameOverSign.transform.SetParent (canvas, false); 
-		gameOverNotDone = false;
-		checkWhenScalingIsDone = true;
+			gameOverSign = Instantiate (gameOverMessage);
+			gameOverSign.transform.SetParent (canvas, false); 
+			gameOverNotDone = false;
+			checkWhenScalingIsDone = true;
+		}
 	} 
 
 	void inactivateBonusText() {
