@@ -12,11 +12,11 @@ public class arcadeAndEndless : MonoBehaviour {
 		string activeScene = SceneManager.GetActiveScene ().name;
 
 		if (activeScene == "levelSelect") {
-			arcade.enabled = false;
-			endless.enabled = true;
+			arcade.interactable = false;
+			endless.interactable = true;
 		} else {
-			arcade.enabled = true;
-			endless.enabled = false;
+			arcade.interactable = true;
+			endless.interactable = false;
 		}
 	}
 	
