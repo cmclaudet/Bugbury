@@ -97,6 +97,21 @@ public class resetScores : MonoBehaviour {
 		case "level 5":
 			highScoreManager.Instance.Five = resetAllScores (highScoreManager.Instance.Five);
 			break;
+		case "level 1 endless":
+			highScoreManager.Instance.One = resetEndlessScore (highScoreManager.Instance.One);
+			break;
+		case "level 2 endless":
+			highScoreManager.Instance.Two = resetEndlessScore (highScoreManager.Instance.Two);
+			break;
+		case "level 3 endless":
+			highScoreManager.Instance.Three = resetEndlessScore (highScoreManager.Instance.Three);
+			break;
+		case "level 4 endless":
+			highScoreManager.Instance.Four = resetEndlessScore (highScoreManager.Instance.Four);
+			break;
+		case "level 5 endless":
+			highScoreManager.Instance.Five = resetEndlessScore (highScoreManager.Instance.Five);
+			break;
 		}
 
 	}
@@ -128,4 +143,10 @@ public class resetScores : MonoBehaviour {
 		return level;
 	}
 
+	highScoreManager.level resetEndlessScore(highScoreManager.level level) {
+		if (playerScore > level.HSEndless) {
+			level.HSEndless = playerScore;
+		}
+		return level;
+	}
 }
