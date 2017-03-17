@@ -1709,8 +1709,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farBonus: 5
-  minVelocity: 0.4
-  maxVelocity: 0.8
+  minVelocity: 1
+  maxVelocity: 1
   velocityIncrement: 0.03
   coolDownOnMiss: 1
   totalCaterpillars: 10

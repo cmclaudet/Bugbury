@@ -15,6 +15,7 @@ public class triggerLevelComplete : MonoBehaviour {
 	public AudioSource bam;
 
 	private bool endless;
+	private GameObject[] caterpillars;
 
 	void Awake() {
 		caterpillarManager.Instance.levelComplete = gameObject;
@@ -30,8 +31,13 @@ public class triggerLevelComplete : MonoBehaviour {
 		lifeManager.Instance.control = false;
 		pauseButton.interactable = false;
 		caterpillarManager.Instance.resetMaxStreak ();
+		caterpillars = GameObject.FindGameObjectsWithTag ("caterpillar");
 
 		if (endless) {
+			foreach (GameObject caterpillar in caterpillars) {
+				caterpillar.GetComponent<Animator>().Stop();
+				caterpillar.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+			}
 			Transform levelEnded = Instantiate (completeMessageEndless);
 			levelEnded.transform.SetParent (canvas, false);
 		} else {

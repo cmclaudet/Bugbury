@@ -52,15 +52,16 @@ public class resetScores : MonoBehaviour {
 			//instantiate score number when score number time delay has passed
 			Transform scoreNum = Instantiate (scoreNumber);
 			scoreNum.SetParent (this.transform, false);
-			GetComponent<setScores> ().setScoreNum (scoreNum);
+			GetComponent<setScores> ().setScoreNum (scoreNum);	//function rewrites score number to player score
 			timePassed = 0;
 			scoreNumInstantiated = true;
 		}
 	}
 
 	void calcScoreDelay() {
-		//6 is used because there are 5 objects which appear before the score number, thus score number order = 6
-		scoreNumDelay = 6 * textDelay;
+		//find order of score text. Score number text order must be one higher than this as it appears staright after socre text.
+		Transform scoreText = transform.Find("score");
+		scoreNumDelay = (scoreText.GetComponent<scaleSetup>().order + 1) * textDelay;
 	}
 
 	//set time delay between instantiation of lvl complete message and text objects

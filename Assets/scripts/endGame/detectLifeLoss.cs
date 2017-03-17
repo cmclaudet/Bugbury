@@ -60,7 +60,6 @@ public class detectLifeLoss : MonoBehaviour {
 				gameOver ();
 			}
 		}
-
 	}
 
 	void Update() {
