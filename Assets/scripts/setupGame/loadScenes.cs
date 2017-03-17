@@ -108,6 +108,41 @@ public class loadScenes : MonoBehaviour {
 		click.Play ();
 	}
 
+	//load from level select
+	public void loadFirstlvlEndless () {
+		destroyMusic ();
+		SceneManager.LoadScene ("level 1 endless");
+		click.Play ();
+	}
+
+	//load from level select
+	public void loadSecondlvlEndless() {
+		destroyMusic ();
+		SceneManager.LoadScene ("level 2 endless");
+		click.Play ();
+	}
+
+	//load from level select
+	public void loadThirdlvlEndless () {
+		destroyMusic ();
+		SceneManager.LoadScene ("level 3 endless");
+		click.Play ();
+	}
+
+	//load from level select
+	public void loadFourthlvlEndless() {
+		destroyMusic ();
+		SceneManager.LoadScene ("level 4 endless");
+		click.Play ();
+	}
+
+	//load from level select
+	public void loadFifthlvlEndless() {
+		destroyMusic ();
+		SceneManager.LoadScene ("level 5 endless");
+		click.Play ();
+	}
+
 	public void loadChooseEndlessLevel() {
 		if (musicManager.Instance.isPlaying) {
 			DontDestroyOnLoad (musicManager.Instance.music);
