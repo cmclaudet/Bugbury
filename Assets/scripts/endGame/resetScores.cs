@@ -20,6 +20,8 @@ public class resetScores : MonoBehaviour {
 	private int star3score;	//necessary score for 3 stars
 
 	private int playerScore;
+	private int maxStreak;
+	private int farShots;
 	private bool needScaling;
 
 	public Transform scoreNumber;		//score number object. must define because this is activated in the script
@@ -31,6 +33,8 @@ public class resetScores : MonoBehaviour {
 
 	void Awake() {
 		playerScore = scoreCount.Instance.playerScore;
+		maxStreak = scoreCount.Instance.maxPlayerStreak;
+		farShots = scoreCount.Instance.farShots;
 		setTextTimeDelays ();
 	}
 
@@ -147,6 +151,13 @@ public class resetScores : MonoBehaviour {
 		if (playerScore > level.HSEndless) {
 			level.HSEndless = playerScore;
 		}
+		if (farShots > level.FSEndless) {
+			level.FSEndless = farShots;
+		}
+		if (maxStreak > level.MSEndless) {
+			level.MSEndless = maxStreak;
+		}
+
 		return level;
 	}
 }
