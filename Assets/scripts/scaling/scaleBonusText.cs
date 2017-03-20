@@ -19,6 +19,7 @@ public class scaleBonusText : MonoBehaviour {
 	private bool needScaling;
 
 	private float timePassed;		//time since text appeared
+	private bool endless;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class scaleBonusText : MonoBehaviour {
 		scaleUp = new blowUpGeneral (vel, acc, minScale);
 
 		timePassed = 0;
+		endless = caterpillarManager.Instance.endlessLevel;
 	}
 
 	// Update is called once per frame
@@ -61,6 +63,18 @@ public class scaleBonusText : MonoBehaviour {
 	void findMaxScale() {
 		int currentCombo = scoreCount.Instance.playerCombo;
 		int numOfCaterpillars = caterpillarManager.Instance.totalCaterpillars;
-		maxScale = minMaxScale + currentCombo*(maxMaxScale - minMaxScale) /numOfCaterpillars;
+		int caterpillarsToMaxSpeed = caterpillarManager.Instance.caterpillarNumToMaxSpeed;
+
+		//if level is endless text enlargement depends on caterpillar number to max speed (number of caterpillars needed for caterpillars to get to max speed) and not total caterpillars
+		//if current combo is larger than caterpillar number to max speed max scale no longer increases
+		if (endless) {
+			if (currentCombo > caterpillarsToMaxSpeed) {
+				maxScale = maxMaxScale;
+			} else {
+				maxScale = minMaxScale + currentCombo * (maxMaxScale - minMaxScale) / caterpillarsToMaxSpeed;
+			}
+		} else {
+			maxScale = minMaxScale + currentCombo * (maxMaxScale - minMaxScale) / numOfCaterpillars;
+		}
 	}
 }
