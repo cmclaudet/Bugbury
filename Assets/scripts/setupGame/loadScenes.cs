@@ -40,15 +40,15 @@ public class loadScenes : MonoBehaviour {
 	//load from level complete
 	public void nextLevel() {
 		if (endless) {
-			for (int i = 0; i < allLevels.Length; i++) {
-				if (SceneManager.GetActiveScene ().name == allLevels [i]) {
-					SceneManager.LoadScene (allLevels [i + 1]);
-				}
-			}
-		} else {
 			for (int i = 0; i < allLevelsEndless.Length; i++) {
 				if (SceneManager.GetActiveScene ().name == allLevelsEndless [i]) {
 					SceneManager.LoadScene (allLevelsEndless [i + 1]);
+				}
+			}
+		} else {
+			for (int i = 0; i < allLevels.Length; i++) {
+				if (SceneManager.GetActiveScene ().name == allLevels [i]) {
+					SceneManager.LoadScene (allLevels [i + 1]);
 				}
 			}
 		}

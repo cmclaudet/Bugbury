@@ -1601,7 +1601,7 @@ MonoBehaviour:
   maxVelocity: 1.8
   coolDownOnMiss: 1
   totalCaterpillars: 15
-  caterpillarNumToMaxSpeed: 20
+  caterpillarNumToMaxSpeed: 25
   endlessLevel: 1
 --- !u!4 &702104804
 Transform:
