@@ -20,7 +20,7 @@ public class move : MonoBehaviour {
 	private float finishLine;
 
 	private bool endless;
-	private float velocityIncrement;
+	private float caterpillarNumToMaxSpeed;
 
 	// Use this for initialization
 	void Awake () {
@@ -31,7 +31,7 @@ public class move : MonoBehaviour {
 		totalCaterpillars = caterpillarManager.Instance.totalCaterpillars;
 		finishLine = caterpillarManager.Instance.finishLine;
 		endless = caterpillarManager.Instance.endlessLevel;
-		velocityIncrement = caterpillarManager.Instance.velocityIncrement;
+		caterpillarNumToMaxSpeed = caterpillarManager.Instance.caterpillarNumToMaxSpeed;
 
 		setupPosition ();
 		setIncreasedSpeed ();
@@ -66,8 +66,17 @@ public class move : MonoBehaviour {
 	void setIncreasedSpeed() {
 		float speed = 0;
 		int currentCaterpillar = caterpillarManager.Instance.currentSpawn;
+
+		//if on endless mode need to use caterpillar number until max speed is hit
 		if (endless) {
-			speed = minVelocity + currentCaterpillar * velocityIncrement;
+			//if current caterpillar number is larger than caterpillar number until max speed set speed equal to max speed
+			//else speed is calculated the same way as in arcade mode but with different total caterpillar number
+			if (currentCaterpillar > caterpillarNumToMaxSpeed) {
+				speed = maxVelocity;
+			} else {
+				float deltaVelocity = (maxVelocity - minVelocity) / caterpillarNumToMaxSpeed;
+				speed = minVelocity + currentCaterpillar * deltaVelocity;
+			}
 		} else {
 			float deltaVelocity = (maxVelocity - minVelocity) / totalCaterpillars;
 			speed = minVelocity + currentCaterpillar * deltaVelocity;

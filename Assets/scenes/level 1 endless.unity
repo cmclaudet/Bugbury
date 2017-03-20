@@ -1711,9 +1711,9 @@ MonoBehaviour:
   farBonus: 5
   minVelocity: 0.5
   maxVelocity: 1
-  velocityIncrement: 0.03
   coolDownOnMiss: 1
   totalCaterpillars: 10
+  caterpillarNumToMaxSpeed: 30
   endlessLevel: 1
 --- !u!4 &1081278979
 Transform:

@@ -29,8 +29,8 @@ public class caterpillarManager : MonoBehaviour {
 	//values are set in the inspector and set to this class as they are scene specific
 	public float minVel { get; set; }		//minimum possible velocity for caterpillar
 	public float maxVel { get; set; }		//max possible velocity for caterpillar
-	public float velocityIncrement{get;set;}	//used for endless mode. Amount caterpillar speed increases by each spawn.
 	public int totalCaterpillars{ get; set; }	//total caterpillars for this level
+	public int caterpillarNumToMaxSpeed{get;set;}	//for endless mode. Number of caterpillars spawned until max speed is hit.
 	public Rigidbody2D caterpillars{ get; set; }	//caterpillar prefab
 
 	public int currentSpawn{ get; set; }	//number of the most recent caterpillar
