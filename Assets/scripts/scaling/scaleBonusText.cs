@@ -23,13 +23,14 @@ public class scaleBonusText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		endless = caterpillarManager.Instance.endlessLevel;
+
 		findMaxScale ();
 		needScaling = true;
 		GetComponent<Transform> ().localScale = new Vector3(minScale, minScale);
 		scaleUp = new blowUpGeneral (vel, acc, minScale);
 
 		timePassed = 0;
-		endless = caterpillarManager.Instance.endlessLevel;
 	}
 
 	// Update is called once per frame
@@ -71,7 +72,7 @@ public class scaleBonusText : MonoBehaviour {
 			if (currentCombo > caterpillarsToMaxSpeed) {
 				maxScale = maxMaxScale;
 			} else {
-				maxScale = minMaxScale + currentCombo * (maxMaxScale - minMaxScale) / caterpillarsToMaxSpeed;
+				maxScale = minMaxScale + (float)currentCombo * (maxMaxScale - minMaxScale) / (float)caterpillarsToMaxSpeed;
 			}
 		} else {
 			maxScale = minMaxScale + currentCombo * (maxMaxScale - minMaxScale) / numOfCaterpillars;
