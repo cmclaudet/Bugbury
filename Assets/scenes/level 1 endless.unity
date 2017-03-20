@@ -1709,11 +1709,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farBonus: 5
-  minVelocity: 0.5
-  maxVelocity: 1
+  minVelocity: 0.6
+  maxVelocity: 1.8
   coolDownOnMiss: 1
   totalCaterpillars: 10
-  caterpillarNumToMaxSpeed: 30
+  caterpillarNumToMaxSpeed: 20
   endlessLevel: 1
 --- !u!4 &1081278979
 Transform:
