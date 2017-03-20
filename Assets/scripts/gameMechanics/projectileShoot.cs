@@ -72,7 +72,7 @@ public class projectileShoot : MonoBehaviour {
 		}
 
 		//when player releases their finger after having put it down through drag function, shooting is triggered
-		if (Input.touchCount == 0 && fingerDown) {
+		if (lifeManager.Instance.control && Input.touchCount == 0 && fingerDown) {
 			drawPointer = false;
 			shoot ();
 			//line renderer showing pointer is inactivated
@@ -188,8 +188,10 @@ public class projectileShoot : MonoBehaviour {
 			updateScores (col);
 			this.gameObject.SetActive (false);
 			//if player kills final caterpillar level ends
-			if (caterpillarManager.Instance.caterpillarsInactivated == caterpillarManager.Instance.totalCaterpillars) {
-				caterpillarManager.Instance.levelEnd = true;
+			if (!caterpillarManager.Instance.endlessLevel) {
+				if (caterpillarManager.Instance.caterpillarsInactivated == caterpillarManager.Instance.totalCaterpillars) {
+					caterpillarManager.Instance.levelEnd = true;
+				}
 			}
 		//if rock hits wall make tink sound
 		} 

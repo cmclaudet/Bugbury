@@ -19,6 +19,9 @@ public class move : MonoBehaviour {
 	private int totalCaterpillars;
 	private float finishLine;
 
+	private bool endless;
+	private float caterpillarNumToMaxSpeed;
+
 	// Use this for initialization
 	void Awake () {
 		//grab caterpillar manager values
@@ -27,6 +30,8 @@ public class move : MonoBehaviour {
 		maxVelocity = caterpillarManager.Instance.maxVel;
 		totalCaterpillars = caterpillarManager.Instance.totalCaterpillars;
 		finishLine = caterpillarManager.Instance.finishLine;
+		endless = caterpillarManager.Instance.endlessLevel;
+		caterpillarNumToMaxSpeed = caterpillarManager.Instance.caterpillarNumToMaxSpeed;
 
 		setupPosition ();
 		setIncreasedSpeed ();
@@ -59,9 +64,23 @@ public class move : MonoBehaviour {
 	//set up speed based on the caterpillar spawn number
 	//speed starts at minVel and increases linearly to maxVel with spawn number
 	void setIncreasedSpeed() {
-		float deltaVelocity = (maxVelocity - minVelocity) / totalCaterpillars;
+		float speed = 0;
 		int currentCaterpillar = caterpillarManager.Instance.currentSpawn;
-		float speed = minVelocity + currentCaterpillar * deltaVelocity;
+
+		//if on endless mode need to use caterpillar number until max speed is hit
+		if (endless) {
+			//if current caterpillar number is larger than caterpillar number until max speed set speed equal to max speed
+			//else speed is calculated the same way as in arcade mode but with different total caterpillar number
+			if (currentCaterpillar > caterpillarNumToMaxSpeed) {
+				speed = maxVelocity;
+			} else {
+				float deltaVelocity = (maxVelocity - minVelocity) / caterpillarNumToMaxSpeed;
+				speed = minVelocity + currentCaterpillar * deltaVelocity;
+			}
+		} else {
+			float deltaVelocity = (maxVelocity - minVelocity) / totalCaterpillars;
+			speed = minVelocity + currentCaterpillar * deltaVelocity;
+		}
 		GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, -speed, 0);
 	}
 }

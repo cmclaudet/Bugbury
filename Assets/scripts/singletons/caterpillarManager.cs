@@ -30,6 +30,7 @@ public class caterpillarManager : MonoBehaviour {
 	public float minVel { get; set; }		//minimum possible velocity for caterpillar
 	public float maxVel { get; set; }		//max possible velocity for caterpillar
 	public int totalCaterpillars{ get; set; }	//total caterpillars for this level
+	public int caterpillarNumToMaxSpeed{get;set;}	//for endless mode. Number of caterpillars spawned until max speed is hit.
 	public Rigidbody2D caterpillars{ get; set; }	//caterpillar prefab
 
 	public int currentSpawn{ get; set; }	//number of the most recent caterpillar
@@ -45,16 +46,19 @@ public class caterpillarManager : MonoBehaviour {
 	private float timeSinceSpawn;
 	private GameObject[] allCaterpillars;
 
-	private bool levelOngoing = true;
+	public bool levelOngoing{ get; set; }
 	private bool setupNotDone = true;	//ensures end menu is not repeatedley instantiated
 
 	private float timeAfterEnd;		//counts time passed since final caterpillar is inactivated
+
+	public bool endlessLevel;
 
 	void Awake() {
 		_instance = this;
 	}
 
 	void Start() {
+		levelOngoing = true;
 		currentSpawn = 0;
 		levelEnd = false;
 		levelStart = false;
@@ -75,13 +79,14 @@ public class caterpillarManager : MonoBehaviour {
 
 		//instantiate caterpillar when time has elapsed over spawn frequency
 		if (timeSinceSpawn > spawnFrequency && levelOngoing) {
-			if (currentSpawn < totalCaterpillars) {
-				Instantiate (caterpillars);
-				timeSinceSpawn = 0;
-				currentSpawn += 1;
-				calculateSpawnTime ();	//find spawn time for next caterpillar
+			if (endlessLevel) {
+				makeAnotherCaterpillar ();
 			} else {
-				levelOngoing = false;
+				if (currentSpawn < totalCaterpillars) {
+					makeAnotherCaterpillar ();
+				} else {
+					levelOngoing = false;
+				}
 			}
 		}
 
@@ -99,9 +104,11 @@ public class caterpillarManager : MonoBehaviour {
 				findAllBugs ();		//recount caterpillars after inactivation
 
 				//ends level once all caterpillars are inactivated
-				if (caterpillarsInactivated == totalCaterpillars) {
-					lifeManager.Instance.control = false;
-					levelEnd = true;
+				if (!endlessLevel) {
+					if (caterpillarsInactivated == totalCaterpillars) {
+						lifeManager.Instance.control = false;
+						levelEnd = true;
+					}
 				}
 			}
 		}
@@ -115,6 +122,13 @@ public class caterpillarManager : MonoBehaviour {
 				setupNotDone = false;
 			}
 		}
+	}
+
+	void makeAnotherCaterpillar() {
+		Instantiate (caterpillars);
+		timeSinceSpawn = 0;
+		currentSpawn += 1;
+		calculateSpawnTime ();	//find spawn time for next caterpillar
 	}
 
 	void calculateSpawnTime() {

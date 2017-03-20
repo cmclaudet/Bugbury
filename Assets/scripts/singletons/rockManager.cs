@@ -39,6 +39,8 @@ public class rockManager : MonoBehaviour {
 	public float coolDownOnMiss;
 	private float timeSinceLastShot = 0;
 
+	private bool levelOngoing = false;
+
 	void Awake() {
 		_instance = this;
 	}
@@ -71,10 +73,13 @@ public class rockManager : MonoBehaviour {
 			timeSinceLastShot += Time.deltaTime;
 
 			if (timeSinceLastShot >= coolDownOnMiss) {
-				recolorSlingshot ();
-				startCoolDown = false;
-				timeSinceLastShot = 0;
-				makeRockNow = true;
+				levelOngoing = caterpillarManager.Instance.levelOngoing;
+				if (levelOngoing) {
+					recolorSlingshot ();
+					startCoolDown = false;
+					timeSinceLastShot = 0;
+					makeRockNow = true;
+				}
 			}
 		}
 

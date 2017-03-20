@@ -32,6 +32,7 @@ public class setScores : MonoBehaviour {
 		farShotNum.GetComponent<Text> ().text = totfarShots.ToString();
 	}
 
+	//called in reset score script when score number object is instantiated
 	public void setScoreNum(Transform scoreNumber) {
 		scoreNumber.GetComponent<Text> ().text = playerScore.ToString();
 	}

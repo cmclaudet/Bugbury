@@ -13,6 +13,8 @@ public class detectLifeLoss : MonoBehaviour {
 	public Transform canvas;
 	public AudioSource hurtSound;
 
+	public GameObject levelComplete;
+
 	private Image life1;
 	private Image life2;
 	private Image life3;
@@ -23,12 +25,15 @@ public class detectLifeLoss : MonoBehaviour {
 	private Transform gameOverSign;
 	private float cameraLifeShakeDuration = 0.2f;
 
+	private bool endless;
+
 	void Awake() {
 		lifeManager.Instance.camera = gameObject;
 	}
 
 	// Use this for initialization
 	void Start () {
+		endless = caterpillarManager.Instance.endlessLevel;
 		Time.timeScale = 1.0f;
 		gameOverNotDone = true;
 
@@ -55,7 +60,6 @@ public class detectLifeLoss : MonoBehaviour {
 				gameOver ();
 			}
 		}
-
 	}
 
 	void Update() {
@@ -76,13 +80,18 @@ public class detectLifeLoss : MonoBehaviour {
 	}
 
 	void gameOver() {
-		lifeManager.Instance.control = false;
-		pauseButton.interactable = false;
+		if (endless) {
+			caterpillarManager.Instance.levelOngoing = false;
+			levelComplete.GetComponent<triggerLevelComplete> ().setupEnd ();
+		} else {
+			lifeManager.Instance.control = false;
+			pauseButton.interactable = false;
 
-		gameOverSign = Instantiate (gameOverMessage);
-		gameOverSign.transform.SetParent (canvas, false); 
-		gameOverNotDone = false;
-		checkWhenScalingIsDone = true;
+			gameOverSign = Instantiate (gameOverMessage);
+			gameOverSign.transform.SetParent (canvas, false); 
+			gameOverNotDone = false;
+			checkWhenScalingIsDone = true;
+		}
 	} 
 
 	void inactivateBonusText() {

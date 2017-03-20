@@ -20,6 +20,8 @@ public class resetScores : MonoBehaviour {
 	private int star3score;	//necessary score for 3 stars
 
 	private int playerScore;
+	private int maxStreak;
+	private int farShots;
 	private bool needScaling;
 
 	public Transform scoreNumber;		//score number object. must define because this is activated in the script
@@ -31,6 +33,8 @@ public class resetScores : MonoBehaviour {
 
 	void Awake() {
 		playerScore = scoreCount.Instance.playerScore;
+		maxStreak = scoreCount.Instance.maxPlayerStreak;
+		farShots = scoreCount.Instance.farShots;
 		setTextTimeDelays ();
 	}
 
@@ -52,15 +56,16 @@ public class resetScores : MonoBehaviour {
 			//instantiate score number when score number time delay has passed
 			Transform scoreNum = Instantiate (scoreNumber);
 			scoreNum.SetParent (this.transform, false);
-			GetComponent<setScores> ().setScoreNum (scoreNum);
+			GetComponent<setScores> ().setScoreNum (scoreNum);	//function rewrites score number to player score
 			timePassed = 0;
 			scoreNumInstantiated = true;
 		}
 	}
 
 	void calcScoreDelay() {
-		//6 is used because there are 5 objects which appear before the score number, thus score number order = 6
-		scoreNumDelay = 6 * textDelay;
+		//find order of score text. Score number text order must be one higher than this as it appears staright after socre text.
+		Transform scoreText = transform.Find("score");
+		scoreNumDelay = (scoreText.GetComponent<scaleSetup>().order + 1) * textDelay;
 	}
 
 	//set time delay between instantiation of lvl complete message and text objects
@@ -97,8 +102,22 @@ public class resetScores : MonoBehaviour {
 		case "level 5":
 			highScoreManager.Instance.Five = resetAllScores (highScoreManager.Instance.Five);
 			break;
+		case "level 1 endless":
+			highScoreManager.Instance.One = resetEndlessScore (highScoreManager.Instance.One);
+			break;
+		case "level 2 endless":
+			highScoreManager.Instance.Two = resetEndlessScore (highScoreManager.Instance.Two);
+			break;
+		case "level 3 endless":
+			highScoreManager.Instance.Three = resetEndlessScore (highScoreManager.Instance.Three);
+			break;
+		case "level 4 endless":
+			highScoreManager.Instance.Four = resetEndlessScore (highScoreManager.Instance.Four);
+			break;
+		case "level 5 endless":
+			highScoreManager.Instance.Five = resetEndlessScore (highScoreManager.Instance.Five);
+			break;
 		}
-
 	}
 
 	//resets player high score and player's top star
@@ -128,4 +147,17 @@ public class resetScores : MonoBehaviour {
 		return level;
 	}
 
+	highScoreManager.level resetEndlessScore(highScoreManager.level level) {
+		if (playerScore > level.HSEndless) {
+			level.HSEndless = playerScore;
+		}
+		if (farShots > level.FSEndless) {
+			level.FSEndless = farShots;
+		}
+		if (maxStreak > level.MSEndless) {
+			level.MSEndless = maxStreak;
+		}
+
+		return level;
+	}
 }
