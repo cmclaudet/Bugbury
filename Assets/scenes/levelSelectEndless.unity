@@ -165,53 +165,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 4586348}
---- !u!1001 &55541820
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4622786655122818, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4622786655122818, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4622786655122818, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4622786655122818, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4622786655122818, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4622786655122818, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4622786655122818, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4622786655122818, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c03992da74a234c5ab766fc4bfb4ca68, type: 2}
-  m_IsPrefabParent: 0
---- !u!82 &55541821 stripped
-AudioSource:
-  m_PrefabParentObject: {fileID: 82629840924126518, guid: c03992da74a234c5ab766fc4bfb4ca68,
-    type: 2}
-  m_PrefabInternal: {fileID: 55541820}
 --- !u!1 &72243893
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,7 +3109,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.5588235, g: 0.55060554, b: 0.55060554, a: 0.5019608}
+    m_DisabledColor: {r: 0.5588235, g: 0.55060554, b: 0.55060554, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3230,7 +3183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 55541821}
+  music: {fileID: 0}
 --- !u!1 &1237756737
 GameObject:
   m_ObjectHideFlags: 0
