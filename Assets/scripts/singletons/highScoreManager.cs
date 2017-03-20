@@ -30,14 +30,18 @@ public class highScoreManager : MonoBehaviour {
 		public bool star2;
 		public bool star3;
 		public int HSEndless;
+		public int MSEndless;
+		public int FSEndless;
 
-		public level(int Score, bool one, bool two, bool three, int scoreEndless)
+		public level(int Score, bool one, bool two, bool three, int scoreEndless, int maxStreakEnd, int farShotEnd)
 		{
 			highScore = Score;
 			star1 = one;
 			star2 = two;
 			star3 = three;
 			HSEndless = scoreEndless;
+			MSEndless = maxStreakEnd;
+			FSEndless = farShotEnd;
 		}
 	}
 
@@ -56,11 +60,11 @@ public class highScoreManager : MonoBehaviour {
 		_instance = this;
 
 		//all stars start out false
-		One = new level (0, false, false, false, 0);
-		Two = new level (0, false, false, false, 0);
-		Three = new level (0, false, false, false, 0);
-		Four = new level (0, false, false, false, 0);
-		Five = new level (0, false, false, false, 0);
+		One = new level (0, false, false, false, 0, 0, 0);
+		Two = new level (0, false, false, false, 0, 0, 0);
+		Three = new level (0, false, false, false, 0, 0, 0);
+		Four = new level (0, false, false, false, 0, 0, 0);
+		Five = new level (0, false, false, false, 0, 0, 0);
 
 		beatenLevel5 = false;
 		askedForRating = false;
@@ -81,12 +85,6 @@ public class highScoreManager : MonoBehaviour {
 			Four.highScore = currentScores.highScore4;
 			Five.highScore = currentScores.highScore5;
 
-			One.HSEndless = currentScores.endlessHS1;
-			Two.HSEndless = currentScores.endlessHS2;
-			Three.HSEndless = currentScores.endlessHS3;
-			Four.HSEndless = currentScores.endlessHS4;
-			Five.HSEndless = currentScores.endlessHS5;
-
 			One.star1 = currentScores.lvl1star1;
 			Two.star1 = currentScores.lvl2star1;
 			Three.star1 = currentScores.lvl3star1;
@@ -104,6 +102,24 @@ public class highScoreManager : MonoBehaviour {
 			Three.star3 = currentScores.lvl3star3;
 			Four.star3 = currentScores.lvl4star3;
 			Five.star3 = currentScores.lvl5star3;
+
+			One.HSEndless = currentScores.endlessHS1;
+			Two.HSEndless = currentScores.endlessHS2;
+			Three.HSEndless = currentScores.endlessHS3;
+			Four.HSEndless = currentScores.endlessHS4;
+			Five.HSEndless = currentScores.endlessHS5;
+
+			One.MSEndless = currentScores.maxStreakEnd1;
+			Two.MSEndless = currentScores.maxStreakEnd2;
+			Three.MSEndless = currentScores.maxStreakEnd3;
+			Four.MSEndless = currentScores.maxStreakEnd4;
+			Five.MSEndless = currentScores.maxStreakEnd5;
+
+			One.FSEndless = currentScores.farShotEnd1;
+			Two.FSEndless = currentScores.farShotEnd2;
+			Three.FSEndless = currentScores.farShotEnd3;
+			Four.FSEndless = currentScores.farShotEnd4;
+			Five.FSEndless = currentScores.farShotEnd5;
 
 			beatenLevel5 = currentScores.beatenLevel5;
 			askedForRating = currentScores.askedForRating;
@@ -123,12 +139,6 @@ public class highScoreManager : MonoBehaviour {
 		newScores.highScore4 = Four.highScore;
 		newScores.highScore5 = Five.highScore;
 
-		newScores.endlessHS1 = One.HSEndless;
-		newScores.endlessHS2 = Two.HSEndless;
-		newScores.endlessHS3 = Three.HSEndless;
-		newScores.endlessHS4 = Four.HSEndless;
-		newScores.endlessHS5 = Five.HSEndless;
-
 		newScores.lvl1star1 = One.star1;
 		newScores.lvl2star1 = Two.star1;
 		newScores.lvl3star1 = Three.star1;
@@ -146,6 +156,24 @@ public class highScoreManager : MonoBehaviour {
 		newScores.lvl3star3 = Three.star3;
 		newScores.lvl4star3 = Four.star3;
 		newScores.lvl5star3 = Five.star3;
+
+		newScores.endlessHS1 = One.HSEndless;
+		newScores.endlessHS2 = Two.HSEndless;
+		newScores.endlessHS3 = Three.HSEndless;
+		newScores.endlessHS4 = Four.HSEndless;
+		newScores.endlessHS5 = Five.HSEndless;
+
+		newScores.maxStreakEnd1 = One.MSEndless;
+		newScores.maxStreakEnd2 = Two.MSEndless;
+		newScores.maxStreakEnd3 = Three.MSEndless;
+		newScores.maxStreakEnd4 = Four.MSEndless;
+		newScores.maxStreakEnd5 = Five.MSEndless;
+
+		newScores.farShotEnd1 = One.FSEndless;
+		newScores.farShotEnd2 = Two.FSEndless;
+		newScores.farShotEnd3 = Three.FSEndless;
+		newScores.farShotEnd4 = Four.FSEndless;
+		newScores.farShotEnd5 = Five.FSEndless;
 
 		newScores.beatenLevel5 = beatenLevel5;
 		newScores.askedForRating = askedForRating;
@@ -166,12 +194,6 @@ class playerScores {
 	public int highScore4;
 	public int highScore5;
 
-	public int endlessHS1;
-	public int endlessHS2;
-	public int endlessHS3;
-	public int endlessHS4;
-	public int endlessHS5;
-
 	public bool lvl1star1;
 	public bool lvl1star2;
 	public bool lvl1star3;
@@ -191,6 +213,24 @@ class playerScores {
 	public bool lvl5star1;
 	public bool lvl5star2;
 	public bool lvl5star3;
+
+	public int endlessHS1;
+	public int endlessHS2;
+	public int endlessHS3;
+	public int endlessHS4;
+	public int endlessHS5;
+
+	public int maxStreakEnd1;
+	public int maxStreakEnd2;
+	public int maxStreakEnd3;
+	public int maxStreakEnd4;
+	public int maxStreakEnd5;
+
+	public int farShotEnd1;
+	public int farShotEnd2;
+	public int farShotEnd3;
+	public int farShotEnd4;
+	public int farShotEnd5;
 
 	public bool beatenLevel5;
 	public bool askedForRating;
