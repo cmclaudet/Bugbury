@@ -24,8 +24,12 @@ public class setEndlessScores : MonoBehaviour {
 	//updates visible highscore
 	void sethighScore(Transform level, highScoreManager.level levelInstance) {
 		Text[] textComponents = level.GetComponentsInChildren<Text> ();
+
+		//Final 3 text components are far shot number, max streak number and score number in that order.
 		textComponents [textComponents.Length - 1].text = levelInstance.HSEndless.ToString ();
-//		level1.GetComponentsInChildren<Text>()[1].text = "High Score: " + highScoreManager.Instance.One.HSEndless;
+		textComponents [textComponents.Length - 2].text = levelInstance.MSEndless.ToString ();
+		textComponents [textComponents.Length - 3].text = levelInstance.FSEndless.ToString ();
+
 	}
 
 
