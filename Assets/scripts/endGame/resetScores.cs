@@ -18,6 +18,7 @@ public class resetScores : MonoBehaviour {
 	private int star1score;	//necessary score for 1 star
 	private int star2score;	//necessary score for 2 stars
 	private int star3score;	//necessary score for 3 stars
+	private int perfectScore;	//score that player would get from perfect run
 
 	private int playerScore;
 	private int maxStreak;
@@ -44,6 +45,7 @@ public class resetScores : MonoBehaviour {
 		scoreNumInstantiated = false;
 		calcScoreDelay ();
 		setStarThresholds ();
+		setPerfectScore ();
 		inactivateStars ();
 	}
 	
@@ -81,6 +83,10 @@ public class resetScores : MonoBehaviour {
 		star1score = scoreCount.Instance.star1threshold;
 		star2score = scoreCount.Instance.star2threshold;
 		star3score = scoreCount.Instance.star3threshold;
+	}
+
+	void setPerfectScore() {
+		perfectScore = scoreCount.Instance.perfectScore;
 	}
 
 	//if player does not have sufficient score stars are inactivated

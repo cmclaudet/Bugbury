@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //calculates the score thresholds for getting stars
+//also calculates perfect score for the level
 public class starThreshold : MonoBehaviour {
 	/*fractions are the necessary fraction of caterpillars out of the total which player needs to get a streak from
 	ie, star1Frac = 3, player (on average!!) needs to get at least 3 straight streaks. Thus average top streak will be 1/3 of total caterpillars.
@@ -19,6 +20,7 @@ public class starThreshold : MonoBehaviour {
 	private int threshold1;
 	private int threshold2;
 	private int threshold3;
+	private int perfectScore;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +36,7 @@ public class starThreshold : MonoBehaviour {
 		} else {
 			Debug.Log ("Required score threshold is too high for star!");
 		}
-
+		setPerfectScore ();
 		setStarThresholds ();
 	}
 		
@@ -59,5 +61,11 @@ public class starThreshold : MonoBehaviour {
 		scoreCount.Instance.star1threshold = threshold1;
 		scoreCount.Instance.star2threshold = threshold2;
 		scoreCount.Instance.star3threshold = threshold3;
+	}
+
+	void setPerfectScore() {
+		//sum of all numbers from 1 to N is: N(N + 1)/2
+		perfectScore = totalCaterpillars*(totalCaterpillars + 1)/2 + totalCaterpillars * farShotBonus;
+		scoreCount.Instance.perfectScore = perfectScore;
 	}
 }
