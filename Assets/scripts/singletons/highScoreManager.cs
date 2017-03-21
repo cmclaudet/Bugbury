@@ -29,16 +29,18 @@ public class highScoreManager : MonoBehaviour {
 		public bool star1;
 		public bool star2;
 		public bool star3;
+		public bool perfect;
 		public int HSEndless;
 		public int MSEndless;
 		public int FSEndless;
 
-		public level(int Score, bool one, bool two, bool three, int scoreEndless, int maxStreakEnd, int farShotEnd)
+		public level(int Score, bool one, bool two, bool three, bool perfectScore, int scoreEndless, int maxStreakEnd, int farShotEnd)
 		{
 			highScore = Score;
 			star1 = one;
 			star2 = two;
 			star3 = three;
+			perfect = perfectScore;
 			HSEndless = scoreEndless;
 			MSEndless = maxStreakEnd;
 			FSEndless = farShotEnd;
@@ -60,11 +62,11 @@ public class highScoreManager : MonoBehaviour {
 		_instance = this;
 
 		//all stars start out false
-		One = new level (0, false, false, false, 0, 0, 0);
-		Two = new level (0, false, false, false, 0, 0, 0);
-		Three = new level (0, false, false, false, 0, 0, 0);
-		Four = new level (0, false, false, false, 0, 0, 0);
-		Five = new level (0, false, false, false, 0, 0, 0);
+		One = new level (0, false, false, false, false, 0, 0, 0);
+		Two = new level (0, false, false, false, false, 0, 0, 0);
+		Three = new level (0, false, false, false, false, 0, 0, 0);
+		Four = new level (0, false, false, false, false, 0, 0, 0);
+		Five = new level (0, false, false, false, false, 0, 0, 0);
 
 		beatenLevel5 = false;
 		askedForRating = false;
@@ -102,6 +104,12 @@ public class highScoreManager : MonoBehaviour {
 			Three.star3 = currentScores.lvl3star3;
 			Four.star3 = currentScores.lvl4star3;
 			Five.star3 = currentScores.lvl5star3;
+
+			One.perfect = currentScores.perfect1;
+			Two.perfect = currentScores.perfect2;
+			Three.perfect = currentScores.perfect3;
+			Four.perfect = currentScores.perfect4;
+			Five.perfect = currentScores.perfect5;
 
 			One.HSEndless = currentScores.endlessHS1;
 			Two.HSEndless = currentScores.endlessHS2;
@@ -156,6 +164,12 @@ public class highScoreManager : MonoBehaviour {
 		newScores.lvl3star3 = Three.star3;
 		newScores.lvl4star3 = Four.star3;
 		newScores.lvl5star3 = Five.star3;
+
+		newScores.perfect1 = One.perfect;
+		newScores.perfect2 = Two.perfect;
+		newScores.perfect3 = Three.perfect;
+		newScores.perfect4 = Four.perfect;
+		newScores.perfect5 = Five.perfect;
 
 		newScores.endlessHS1 = One.HSEndless;
 		newScores.endlessHS2 = Two.HSEndless;
@@ -213,6 +227,12 @@ class playerScores {
 	public bool lvl5star1;
 	public bool lvl5star2;
 	public bool lvl5star3;
+
+	public bool perfect1;
+	public bool perfect2;
+	public bool perfect3;
+	public bool perfect4;
+	public bool perfect5;
 
 	public int endlessHS1;
 	public int endlessHS2;
