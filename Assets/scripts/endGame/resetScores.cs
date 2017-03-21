@@ -10,9 +10,13 @@ using UnityEngine.SceneManagement;
 public class resetScores : MonoBehaviour {
 	public float textDelay;		//delay time between appearance of text: max streak, far shots, score
 
+	//stars which appear at level end
 	public Transform starfill1;
 	public Transform starfill2;
 	public Transform starfill3;
+
+	//perfect text appears if player has perfect score
+	public Transform perfectText;
 
 	//obtain from manager
 	private int star1score;	//necessary score for 1 star
@@ -130,6 +134,12 @@ public class resetScores : MonoBehaviour {
 	highScoreManager.level resetAllScores(highScoreManager.level level) {
 		if (playerScore > level.highScore) {
 			level.highScore = playerScore;
+		}
+
+		if (playerScore == perfectScore) {
+			level.perfect = true;
+		} else {
+			perfectText.gameObject.SetActive (false);
 		}
 
 		if (playerScore < star1score) {
