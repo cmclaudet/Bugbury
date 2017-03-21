@@ -3802,6 +3802,8 @@ MonoBehaviour:
   level5: {fileID: 1833840616}
   canvas: {fileID: 1605478907}
   starFill: {fileID: 224098110172705556, guid: 7dbb017a692a24663a509b17d4f28746, type: 2}
+  perfectText: {fileID: 224303579543053486, guid: bd46bf40f62ab4697bf36922c23cea4a,
+    type: 2}
 --- !u!4 &1724604819
 Transform:
   m_ObjectHideFlags: 0
