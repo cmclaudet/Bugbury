@@ -4359,7 +4359,7 @@ MonoBehaviour:
   pauseButton: {fileID: 1771330785}
   completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
-  completeMessageEndless: {fileID: 224256179553984670, guid: c859cff33099144c896f4b2be7d0727b,
+  completeMessageEndless: {fileID: 224256179553984670, guid: 4364e3faaf17b435b88eb3083bb7bc1f,
     type: 2}
   canvas: {fileID: 1770821641}
   bam: {fileID: 143216193}
