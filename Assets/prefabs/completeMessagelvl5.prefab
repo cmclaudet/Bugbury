@@ -781,12 +781,12 @@ MonoBehaviour:
     acceleration: 0
     scale: 0
   timeDelay: 0
-  order: 11
+  order: 12
   vel: 6
   acc: -4
   startScale: 0
   lowTimeStep: 0
-  desiredSoundEffect: 
+  desiredSoundEffect: choirSound
   downscaleSound: 
 --- !u!114 &114383854634599640
 MonoBehaviour:
