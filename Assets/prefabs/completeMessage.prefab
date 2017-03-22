@@ -1320,7 +1320,7 @@ MonoBehaviour:
     acceleration: 0
     scale: 0
   timeDelay: 0
-  order: 12
+  order: 11
   vel: 6
   acc: -4
   startScale: 0
