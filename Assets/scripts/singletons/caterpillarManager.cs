@@ -117,7 +117,7 @@ public class caterpillarManager : MonoBehaviour {
 		if (levelEnd && setupNotDone) {
 			timeAfterEnd += Time.deltaTime;
 
-			if (timeAfterEnd >= endDelay) {
+			if (timeAfterEnd >= endDelay && !endlessLevel) {
 				levelComplete.GetComponent<triggerLevelComplete> ().setupEnd ();
 				setupNotDone = false;
 			}

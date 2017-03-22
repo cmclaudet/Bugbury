@@ -36,13 +36,17 @@ public class triggerLevelComplete : MonoBehaviour {
 		rocks = GameObject.FindGameObjectsWithTag ("rock");
 
 		if (endless) {
+			//stop caterpillars on screen from moving
+			//Do this instead of stopping time so that level end scaling can take place
 			foreach (GameObject caterpillar in caterpillars) {
 				caterpillar.GetComponent<Animator>().Stop();
 				caterpillar.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 			}
+			//stop rocks from moving and delete pointer if necessary
 			foreach (GameObject rock in rocks) {
 				Component pointer = rock.GetComponentsInChildren (typeof(LineRenderer), true) [1];
 				pointer.gameObject.SetActive (false);
+				rock.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 			}
 			Transform levelEnded = Instantiate (completeMessageEndless);
 			levelEnded.transform.SetParent (canvas, false);
