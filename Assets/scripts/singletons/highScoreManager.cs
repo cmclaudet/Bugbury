@@ -74,6 +74,8 @@ public class highScoreManager : MonoBehaviour {
 
 	//loads data when script is enabled, ie when game loads
 	void OnEnable() {
+		Debug.Log (Application.persistentDataPath);
+
 		if (File.Exists (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScores.dat")) {
 			BinaryFormatter bf = new BinaryFormatter ();
 			FileStream file = File.Open (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScores.dat", FileMode.Open);
