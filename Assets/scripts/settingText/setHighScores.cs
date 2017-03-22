@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//placed on empty gameobject in level select scene. Rewrites high score and star appearances if necessary so player sees updated version of their score
+//placed on empty gameobject in level select scene. Rewrites high score, star appearances and perfect status if necessary so player sees updated version of their score
 public class setHighScores : MonoBehaviour {
 	public Transform level1;
 	public Transform level2;
@@ -13,6 +13,7 @@ public class setHighScores : MonoBehaviour {
 
 	public Transform canvas;
 	public Transform starFill;
+	public Transform perfectText;
 
 	// Use this for initialization
 	void Start () {
@@ -31,15 +32,15 @@ public class setHighScores : MonoBehaviour {
 
 	//fills stars in correct place if player has acquired them in levels
 	void checkLevels() {
-		checkStars (highScoreManager.Instance.One, level1);
-		checkStars (highScoreManager.Instance.Two, level2);
-		checkStars (highScoreManager.Instance.Three, level3);
-		checkStars (highScoreManager.Instance.Four, level4);
-		checkStars (highScoreManager.Instance.Five, level5);
+		checkStarsAndPerfect (highScoreManager.Instance.One, level1);
+		checkStarsAndPerfect (highScoreManager.Instance.Two, level2);
+		checkStarsAndPerfect (highScoreManager.Instance.Three, level3);
+		checkStarsAndPerfect (highScoreManager.Instance.Four, level4);
+		checkStarsAndPerfect (highScoreManager.Instance.Five, level5);
 
 	}
 
-	void checkStars(highScoreManager.level level, Transform levelSign) {
+	void checkStarsAndPerfect(highScoreManager.level level, Transform levelSign) {
 		if (level.star1) {
 			fillStars (levelSign, "star1");
 		}
@@ -48,6 +49,10 @@ public class setHighScores : MonoBehaviour {
 		}
 		if (level.star3) {
 			fillStars (levelSign, "star3");
+		}
+		if (level.perfect) {
+			Transform perfect = Instantiate (perfectText);
+			perfect.transform.SetParent (levelSign, false);
 		}
 	}
 

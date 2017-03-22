@@ -10,14 +10,19 @@ using UnityEngine.SceneManagement;
 public class resetScores : MonoBehaviour {
 	public float textDelay;		//delay time between appearance of text: max streak, far shots, score
 
+	//stars which appear at level end
 	public Transform starfill1;
 	public Transform starfill2;
 	public Transform starfill3;
+
+	//perfect text appears if player has perfect score
+	public Transform perfectText;
 
 	//obtain from manager
 	private int star1score;	//necessary score for 1 star
 	private int star2score;	//necessary score for 2 stars
 	private int star3score;	//necessary score for 3 stars
+	private int perfectScore;	//score that player would get from perfect run
 
 	private int playerScore;
 	private int maxStreak;
@@ -44,6 +49,7 @@ public class resetScores : MonoBehaviour {
 		scoreNumInstantiated = false;
 		calcScoreDelay ();
 		setStarThresholds ();
+		setPerfectScore ();
 		inactivateStars ();
 	}
 	
@@ -81,6 +87,10 @@ public class resetScores : MonoBehaviour {
 		star1score = scoreCount.Instance.star1threshold;
 		star2score = scoreCount.Instance.star2threshold;
 		star3score = scoreCount.Instance.star3threshold;
+	}
+
+	void setPerfectScore() {
+		perfectScore = scoreCount.Instance.perfectScore;
 	}
 
 	//if player does not have sufficient score stars are inactivated
@@ -124,6 +134,12 @@ public class resetScores : MonoBehaviour {
 	highScoreManager.level resetAllScores(highScoreManager.level level) {
 		if (playerScore > level.highScore) {
 			level.highScore = playerScore;
+		}
+
+		if (playerScore == perfectScore) {
+			level.perfect = true;
+		} else {
+			perfectText.gameObject.SetActive (false);
 		}
 
 		if (playerScore < star1score) {

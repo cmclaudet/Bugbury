@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //stores player score, player streak number, number of far shots and whether the last shot was a far shot or not
-//stores star thresholds. these are set in star threshold script on setSceneVars gameobject in hierarchy
+//stores star thresholds and perfect score. these are set in star threshold script on setSceneVars gameobject in hierarchy
 public class scoreCount : MonoBehaviour {
 
 	private static scoreCount _instance;
@@ -32,6 +32,9 @@ public class scoreCount : MonoBehaviour {
 	public int star1threshold{ get; set; }
 	public int star2threshold{ get; set; }
 	public int star3threshold{ get; set; }
+
+	//perfect score. Player must get all far shots and have complete straight streak.
+	public int perfectScore{ get; set; }
 
 	public GameObject scoreObject;
 
