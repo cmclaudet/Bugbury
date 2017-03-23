@@ -1758,6 +1758,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 934170122}
+  - component: {fileID: 934170123}
   m_Layer: 5
   m_Name: dots
   m_TagString: Untagged
@@ -1788,6 +1789,19 @@ RectTransform:
   m_AnchoredPosition: {x: 2.59, y: -386}
   m_SizeDelta: {x: 371, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &934170123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 934170121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444ee3ee73b2248f5ab9cb674b2abcd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteDot: {fileID: 21300000, guid: 582cf03a120e24d6db88a0fdcb86f51f, type: 3}
+  darkDot: {fileID: 21300000, guid: 2747aa29c13b2477f94d46b3d4f703d2, type: 3}
 --- !u!1 &1006819186
 GameObject:
   m_ObjectHideFlags: 0
@@ -3256,6 +3270,7 @@ MonoBehaviour:
   lvl3: {fileID: 1296275132}
   lvl4: {fileID: 716582189}
   lvl5: {fileID: 1833840617}
+  dots: {fileID: 934170121}
   woosh: {fileID: 2003868886}
 --- !u!114 &1537917016
 MonoBehaviour:
