@@ -1325,7 +1325,7 @@ MonoBehaviour:
   acc: -4
   startScale: 0
   lowTimeStep: 0
-  desiredSoundEffect: choirSound
+  desiredSoundEffect: choirSoundPerfect
   downscaleSound: 
 --- !u!114 &114797528328713592
 MonoBehaviour:
