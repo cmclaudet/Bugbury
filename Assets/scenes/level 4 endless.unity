@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1849413118}
   pauseButton: {fileID: 1400410756}
-  completeMessage: {fileID: 224256179553984670, guid: ffb27cc3e2e054a6ab47ba59e66e947b,
+  completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
   completeMessageEndless: {fileID: 224256179553984670, guid: c859cff33099144c896f4b2be7d0727b,
     type: 2}
