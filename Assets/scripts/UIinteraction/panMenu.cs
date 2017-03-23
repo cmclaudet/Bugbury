@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 //triggers panning animation when player presses forward or back button to focus on different level
 //disables forward button if player focuses on last level or back button if player focuses on first level
@@ -14,9 +13,10 @@ public class panMenu : MonoBehaviour {
 	public Animator lvl3;
 	public Animator lvl4;
 	public Animator lvl5;
+	public GameObject dots;
 	public AudioSource woosh;
 
-	private int currentLevel;
+	public int currentLevel{get;set;}
 	private Animator[] levelAnimators;
 
 	// Use this for initialization
@@ -62,7 +62,7 @@ public class panMenu : MonoBehaviour {
 
 		//update current level
 		currentLevel += 1;
-
+		dots.GetComponent<changeDot>().switchDotImage(currentLevel, currentLevel - 1);
 	}
 
 	//focus on previous level
@@ -90,7 +90,7 @@ public class panMenu : MonoBehaviour {
 
 		woosh.Play ();
 		currentLevel -= 1;
-
+		dots.GetComponent<changeDot>().switchDotImage(currentLevel, currentLevel + 1);
 	}
 
 }
