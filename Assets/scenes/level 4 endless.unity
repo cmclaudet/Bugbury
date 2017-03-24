@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   farBonus: 15
   minVelocity: 0.6
-  maxVelocity: 1.8
+  maxVelocity: 2.1
   coolDownOnMiss: 1
   totalCaterpillars: 25
   caterpillarNumToMaxSpeed: 35
