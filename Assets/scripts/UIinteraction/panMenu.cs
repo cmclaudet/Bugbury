@@ -21,7 +21,6 @@ public class panMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		backButton.interactable = false;
 		currentLevel = currentLevelSelectLevel.currentLevel;		//keeps track of current level player is looking at
 		levelAnimators = new Animator[] { lvl1, lvl2, lvl3, lvl4, lvl5};
 
@@ -37,6 +36,21 @@ public class panMenu : MonoBehaviour {
 			}
 		}
 
+		//make sure back button is disabled on level 1 and forward button on level 5
+		setupButtons();
+	}
+
+	void setupButtons() {
+		if (currentLevel == 1) {
+			forwardButton.interactable = true;
+			backButton.interactable = false;
+		} else if (currentLevel == levelAnimators.Length) {
+			forwardButton.interactable = false;
+			backButton.interactable = true;
+		} else {
+			forwardButton.interactable = true;
+			backButton.interactable = true;
+		}
 	}
 
 	//focus on next level
