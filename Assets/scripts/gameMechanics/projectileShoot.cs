@@ -75,26 +75,7 @@ public class projectileShoot : MonoBehaviour {
 				launchRock(rockLaunchPos);
 			}
 		}
-/*		//if player is able to control and touches the screen trigger rock dragging function
-		//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
-		if (lifeManager.Instance.control && Input.touchCount > 0 && rockGen) {
-			drag ();
-		}
 
-		if (drawPointer) {
-			GetComponent<getPointerVertices> ().updatePointer ();
-		}
-
-		//when player releases their finger after having put it down through drag function, shooting is triggered
-		if (lifeManager.Instance.control && Input.touchCount == 0 && fingerDown) {
-			drawPointer = false;
-			shoot ();
-			//line renderer showing pointer is inactivated
-			pointer.gameObject.SetActive (false);
-			throwSound.Play ();
-			lifeManager.Instance.control = false;
-		}
-*/
 		//when rock exits the slingshot shooting zone launch is triggered
 		if (transform.position.y > leftSlingshot.transform.position.y && rockGen) {
 			launch ();
@@ -134,37 +115,6 @@ public class projectileShoot : MonoBehaviour {
 		GetComponent<SpringJoint2D> ().enabled = true;
 		GetComponent<Rigidbody2D> ().isKinematic = false;
 		lifeManager.Instance.control = false;
-	}
-
-	void drag()
-	{
-		//make rock follow player finger whilst finger is down inside the shooting space
-		//ensures spring is disabled in this time and the rock is kinematic
-		//drawPointer becomes true as pointer must be drawn when player drags rock back
-		Vector3 fingerPos = Camera.main.ScreenToWorldPoint (Input.GetTouch(0).position);
-		Vector3 worldPos = new Vector3 (fingerPos.x, fingerPos.y, 0);
-
-		//can only shoot is player drags rock back through shooting space
-		if (shootingSpace.Contains (worldPos)) {
-			GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
-			spring.enabled = false;
-			GetComponent<Rigidbody2D> ().isKinematic = true;
-			fingerDown = true;
-			transform.position = new Vector3 (fingerPos.x, fingerPos.y, 0);
-
-			//only draw pointer for first few rocks
-			if (rockManager.Instance.rockNumber <= shotsWithPointer) {
-				drawPointer = true;
-			}
-		}
-	}
-
-	void shoot() {
-		//spring physics is enabled
-		spring.enabled = true;
-		GetComponent<SpringJoint2D> ().enabled = true;
-		GetComponent<Rigidbody2D> ().isKinematic = false;
-		fingerDown = false;
 	}
 
 	void launch() {
