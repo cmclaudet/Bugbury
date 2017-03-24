@@ -68,13 +68,14 @@ public class projectileShoot : MonoBehaviour {
 
 
 		foreach (GameObject caterpillar in allCaterpillars) {
-			if (caterpillar.transform.position.y < catMinYvalue) {
+			if (caterpillar.transform.position.y < catMinYvalue && rockGen && lifeManager.Instance.control) {
 				int totalLanes = caterpillar.GetComponent<move>().laneNumber;
 				int caterpillarLane = caterpillar.GetComponent<move>().chosenLane;
 				Vector3 rockLaunchPos = rockLaunchPositions[caterpillarLane + totalLanes/2];
+				launchRock(rockLaunchPos);
 			}
 		}
-		//if player is able to control and touches the screen trigger rock dragging function
+/*		//if player is able to control and touches the screen trigger rock dragging function
 		//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
 		if (lifeManager.Instance.control && Input.touchCount > 0 && rockGen) {
 			drag ();
@@ -93,9 +94,9 @@ public class projectileShoot : MonoBehaviour {
 			throwSound.Play ();
 			lifeManager.Instance.control = false;
 		}
-
+*/
 		//when rock exits the slingshot shooting zone launch is triggered
-		if (fingerDown == false && transform.position.y > leftSlingshot.transform.position.y && rockGen) {
+		if (transform.position.y > leftSlingshot.transform.position.y && rockGen) {
 			launch ();
 			fadeSlingshot ();
 			rockGen = false;
@@ -120,6 +121,20 @@ public class projectileShoot : MonoBehaviour {
 	}
 
 //	void setRock
+
+	void launchRock(Vector3 launchPos) {
+		//move rock back and disable spring
+		GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, 0, 0);
+		spring.enabled = false;
+		GetComponent<Rigidbody2D> ().isKinematic = true;
+		transform.position = launchPos;
+
+		//disable spring to let rock go
+		spring.enabled = true;
+		GetComponent<SpringJoint2D> ().enabled = true;
+		GetComponent<Rigidbody2D> ().isKinematic = false;
+		lifeManager.Instance.control = false;
+	}
 
 	void drag()
 	{

@@ -1709,8 +1709,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farBonus: 5
-  minVelocity: 0.6
-  maxVelocity: 1.8
+  minVelocity: 2.3
+  maxVelocity: 2.3
   coolDownOnMiss: 1
   totalCaterpillars: 10
   caterpillarNumToMaxSpeed: 20
@@ -4017,11 +4017,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.size
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 4803701740742182, guid: 5e1a4dd8042d74d7396bb196ddfbbde0, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.01
@@ -4059,81 +4054,6 @@ Prefab:
       propertyPath: m_ConnectedRigidBody
       value: 
       objectReference: {fileID: 1714009865}
-    - target: {fileID: 120641520176757126, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: m_Parameters.textureMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120641520176757126, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: m_Parameters.alignment
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: fadedColor
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[0].x
-      value: 0.6160743
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[0].y
-      value: -4.766067
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[1].x
-      value: 0.3307
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[1].y
-      value: -4.632813
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[2].x
-      value: 0.1475696
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[2].y
-      value: -4.993266
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[3].x
-      value: -0.174313
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[3].y
-      value: -4.859691
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[4].x
-      value: -0.3291205
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[4].y
-      value: -4.64877
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[5].x
-      value: -0.4961025
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921812004129910, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
-        type: 2}
-      propertyPath: rockLaunchPositions.Array.data[5].y
-      value: -4.422465
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e1a4dd8042d74d7396bb196ddfbbde0, type: 2}
   m_IsPrefabParent: 0
