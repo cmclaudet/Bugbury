@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class changeDot : MonoBehaviour {
-
 	public Sprite whiteDot;
 	public Sprite darkDot;
 	private Image[] allDots;
 	// Use this for initialization
 	void Start () {
 		allDots = GetComponentsInChildren<Image>();
-		allDots[0].sprite = whiteDot;
+
+		//make white dot correspond to whichever level player is focussing on
+		allDots[currentLevelSelectLevel.currentLevel - 1].sprite = whiteDot;
 	}
 	
 	// Update is called once per frame

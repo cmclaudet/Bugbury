@@ -22,12 +22,19 @@ public class panMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		backButton.interactable = false;
-		currentLevel = 1;		//keeps track of current level player is looking at
+		currentLevel = currentLevelSelectLevel.currentLevel;		//keeps track of current level player is looking at
 		levelAnimators = new Animator[] { lvl1, lvl2, lvl3, lvl4, lvl5};
 
 		foreach (Animator level in levelAnimators) { 
 			level.speed = 3.0f;		//increase animation speed
 			level.enabled = false;	//ensures default animation does not play on runtime
+			
+			//set all level select menus inactive besides the one the player is looking at
+			if (level == levelAnimators[currentLevel - 1]) {
+				level.gameObject.SetActive(true);
+			} else {
+				level.gameObject.SetActive(false);
+			}
 		}
 
 	}
@@ -63,6 +70,9 @@ public class panMenu : MonoBehaviour {
 		//update current level
 		currentLevel += 1;
 		dots.GetComponent<changeDot>().switchDotImage(currentLevel, currentLevel - 1);
+
+		//update current level on persistent object
+		currentLevelSelectLevel.currentLevel = currentLevel;
 	}
 
 	//focus on previous level
@@ -91,6 +101,9 @@ public class panMenu : MonoBehaviour {
 		woosh.Play ();
 		currentLevel -= 1;
 		dots.GetComponent<changeDot>().switchDotImage(currentLevel, currentLevel + 1);
+
+		//update current level on persistent object
+		currentLevelSelectLevel.currentLevel = currentLevel;
 	}
 
 }
