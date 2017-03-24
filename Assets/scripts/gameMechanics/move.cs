@@ -6,7 +6,8 @@ using UnityEngine;
 //sets caterpillar speed based on spawn number and min max speeds set in inspector
 
 public class move : MonoBehaviour {
-	private int laneNumber;	//must be EVEN
+	public int chosenLane{get;set;}	//actual lane caterpillar is set to
+	public int laneNumber{get;set;}	//must be EVEN
 	private float minVelocity;
 	private float maxVelocity;
 
@@ -54,6 +55,7 @@ public class move : MonoBehaviour {
 		//finding x and y pos for caterpillar
 		float yWorldDim = transform.TransformPoint (new Vector3 (0, yOffset + ySize, 0)).y;	//offset from screenheight spawn pos to make caterpillar spawn off the screen
 		int lane = Random.Range (-laneNumber/2, laneNumber/2);	//find lane
+		chosenLane = lane;
 		float laneWidth = 2*ScreenVariables.worldWidth / laneNumber;
 		float xPos = (lane + 0.5f) * laneWidth; 
 		float yPos = ScreenVariables.worldHeight + yWorldDim;

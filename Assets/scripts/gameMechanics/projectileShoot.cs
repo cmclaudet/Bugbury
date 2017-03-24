@@ -29,7 +29,9 @@ public class projectileShoot : MonoBehaviour {
 
 	private bool rockGen = true;
 	private bool drawPointer = false;	//becomes true when pointer needs to be drawn (when player drags rock back)
-
+	private GameObject[] allCaterpillars;
+	public float catMinYvalue;	//minimum y value caterpillar will get down to before being shot
+	public Vector3[] rockLaunchPositions;	//positions necessary for bot to launch rocks from for each lane
 
 	void Awake() {
 		spring = GetComponent<SpringJoint2D> ();
@@ -39,6 +41,8 @@ public class projectileShoot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		catMinYvalue = 3.5f;
+
 		setupSounds();
 
 		//find relevant gameobjects stored in rock manager singleton
@@ -60,7 +64,16 @@ public class projectileShoot : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		updateLineRenderer ();
+		allCaterpillars = GameObject.FindGameObjectsWithTag("caterpillar");
 
+
+		foreach (GameObject caterpillar in allCaterpillars) {
+			if (caterpillar.transform.position.y < catMinYvalue) {
+				int totalLanes = caterpillar.GetComponent<move>().laneNumber;
+				int caterpillarLane = caterpillar.GetComponent<move>().chosenLane;
+				Vector3 rockLaunchPos = rockLaunchPositions[caterpillarLane + totalLanes/2];
+			}
+		}
 		//if player is able to control and touches the screen trigger rock dragging function
 		//rockgen necessary here to ensure rocks do not move back to shooting area once already shot
 		if (lifeManager.Instance.control && Input.touchCount > 0 && rockGen) {
@@ -105,6 +118,8 @@ public class projectileShoot : MonoBehaviour {
 		splatSound.pitch = Random.Range (0.8f, 1.2f);
 
 	}
+
+//	void setRock
 
 	void drag()
 	{
