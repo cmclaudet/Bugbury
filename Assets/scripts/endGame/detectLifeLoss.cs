@@ -85,6 +85,7 @@ public class detectLifeLoss : MonoBehaviour {
 			caterpillarManager.Instance.levelEnd = true;
 			levelComplete.GetComponent<triggerLevelComplete> ().setupEnd ();
 		} else {
+			inactivatePointer();
 			lifeManager.Instance.control = false;
 			pauseButton.interactable = false;
 
@@ -94,6 +95,15 @@ public class detectLifeLoss : MonoBehaviour {
 			checkWhenScalingIsDone = true;
 		}
 	} 
+
+	void inactivatePointer() {
+		GameObject[] rocks = GameObject.FindGameObjectsWithTag("rock");
+		foreach (GameObject rock in rocks) {
+			if (rock.GetComponentsInChildren<LineRenderer>()[1] != null) {
+				rock.GetComponentsInChildren<LineRenderer>()[1].gameObject.SetActive(false);
+			}
+		}
+	}
 
 	void inactivateBonusText() {
 		GameObject[] allBonusText = GameObject.FindGameObjectsWithTag ("bonusText");
