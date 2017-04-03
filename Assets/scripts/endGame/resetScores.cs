@@ -38,7 +38,7 @@ public class resetScores : MonoBehaviour {
 	private bool scoreNumInstantiated;
 	private bool noStarsAttained = false;		//if no stars are attained score number must reactivate buttons on scale finish
 	private bool activateButtonsSet = false;	//checks if activate buttons script has already been added to something before adding it
-	private Button[] allButtons;
+	public Button[] allButtons{get;set;}
 	public blowUpGeneral endMessage;
 
 	void Awake() {
@@ -192,7 +192,7 @@ public class resetScores : MonoBehaviour {
 
 	void addActivateButtonScript(Transform trans) {
 		trans.gameObject.AddComponent<activateButtons>();
-		trans.gameObject.GetComponent<activateButtons>().buttons = allButtons;
+//		trans.gameObject.GetComponent<activateButtons>().buttons = allButtons;
 		activateButtonsSet = true;
 	}
 

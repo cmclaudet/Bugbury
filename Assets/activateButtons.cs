@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class activateButtons : MonoBehaviour {
 
 	public Button[] buttons;
-	
+	void Start() {
+		buttons = GetComponentInParent<resetScores>().allButtons;
+	}	
 	// Update is called once per frame
 	void Update () {
 		if (GetComponent<scaleSetup>().doneScaling) {
