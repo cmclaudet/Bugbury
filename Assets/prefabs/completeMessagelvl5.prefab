@@ -1277,7 +1277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a0cf6693b3945468da7570e2d9218a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDelay: 0.75
+  textDelay: 0.5
   starfill1: {fileID: 224037810366796676}
   starfill2: {fileID: 224631220067692548}
   starfill3: {fileID: 224288780789341980}
