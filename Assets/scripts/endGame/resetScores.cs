@@ -192,7 +192,6 @@ public class resetScores : MonoBehaviour {
 
 	void addActivateButtonScript(Transform trans) {
 		trans.gameObject.AddComponent<activateButtons>();
-//		trans.gameObject.GetComponent<activateButtons>().buttons = allButtons;
 		activateButtonsSet = true;
 	}
 
