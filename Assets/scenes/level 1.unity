@@ -4193,6 +4193,11 @@ Prefab:
       propertyPath: fadedColor
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 58348707713463384, guid: 5e1a4dd8042d74d7396bb196ddfbbde0,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e1a4dd8042d74d7396bb196ddfbbde0, type: 2}
   m_IsPrefabParent: 0

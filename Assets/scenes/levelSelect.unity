@@ -883,10 +883,10 @@ RectTransform:
   m_Father: {fileID: 1605478907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.162, y: 0.25887194}
-  m_AnchorMax: {x: 0.84375006, y: 0.74100006}
-  m_AnchoredPosition: {x: -2.4998932, y: 0.0018615723}
-  m_SizeDelta: {x: 7, y: 3}
+  m_AnchorMin: {x: 0.162, y: 0.2792045}
+  m_AnchorMax: {x: 0.84375006, y: 0.720654}
+  m_AnchoredPosition: {x: -2.4998932, y: -0.70364}
+  m_SizeDelta: {x: 7, y: 4.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &353453035
 Animator:
@@ -1563,10 +1563,10 @@ RectTransform:
   m_Father: {fileID: 1605478907}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.162, y: 0.25887194}
-  m_AnchorMax: {x: 0.84375006, y: 0.74100006}
-  m_AnchoredPosition: {x: -2.4999084, y: 0.0018615723}
-  m_SizeDelta: {x: 7, y: 3}
+  m_AnchorMin: {x: 0.162, y: 0.2792045}
+  m_AnchorMax: {x: 0.84375006, y: 0.720654}
+  m_AnchoredPosition: {x: -2.4999084, y: -0.70364}
+  m_SizeDelta: {x: 7, y: 4.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &716582189
 Animator:
@@ -2503,10 +2503,10 @@ RectTransform:
   m_Father: {fileID: 1605478907}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.162, y: 0.25887194}
-  m_AnchorMax: {x: 0.84375006, y: 0.74100006}
-  m_AnchoredPosition: {x: -2.4999084, y: 0.0018615723}
-  m_SizeDelta: {x: 7, y: 3}
+  m_AnchorMin: {x: 0.162, y: 0.2792045}
+  m_AnchorMax: {x: 0.84375006, y: 0.720654}
+  m_AnchoredPosition: {x: -2.4999084, y: -0.70364}
+  m_SizeDelta: {x: 7, y: 4.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1296275132
 Animator:
@@ -4636,10 +4636,10 @@ RectTransform:
   m_Father: {fileID: 1605478907}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.162, y: 0.25887194}
-  m_AnchorMax: {x: 0.84375006, y: 0.74100006}
-  m_AnchoredPosition: {x: -2.499939, y: 0.0018310547}
-  m_SizeDelta: {x: 7, y: 3}
+  m_AnchorMin: {x: 0.162, y: 0.2792045}
+  m_AnchorMax: {x: 0.84375006, y: 0.720654}
+  m_AnchoredPosition: {x: -2.499939, y: -0.7033901}
+  m_SizeDelta: {x: 7, y: 4.5909996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1833840617
 Animator:
