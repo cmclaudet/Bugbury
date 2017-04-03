@@ -763,10 +763,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a0cf6693b3945468da7570e2d9218a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDelay: 0.75
+  textDelay: 0.5
   starfill1: {fileID: 0}
   starfill2: {fileID: 0}
   starfill3: {fileID: 0}
+  perfectText: {fileID: 0}
   scoreNumber: {fileID: 224342785158821954, guid: 9e89fdb7c0c644d39b21f2e5d085881f,
     type: 2}
   endMessage:

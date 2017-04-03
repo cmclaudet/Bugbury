@@ -1822,7 +1822,7 @@ MonoBehaviour:
   minVelocity: 0.4
   maxVelocity: 0.8
   coolDownOnMiss: 1
-  totalCaterpillars: 10
+  totalCaterpillars: 3
   caterpillarNumToMaxSpeed: 0
   endlessLevel: 0
 --- !u!4 &1081278979
