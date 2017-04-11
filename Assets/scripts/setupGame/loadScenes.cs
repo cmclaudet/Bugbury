@@ -9,21 +9,15 @@ public class loadScenes : MonoBehaviour {
 
 	private AudioSource click;
 
-	private string[] allLevels;
-	private string[] allLevelsEndless;
+	private highScoreManager.levelArcade[] allLevels;
+	private highScoreManager.levelEndless[] allLevelsEndless;
 
 	private bool endless;
 
 	void Awake() {
 		click = GameObject.Find ("click").GetComponent<AudioSource>();
-		allLevels = new string[] { "level 1", "level 2", "level 3", "level 4", "level 5" };
-		allLevelsEndless = new string[] {
-			"level 1 endless",
-			"level 2 endless",
-			"level 3 endless",
-			"level 4 endless",
-			"level 5 endless"
-		};
+		allLevels = highScoreManager.Instance.arcadeLevels;
+		allLevelsEndless = highScoreManager.Instance.endlessLevels;
 	}
 
 	void Start() {
@@ -41,14 +35,14 @@ public class loadScenes : MonoBehaviour {
 	public void nextLevel() {
 		if (endless) {
 			for (int i = 0; i < allLevelsEndless.Length; i++) {
-				if (SceneManager.GetActiveScene ().name == allLevelsEndless [i]) {
-					SceneManager.LoadScene (allLevelsEndless [i + 1]);
+				if (SceneManager.GetActiveScene ().name == allLevelsEndless [i].levelName) {
+					SceneManager.LoadScene (allLevelsEndless [i + 1].levelName);
 				}
 			}
 		} else {
 			for (int i = 0; i < allLevels.Length; i++) {
-				if (SceneManager.GetActiveScene ().name == allLevels [i]) {
-					SceneManager.LoadScene (allLevels [i + 1]);
+				if (SceneManager.GetActiveScene ().name == allLevels [i].levelName) {
+					SceneManager.LoadScene (allLevels [i + 1].levelName);
 				}
 			}
 		}

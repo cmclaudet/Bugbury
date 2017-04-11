@@ -244,7 +244,6 @@ GameObject:
   - component: {fileID: 115926478}
   - component: {fileID: 115926477}
   - component: {fileID: 115926476}
-  - component: {fileID: 115926475}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -271,18 +270,6 @@ RectTransform:
   m_AnchoredPosition: {x: 2.0284004, y: -0.5}
   m_SizeDelta: {x: 13, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &115926475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 115926473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 0}
 --- !u!114 &115926476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,8 +309,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115926475}
-        m_MethodName: loadThirdlvl
+      - m_Target: {fileID: 1296275135}
+        m_MethodName: loadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -895,6 +882,7 @@ GameObject:
   - component: {fileID: 353453037}
   - component: {fileID: 353453036}
   - component: {fileID: 353453035}
+  - component: {fileID: 353453038}
   m_Layer: 5
   m_Name: level2select
   m_TagString: Untagged
@@ -976,6 +964,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 353453033}
+--- !u!114 &353453038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 353453033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 0}
 --- !u!1 &430961522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1575,7 @@ GameObject:
   - component: {fileID: 716582191}
   - component: {fileID: 716582190}
   - component: {fileID: 716582189}
+  - component: {fileID: 716582192}
   m_Layer: 5
   m_Name: level4select
   m_TagString: Untagged
@@ -1656,6 +1657,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 716582187}
+--- !u!114 &716582192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716582187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 0}
 --- !u!1 &723730840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,6 +2528,7 @@ GameObject:
   - component: {fileID: 1296275134}
   - component: {fileID: 1296275133}
   - component: {fileID: 1296275132}
+  - component: {fileID: 1296275135}
   m_Layer: 5
   m_Name: level3select
   m_TagString: Untagged
@@ -2596,6 +2610,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1296275130}
+--- !u!114 &1296275135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1296275130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 0}
 --- !u!1 &1330283151
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,7 +2633,6 @@ GameObject:
   - component: {fileID: 1330283155}
   - component: {fileID: 1330283154}
   - component: {fileID: 1330283153}
-  - component: {fileID: 1330283156}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -2673,8 +2698,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1330283156}
-        m_MethodName: loadFirstlvl
+      - m_Target: {fileID: 1743607773}
+        m_MethodName: loadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2719,18 +2744,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1330283151}
---- !u!114 &1330283156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1330283151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 0}
 --- !u!1 &1358741549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,7 +2823,6 @@ GameObject:
   - component: {fileID: 1393650952}
   - component: {fileID: 1393650951}
   - component: {fileID: 1393650950}
-  - component: {fileID: 1393650949}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -2837,18 +2849,6 @@ RectTransform:
   m_AnchoredPosition: {x: 2.0284004, y: -0.5}
   m_SizeDelta: {x: 13, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1393650949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1393650947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 0}
 --- !u!114 &1393650950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2888,8 +2888,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1393650949}
-        m_MethodName: loadSecondlvl
+      - m_Target: {fileID: 353453038}
+        m_MethodName: loadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2945,7 +2945,6 @@ GameObject:
   - component: {fileID: 1448563270}
   - component: {fileID: 1448563269}
   - component: {fileID: 1448563268}
-  - component: {fileID: 1448563267}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -2972,18 +2971,6 @@ RectTransform:
   m_AnchoredPosition: {x: 2.0284004, y: -0.5}
   m_SizeDelta: {x: 13, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1448563267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1448563265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 0}
 --- !u!114 &1448563268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3023,8 +3010,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1448563267}
-        m_MethodName: loadFifthlvl
+      - m_Target: {fileID: 1833840620}
+        m_MethodName: loadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4112,6 +4099,7 @@ GameObject:
   - component: {fileID: 1743607771}
   - component: {fileID: 1743607770}
   - component: {fileID: 1743607772}
+  - component: {fileID: 1743607773}
   m_Layer: 5
   m_Name: level1select
   m_TagString: Untagged
@@ -4193,6 +4181,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1743607773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1743607768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 0}
 --- !u!1 &1790879429
 GameObject:
   m_ObjectHideFlags: 0
@@ -4636,6 +4636,7 @@ GameObject:
   - component: {fileID: 1833840619}
   - component: {fileID: 1833840618}
   - component: {fileID: 1833840617}
+  - component: {fileID: 1833840620}
   m_Layer: 5
   m_Name: level5select
   m_TagString: Untagged
@@ -4717,6 +4718,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1833840615}
+--- !u!114 &1833840620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1833840615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 0}
 --- !u!1 &1845504975
 GameObject:
   m_ObjectHideFlags: 0
@@ -5479,7 +5492,6 @@ GameObject:
   - component: {fileID: 2088477671}
   - component: {fileID: 2088477670}
   - component: {fileID: 2088477669}
-  - component: {fileID: 2088477668}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -5506,18 +5518,6 @@ RectTransform:
   m_AnchoredPosition: {x: 2.0284004, y: -0.5}
   m_SizeDelta: {x: 13, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2088477668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2088477666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf7abb6966104fb79ba61f023e1b52f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 0}
 --- !u!114 &2088477669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5557,8 +5557,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2088477668}
-        m_MethodName: loadFourthlvl
+      - m_Target: {fileID: 716582192}
+        m_MethodName: loadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
