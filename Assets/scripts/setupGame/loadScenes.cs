@@ -55,6 +55,16 @@ public class loadScenes : MonoBehaviour {
 		click.Play ();
 	}
 
+	public void loadLevel() {
+		destroyMusic();
+		int thisLevel = transform.GetSiblingIndex();
+		if (SceneManager.GetActiveScene().name == "levelSelect") {
+			SceneManager.LoadScene(highScoreManager.Instance.arcadeLevels[thisLevel].levelName);
+		} else {
+			SceneManager.LoadScene(highScoreManager.Instance.endlessLevels[thisLevel].levelName);
+		}
+	}
+
 	//load from level select
 	public void loadFirstlvl () {
 		destroyMusic ();

@@ -8,25 +8,21 @@ using UnityEngine.UI;
 public class panMenu : MonoBehaviour {
 	public Button backButton;
 	public Button forwardButton;
-	public Animator lvl1;
-	public Animator lvl2;
-	public Animator lvl3;
-	public Animator lvl4;
-	public Animator lvl5;
+	public GameObject levelSelectMenus;
 	public GameObject dots;
 	public AudioSource woosh;
 
 	public int currentLevel{get;set;}
-	private Animator[] levelAnimators;
+	private Component[] levelAnimators;
 
 	// Use this for initialization
 	void Start () {
 		currentLevel = currentLevelSelectLevel.currentLevel;		//keeps track of current level player is looking at
-		levelAnimators = new Animator[] { lvl1, lvl2, lvl3, lvl4, lvl5};
+		levelAnimators = levelSelectMenus.GetComponentsInChildren(typeof(Animator), true);
 
-		foreach (Animator level in levelAnimators) { 
-			level.speed = 3.0f;		//increase animation speed
-			level.enabled = false;	//ensures default animation does not play on runtime
+		foreach (Component level in levelAnimators) { 
+			level.gameObject.GetComponent<Animator>().speed = 3.0f;		//increase animation speed
+			level.gameObject.GetComponent<Animator>().enabled = false;	//ensures default animation does not play on runtime
 			
 			//set all level select menus inactive besides the one the player is looking at
 			if (level == levelAnimators[currentLevel - 1]) {
@@ -55,8 +51,8 @@ public class panMenu : MonoBehaviour {
 
 	//focus on next level
 	public void toNextLevel() {
-		Animator thisLevel = levelAnimators [currentLevel - 1];
-		Animator nextLevel = levelAnimators [currentLevel];
+		Animator thisLevel = levelAnimators[currentLevel - 1].GetComponent<Animator>();
+		Animator nextLevel = levelAnimators [currentLevel].GetComponent<Animator>();
 
 		foreach (Animator level in levelAnimators) {
 			//set all level select gameobjects false besides the ones being animated so the player cannot see other levels underneath
@@ -91,8 +87,8 @@ public class panMenu : MonoBehaviour {
 
 	//focus on previous level
 	public void toLastLevel() {
-		Animator thisLevel = levelAnimators [currentLevel - 1];
-		Animator lastLevel = levelAnimators [currentLevel - 2];
+		Animator thisLevel = levelAnimators [currentLevel - 1].GetComponent<Animator>();
+		Animator lastLevel = levelAnimators [currentLevel - 2].GetComponent<Animator>();
 
 		foreach (Animator level in levelAnimators) {
 			if (level == thisLevel || level == lastLevel) {

@@ -113,43 +113,23 @@ public class resetScores : MonoBehaviour {
 	//if player does not have sufficient score stars are inactivated
 	void inactivateStars() {
 		string currentScene = SceneManager.GetActiveScene ().name;
-		switch (currentScene) {
-		case "level 1":
-			highScoreManager.Instance.One = resetAllScores (highScoreManager.Instance.One);
-			break;
-		case "level 2":
-			highScoreManager.Instance.Two = resetAllScores (highScoreManager.Instance.Two);
-			break;
-		case "level 3":
-			highScoreManager.Instance.Three = resetAllScores (highScoreManager.Instance.Three);
-			break;
-		case "level 4":
-			highScoreManager.Instance.Four = resetAllScores (highScoreManager.Instance.Four);
-			break;
-		case "level 5":
-			highScoreManager.Instance.Five = resetAllScores (highScoreManager.Instance.Five);
-			break;
-		case "level 1 endless":
-			highScoreManager.Instance.One = resetEndlessScore (highScoreManager.Instance.One);
-			break;
-		case "level 2 endless":
-			highScoreManager.Instance.Two = resetEndlessScore (highScoreManager.Instance.Two);
-			break;
-		case "level 3 endless":
-			highScoreManager.Instance.Three = resetEndlessScore (highScoreManager.Instance.Three);
-			break;
-		case "level 4 endless":
-			highScoreManager.Instance.Four = resetEndlessScore (highScoreManager.Instance.Four);
-			break;
-		case "level 5 endless":
-			highScoreManager.Instance.Five = resetEndlessScore (highScoreManager.Instance.Five);
-			break;
+		foreach (highScoreManager.levelArcade level in highScoreManager.Instance.arcadeLevels) {
+			if (level.levelName == currentScene) {
+				resetAllScores(level);
+			}
 		}
+
+		foreach (highScoreManager.levelEndless level in highScoreManager.Instance.endlessLevels) {
+			if (level.levelName == currentScene) {
+				resetEndlessScore(level);
+			}
+		}
+
 	}
 
 	//resets player high score and player's top star
 	//adds activate button component to final displayed object (eg if player doesn't get any stars, the score number object activates buttons)
-	highScoreManager.level resetAllScores(highScoreManager.level level) {
+	void resetAllScores(highScoreManager.levelArcade level) {
 		if (playerScore > level.highScore) {
 			level.highScore = playerScore;
 		}
@@ -187,7 +167,6 @@ public class resetScores : MonoBehaviour {
 			addActivateButtonScript(starfill3);
 		}
 
-		return level;
 	}
 
 	void addActivateButtonScript(Transform trans) {
@@ -195,17 +174,16 @@ public class resetScores : MonoBehaviour {
 		activateButtonsSet = true;
 	}
 
-	highScoreManager.level resetEndlessScore(highScoreManager.level level) {
-		if (playerScore > level.HSEndless) {
-			level.HSEndless = playerScore;
+	void resetEndlessScore(highScoreManager.levelEndless level) {
+		if (playerScore > level.highScore) {
+			level.highScore = playerScore;
 		}
-		if (farShots > level.FSEndless) {
-			level.FSEndless = farShots;
+		if (farShots > level.farShots) {
+			level.farShots = farShots;
 		}
-		if (maxStreak > level.MSEndless) {
-			level.MSEndless = maxStreak;
+		if (maxStreak > level.maxStreak) {
+			level.maxStreak = maxStreak;
 		}
 
-		return level;
 	}
 }
