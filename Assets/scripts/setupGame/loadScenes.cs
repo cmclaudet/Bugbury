@@ -24,6 +24,22 @@ public class loadScenes : MonoBehaviour {
 		endless = caterpillarManager.Instance.endlessLevel;
 	}
 
+	//use only for play button on title screen
+	public void loadFirstLevel() {
+		destroyMusic();
+		SceneManager.LoadScene ("level 1");
+		click.enabled = true;
+		click.Play ();
+	}
+
+	//load from level select, level complete and credits
+	public void loadMainMenu() {
+		Time.timeScale = 1.0f;
+		SceneManager.LoadScene ("title");
+		click.enabled = true;
+		click.Play ();
+	}
+
 	//load from level complete
 	public void replay() {
 		Scene currentScene = SceneManager.GetActiveScene ();
@@ -49,6 +65,7 @@ public class loadScenes : MonoBehaviour {
 		click.Play ();
 	}
 
+	//load from level select
 	public void loadLevel() {
 		destroyMusic();
 		int thisLevel = transform.GetSiblingIndex();
@@ -59,43 +76,22 @@ public class loadScenes : MonoBehaviour {
 		}
 	}
 
-	//load from level select
-	public void loadFirstlvl () {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 1");
-		click.Play ();
+	//load from title and level select endless
+	public void loadChooselvl() {
+		loadNewScene("levelSelect");
 	}
 
 	//load from level select
-	public void loadSecondlvl() {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 2");
-		click.Play ();
-	}
-
-	//load from level select
-	public void loadThirdlvl () {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 3");
-		click.Play ();
-	}
-
-	//load from level select
-	public void loadFourthlvl() {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 4");
-		click.Play ();
-	}
-
-	//load from level select
-	public void loadFifthlvl() {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 5");
-		click.Play ();
+	public void loadChooseEndlessLevel() {
+		loadNewScene("levelSelectEndless");
 	}
 
 	//load from title
-	public void loadChooselvl() {
+	public void loadCredits() {
+		loadNewScene("credits");
+	}
+
+	void loadNewScene(string sceneName) {
 		//if music is playing already keep music object between scenes
 		if (musicManager.Instance.isPlaying) {
 			DontDestroyOnLoad (musicManager.Instance.music);
@@ -108,88 +104,10 @@ public class loadScenes : MonoBehaviour {
 		}
 
 		Time.timeScale = 1.0f;
-		SceneManager.LoadScene ("levelSelect");
-		click.Play ();
-	}
-
-	//load from level select
-	public void loadFirstlvlEndless () {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 1 endless");
-		click.Play ();
-	}
-
-	//load from level select
-	public void loadSecondlvlEndless() {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 2 endless");
-		click.Play ();
-	}
-
-	//load from level select
-	public void loadThirdlvlEndless () {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 3 endless");
-		click.Play ();
-	}
-
-	//load from level select
-	public void loadFourthlvlEndless() {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 4 endless");
-		click.Play ();
-	}
-
-	//load from level select
-	public void loadFifthlvlEndless() {
-		destroyMusic ();
-		SceneManager.LoadScene ("level 5 endless");
-		click.Play ();
-	}
-
-	public void loadChooseEndlessLevel() {
-		if (musicManager.Instance.isPlaying) {
-			DontDestroyOnLoad (musicManager.Instance.music);
-		} else {
-			AudioSource newMusic = Instantiate (music);
-			newMusic.Play ();
-			musicManager.Instance.isPlaying = true;
-			musicManager.Instance.music = newMusic.gameObject;
-			DontDestroyOnLoad (musicManager.Instance.music);
-		}
-
-		Time.timeScale = 1.0f;
-		SceneManager.LoadScene ("levelSelectEndless");
-		click.Play ();
-
-	}
-
-	//load from level select, level complete and credits
-	public void loadMainMenu() {
-		Time.timeScale = 1.0f;
-		SceneManager.LoadScene ("title");
+		SceneManager.LoadScene (sceneName);
 		click.enabled = true;
 		click.Play ();
-	}
-
-	//load from title
-	public void loadCredits() {
-		if (musicManager.Instance.isPlaying) {
-			DontDestroyOnLoad (musicManager.Instance.music);
-		} else {
-			AudioSource newMusic = Instantiate (music);
-			newMusic.Play ();
-			musicManager.Instance.isPlaying = true;
-			musicManager.Instance.music = newMusic.gameObject;
-			DontDestroyOnLoad (musicManager.Instance.music);
-		}
-
-		SceneManager.LoadScene ("credits");
-		click.enabled = true;
-		click.Play ();
-
-
-	}
+	} 
 
 	void destroyMusic() {
 		Destroy (musicManager.Instance.music);
