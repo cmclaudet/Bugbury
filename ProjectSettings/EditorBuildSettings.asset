@@ -10,30 +10,70 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/scenes/main.unity
   - enabled: 1
-    path: Assets/scenes/level 1.unity
+    path: Assets/scenes/arcade/level 1.unity
   - enabled: 1
-    path: Assets/scenes/level 2.unity
+    path: Assets/scenes/arcade/level 2.unity
   - enabled: 1
     path: Assets/scenes/credits.unity
   - enabled: 0
     path: Assets/scenes/levelSelect 2.unity
   - enabled: 1
-    path: Assets/scenes/level 5.unity
+    path: Assets/scenes/arcade/level 5.unity
   - enabled: 1
     path: Assets/scenes/levelSelect.unity
   - enabled: 1
-    path: Assets/scenes/level 4.unity
+    path: Assets/scenes/arcade/level 4.unity
   - enabled: 1
-    path: Assets/scenes/level 3.unity
+    path: Assets/scenes/arcade/level 3.unity
   - enabled: 1
     path: Assets/scenes/levelSelectEndless.unity
   - enabled: 1
-    path: Assets/scenes/level 1 endless.unity
+    path: Assets/scenes/endless/level 1 endless.unity
   - enabled: 1
-    path: Assets/scenes/level 2 endless.unity
+    path: Assets/scenes/endless/level 2 endless.unity
   - enabled: 1
-    path: Assets/scenes/level 3 endless.unity
+    path: Assets/scenes/endless/level 3 endless.unity
   - enabled: 1
-    path: Assets/scenes/level 4 endless.unity
+    path: Assets/scenes/endless/level 4 endless.unity
   - enabled: 1
-    path: Assets/scenes/level 5 endless.unity
+    path: Assets/scenes/endless/level 5 endless.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 6.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 7.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 8.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 9.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 10.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 11.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 12.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 13.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 14.unity
+  - enabled: 1
+    path: Assets/scenes/arcade/level 15.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 6 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 7 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 8 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 9 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 10 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 11 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 12 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 13 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 14 endless.unity
+  - enabled: 1
+    path: Assets/scenes/endless/level 15 endless.unity

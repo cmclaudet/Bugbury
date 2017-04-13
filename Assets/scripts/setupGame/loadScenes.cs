@@ -74,6 +74,7 @@ public class loadScenes : MonoBehaviour {
 		} else {
 			SceneManager.LoadScene(highScoreManager.Instance.endlessLevels[thisLevel].levelName);
 		}
+		click.Play();
 	}
 
 	//load from title and level select endless

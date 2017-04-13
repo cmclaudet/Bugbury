@@ -62,11 +62,17 @@ public class highScoreManager : MonoBehaviour {
 	public levelEndless[] endlessLevels;
 
 	//if player has beaten value becomes true. This value must be true for player to be prompted for a rating! 
-	//Ensures players have played through the game before beating it
+	//Ensures players have played through some of the game before rating it
 	public bool beatenLevel5;		
 	public bool askedForRating;		//if player has already been asked for a rating this value becomes true
-	private string[] arcadeLevelNames = new string[] {"level 1", "level 2", "level 3", "level 4", "level 5"};
-	private string[] endlessLevelNames = new string[] {"level 1 endless", "level 2 endless", "level 3 endless", "level 4 endless", "level 5 endless"};
+	private string[] arcadeLevelNames = new string[] {
+		"level 1", "level 2", "level 3", "level 4", "level 5",
+		"level 6", "level 7", "level 8", "level 9", "level 10",
+		"level 11", "level 12", "level 13", "level 14", "level 15"};
+	private string[] endlessLevelNames = new string[] {
+		"level 1 endless", "level 2 endless", "level 3 endless", "level 4 endless", "level 5 endless",
+		"level 6 endless", "level 7 endless", "level 8 endless", "level 9 endless", "level 10 endless",
+		"level 11 endless", "level 12 endless", "level 13 endless", "level 14 endless", "level 15 endless"};
 
 	void Awake() {
 		_instance = this;
@@ -89,9 +95,9 @@ public class highScoreManager : MonoBehaviour {
 
 	//loads data when script is enabled, ie when game loads
 	void OnEnable() {
-		if (File.Exists (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScores.dat")) {
+		if (File.Exists (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScoresV2.dat")) {
 			BinaryFormatter bf = new BinaryFormatter ();
-			FileStream file = File.Open (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScores.dat", FileMode.Open);
+			FileStream file = File.Open (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScoresV2.dat", FileMode.Open);
 			playerScores currentScores = (playerScores)bf.Deserialize (file);
 			file.Close ();
 
@@ -107,7 +113,7 @@ public class highScoreManager : MonoBehaviour {
 	//saves data when script is destroyed, ie when player exits the game
 	void OnDisable() {
 		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Create (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScores.dat");
+		FileStream file = File.Create (Application.persistentDataPath + Path.DirectorySeparatorChar + "bugburyScoresV2.dat");
 
 		playerScores newScores = new playerScores ();
 

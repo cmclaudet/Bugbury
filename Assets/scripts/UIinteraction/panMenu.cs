@@ -79,7 +79,7 @@ public class panMenu : MonoBehaviour {
 
 		//update current level
 		currentLevel += 1;
-		dots.GetComponent<changeDot>().switchDotImage(currentLevel, currentLevel - 1);
+//		dots.GetComponent<changeDot>().switchDotImage(currentLevel, currentLevel - 1);
 
 		//update current level on persistent object
 		currentLevelSelectLevel.currentLevel = currentLevel;
@@ -110,7 +110,7 @@ public class panMenu : MonoBehaviour {
 
 		woosh.Play ();
 		currentLevel -= 1;
-		dots.GetComponent<changeDot>().switchDotImage(currentLevel, currentLevel + 1);
+//		dots.GetComponent<changeDot>().switchDotImage(currentLevel, currentLevel + 1);
 
 		//update current level on persistent object
 		currentLevelSelectLevel.currentLevel = currentLevel;
