@@ -40,7 +40,6 @@ public class scoreCount : MonoBehaviour {
 
 	void Awake() {
 		_instance = this;
-
 	}
 
 	// Use this for initialization
@@ -50,6 +49,7 @@ public class scoreCount : MonoBehaviour {
 		maxPlayerStreak = 0;
 		farShots = 0;
 		far = false;
+
 	}
 
 	public void changeScore(int newScore) {

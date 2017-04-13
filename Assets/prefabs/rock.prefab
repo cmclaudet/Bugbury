@@ -124,9 +124,7 @@ MonoBehaviour:
   velocityMagnitude: 15
   spawnPosition: {x: 0.01, y: -3.63, z: 0}
   splatters: {fileID: 1929839293047604, guid: be003e062248c4892b80028ae087def9, type: 2}
-  rockSimulation: {fileID: 50435492825116804, guid: 945ecb672332f43b29364d0898154e01,
-    type: 2}
-  shotsWithPointer: 10
+  shotsWithPointer: 100
   fadedColor: 0.5
 --- !u!114 &114979616890992130
 MonoBehaviour:
