@@ -1447,7 +1447,8 @@ MonoBehaviour:
   pauseButton: {fileID: 1924707628}
   completeMessage: {fileID: 224256179553984670, guid: 04a5670ea21b74d19aa8f31d9e8d1fde,
     type: 2}
-  completeMessageEndless: {fileID: 0}
+  completeMessageEndless: {fileID: 224256179553984670, guid: c859cff33099144c896f4b2be7d0727b,
+    type: 2}
   canvas: {fileID: 1770821641}
   bam: {fileID: 318686599}
 --- !u!4 &881261686
@@ -1798,7 +1799,6 @@ GameObject:
   - component: {fileID: 1081278979}
   - component: {fileID: 1081278978}
   - component: {fileID: 1081278980}
-  - component: {fileID: 1081278982}
   - component: {fileID: 1081278981}
   m_Layer: 0
   m_Name: setSceneVars
@@ -1819,8 +1819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   farBonus: 5
-  minVelocity: 0.4
-  maxVelocity: 0.8
+  minVelocity: 0.5
+  maxVelocity: 2.2
   coolDownOnMiss: 1
   totalCaterpillars: 6
   caterpillarNumToMaxSpeed: 20
@@ -1871,20 +1871,6 @@ MonoBehaviour:
   tinkSound: {fileID: 168243329}
   splatSounds: {fileID: 1515061900}
   missedSound: {fileID: 1032642109}
---- !u!114 &1081278982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1081278977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215dd795c7d6f4a0889a67b7f27681f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  star1Frac: 5
-  star2Frac: 3
-  star3Frac: 1.9
 --- !u!1 &1139264870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3734,7 +3720,7 @@ MonoBehaviour:
   pauseButton: {fileID: 1924707628}
   canvas: {fileID: 1770821641}
   hurtSound: {fileID: 435618072}
-  levelComplete: {fileID: 0}
+  levelComplete: {fileID: 881261684}
 --- !u!1001 &1856601265
 Prefab:
   m_ObjectHideFlags: 0
