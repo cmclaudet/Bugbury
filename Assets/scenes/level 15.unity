@@ -1984,7 +1984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   star1Frac: 5
   star2Frac: 3
-  star3Frac: 1.9
+  star3Frac: 2.1
 --- !u!114 &702104801
 MonoBehaviour:
   m_ObjectHideFlags: 0
