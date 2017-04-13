@@ -62,7 +62,7 @@ public class highScoreManager : MonoBehaviour {
 	public levelEndless[] endlessLevels;
 
 	//if player has beaten value becomes true. This value must be true for player to be prompted for a rating! 
-	//Ensures players have played through the game before beating it
+	//Ensures players have played through some of the game before rating it
 	public bool beatenLevel5;		
 	public bool askedForRating;		//if player has already been asked for a rating this value becomes true
 	private string[] arcadeLevelNames = new string[] {

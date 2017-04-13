@@ -1927,11 +1927,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   farBonus: 20
   minVelocity: 0.5
-  maxVelocity: 0.9
+  maxVelocity: 2.2
   coolDownOnMiss: 1
   totalCaterpillars: 35
-  caterpillarNumToMaxSpeed: 0
-  endlessLevel: 0
+  caterpillarNumToMaxSpeed: 48
+  endlessLevel: 1
 --- !u!4 &702104804
 Transform:
   m_ObjectHideFlags: 0
@@ -4524,7 +4524,8 @@ MonoBehaviour:
   pauseButton: {fileID: 1771330785}
   completeMessage: {fileID: 224256179553984670, guid: ffb27cc3e2e054a6ab47ba59e66e947b,
     type: 2}
-  completeMessageEndless: {fileID: 0}
+  completeMessageEndless: {fileID: 224256179553984670, guid: 4364e3faaf17b435b88eb3083bb7bc1f,
+    type: 2}
   canvas: {fileID: 1770821641}
   bam: {fileID: 143216193}
 --- !u!4 &1709009011
@@ -5234,7 +5235,7 @@ MonoBehaviour:
   pauseButton: {fileID: 1771330785}
   canvas: {fileID: 1770821641}
   hurtSound: {fileID: 493204308}
-  levelComplete: {fileID: 0}
+  levelComplete: {fileID: 1709009009}
 --- !u!1001 &1874684947
 Prefab:
   m_ObjectHideFlags: 0
